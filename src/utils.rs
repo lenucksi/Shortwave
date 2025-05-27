@@ -37,7 +37,7 @@ pub fn send<T: 'static>(sender: &async_channel::Sender<T>, message: T) {
 
 pub fn format_duration(d: u64, short: bool) -> String {
     if short {
-        let dt = glib::DateTime::from_unix_local(d.try_into().unwrap_or_default()).unwrap();
+        let dt = glib::DateTime::from_unix_utc(d.try_into().unwrap_or_default()).unwrap();
         dt.format("%M:%S").unwrap_or_default().to_string()
     } else {
         let time: u32 = d.try_into().unwrap();
