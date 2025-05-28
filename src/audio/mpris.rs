@@ -60,7 +60,7 @@ impl MprisServer {
                     #[strong]
                     server,
                     async move {
-                        server.update_mpris_plaback_status().await;
+                        server.update_mpris_playback_status().await;
                     }
                 ));
             }
@@ -140,7 +140,7 @@ impl MprisServer {
         });
 
         glib::spawn_future_local(server.player.run());
-        server.update_mpris_plaback_status().await;
+        server.update_mpris_playback_status().await;
         server.update_mpris_metadata().await;
         server.update_mpris_volume().await;
 
@@ -173,7 +173,7 @@ impl MprisServer {
         }
     }
 
-    async fn update_mpris_plaback_status(&self) {
+    async fn update_mpris_playback_status(&self) {
         let player = SwApplication::default().player();
 
         let can_play = player.has_station();
