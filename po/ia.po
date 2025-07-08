@@ -8,16 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shortwave main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/Shortwave/issues\n"
-"POT-Creation-Date: 2025-02-13 05:11+0000\n"
-"PO-Revision-Date: 2025-02-13 21:32-0300\n"
+"POT-Creation-Date: 2025-04-11 07:02+0000\n"
+"PO-Revision-Date: 2025-07-08 11:20-0400\n"
 "Last-Translator: Emilio Sepúlveda <emism.translations@gmail.com>\n"
-"Language-Team: Interlingua\n"
+"Language-Team: Interlingua <softinterlingua@gmail.com>\n"
 "Language: ia\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Gtranslator 47.1\n"
+"X-Generator: Gtranslator 48.0\n"
 "X-DL-Lang: ia\n"
 "X-DL-Module: shortwave\n"
 "X-DL-Branch: main\n"
@@ -71,7 +71,7 @@ msgid ""
 "Automatic recognition of tracks, with the possibility to save them "
 "individually"
 msgstr ""
-"Recognoscentia automatic de cantos, con le possibilitate de salvar los "
+"Recognoscentia automatic de cantiones, con le possibilitate de salvar los "
 "individualmente"
 
 #: data/de.haeckerfelix.Shortwave.metainfo.xml.in.in:20
@@ -156,7 +156,7 @@ msgstr "General"
 #: data/gtk/help_overlay.ui:14
 msgctxt "shortcut window"
 msgid "Open shortcut window"
-msgstr "Aperir fenestra de commando curte"
+msgstr "Aperir fenestra de via breve"
 
 #: data/gtk/help_overlay.ui:21
 msgctxt "shortcut window"
@@ -264,7 +264,7 @@ msgstr "_Preferentias"
 
 #: data/gtk/library_page.ui:170
 msgid "_Keyboard Shortcuts"
-msgstr "_Commandos curte de claviero"
+msgstr "Vias breve de _claviero"
 
 #: data/gtk/library_page.ui:174
 msgid "_About Shortwave"
@@ -286,7 +286,7 @@ msgstr "Reproducer"
 #: data/gtk/player_gadget.ui:55 data/gtk/player_toolbar.ui:106
 #: data/gtk/player_view.ui:170
 msgid "Stop"
-msgstr "Detener"
+msgstr "Stoppar"
 
 #: data/gtk/player_gadget.ui:71 data/gtk/player_toolbar.ui:121
 #: data/gtk/player_view.ui:185
@@ -298,7 +298,7 @@ msgid "SHORTWAVE INTERNET RADIO"
 msgstr "RADIO PER INTERNET SHORTWAVE"
 
 #: data/gtk/player_gadget.ui:140 data/gtk/player_toolbar.ui:29
-#: data/gtk/player_view.ui:58 src/app.rs:257
+#: data/gtk/player_view.ui:58 src/app.rs:251
 msgid "No Playback"
 msgstr "Sin reproduction"
 
@@ -344,7 +344,8 @@ msgstr "_Notificationes"
 
 #: data/gtk/preferences_dialog.ui:29
 msgid "Show desktop notifications when a new track gets played"
-msgstr "Monstrar notificationes de scriptorio quando un nove pista"
+msgstr ""
+"Monstrar notificationes de scriptorio quando un nove pista es in reproduction"
 
 #. Translators: This is a noun / preferences group title
 #: data/gtk/preferences_dialog.ui:43
@@ -396,7 +397,7 @@ msgstr "Duration m_inime"
 
 #: data/gtk/preferences_dialog.ui:121
 msgid "Tracks shorter than the minimum duration will be ignored"
-msgstr "Le pistas de un duration minor al minime sera ignorate"
+msgstr "Le pistas de un duration minor al minime essera ignorate"
 
 #: data/gtk/preferences_dialog.ui:136
 msgid "M_aximum Duration"
@@ -428,12 +429,12 @@ msgstr "Discoperir nove stationes"
 
 #: data/gtk/search_page.ui:135
 msgid ""
-"The displayed information is provided by <a href=\"https://www.radio-browser."
-"info/\">radio-browser.info</a>. \n"
+"The displayed information is provided by <a href=\"https://www.radio-"
+"browser.info/\">radio-browser.info</a>. \n"
 "Shortwave has no influence on the listed stations."
 msgstr ""
-"Le information monstrate es fornite per <a href=\"https://www.radio-browser."
-"info/\">radio-browser.info</a>. \n"
+"Le information monstrate es fornite per <a href=\"https://www.radio-"
+"browser.info/\">radio-browser.info</a>. \n"
 "Shortwave non ha influentia sur le stationes listate."
 
 #: data/gtk/search_page.ui:201
@@ -508,40 +509,40 @@ msgstr "Information"
 msgid "Language"
 msgstr "Lingua"
 
-#: data/gtk/station_dialog.ui:168
+#: data/gtk/station_dialog.ui:169
 msgid "Tags"
 msgstr "Etiquettas"
 
-#: data/gtk/station_dialog.ui:180
+#: data/gtk/station_dialog.ui:182
 msgid "Location"
 msgstr "Localisation"
 
-#: data/gtk/station_dialog.ui:184
+#: data/gtk/station_dialog.ui:186
 msgid "Country"
 msgstr "Pais"
 
-#: data/gtk/station_dialog.ui:194
+#: data/gtk/station_dialog.ui:197
 msgid "State"
 msgstr "Stato"
 
-#: data/gtk/station_dialog.ui:228
+#: data/gtk/station_dialog.ui:232
 msgid "Audio"
 msgstr "Audio"
 
-#: data/gtk/station_dialog.ui:231
+#: data/gtk/station_dialog.ui:235
 msgid "Bitrate"
 msgstr "Taxa de bits"
 
-#: data/gtk/station_dialog.ui:241
+#: data/gtk/station_dialog.ui:246
 msgid "Codec"
 msgstr "Codec"
 
 #. This is a noun/label for the station stream url
-#: data/gtk/station_dialog.ui:251
+#: data/gtk/station_dialog.ui:257
 msgid "Stream"
 msgstr "Fluxo"
 
-#: data/gtk/station_dialog.ui:257
+#: data/gtk/station_dialog.ui:263
 msgid "Copy"
 msgstr "Copiar"
 
@@ -560,7 +561,7 @@ msgstr "Salvar pista"
 
 #: data/gtk/track_dialog.ui:148
 msgid "Play Track"
-msgstr "Reproder pista"
+msgstr "Reproducer pista"
 
 #: data/gtk/track_dialog.ui:159
 msgid "Cancel Recording"
@@ -592,15 +593,15 @@ msgstr "Commutar le silentio"
 msgid "Track no longer available"
 msgstr "Pista non plus disponibile"
 
-#: src/app.rs:108 src/app.rs:130
+#: src/app.rs:109 src/app.rs:132
 msgid "This track is currently not being recorded"
 msgstr "Iste pista non es registrante actualmente"
 
-#: src/app.rs:261
+#: src/app.rs:255
 msgid "Playing “{}”"
 msgstr "“{}” in reproduction "
 
-#: src/app.rs:360
+#: src/app.rs:351
 msgid "Active Playback"
 msgstr "Reproduction active"
 
@@ -691,7 +692,7 @@ msgstr "Seliger le copertura de station"
 
 #: src/ui/display_error.rs:50
 msgid "Show Details"
-msgstr "Monstrar le detalios"
+msgstr "Monstrar detalios"
 
 #: src/ui/pages/library_page.rs:111
 msgid "Welcome to {}"
@@ -699,11 +700,11 @@ msgstr "Benvenite a {}"
 
 #: src/ui/preferences_dialog.rs:139
 msgid "Select Save Directory"
-msgstr "Selectionar directorio de salvamento"
+msgstr "Seliger directorio de salvamento"
 
 #: src/ui/preferences_dialog.rs:140
 msgid "_Select"
-msgstr "_Selectionar"
+msgstr "_Seliger"
 
 #: src/ui/preferences_dialog.rs:163
 msgid "{} min"
@@ -741,7 +742,7 @@ msgstr "Tenta de qualcunque maniera"
 
 #: src/ui/window.rs:228
 msgid "Disable Background Playback"
-msgstr "Dishabilitar le reproduction in secunde plano"
+msgstr "Disactivar le reproduction in secunde plano"
 
 #: src/utils.rs:51
 msgid "{} hour"
