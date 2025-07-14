@@ -591,10 +591,35 @@ dependencies = [
 ]
 
 [[package]]
+name = "crossbeam-deque"
+version = "0.8.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9dd111b7b7f7d55b72c0a6ae361660ee5853c9af73f70c3c2ef6858b950e2e51"
+dependencies = [
+ "crossbeam-epoch",
+ "crossbeam-utils",
+]
+
+[[package]]
+name = "crossbeam-epoch"
+version = "0.9.18"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5b82ac4a3c2ca9c3460964f020e1402edd5753411d7737aa39c3714ad1b5420e"
+dependencies = [
+ "crossbeam-utils",
+]
+
+[[package]]
 name = "crossbeam-utils"
 version = "0.8.21"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d0a5c400df2834b80a4c3327b3aad3a4c4cd4de0629063962b03235697506a28"
+
+[[package]]
+name = "crunchy"
+version = "0.2.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "460fbee9c2c2f33933d720630a6a0bac33ba7053db5344fac858d4b8952d77d5"
 
 [[package]]
 name = "crypto-common"
@@ -1358,9 +1383,9 @@ dependencies = [
 
 [[package]]
 name = "glycin"
-version = "2.1.1"
+version = "3.0.0-alpha.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "37cb9e103cb6b8925bf5e8a1cf8a1166797d8aaefaabd03e68cf6ad7443a1baa"
+checksum = "96c2cf69d077fa279fc3a2e6941fd05fc2f3f161910b495bc55e8f2068a50c0b"
 dependencies = [
  "async-fs",
  "async-io",
@@ -1371,6 +1396,8 @@ dependencies = [
  "futures-util",
  "gdk4",
  "gio",
+ "glib",
+ "glycin-common",
  "glycin-utils",
  "gufo-common",
  "gufo-exif",
@@ -1389,23 +1416,49 @@ dependencies = [
 ]
 
 [[package]]
-name = "glycin-utils"
-version = "3.0.1"
+name = "glycin-common"
+version = "1.0.0-alpha.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c0816d1db00696479cda3cd6c914fb07115982b019dac96555d203c0d5b6d37a"
+checksum = "72f726fe14063e230fd79a77a602469d1a7c721c6fe1037bb69786df08b79cdc"
 dependencies = [
- "env_logger 0.11.8",
+ "bitflags 2.9.1",
  "gufo-common",
- "libc",
- "libseccomp",
- "log",
+ "half",
  "memmap2 0.9.5",
  "nix 0.29.0",
  "paste",
  "rmp-serde",
  "serde",
  "thiserror 2.0.12",
+ "zerocopy",
+ "zvariant 5.6.0",
+]
+
+[[package]]
+name = "glycin-utils"
+version = "4.0.0-alpha.7"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5c87e6f0bedff21f6592368212277d232908f9d9fbf330a5f6558e6907a5b33c"
+dependencies = [
+ "async-lock",
+ "bitflags 2.9.1",
+ "blocking",
+ "env_logger 0.11.8",
+ "futures-util",
+ "glycin-common",
+ "gufo-common",
+ "half",
+ "libc",
+ "libseccomp",
+ "log",
+ "memmap2 0.9.5",
+ "nix 0.29.0",
+ "paste",
+ "rayon",
+ "serde",
+ "thiserror 2.0.12",
  "zbus 5.7.1",
+ "zerocopy",
 ]
 
 [[package]]
@@ -1621,9 +1674,9 @@ dependencies = [
 
 [[package]]
 name = "gufo-common"
-version = "0.2.0"
+version = "0.3.0-alpha"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ccb2b4c040e67e6d6ad954f04693a11864df82bce6c6c468524b6a78bb75581f"
+checksum = "8cb5af73614babb20f5f4500717610d59a9e8231def2f56dfb92662104d10ce3"
 dependencies = [
  "paste",
  "serde",
@@ -1632,9 +1685,9 @@ dependencies = [
 
 [[package]]
 name = "gufo-exif"
-version = "0.2.2"
+version = "0.3.0-alpha"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1448d72e2458b35dd10c0f148ea913b38c61b649552b22a97fa836ec376189ff"
+checksum = "005e335f23848568d44652823834de7b65a861241e6f6e40e44a7d5f03908a98"
 dependencies = [
  "gufo-common",
  "thiserror 2.0.12",
@@ -1658,6 +1711,16 @@ dependencies = [
  "tokio",
  "tokio-util",
  "tracing",
+]
+
+[[package]]
+name = "half"
+version = "2.6.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "459196ed295495a68f7d7fe1d84f6c4b7ff0e21fe3017b2f283c6fac3ad803c9"
+dependencies = [
+ "cfg-if",
+ "crunchy",
 ]
 
 [[package]]
@@ -2960,6 +3023,26 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "99d9a13982dcf210057a8a78572b2217b667c3beacbf3a0d8b454f6f82837d38"
 dependencies = [
  "getrandom 0.3.3",
+]
+
+[[package]]
+name = "rayon"
+version = "1.10.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b418a60154510ca1a002a752ca9714984e21e4241e804d32555251faf8b78ffa"
+dependencies = [
+ "either",
+ "rayon-core",
+]
+
+[[package]]
+name = "rayon-core"
+version = "1.12.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1465873a3dfdaa8ae7cb14b4383657caab0b3e8a0aa9ae8e04b044854c8dfce2"
+dependencies = [
+ "crossbeam-deque",
+ "crossbeam-utils",
 ]
 
 [[package]]
@@ -4684,7 +4767,7 @@ dependencies = [
  "winnow",
  "zbus_macros 5.7.1",
  "zbus_names 4.2.0",
- "zvariant 5.5.3",
+ "zvariant 5.6.0",
 ]
 
 [[package]]
@@ -4711,7 +4794,7 @@ dependencies = [
  "quote",
  "syn",
  "zbus_names 4.2.0",
- "zvariant 5.5.3",
+ "zvariant 5.6.0",
  "zvariant_utils 3.2.0",
 ]
 
@@ -4735,7 +4818,7 @@ dependencies = [
  "serde",
  "static_assertions",
  "winnow",
- "zvariant 5.5.3",
+ "zvariant 5.6.0",
 ]
 
 [[package]]
@@ -4833,16 +4916,16 @@ dependencies = [
 
 [[package]]
 name = "zvariant"
-version = "5.5.3"
+version = "5.6.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9d30786f75e393ee63a21de4f9074d4c038d52c5b1bb4471f955db249f9dffb1"
+checksum = "d91b3680bb339216abd84714172b5138a4edac677e641ef17e1d8cb1b3ca6e6f"
 dependencies = [
  "endi",
  "enumflags2",
  "serde",
  "url",
  "winnow",
- "zvariant_derive 5.5.3",
+ "zvariant_derive 5.6.0",
  "zvariant_utils 3.2.0",
 ]
 
@@ -4861,9 +4944,9 @@ dependencies = [
 
 [[package]]
 name = "zvariant_derive"
-version = "5.5.3"
+version = "5.6.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "75fda702cd42d735ccd48117b1630432219c0e9616bf6cb0f8350844ee4d9580"
+checksum = "3a8c68501be459a8dbfffbe5d792acdd23b4959940fc87785fb013b32edbc208"
 dependencies = [
  "proc-macro-crate",
  "proc-macro2",
