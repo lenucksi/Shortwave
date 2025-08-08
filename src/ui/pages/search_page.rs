@@ -210,7 +210,7 @@ mod imp {
             let request = StationRequest::search_for_name(text, 1000);
             self.stack.set_visible_child_name("spinner");
 
-            debug!("Search for: {:?}", request);
+            debug!("Search for: {request:?}");
             let res = client::station_request(request).await;
             res.handle_error("Unable to search for stations");
 

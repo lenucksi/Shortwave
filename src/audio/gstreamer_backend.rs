@@ -219,7 +219,7 @@ impl GstreamerBackend {
     }
 
     pub fn set_state(&mut self, state: gstreamer::State) {
-        debug!("Set playback state: {:?}", state);
+        debug!("Set playback state: {state:?}");
 
         if state == gstreamer::State::Playing {
             debug!("Start pipeline...");
@@ -255,7 +255,7 @@ impl GstreamerBackend {
             let mut buffering_state = self.buffering_state.lock().unwrap();
             if buffering_state.is_live.is_none() {
                 let is_live = res == Ok(gstreamer::StateChangeSuccess::NoPreroll);
-                debug!("Pipeline is live: {}", is_live);
+                debug!("Pipeline is live: {is_live}");
                 buffering_state.is_live = Some(is_live);
             }
         }
@@ -370,7 +370,7 @@ impl GstreamerBackend {
             .expect("Unable to link tee srcpad with recorderbin sinkpad");
 
         *self.recorderbin.lock().unwrap() = Some(recorderbin);
-        debug!("Started recording to {:?}", path);
+        debug!("Started recording to {path:?}");
     }
 
     pub fn stop_recording(&mut self, discard_buffered_data: bool) {
@@ -496,7 +496,7 @@ impl GstreamerBackend {
         let _ = pipeline.remove(&recorderbin);
 
         if let Err(err) = recorderbin.set_state(gstreamer::State::Null) {
-            warn!("Failed to stop recording: {}", err);
+            warn!("Failed to stop recording: {err}");
         }
         debug!("Destroyed recorderbin.");
     }
@@ -543,7 +543,7 @@ impl GstreamerBackend {
             }
             MessageView::Buffering(buffering) => {
                 let percent = buffering.percent();
-                debug!("Buffering ({}%)", percent);
+                debug!("Buffering ({percent}%)");
 
                 // Wait until buffering is complete before start/resume playing
                 let mut buffering_state = buffering_state.lock().unwrap();
@@ -617,9 +617,9 @@ impl GstreamerBackend {
             MessageView::Error(err) => {
                 let msg = err.error().to_string();
                 if let Some(debug) = err.debug() {
-                    warn!("Gstreamer Error: {} (debug {})", msg, debug);
+                    warn!("Gstreamer Error: {msg} (debug {debug})");
                 } else {
-                    warn!("Gstreamer Error: {}", msg);
+                    warn!("Gstreamer Error: {msg}");
                 }
                 crate::utils::send(
                     &sender,

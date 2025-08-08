@@ -78,7 +78,7 @@ pub async fn station_metadata_by_uuid(uuids: Vec<String>) -> Result<Vec<StationM
         r#"{{"uuids":{}}}"#,
         serde_json::to_string(&uuids).unwrap_or_default()
     );
-    debug!("Post body: {}", uuids);
+    debug!("Post body: {uuids}");
 
     let request = HTTP_CLIENT.post(url).body(uuids).build().map_err(Rc::new)?;
     send_request_compat(request).await
@@ -112,7 +112,7 @@ pub async fn lookup_rb_server() -> Option<String> {
             .and_then(|r| r.into_iter().next());
 
         if result.is_none() {
-            warn!("Reverse lookup for {} failed", ip);
+            warn!("Reverse lookup for {ip} failed");
             continue;
         }
 
@@ -122,7 +122,7 @@ pub async fn lookup_rb_server() -> Option<String> {
 
         // Check if the server is online / returns data
         // If not, try using the next one in the list
-        debug!("Trying to connect to {} ({})", hostname, ip);
+        debug!("Trying to connect to {hostname} ({ip})");
         match server_stats(hostname).await {
             Ok(stats) => {
                 debug!(
@@ -131,7 +131,7 @@ pub async fn lookup_rb_server() -> Option<String> {
                 );
                 return Some(format!("https://{hostname}/"));
             }
-            Err(err) => warn!("Unable to connect to {hostname}: {}", err),
+            Err(err) => warn!("Unable to connect to {hostname}: {err}"),
         }
     }
 
@@ -153,7 +153,7 @@ fn build_url(param: &str, options: Option<&str>) -> Result<Url, Error> {
         url.set_query(Some(options))
     }
 
-    debug!("Retrieve data: {}", url);
+    debug!("Retrieve data: {url}");
     Ok(url)
 }
 
@@ -174,8 +174,8 @@ async fn send_request<T: de::DeserializeOwned>(request: Request) -> Result<T, Er
     match deserialized {
         Ok(d) => Ok(d),
         Err(err) => {
-            error!("Unable to deserialize data: {}", err);
-            error!("Raw unserialized data: {}", json);
+            error!("Unable to deserialize data: {err}");
+            error!("Raw unserialized data: {json}");
             Err(Error::Deserializer(err.into()))
         }
     }

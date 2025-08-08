@@ -254,7 +254,7 @@ mod imp {
         }
 
         fn gst_title_change(&self, title: &str) {
-            debug!("Stream title has changed to: {}", title);
+            debug!("Stream title has changed to: {title}");
             let track = SwTrack::new(title, &self.obj().station().unwrap());
 
             // Stop recording of old track
@@ -325,7 +325,7 @@ mod imp {
             // Check if the volume differs. For some reason gstreamer sends us slightly
             // different floats, so we round up here (only the the first two digits are
             // important for use here).
-            let new_val = format!("{:.2}", volume);
+            let new_val = format!("{volume:.2}");
             let old_val = format!("{:.2}", self.volume.get());
 
             if new_val != old_val {
@@ -398,8 +398,7 @@ mod imp {
             // Check whether recorded track meets minimum duration
             if new_state.is_recorded() && duration < minimum_duration as u64 {
                 debug!(
-                    "Discard recorded data, duration ({} sec) is below threshold ({} sec).",
-                    duration, minimum_duration
+                    "Discard recorded data, duration ({duration} sec) is below threshold ({minimum_duration} sec)."
                 );
 
                 discard_data = true;
@@ -428,7 +427,7 @@ mod imp {
             if discard_data {
                 debug!("Discard recorded data: {}", track.file().parse_name());
                 if let Err(err) = track.file().delete(gio::Cancellable::NONE) {
-                    warn!("Unable to discard recorded data: {}", err);
+                    warn!("Unable to discard recorded data: {err}");
                 }
             }
         }
@@ -488,7 +487,7 @@ impl SwPlayer {
         self.stop_playback().await;
 
         if let Some(url) = station.stream_url() {
-            debug!("Set new playback URI: {}", url);
+            debug!("Set new playback URI: {url}");
             settings_manager::set_string(
                 Key::PlaybackLastStation,
                 serde_json::to_string(&station.metadata()).unwrap_or_default(),
@@ -611,7 +610,7 @@ impl SwPlayer {
                     }
                 ));
             }
-            Err(e) => warn!("Unable to restore last played station: {}", e),
+            Err(e) => warn!("Unable to restore last played station: {e}"),
         }
     }
 
@@ -658,7 +657,7 @@ impl SwPlayer {
                 backend.set_mute(false);
                 backend.volume()
             };
-            debug!("Restore previous volume: {}", volume);
+            debug!("Restore previous volume: {volume}");
             self.set_volume(volume);
         }
     }

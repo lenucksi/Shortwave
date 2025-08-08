@@ -262,7 +262,7 @@ impl SwApplicationWindow {
     }
 
     pub fn enable_gadget_player(&self, enable: bool) {
-        debug!("Enable gadget player: {:?}", enable);
+        debug!("Enable gadget player: {enable:?}");
 
         if self.is_maximized() && enable {
             self.unmaximize();

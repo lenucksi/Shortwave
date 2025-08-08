@@ -205,7 +205,7 @@ mod imp {
 
     impl SwApplication {
         fn set_background_playback(&self, enabled: bool) {
-            debug!("Enable background playback: {}", enabled);
+            debug!("Enable background playback: {enabled}");
             self.background_playback.set(enabled);
 
             if enabled {
@@ -243,7 +243,7 @@ mod imp {
 
                     self.update_background_portal_status();
                 }
-                Err(err) => warn!("Unable to setup background portal proxy: {}", err),
+                Err(err) => warn!("Unable to setup background portal proxy: {err}"),
             };
         }
 
@@ -272,7 +272,7 @@ mod imp {
             let message = utils::ellipsize_end(message, 96);
             if let Some(proxy) = self.background_proxy.get() {
                 if let Err(err) = proxy.set_status(&message).await {
-                    warn!("Unable to update background portal status message: {}", err);
+                    warn!("Unable to update background portal status message: {err}");
                 }
             }
         }

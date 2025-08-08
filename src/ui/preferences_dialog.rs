@@ -151,7 +151,7 @@ mod imp {
                         );
                     }
                     Err(err) => {
-                        warn!("Selected directory could not be accessed {:?}", err);
+                        warn!("Selected directory could not be accessed {err:?}");
                     }
                 },
             );
