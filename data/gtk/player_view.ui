@@ -36,7 +36,7 @@
                       <object class="GtkBox">
                         <property name="orientation">vertical</property>
                         <child>
-                          <object class="SwStationCover" id="station_cover">
+                          <object class="SwStationCoverAnimated" id="station_cover">
                             <property name="size">192</property>
                             <property name="overflow">hidden</property>
                             <property name="margin_bottom">18</property>
@@ -46,7 +46,7 @@
                               </lookup>
                             </binding>
                             <style>
-                              <class name="card"/>
+                              <class name="card" />
                             </style>
                           </object>
                         </child>
@@ -68,7 +68,7 @@
                                   </lookup>
                                 </binding>
                                 <style>
-                                  <class name="title-3"/>
+                                  <class name="title-3" />
                                 </style>
                               </object>
                             </child>
@@ -134,7 +134,7 @@
                                 <property name="valign">center</property>
                                 <property name="icon_name">streaming-symbolic</property>
                                 <style>
-                                  <class name="circular"/>
+                                  <class name="circular" />
                                 </style>
                               </object>
                             </child>
@@ -155,7 +155,7 @@
                                         <property name="icon_name">media-playback-start-symbolic</property>
                                         <property name="tooltip_text" translatable="yes">Play</property>
                                         <style>
-                                          <class name="pill"/>
+                                          <class name="pill" />
                                         </style>
                                       </object>
                                     </property>
@@ -170,7 +170,7 @@
                                         <property name="tooltip_text" translatable="yes">Stop</property>
                                         <property name="icon_name">media-playback-stop-symbolic</property>
                                         <style>
-                                          <class name="pill"/>
+                                          <class name="pill" />
                                         </style>
                                       </object>
                                     </property>
@@ -187,7 +187,7 @@
                                           <object class="AdwSpinner" />
                                         </child>
                                         <style>
-                                          <class name="pill"/>
+                                          <class name="pill" />
                                         </style>
                                       </object>
                                     </property>
@@ -201,8 +201,8 @@
                                         <property name="popover">failure_popover</property>
                                         <property name="icon_name">dialog-error-symbolic</property>
                                         <style>
-                                          <class name="destructive-action"/>
-                                          <class name="pill"/>
+                                          <class name="destructive-action" />
+                                          <class name="pill" />
                                         </style>
                                       </object>
                                     </property>
@@ -217,7 +217,7 @@
                                 <property name="valign">center</property>
                                 <property name="icon_name">details-symbolic</property>
                                 <style>
-                                  <class name="circular"/>
+                                  <class name="circular" />
                                 </style>
                               </object>
                             </child>
@@ -267,8 +267,8 @@
                                     <property name="justify">center</property>
                                     <property name="ellipsize">end</property>
                                     <style>
-                                      <class name="title-2"/>
-                                      <class name="dimmed"/>
+                                      <class name="title-2" />
+                                      <class name="dimmed" />
                                     </style>
                                   </object>
                                 </child>
@@ -278,7 +278,7 @@
                                     <property name="justify">center</property>
                                     <property name="wrap">True</property>
                                     <style>
-                                      <class name="dimmed"/>
+                                      <class name="dimmed" />
                                     </style>
                                   </object>
                                 </child>
@@ -288,7 +288,7 @@
                               <object class="GtkListBox" id="past_tracks_listbox">
                                 <property name="selection-mode">none</property>
                                 <style>
-                                  <class name="boxed-list"/>
+                                  <class name="boxed-list" />
                                 </style>
                               </object>
                             </child>

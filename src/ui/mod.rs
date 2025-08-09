@@ -42,7 +42,7 @@ pub use display_error::{DisplayError, ToastWindow};
 pub use preferences_dialog::SwPreferencesDialog;
 pub use recording_indicator::SwRecordingIndicator;
 pub use scalable_image::SwScalableImage;
-pub use station_cover::SwStationCover;
+pub use station_cover::{SwStationCover, SwStationCoverAnimated};
 pub use station_dialog::SwStationDialog;
 pub use station_row::SwStationRow;
 pub use track_dialog::SwTrackDialog;

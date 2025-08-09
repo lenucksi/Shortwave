@@ -23,7 +23,7 @@ use gtk::{CompositeTemplate, glib};
 
 use crate::app::SwApplication;
 use crate::audio::SwPlayer;
-use crate::ui::SwStationCover;
+use crate::ui::SwStationCoverAnimated;
 
 mod imp {
     use super::*;
@@ -33,7 +33,7 @@ mod imp {
     #[properties(wrapper_type = super::SwPlayerToolbar)]
     pub struct SwPlayerToolbar {
         #[template_child]
-        station_cover: TemplateChild<SwStationCover>,
+        station_cover: TemplateChild<SwStationCoverAnimated>,
 
         #[property(get=Self::player)]
         pub player: PhantomData<SwPlayer>,

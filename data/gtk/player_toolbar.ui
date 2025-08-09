@@ -4,7 +4,7 @@
     <property name="child">
       <object class="GtkBox">
         <child>
-          <object class="SwStationCover" id="station_cover">
+          <object class="SwStationCoverAnimated" id="station_cover">
             <property name="size">64</property>
             <binding name="station">
               <lookup name="station" type="SwPlayer">
@@ -136,8 +136,8 @@
                   <object class="GtkMenuButton">
                     <property name="icon_name">dialog-error-symbolic</property>
                     <style>
-                      <class name="destructive-action"/>
-                      <class name="circular"/>
+                      <class name="destructive-action" />
+                      <class name="circular" />
                     </style>
                   </object>
                 </property>

@@ -26,7 +26,7 @@ use crate::app::SwApplication;
 use crate::audio::SwPlayer;
 use crate::audio::SwTrack;
 use crate::ui::{
-    SwDeviceIndicator, SwRecordingIndicator, SwStationCover, SwTrackRow, SwVolumeControl,
+    SwDeviceIndicator, SwRecordingIndicator, SwStationCoverAnimated, SwTrackRow, SwVolumeControl,
 };
 
 mod imp {
@@ -37,7 +37,7 @@ mod imp {
     #[properties(wrapper_type = super::SwPlayerView)]
     pub struct SwPlayerView {
         #[template_child]
-        station_cover: TemplateChild<SwStationCover>,
+        station_cover: TemplateChild<SwStationCoverAnimated>,
         #[template_child]
         recording_indicator: TemplateChild<SwRecordingIndicator>,
         #[template_child]

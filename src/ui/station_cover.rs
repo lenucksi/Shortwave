@@ -47,7 +47,7 @@ mod imp {
 
         #[property(get, set=Self::set_size)]
         size: Cell<i32>,
-        #[property(get, set=Self::set_station)]
+        #[property(get, set=Self::set_station, nullable)]
         station: RefCell<Option<SwStation>>,
         #[property(get)]
         is_loaded: Cell<bool>,
@@ -293,5 +293,84 @@ mod imp {
 
 glib::wrapper! {
     pub struct SwStationCover(ObjectSubclass<imp::SwStationCover>)
+        @extends gtk::Widget, adw::Bin;
+}
+
+impl Default for SwStationCover {
+    fn default() -> Self {
+        glib::Object::new()
+    }
+}
+
+mod imp_animated {
+    use super::*;
+
+    #[derive(Debug, Default, Properties)]
+    #[properties(wrapper_type = super::SwStationCoverAnimated)]
+    pub struct SwStationCoverAnimated {
+        cover1: SwStationCover,
+        cover2: SwStationCover,
+        stack: adw::ViewStack,
+
+        #[property(get, set)]
+        size: Cell<i32>,
+        #[property(get, set=Self::set_station, nullable)]
+        station: RefCell<Option<SwStation>>,
+    }
+
+    #[glib::object_subclass]
+    impl ObjectSubclass for SwStationCoverAnimated {
+        const NAME: &'static str = "SwStationCoverAnimated";
+        type ParentType = adw::Bin;
+        type Type = super::SwStationCoverAnimated;
+    }
+
+    #[glib::derived_properties]
+    impl ObjectImpl for SwStationCoverAnimated {
+        fn constructed(&self) {
+            self.parent_constructed();
+
+            self.obj().set_child(Some(&self.stack));
+            self.stack.add_named(&self.cover1, Some("cover1"));
+            self.stack.add_named(&self.cover2, Some("cover2"));
+            self.stack.set_enable_transitions(true);
+            self.stack.set_transition_duration(200);
+
+            self.obj().set_halign(gtk::Align::Center);
+            self.obj().set_valign(gtk::Align::Center);
+
+            self.obj()
+                .bind_property("size", &self.cover1, "size")
+                .build();
+            self.obj()
+                .bind_property("size", &self.cover2, "size")
+                .build();
+        }
+    }
+
+    impl WidgetImpl for SwStationCoverAnimated {}
+
+    impl BinImpl for SwStationCoverAnimated {}
+
+    impl SwStationCoverAnimated {
+        fn set_station(&self, station: Option<&SwStation>) {
+            *self.station.borrow_mut() = station.cloned();
+
+            let new_cover = if self.stack.visible_child_name().unwrap() == "cover1" {
+                self.cover2.set_station(station);
+                &self.cover2
+            } else {
+                self.cover1.set_station(station);
+                &self.cover1
+            };
+
+            self.stack.set_visible_child(new_cover);
+        }
+    }
+}
+
+glib::wrapper! {
+    /// Transitions between station covers. Only useful when the underlying [SwStation] can change, for example in player widgets.
+    pub struct SwStationCoverAnimated(ObjectSubclass<imp_animated::SwStationCoverAnimated>)
         @extends gtk::Widget, adw::Bin;
 }
