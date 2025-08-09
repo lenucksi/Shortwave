@@ -1,5 +1,5 @@
 // Shortwave - mod.rs
-// Copyright (C) 2021-2024  Felix Häcker <haeckerfelix@gnome.org>
+// Copyright (C) 2021-2025  Felix Häcker <haeckerfelix@gnome.org>
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,6 +25,7 @@ mod device_row;
 mod display_error;
 mod preferences_dialog;
 mod recording_indicator;
+mod scalable_image;
 mod station_cover;
 mod station_dialog;
 mod station_row;
@@ -40,6 +41,7 @@ pub use device_row::SwDeviceRow;
 pub use display_error::{DisplayError, ToastWindow};
 pub use preferences_dialog::SwPreferencesDialog;
 pub use recording_indicator::SwRecordingIndicator;
+pub use scalable_image::SwScalableImage;
 pub use station_cover::SwStationCover;
 pub use station_dialog::SwStationDialog;
 pub use station_row::SwStationRow;

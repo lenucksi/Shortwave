@@ -20,12 +20,13 @@ use std::hash::{DefaultHasher, Hash, Hasher};
 
 use adw::prelude::*;
 use adw::subclass::prelude::*;
-use glib::{clone, subclass, Properties};
-use gtk::{gio, glib, pango, CompositeTemplate};
+use glib::{Properties, clone, subclass};
+use gtk::{CompositeTemplate, gdk, gio, glib, pango};
 
 use crate::api::SwStation;
 use crate::app::SwApplication;
 use crate::config;
+use crate::ui::SwScalableImage;
 
 mod imp {
     use super::*;
@@ -38,7 +39,7 @@ mod imp {
         #[template_child]
         placeholder_image: TemplateChild<gtk::Image>,
         #[template_child]
-        image: TemplateChild<gtk::Image>,
+        image: TemplateChild<SwScalableImage>,
         #[template_child]
         stack: TemplateChild<gtk::Stack>,
         #[template_child]
@@ -112,7 +113,7 @@ mod imp {
             *self.station.borrow_mut() = station.cloned();
 
             // Reset previous cover
-            self.image.set_paintable(gtk::gdk::Paintable::NONE);
+            self.image.set_texture(gdk::Texture::NONE);
             self.stack.set_visible_child_name("fallback");
 
             self.is_loaded.set(false);
@@ -237,7 +238,7 @@ mod imp {
                 // First check whether we have some custom cover for that station
                 // Usually only for local added stations
                 if let Some(texture) = station.custom_cover() {
-                    self.image.set_paintable(Some(&texture));
+                    self.image.set_texture(Some(&texture));
                     self.stack.set_visible_child_name("image");
 
                     self.is_loaded.set(true);
@@ -255,7 +256,7 @@ mod imp {
 
                     match res {
                         Ok(texture) => {
-                            self.image.set_paintable(Some(&texture));
+                            self.image.set_texture(Some(&texture));
                             self.stack.set_visible_child_name("image");
 
                             self.is_loaded.set(true);
