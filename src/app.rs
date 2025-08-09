@@ -20,12 +20,12 @@ use adw::prelude::*;
 use adw::subclass::prelude::*;
 use ashpd::desktop::background::BackgroundProxy;
 use gio::subclass::prelude::ApplicationImpl;
-use glib::{clone, Properties};
+use glib::{Properties, clone};
 use gtk::glib::VariantTy;
 use gtk::{gio, glib};
 
-use crate::api::client;
 use crate::api::CoverLoader;
+use crate::api::client;
 use crate::audio::{SwPlaybackState, SwPlayer, SwRecordingState, SwTrack};
 use crate::config;
 use crate::database::SwLibrary;
@@ -195,7 +195,9 @@ mod imp {
             let obj = self.obj();
 
             if obj.active_window().is_none() && obj.player().state() != SwPlaybackState::Playing {
-                debug!("All windows closed, no active playback -> quit application, no need to run in background.");
+                debug!(
+                    "All windows closed, no active playback -> quit application, no need to run in background."
+                );
                 obj.quit();
             }
         }

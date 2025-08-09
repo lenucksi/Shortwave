@@ -20,8 +20,8 @@ use std::marker::PhantomData;
 
 use adw::subclass::prelude::*;
 use glib::clone;
-use glib::{subclass::Signal, Properties};
-use gtk::{gdk, gio, glib, prelude::*, CompositeTemplate};
+use glib::{Properties, subclass::Signal};
+use gtk::{CompositeTemplate, gdk, gio, glib, prelude::*};
 
 mod imp {
     use std::sync::LazyLock;
@@ -163,9 +163,11 @@ mod imp {
 
         fn signals() -> &'static [Signal] {
             static SIGNALS: LazyLock<Vec<Signal>> = LazyLock::new(|| {
-                vec![Signal::builder("volume-changed")
-                    .param_types([f64::static_type()])
-                    .build()]
+                vec![
+                    Signal::builder("volume-changed")
+                        .param_types([f64::static_type()])
+                        .build(),
+                ]
             });
 
             SIGNALS.as_ref()

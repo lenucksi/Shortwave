@@ -17,17 +17,17 @@
 use std::cell::RefCell;
 
 use adw::subclass::prelude::*;
+use glib::Properties;
 use glib::clone;
 use glib::subclass;
-use glib::Properties;
 use gtk::prelude::*;
-use gtk::{glib, CompositeTemplate};
+use gtk::{CompositeTemplate, glib};
 use inflector::Inflector;
 
+use crate::SwApplication;
 use crate::api::StationMetadata;
 use crate::api::SwStation;
 use crate::ui::SwStationCover;
-use crate::SwApplication;
 
 mod imp {
     use super::*;

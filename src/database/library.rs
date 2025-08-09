@@ -26,7 +26,7 @@ use super::models::StationEntry;
 use super::*;
 use crate::api;
 use crate::api::StationMetadata;
-use crate::api::{client, SwStation, SwStationModel};
+use crate::api::{SwStation, SwStationModel, client};
 
 mod imp {
     use super::*;

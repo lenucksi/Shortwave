@@ -18,15 +18,15 @@ use std::cell::Cell;
 
 use adw::prelude::*;
 use adw::subclass::prelude::*;
-use glib::{clone, subclass, Properties};
-use gtk::{glib, CompositeTemplate};
+use glib::{Properties, clone, subclass};
+use gtk::{CompositeTemplate, glib};
 
 use crate::api::{SwStation, SwStationSorter, SwStationSorting, SwStationSortingType};
 use crate::app::SwApplication;
 use crate::config;
 use crate::database::SwLibraryStatus;
 use crate::i18n::*;
-use crate::settings::{settings_manager, Key};
+use crate::settings::{Key, settings_manager};
 use crate::ui::{SwStationDialog, SwStationRow};
 
 mod imp {

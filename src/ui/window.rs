@@ -17,18 +17,18 @@
 use adw::prelude::*;
 use adw::subclass::prelude::*;
 use glib::{clone, subclass};
-use gtk::{gio, glib, CompositeTemplate};
+use gtk::{CompositeTemplate, gio, glib};
 
 use crate::app::SwApplication;
 use crate::audio::SwPlaybackState;
 use crate::config;
 use crate::i18n::i18n;
-use crate::settings::{settings_manager, Key};
+use crate::settings::{Key, settings_manager};
 use crate::ui::pages::*;
 use crate::ui::player::{SwPlayerGadget, SwPlayerToolbar, SwPlayerView};
 use crate::ui::{
-    about_dialog, DisplayError, SwAddStationDialog, SwDeviceDialog, SwPreferencesDialog,
-    SwStationDialog, ToastWindow,
+    DisplayError, SwAddStationDialog, SwDeviceDialog, SwPreferencesDialog, SwStationDialog,
+    ToastWindow, about_dialog,
 };
 use crate::utils;
 

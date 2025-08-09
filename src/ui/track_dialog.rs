@@ -18,8 +18,8 @@ use std::cell::RefCell;
 
 use adw::prelude::*;
 use adw::subclass::prelude::*;
-use glib::{subclass, Properties};
-use gtk::{gio, glib, CompositeTemplate};
+use glib::{Properties, subclass};
+use gtk::{CompositeTemplate, gio, glib};
 
 use super::{SwStationDialog, ToastWindow};
 use crate::app::SwApplication;

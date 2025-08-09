@@ -18,10 +18,10 @@ use std::cell::OnceCell;
 
 use adw::prelude::*;
 use adw::subclass::prelude::*;
+use glib::Properties;
 use glib::clone;
 use glib::subclass;
-use glib::Properties;
-use gtk::{glib, CompositeTemplate};
+use gtk::{CompositeTemplate, glib};
 
 use crate::app::SwApplication;
 use crate::device::SwDevice;

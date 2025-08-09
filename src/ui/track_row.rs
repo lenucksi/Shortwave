@@ -18,8 +18,8 @@ use std::cell::OnceCell;
 
 use adw::prelude::*;
 use adw::subclass::prelude::*;
-use glib::{subclass, Properties};
-use gtk::{glib, CompositeTemplate};
+use glib::{Properties, subclass};
+use gtk::{CompositeTemplate, glib};
 
 use crate::audio::SwRecordingState;
 use crate::audio::SwTrack;

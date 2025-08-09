@@ -17,10 +17,10 @@
 use adw::prelude::*;
 use adw::subclass::prelude::*;
 use glib::{clone, subclass};
-use gtk::{gio, glib, CompositeTemplate};
+use gtk::{CompositeTemplate, gio, glib};
 
 use crate::i18n::{i18n, ni18n_f};
-use crate::settings::{settings_manager, Key};
+use crate::settings::{Key, settings_manager};
 
 mod imp {
     use super::*;

@@ -18,8 +18,8 @@ use std::cell::OnceCell;
 
 use adw::prelude::*;
 use adw::subclass::prelude::*;
-use glib::{subclass, Properties};
-use gtk::{gdk, glib, CompositeTemplate};
+use glib::{Properties, subclass};
+use gtk::{CompositeTemplate, gdk, glib};
 use inflector::Inflector;
 use shumate::prelude::*;
 

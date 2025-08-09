@@ -18,9 +18,9 @@ use std::cell::{Cell, OnceCell, RefCell};
 use std::fs;
 
 use adw::prelude::*;
+use glib::Properties;
 use glib::clone;
 use glib::subclass::prelude::*;
-use glib::Properties;
 use gtk::{gio, glib};
 
 use crate::api::{StationMetadata, SwStation};
@@ -30,7 +30,7 @@ use crate::config;
 use crate::device::{SwCastSender, SwDevice, SwDeviceDiscovery, SwDeviceKind};
 use crate::i18n::*;
 use crate::path;
-use crate::settings::{settings_manager, Key};
+use crate::settings::{Key, settings_manager};
 use crate::ui::DisplayError;
 
 mod imp {

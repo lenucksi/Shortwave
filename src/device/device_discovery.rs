@@ -22,7 +22,7 @@ use adw::prelude::*;
 use async_io::Timer;
 use futures_util::future::select;
 use glib::subclass::prelude::*;
-use glib::{clone, Properties};
+use glib::{Properties, clone};
 use gtk::glib;
 use mdns_sd::{Error, ServiceDaemon, ServiceEvent};
 

@@ -16,8 +16,8 @@
 
 use adw::prelude::*;
 use adw::subclass::prelude::*;
-use glib::{clone, subclass, Properties};
-use gtk::{gdk, gio, glib, CompositeTemplate};
+use glib::{Properties, clone, subclass};
+use gtk::{CompositeTemplate, gdk, gio, glib};
 use url::Url;
 use uuid::Uuid;
 

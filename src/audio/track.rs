@@ -21,14 +21,14 @@ use std::rc::Rc;
 
 use adw::prelude::*;
 use glib::subclass::prelude::*;
-use glib::{clone, Properties};
+use glib::{Properties, clone};
 use gtk::{gio, glib};
 use uuid::Uuid;
 
 use crate::api::{Error, SwStation};
 use crate::app::SwApplication;
 use crate::audio::SwRecordingState;
-use crate::settings::{settings_manager, Key};
+use crate::settings::{Key, settings_manager};
 use crate::ui::DisplayError;
 
 mod imp {

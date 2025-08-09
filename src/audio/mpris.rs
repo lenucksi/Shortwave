@@ -18,7 +18,7 @@ use std::rc::Rc;
 
 use glib::clone;
 use gtk::{glib, prelude::ApplicationExt};
-use mpris_server::{zbus::Result, Metadata, PlaybackStatus, Player};
+use mpris_server::{Metadata, PlaybackStatus, Player, zbus::Result};
 
 use super::SwPlaybackState;
 use crate::{app::SwApplication, config};

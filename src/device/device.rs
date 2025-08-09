@@ -17,8 +17,8 @@
 use std::cell::{Cell, OnceCell};
 
 use adw::prelude::*;
-use glib::subclass::prelude::*;
 use glib::Properties;
+use glib::subclass::prelude::*;
 use gtk::glib;
 
 use super::SwDeviceKind;

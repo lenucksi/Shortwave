@@ -19,9 +19,9 @@ use std::cell::{Cell, RefCell};
 use adw::prelude::*;
 use cast_sender::namespace::media::*;
 use cast_sender::{AppId, ImageBuilder, MediaController};
+use glib::Properties;
 use glib::clone;
 use glib::subclass::prelude::*;
-use glib::Properties;
 use gtk::glib;
 
 use crate::ui::DisplayError;
@@ -87,10 +87,12 @@ mod imp {
 
                 let metadata = MusicTrackMediaMetadataBuilder::default()
                     .title(self.obj().title())
-                    .images(vec![ImageBuilder::default()
-                        .url(self.obj().cover_url())
-                        .build()
-                        .unwrap()])
+                    .images(vec![
+                        ImageBuilder::default()
+                            .url(self.obj().cover_url())
+                            .build()
+                            .unwrap(),
+                    ])
                     .build()
                     .unwrap()
                     .into();
