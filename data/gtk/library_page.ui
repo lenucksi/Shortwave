@@ -23,16 +23,15 @@
                 <property name="tooltip_text" translatable="yes">Main Menu</property>
                 <property name="primary">True</property>
               </object>
-            </child>"
-          </object>
+            </child>" </object>
         </child>
         <child>
-          <object class="GtkStack" id="stack">
+          <object class="AdwViewStack" id="stack">
             <property name="hhomogeneous">False</property>
             <property name="vhomogeneous">False</property>
-            <property name="transition_type">crossfade</property>
+            <property name="enable_transitions">True</property>
             <child>
-              <object class="GtkStackPage">
+              <object class="AdwViewStackPage">
                 <property name="name">content</property>
                 <property name="child">
                   <object class="GtkScrolledWindow" id="scrolledwindow">
@@ -66,7 +65,7 @@
                               </object>
                             </property>
                             <style>
-                              <class name="station-grid"/>
+                              <class name="station-grid" />
                             </style>
                           </object>
                         </child>
@@ -77,7 +76,7 @@
               </object>
             </child>
             <child>
-              <object class="GtkStackPage">
+              <object class="AdwViewStackPage">
                 <property name="name">empty</property>
                 <property name="child">
                   <object class="GtkBox" id="empty_box">
@@ -87,14 +86,14 @@
                         <child>
                           <object class="GtkButton" id="add_button">
                             <property name="action_name">navigation.push</property>
-                            <property name="action_target">'search'</property>                            
+                            <property name="action_target">'search'</property>
                             <property name="halign">center</property>
                             <property name="label" translatable="yes">_Add New Stations</property>
                             <property name="use_underline">True</property>
                             <property name="can_shrink">True</property>
                             <style>
-                              <class name="suggested-action"/>
-                              <class name="pill"/>
+                              <class name="suggested-action" />
+                              <class name="pill" />
                             </style>
                           </object>
                         </child>

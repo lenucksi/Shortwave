@@ -334,7 +334,6 @@ mod imp_animated {
             self.stack.add_named(&self.cover1, Some("cover1"));
             self.stack.add_named(&self.cover2, Some("cover2"));
             self.stack.set_enable_transitions(true);
-            self.stack.set_transition_duration(200);
 
             self.obj().set_halign(gtk::Align::Center);
             self.obj().set_valign(gtk::Align::Center);

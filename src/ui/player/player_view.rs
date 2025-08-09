@@ -45,7 +45,7 @@ mod imp {
         #[template_child]
         volume_control: TemplateChild<SwVolumeControl>,
         #[template_child]
-        past_tracks_stack: TemplateChild<gtk::Stack>,
+        past_tracks_stack: TemplateChild<adw::ViewStack>,
         #[template_child]
         past_tracks_listbox: TemplateChild<gtk::ListBox>,
 

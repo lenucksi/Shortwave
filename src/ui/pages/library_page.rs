@@ -39,7 +39,7 @@ mod imp {
         #[template_child]
         status_page: TemplateChild<adw::StatusPage>,
         #[template_child]
-        stack: TemplateChild<gtk::Stack>,
+        stack: TemplateChild<adw::ViewStack>,
         #[template_child]
         gridview: TemplateChild<gtk::GridView>,
 

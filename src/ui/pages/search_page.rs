@@ -34,7 +34,7 @@ mod imp {
         #[template_child]
         search_entry: TemplateChild<gtk::SearchEntry>,
         #[template_child]
-        stack: TemplateChild<gtk::Stack>,
+        stack: TemplateChild<adw::ViewStack>,
         #[template_child]
         popular_flowbox: TemplateChild<gtk::FlowBox>,
         #[template_child]
