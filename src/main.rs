@@ -38,8 +38,6 @@ mod config;
 mod i18n;
 mod path;
 
-use std::env;
-
 use gettextrs::*;
 use gtk::{gio, glib};
 
@@ -61,8 +59,8 @@ fn main() -> glib::ExitCode {
     // Initialize variables
     glib::set_application_name(config::NAME);
     gtk::Window::set_default_icon_name(config::APP_ID);
-    env::set_var("PULSE_PROP_application.icon_name", config::APP_ID);
-    env::set_var("PULSE_PROP_application.metadata().name", config::NAME);
+    //env::set_var("PULSE_PROP_application.icon_name", config::APP_ID);
+    //env::set_var("PULSE_PROP_application.metadata().name", config::NAME);
 
     // Setup translations
     setlocale(LocaleCategory::LcAll, "");

@@ -22,16 +22,16 @@ use std::time::Duration;
 use async_compat::Compat;
 use async_std_resolver::{config as rconfig, resolver, resolver_from_system_conf};
 use rand::prelude::SliceRandom;
-use rand::thread_rng;
-use reqwest::header::{self, HeaderMap};
+use rand::rng;
 use reqwest::Request;
+use reqwest::header::{self, HeaderMap};
 use serde::de;
 use url::Url;
 
 use crate::api::*;
 use crate::app::SwApplication;
 use crate::config;
-use crate::settings::{settings_manager, Key};
+use crate::settings::{Key, settings_manager};
 
 static USER_AGENT: LazyLock<String> = LazyLock::new(|| {
     format!(
@@ -101,7 +101,7 @@ pub async fn lookup_rb_server() -> Option<String> {
     let mut ips: Vec<IpAddr> = response.iter().collect();
 
     // Shuffle it to make sure we're not using always the same one
-    ips.shuffle(&mut thread_rng());
+    ips.shuffle(&mut rng());
 
     for ip in ips {
         // Do a reverse lookup to get the hostname

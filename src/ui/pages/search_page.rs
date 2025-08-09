@@ -1,5 +1,5 @@
 // Shortwave - search_page.rs
-// Copyright (C) 2021-2024  Felix Häcker <haeckerfelix@gnome.org>
+// Copyright (C) 2021-2025  Felix Häcker <haeckerfelix@gnome.org>
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,10 +19,10 @@ use std::cell::Cell;
 use adw::prelude::*;
 use adw::subclass::prelude::*;
 use glib::{clone, subclass};
-use gtk::{glib, CompositeTemplate};
-use rand::seq::SliceRandom;
+use gtk::{CompositeTemplate, glib};
+use rand::seq::IndexedRandom;
 
-use crate::api::{client, Error, StationRequest, SwStation, SwStationModel};
+use crate::api::{Error, StationRequest, SwStation, SwStationModel, client};
 use crate::ui::{DisplayError, SwStationDialog, SwStationRow};
 
 mod imp {
@@ -170,7 +170,7 @@ mod imp {
 
             // Randomize the selection to avoid that always the same stations are visible
             let stations = stations
-                .choose_multiple(&mut rand::thread_rng(), 12)
+                .choose_multiple(&mut rand::rng(), 12)
                 .cloned()
                 .collect::<Vec<SwStation>>();
 
