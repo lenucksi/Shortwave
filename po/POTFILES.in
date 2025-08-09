@@ -76,6 +76,7 @@ src/ui/player/player_toolbar.rs
 src/ui/player/player_view.rs
 src/ui/preferences_dialog.rs
 src/ui/recording_indicator.rs
+src/ui/scalable_image.rs
 src/ui/station_cover.rs
 src/ui/station_dialog.rs
 src/ui/station_row.rs
