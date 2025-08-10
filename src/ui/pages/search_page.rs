@@ -174,8 +174,7 @@ mod imp {
                 .cloned()
                 .collect::<Vec<SwStation>>();
 
-            self.popular_model.clear();
-            self.popular_model.add_stations(stations);
+            self.popular_model.set_stations(stations);
 
             // Random stations
             let request = StationRequest {
@@ -186,8 +185,7 @@ mod imp {
             };
 
             let stations = client::station_request(request).await?;
-            self.random_model.clear();
-            self.random_model.add_stations(stations);
+            self.random_model.set_stations(stations);
 
             Ok(())
         }
@@ -207,7 +205,7 @@ mod imp {
                 return;
             }
 
-            let request = StationRequest::search_for_name(text, 1000);
+            let request = StationRequest::search_for_name(text, 5000);
             self.stack.set_visible_child_name("spinner");
 
             debug!("Search for: {request:?}");
@@ -221,8 +219,7 @@ mod imp {
                     self.stack.set_visible_child_name("results");
                 }
 
-                self.search_model.clear();
-                self.search_model.add_stations(stations);
+                self.search_model.set_stations(stations);
             }
         }
 

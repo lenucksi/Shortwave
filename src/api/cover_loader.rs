@@ -23,12 +23,13 @@ use async_compat::CompatExt;
 use futures_util::StreamExt;
 use gdk::RGBA;
 use glycin::Loader;
-use gtk::gio::File;
 use gtk::graphene::Rect;
 use gtk::prelude::TextureExt;
 use gtk::prelude::*;
 use gtk::{gdk, gio, glib, gsk};
 use url::Url;
+
+use crate::path;
 
 static HTTP_CLIENT: LazyLock<reqwest::Client> = LazyLock::new(|| {
     reqwest::ClientBuilder::new()
@@ -37,15 +38,12 @@ static HTTP_CLIENT: LazyLock<reqwest::Client> = LazyLock::new(|| {
         .unwrap()
 });
 
-use crate::{config, path};
 #[derive(Debug, Clone)]
 struct CoverRequest {
     favicon_url: Url,
     size: i32,
     sender: Sender<Result<gdk::Texture>>,
     cancellable: gio::Cancellable,
-    tmp_file: gio::File,
-    tmp_stream: gio::FileIOStream,
 }
 
 impl CoverRequest {
@@ -56,7 +54,6 @@ impl CoverRequest {
             Err(_) => Err(Error::msg("cancelled")),
         };
 
-        let _ = self.delete_tmp_file().await;
         self.sender.send(msg).await.unwrap();
     }
 
@@ -71,13 +68,16 @@ impl CoverRequest {
     async fn cached_texture(&self) -> Result<gdk::Texture> {
         let key = format!("{}@{}", self.favicon_url, self.size);
         let data = cacache::read(&*path::CACHE, key).await?;
-        let bytes = glib::Bytes::from_owned(data);
 
-        Ok(gdk::Texture::from_bytes(&bytes)?)
+        let loader = Loader::new_vec(data);
+        let image = loader.load().await?;
+        let texture = image.next_frame().await?.texture();
+
+        Ok(texture)
     }
 
     async fn compute_texture(&self) -> Result<gdk::Texture> {
-        let (cover_texture, cover_bytes) = self.cover_bytes().await?;
+        let (cover_texture, cover_bytes) = self.cover_bytes().compat().await?;
 
         let key = format!("{}@{}", self.favicon_url, self.size);
         cacache::write_with_algo(cacache::Algorithm::Xxh3, &*path::CACHE, key, &cover_bytes)
@@ -87,9 +87,11 @@ impl CoverRequest {
     }
 
     async fn cover_bytes(&self) -> Result<(gdk::Texture, Vec<u8>)> {
-        self.download_tmp_file().compat().await?;
+        let request = HTTP_CLIENT.get(self.favicon_url.as_str()).build()?;
+        let response = HTTP_CLIENT.execute(request).await?;
+        let body_bytes = response.bytes().await?.to_vec();
 
-        let loader = Loader::new(self.tmp_file.clone());
+        let loader = Loader::new_vec(body_bytes);
         let image = loader.load().await?;
         let texture = image.next_frame().await?.texture();
 
@@ -107,30 +109,6 @@ impl CoverRequest {
 
         let png_bytes = texture.save_to_png_bytes().to_vec();
         Ok((texture, png_bytes))
-    }
-
-    async fn download_tmp_file(&self) -> Result<()> {
-        let request = HTTP_CLIENT.get(self.favicon_url.as_str()).build()?;
-        let response = HTTP_CLIENT.execute(request).await?;
-        let body_bytes = response.bytes().await?;
-
-        // We have to write the data to the disk in order to be able to load them using Glycin
-        // TODO: Load bytes directly
-        // TODO: https://gitlab.gnome.org/GNOME/glycin/-/issues/98
-        let bytes = glib::Bytes::from_owned(body_bytes);
-        self.tmp_stream
-            .output_stream()
-            .write_bytes_future(&bytes, glib::Priority::LOW)
-            .await?;
-
-        Ok(())
-    }
-
-    async fn delete_tmp_file(&self) -> Result<()> {
-        self.tmp_stream.close_future(glib::Priority::LOW).await?;
-        self.tmp_file.delete_future(glib::Priority::LOW).await?;
-
-        Ok(())
     }
 }
 
@@ -183,19 +161,11 @@ impl CoverLoader {
     ) -> Result<gdk::Texture> {
         let (sender, receiver) = async_channel::bounded(1);
 
-        let (tmp_file, tmp_stream) = File::new_tmp_future(
-            Some(&format!("{}-Cover-XXXXXX", config::NAME)),
-            glib::Priority::LOW,
-        )
-        .await?;
-
         let request = CoverRequest {
             favicon_url: favicon_url.clone(),
             size,
             sender,
             cancellable: cancellable.clone(),
-            tmp_file,
-            tmp_stream,
         };
         self.request_sender
             .send(request)

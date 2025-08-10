@@ -67,15 +67,33 @@ impl SwStationModel {
         glib::Object::new()
     }
 
-    pub fn add_stations(&self, stations: Vec<SwStation>) {
+    pub fn set_stations(&self, stations: Vec<SwStation>) {
+        let imp = self.imp();
+
+        let (removed, added) = {
+            let mut map = imp.map.borrow_mut();
+
+            let removed = map.len();
+            map.clear();
+
+            for station in stations {
+                map.insert(station.uuid(), station.clone());
+            }
+            let added = map.len();
+
+            (removed.try_into().unwrap(), added.try_into().unwrap())
+        };
+
+        self.items_changed(0, removed, added);
+    }
+
+    pub fn add_station(&self, station: SwStation) {
         let (pos, added) = {
             let mut map = self.imp().map.borrow_mut();
             let mut added: u32 = 0;
 
-            for station in stations {
-                if map.insert(station.uuid(), station.clone()).is_none() {
-                    added += 1;
-                }
+            if map.insert(station.uuid(), station.clone()).is_none() {
+                added = 1;
             }
 
             (map.len() as u32 - added, added)
@@ -86,28 +104,25 @@ impl SwStationModel {
 
     pub fn remove_station(&self, station: &SwStation) {
         let imp = self.imp();
-        let pos = { imp.map.borrow().get_index_of(&station.uuid()) };
 
-        if let Some(pos) = pos {
-            {
-                imp.map.borrow_mut().shift_remove_full(&station.uuid());
+        let (pos, removed) = {
+            let mut map = imp.map.borrow_mut();
+            let pos = map.get_index_of(&station.uuid());
+
+            if let Some(pos) = pos {
+                map.shift_remove_full(&station.uuid());
+                (pos.try_into().unwrap(), 1)
+            } else {
+                warn!("Station {:?} not found in model", station.metadata().name);
+                (0, 0)
             }
-            self.items_changed(pos.try_into().unwrap(), 1, 0);
-        } else {
-            warn!("Station {:?} not found in model", station.metadata().name);
-        }
+        };
+
+        self.items_changed(pos, removed, 0);
     }
 
     pub fn station(&self, uuid: &str) -> Option<SwStation> {
         self.imp().map.borrow().get(uuid).cloned()
-    }
-
-    pub fn clear(&self) {
-        let len = self.n_items();
-        {
-            self.imp().map.borrow_mut().clear();
-        }
-        self.items_changed(0, len, 0);
     }
 }
 

@@ -4,9 +4,9 @@
     <property name="halign">center</property>
     <property name="valign">center</property>
     <child>
-      <object class="GtkStack" id="stack">
+      <object class="AdwViewStack" id="stack">
         <child>
-          <object class="GtkStackPage">
+          <object class="AdwViewStackPage">
             <property name="name">placeholder</property>
             <property name="child">
               <object class="GtkImage" id="placeholder_image">
@@ -19,7 +19,7 @@
           </object>
         </child>
         <child>
-          <object class="GtkStackPage">
+          <object class="AdwViewStackPage">
             <property name="name">fallback</property>
             <property name="child">
               <object class="GtkLabel" id="fallback_label" />
@@ -27,7 +27,7 @@
           </object>
         </child>
         <child>
-          <object class="GtkStackPage">
+          <object class="AdwViewStackPage">
             <property name="name">image</property>
             <property name="child">
               <object class="SwScalableImage" id="image">

@@ -102,7 +102,7 @@ mod imp {
                 stations.push(station);
             }
 
-            self.model.add_stations(stations);
+            self.model.set_stations(stations);
             self.obj().update_library_status();
         }
     }
@@ -167,7 +167,7 @@ impl SwLibrary {
         let entry = StationEntry::for_station(&station);
         queries::insert_station(entry).unwrap();
 
-        self.imp().model.add_stations(vec![station]);
+        self.imp().model.add_station(station);
         self.update_library_status();
     }
 

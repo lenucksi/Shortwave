@@ -64,7 +64,7 @@ mod imp {
         fn set_metadata(&self, mut metadata: StationMetadata) {
             // Ensure that the station metadata uuid always matches with the SwStation uuid property
             // Previously we did not the `stationuuid` fields for local stations
-            metadata.stationuuid = self.obj().uuid();
+            metadata.stationuuid = self.uuid.get().unwrap().clone();
             *self.metadata.borrow_mut() = metadata;
         }
     }

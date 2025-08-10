@@ -19,8 +19,10 @@ use std::rc::Rc;
 use std::sync::LazyLock;
 use std::time::Duration;
 
-use async_compat::Compat;
+use async_compat::CompatExt;
 use async_std_resolver::{config as rconfig, resolver, resolver_from_system_conf};
+use glib::clone;
+use gtk::{gio, glib};
 use rand::prelude::SliceRandom;
 use rand::rng;
 use reqwest::Request;
@@ -61,7 +63,9 @@ pub async fn station_request(request: StationRequest) -> Result<Vec<SwStation>, 
     let url = build_url(STATION_SEARCH, Some(&request.url_encode()))?;
 
     let request = HTTP_CLIENT.get(url.as_ref()).build().map_err(Rc::new)?;
-    let stations_md = send_request_compat::<Vec<StationMetadata>>(request).await?;
+    let stations_md = send_request::<Vec<StationMetadata>>(request)
+        .compat()
+        .await?;
 
     let stations: Vec<SwStation> = stations_md
         .into_iter()
@@ -81,7 +85,7 @@ pub async fn station_metadata_by_uuid(uuids: Vec<String>) -> Result<Vec<StationM
     debug!("Post body: {uuids}");
 
     let request = HTTP_CLIENT.post(url).body(uuids).build().map_err(Rc::new)?;
-    send_request_compat(request).await
+    send_request(request).compat().await
 }
 
 pub async fn lookup_rb_server() -> Option<String> {
@@ -163,24 +167,27 @@ async fn server_stats(host: &str) -> Result<Stats, Error> {
         .build()
         .map_err(Rc::new)?;
 
-    send_request_compat(request).await
+    send_request(request).compat().await
 }
 
-async fn send_request<T: de::DeserializeOwned>(request: Request) -> Result<T, Error> {
+async fn send_request<T: de::DeserializeOwned + std::marker::Send + 'static>(
+    request: Request,
+) -> Result<T, Error> {
     let response = HTTP_CLIENT.execute(request).await.map_err(Rc::new)?;
     let json = response.text().await.map_err(Rc::new)?;
-    let deserialized = serde_json::from_str(&json);
+
+    let handle = gio::spawn_blocking(clone!(
+        #[strong]
+        json,
+        move || serde_json::from_str::<T>(&json)
+    ));
+    let deserialized = handle.await.unwrap();
 
     match deserialized {
         Ok(d) => Ok(d),
         Err(err) => {
             error!("Unable to deserialize data: {err}");
-            error!("Raw unserialized data: {json}");
             Err(Error::Deserializer(err.into()))
         }
     }
-}
-
-async fn send_request_compat<T: de::DeserializeOwned>(request: Request) -> Result<T, Error> {
-    Compat::new(async move { send_request(request).await }).await
 }

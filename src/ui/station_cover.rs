@@ -41,7 +41,7 @@ mod imp {
         #[template_child]
         image: TemplateChild<SwScalableImage>,
         #[template_child]
-        stack: TemplateChild<gtk::Stack>,
+        stack: TemplateChild<adw::ViewStack>,
         #[template_child]
         fallback_label: TemplateChild<gtk::Label>,
 
