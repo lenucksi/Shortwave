@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-use std::sync::LazyLock;
 use std::time::{Duration, SystemTime};
 
 use anyhow::{Error, Result};
@@ -22,6 +21,7 @@ use async_channel::Sender;
 use async_compat::CompatExt;
 use futures_util::StreamExt;
 use gdk::RGBA;
+use glib::clone;
 use glycin::Loader;
 use gtk::graphene::Rect;
 use gtk::prelude::TextureExt;
@@ -31,12 +31,9 @@ use url::Url;
 
 use crate::path;
 
-static HTTP_CLIENT: LazyLock<reqwest::Client> = LazyLock::new(|| {
-    reqwest::ClientBuilder::new()
-        .timeout(Duration::from_secs(5))
-        .build()
-        .unwrap()
-});
+struct RenderNodeSend(pub gsk::RenderNode);
+
+unsafe impl Send for RenderNodeSend {}
 
 #[derive(Debug, Clone)]
 struct CoverRequest {
@@ -62,7 +59,7 @@ impl CoverRequest {
             return Ok(texture);
         }
 
-        self.compute_texture().await
+        self.compute_texture().compat().await
     }
 
     async fn cached_texture(&self) -> Result<gdk::Texture> {
@@ -77,18 +74,7 @@ impl CoverRequest {
     }
 
     async fn compute_texture(&self) -> Result<gdk::Texture> {
-        let (cover_texture, cover_bytes) = self.cover_bytes().compat().await?;
-
-        let key = format!("{}@{}", self.favicon_url, self.size);
-        cacache::write_with_algo(cacache::Algorithm::Xxh3, &*path::CACHE, key, &cover_bytes)
-            .await?;
-
-        Ok(cover_texture)
-    }
-
-    async fn cover_bytes(&self) -> Result<(gdk::Texture, Vec<u8>)> {
-        let request = HTTP_CLIENT.get(self.favicon_url.as_str()).build()?;
-        let response = HTTP_CLIENT.execute(request).await?;
+        let response = crate::api::http::get(self.favicon_url.clone()).await?;
         let body_bytes = response.bytes().await?.to_vec();
 
         let loader = Loader::new_vec(body_bytes);
@@ -97,14 +83,31 @@ impl CoverRequest {
 
         let snapshot = gtk::Snapshot::new();
         snapshot_thumbnail(&snapshot, texture, self.size as f32);
+        let node = RenderNodeSend(snapshot.to_node().unwrap());
 
-        let node = snapshot.to_node().unwrap();
+        let handle = gio::spawn_blocking(clone!(
+            #[strong(rename_to = size)]
+            self.size,
+            move || Self::render(size, node)
+        ));
+        let (cover_texture, cover_bytes) = handle.await.unwrap()?;
+
+        let key = format!("{}@{}", self.favicon_url, self.size);
+        cacache::write_with_algo(cacache::Algorithm::Xxh3, &*path::CACHE, key, &cover_bytes)
+            .await?;
+
+        Ok(cover_texture)
+    }
+
+    fn render(size: i32, node: RenderNodeSend) -> Result<(gdk::Texture, Vec<u8>)> {
         let renderer = gsk::CairoRenderer::new();
         let display = gdk::Display::default().expect("No default display available");
-        renderer.realize_for_display(&display)?;
+        renderer
+            .realize_for_display(&display)
+            .expect("Unable to realize renderer for default display");
 
-        let rect = Rect::new(0.0, 0.0, self.size as f32, self.size as f32);
-        let texture = renderer.render_texture(node, Some(&rect));
+        let rect = Rect::new(0.0, 0.0, size as f32, size as f32);
+        let texture = renderer.render_texture(node.0, Some(&rect));
         renderer.unrealize();
 
         let png_bytes = texture.save_to_png_bytes().to_vec();
