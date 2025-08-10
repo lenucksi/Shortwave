@@ -15,85 +15,74 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 use std::net::IpAddr;
-use std::sync::{Arc, LazyLock};
-use std::time::Duration;
+use std::sync::Arc;
 
 use async_std_resolver::{config as rconfig, resolver, resolver_from_system_conf};
 use gtk::gio;
 use indexmap::IndexMap;
 use rand::prelude::SliceRandom;
 use rand::rng;
-use reqwest::blocking::Request;
-use reqwest::header::{self, HeaderMap};
+use reqwest::{Method, Request};
 use serde::de;
 use url::Url;
 
 use crate::api::*;
 use crate::app::SwApplication;
-use crate::config;
 use crate::settings::{Key, settings_manager};
-
-static USER_AGENT: LazyLock<String> = LazyLock::new(|| {
-    format!(
-        "{}/{}-{}",
-        config::PKGNAME,
-        config::VERSION,
-        config::PROFILE
-    )
-});
-
-static HTTP_CLIENT: LazyLock<reqwest::blocking::Client> = LazyLock::new(|| {
-    let mut headers = HeaderMap::new();
-    headers.insert(
-        "content-type",
-        header::HeaderValue::from_static("application/json"),
-    );
-
-    reqwest::blocking::ClientBuilder::new()
-        .user_agent(USER_AGENT.as_str())
-        .default_headers(headers)
-        .timeout(Duration::from_secs(15))
-        .build()
-        .unwrap()
-});
 
 pub async fn station_request(
     request: StationRequest,
 ) -> Result<IndexMap<String, SwStation>, Error> {
-    let handle = gio::spawn_blocking(move || {
-        let url = build_url(STATION_SEARCH, Some(&request.url_encode()))?;
-        let request = HTTP_CLIENT.get(url.as_ref()).build().map_err(Arc::new)?;
+    let url: Url = build_url(STATION_SEARCH, Some(&request.url_encode()))?;
+    let stations_md: Vec<StationMetadata> = send_request(Request::new(Method::GET, url)).await?;
 
-        let stations_md = send_request::<Vec<StationMetadata>>(request)?;
+    // Creating hundreds of objects in a row can be expensive -> do it on separate thread
+    let handle = gio::spawn_blocking(move || {
         let mut map = IndexMap::new();
         for station_md in stations_md {
             let uuid = station_md.stationuuid.clone();
             let station = SwStation::new(&uuid, false, station_md, None);
             map.insert(uuid, station);
         }
-
-        Ok(map)
+        map
     });
-    handle.await.unwrap()
+    let map = handle.await.unwrap();
+
+    Ok(map)
 }
 
 pub async fn station_metadata_by_uuid(uuids: Vec<String>) -> Result<Vec<StationMetadata>, Error> {
-    let handle = gio::spawn_blocking(move || {
-        let url = build_url(STATION_BY_UUID, None)?;
-        let uuids = format!(
-            r#"{{"uuids":{}}}"#,
-            serde_json::to_string(&uuids).unwrap_or_default()
-        );
-        debug!("Post body: {uuids}");
+    let url = build_url(STATION_BY_UUID, None)?;
+    let uuids = format!(
+        r#"{{"uuids":{}}}"#,
+        serde_json::to_string(&uuids).unwrap_or_default()
+    );
+    debug!("Post body: {uuids}");
 
-        let request = HTTP_CLIENT
-            .post(url)
-            .body(uuids)
-            .build()
-            .map_err(Arc::new)?;
-        send_request(request)
-    });
-    handle.await.unwrap()
+    let mut request = Request::new(Method::POST, url);
+    *request.body_mut() = Some(uuids.into());
+
+    let stations_md = send_request(request).await?;
+    Ok(stations_md)
+}
+
+async fn send_request<T: de::DeserializeOwned + std::marker::Send + 'static>(
+    request: Request,
+) -> Result<T, Error> {
+    let response = crate::api::http::send(request).await.map_err(Arc::new)?;
+    let json = response.text().await.map_err(Arc::new)?;
+
+    // Deserializing JSON can be expensive -> do it on separate thread pool
+    let handle = gio::spawn_blocking(move || serde_json::from_str::<T>(&json));
+    let deserialized = handle.await.unwrap();
+
+    match deserialized {
+        Ok(d) => Ok(d),
+        Err(err) => {
+            error!("Unable to deserialize data: {err}");
+            Err(Error::Deserializer(err.into()))
+        }
+    }
 }
 
 pub async fn lookup_rb_server() -> Option<String> {
@@ -135,7 +124,10 @@ pub async fn lookup_rb_server() -> Option<String> {
         // Check if the server is online / returns data
         // If not, try using the next one in the list
         debug!("Trying to connect to {hostname} ({ip})");
-        match server_stats(hostname).await {
+        let url = Url::parse(&format!("https://{hostname}/{STATS}")).unwrap();
+        let server_stats = send_request::<Stats>(Request::new(Method::GET, url)).await;
+
+        match server_stats {
             Ok(stats) => {
                 debug!(
                     "Successfully connected to {} ({}), server version {}, {} stations",
@@ -167,27 +159,4 @@ fn build_url(param: &str, options: Option<&str>) -> Result<Url, Error> {
 
     debug!("Retrieve data: {url}");
     Ok(url)
-}
-
-async fn server_stats(host: &str) -> Result<Stats, Error> {
-    let request = HTTP_CLIENT
-        .get(format!("https://{host}/{STATS}"))
-        .build()
-        .map_err(Arc::new)?;
-
-    send_request(request)
-}
-
-fn send_request<T: de::DeserializeOwned>(request: Request) -> Result<T, Error> {
-    let response = HTTP_CLIENT.execute(request).map_err(Arc::new)?;
-    let json = response.text().map_err(Arc::new)?;
-    let deserialized = serde_json::from_str::<T>(&json);
-
-    match deserialized {
-        Ok(d) => Ok(d),
-        Err(err) => {
-            error!("Unable to deserialize data: {err}");
-            Err(Error::Deserializer(err.into()))
-        }
-    }
 }

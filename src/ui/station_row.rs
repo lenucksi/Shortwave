@@ -27,7 +27,6 @@ use inflector::Inflector;
 use crate::SwApplication;
 use crate::api::StationMetadata;
 use crate::api::SwStation;
-use crate::ui::SwStationCover;
 
 mod imp {
     use super::*;

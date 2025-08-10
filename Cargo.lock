@@ -3137,9 +3137,7 @@ dependencies = [
  "base64 0.22.1",
  "bytes",
  "encoding_rs",
- "futures-channel",
  "futures-core",
- "futures-util",
  "h2",
  "http",
  "http-body",
@@ -3578,6 +3576,7 @@ dependencies = [
  "strum_macros 0.27.2",
  "sys-locale",
  "thiserror 1.0.69",
+ "tokio",
  "url",
  "uuid",
 ]
