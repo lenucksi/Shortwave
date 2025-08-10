@@ -91,11 +91,10 @@ mod imp {
                 self,
                 move |_, _| {
                     let player = SwApplication::default().player();
-                    if let Some(track) = player.playing_track() {
-                        if track.uuid() == imp.obj().uuid() {
+                    if let Some(track) = player.playing_track()
+                        && track.uuid() == imp.obj().uuid() {
                             player.cancel_recording();
                         }
-                    }
                 }
             ));
             cancel_action.set_enabled(false);

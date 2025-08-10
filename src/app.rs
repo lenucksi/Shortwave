@@ -96,14 +96,13 @@ mod imp {
                         let window = app.application_window();
 
                         // Check if track uuid matches current playing track uuid
-                        if let Some(track) = app.player().playing_track() {
-                            if track.uuid() == uuid && track.state() == SwRecordingState::Recording
+                        if let Some(track) = app.player().playing_track()
+                            && track.uuid() == uuid && track.state() == SwRecordingState::Recording
                             {
                                 track.set_save_when_recorded(true);
                                 app.show_track_dialog(&track);
                                 return;
                             }
-                        }
 
                         window
                             .show_notification(&i18n("This track is currently not being recorded"));
@@ -119,14 +118,13 @@ mod imp {
                         let uuid = uuid.and_then(|v| v.str()).unwrap_or_default();
 
                         // Check if track uuid matches current playing track uuid
-                        if let Some(track) = app.player().playing_track() {
-                            if track.uuid() == uuid && track.state() == SwRecordingState::Recording
+                        if let Some(track) = app.player().playing_track()
+                            && track.uuid() == uuid && track.state() == SwRecordingState::Recording
                             {
                                 app.player().cancel_recording();
                                 app.show_track_dialog(&track);
                                 return;
                             }
-                        }
 
                         window
                             .show_notification(&i18n("This track is currently not being recorded"));
@@ -252,11 +250,10 @@ mod imp {
         fn update_background_portal_status(&self) {
             let mut message = i18n("No Playback");
 
-            if let Some(station) = self.obj().player().station() {
-                if self.obj().player().state() == SwPlaybackState::Playing {
+            if let Some(station) = self.obj().player().station()
+                && self.obj().player().state() == SwPlaybackState::Playing {
                     message = i18n_f("Playing “{}”", &[&station.title()]);
                 }
-            }
 
             let fut = clone!(
                 #[weak(rename_to = imp)]
@@ -272,11 +269,10 @@ mod imp {
 
         async fn set_background_portal_status(&self, message: &str) {
             let message = utils::ellipsize_end(message, 96);
-            if let Some(proxy) = self.background_proxy.get() {
-                if let Err(err) = proxy.set_status(&message).await {
+            if let Some(proxy) = self.background_proxy.get()
+                && let Err(err) = proxy.set_status(&message).await {
                     warn!("Unable to update background portal status message: {err}");
                 }
-            }
         }
 
         async fn lookup_rb_server(&self) {
@@ -365,11 +361,10 @@ impl SwApplication {
         let win = self.application_window();
 
         // Avoid having multiple track dialogs opened
-        if let Some(dialog) = win.visible_dialog() {
-            if let Ok(track_dialog) = dialog.downcast::<SwTrackDialog>() {
+        if let Some(dialog) = win.visible_dialog()
+            && let Ok(track_dialog) = dialog.downcast::<SwTrackDialog>() {
                 track_dialog.close();
             }
-        }
 
         SwTrackDialog::new(track).present(Some(&win));
     }
