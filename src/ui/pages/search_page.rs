@@ -20,7 +20,8 @@ use adw::prelude::*;
 use adw::subclass::prelude::*;
 use glib::{clone, subclass};
 use gtk::{CompositeTemplate, glib};
-use rand::seq::IndexedRandom;
+use indexmap::IndexMap;
+use rand::seq::IteratorRandom;
 
 use crate::api::{Error, StationRequest, SwStation, SwStationModel, client};
 use crate::ui::{DisplayError, SwStationDialog, SwStationRow};
@@ -166,13 +167,15 @@ mod imp {
             let mut stations = client::station_request(request).await?;
 
             // Anything more than 50k votes can be considered as botted spam
-            stations.retain(|s| s.metadata().votes < 50_000);
+            stations.retain(|_, s| s.metadata().votes < 50_000);
 
             // Randomize the selection to avoid that always the same stations are visible
-            let stations = stations
+            let stations: IndexMap<String, SwStation> = stations
+                .iter()
                 .choose_multiple(&mut rand::rng(), 12)
-                .cloned()
-                .collect::<Vec<SwStation>>();
+                .into_iter()
+                .map(|(k, v)| (k.clone(), v.clone()))
+                .collect();
 
             self.popular_model.set_stations(stations);
 
@@ -205,7 +208,7 @@ mod imp {
                 return;
             }
 
-            let request = StationRequest::search_for_name(text, 5000);
+            let request = StationRequest::search_for_name(text, 1000);
             self.stack.set_visible_child_name("spinner");
 
             debug!("Search for: {request:?}");
@@ -213,13 +216,14 @@ mod imp {
             res.handle_error("Unable to search for stations");
 
             if let Ok(stations) = res {
-                if stations.is_empty() {
+                let no_results = stations.is_empty();
+                self.search_model.set_stations(stations);
+
+                if no_results {
                     self.stack.set_visible_child_name("no-results");
                 } else {
                     self.stack.set_visible_child_name("results");
                 }
-
-                self.search_model.set_stations(stations);
             }
         }
 

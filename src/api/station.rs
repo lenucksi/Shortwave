@@ -14,10 +14,9 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-use std::cell::Cell;
-use std::cell::OnceCell;
-use std::cell::RefCell;
 use std::marker::PhantomData;
+use std::sync::OnceLock;
+use std::sync::RwLock;
 
 use glib::Properties;
 use gtk::prelude::*;
@@ -33,18 +32,18 @@ mod imp {
     #[properties(wrapper_type = super::SwStation)]
     pub struct SwStation {
         #[property(get, set, construct_only)]
-        uuid: OnceCell<String>,
+        uuid: OnceLock<String>,
         #[property(get, set, construct_only)]
-        is_local: OnceCell<bool>,
+        is_local: OnceLock<bool>,
 
         #[property(get, set=Self::set_metadata)]
-        metadata: RefCell<StationMetadata>,
+        metadata: RwLock<StationMetadata>,
         #[property(get=Self::title)]
         title: PhantomData<String>,
         #[property(get, set, nullable)]
-        custom_cover: RefCell<Option<gdk::Texture>>,
+        custom_cover: RwLock<Option<gdk::Texture>>,
         #[property(get, set)]
-        is_orphaned: Cell<bool>,
+        is_orphaned: RwLock<bool>,
     }
 
     #[glib::object_subclass]
@@ -65,7 +64,7 @@ mod imp {
             // Ensure that the station metadata uuid always matches with the SwStation uuid property
             // Previously we did not the `stationuuid` fields for local stations
             metadata.stationuuid = self.uuid.get().unwrap().clone();
-            *self.metadata.borrow_mut() = metadata;
+            *self.metadata.write().unwrap() = metadata;
         }
     }
 }

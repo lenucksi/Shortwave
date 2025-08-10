@@ -25,7 +25,6 @@ use gtk::{CompositeTemplate, gdk, gio, glib, pango};
 
 use crate::api::SwStation;
 use crate::app::SwApplication;
-use crate::config;
 use crate::ui::SwScalableImage;
 
 mod imp {
@@ -36,8 +35,6 @@ mod imp {
     #[template(resource = "/de/haeckerfelix/Shortwave/gtk/station_cover.ui")]
     #[properties(wrapper_type = super::SwStationCover)]
     pub struct SwStationCover {
-        #[template_child]
-        placeholder_image: TemplateChild<gtk::Image>,
         #[template_child]
         image: TemplateChild<SwScalableImage>,
         #[template_child]
@@ -72,21 +69,14 @@ mod imp {
     }
 
     #[glib::derived_properties]
-    impl ObjectImpl for SwStationCover {
-        fn constructed(&self) {
-            self.parent_constructed();
-
-            let icon = format!("{}-symbolic", config::APP_ID);
-            self.placeholder_image.set_icon_name(Some(&icon));
-
-            self.update_initials();
-            self.update_font_size();
-        }
-    }
+    impl ObjectImpl for SwStationCover {}
 
     impl WidgetImpl for SwStationCover {
         fn map(&self) {
             self.parent_map();
+
+            self.update_initials();
+            self.update_font_size();
             self.update_cover();
         }
 
@@ -104,7 +94,6 @@ mod imp {
 
             self.image.set_size_request(size, size);
             self.obj().set_size_request(size, size);
-            self.placeholder_image.set_pixel_size(size.div_euclid(2));
 
             self.update_font_size();
         }
@@ -151,6 +140,10 @@ mod imp {
         }
 
         fn update_initials(&self) {
+            if !self.obj().is_mapped() {
+                return;
+            }
+
             let title = if let Some(station) = self.obj().station() {
                 station.title()
             } else {
@@ -168,10 +161,6 @@ mod imp {
                 initials += &char.to_string();
             }
 
-            if initials.is_empty() {
-                initials += "?";
-            }
-
             self.fallback_label.set_label(&initials.to_uppercase());
             self.update_color_class();
         }
@@ -185,19 +174,20 @@ mod imp {
         }
 
         fn update_font_size(&self) {
+            if !self.obj().is_mapped() {
+                return;
+            }
+
+            let absolute_size = match self.obj().size() {
+                64 => 29491,
+                128 => 58982,
+                192 => 88473,
+                256 => 117964,
+                _ => 0,
+            };
+
             let attributes = pango::AttrList::new();
-            self.fallback_label.set_attributes(Some(&attributes));
-
-            let (width, height) = self.fallback_label.layout().pixel_size();
-
-            let size = self.obj().size() as f32;
-            let padding = f32::max(self.obj().size() as f32 * 0.5, 0.0);
-            let max_size: f32 = size - padding;
-            let new_font_size = height as f32 * (max_size / width as f32);
-
-            attributes.insert(pango::AttrSize::new_size_absolute(
-                (new_font_size.clamp(0.0, max_size) * pango::SCALE as f32) as i32,
-            ));
+            attributes.insert(pango::AttrSize::new_size_absolute(absolute_size));
             self.fallback_label.set_attributes(Some(&attributes));
         }
 
@@ -208,7 +198,12 @@ mod imp {
 
             if let Some(station) = self.obj().station() {
                 let mut hasher = DefaultHasher::new();
-                station.title().hash(&mut hasher);
+                let s = if !station.title().is_empty() {
+                    station.title()
+                } else {
+                    "a".to_string()
+                };
+                s.hash(&mut hasher);
                 let hash = hasher.finish();
 
                 let color_class = hash % 14;
@@ -273,13 +268,11 @@ mod imp {
                             }
                         }
                     }
-                } else if station.title().is_empty() {
-                    self.stack.set_visible_child_name("placeholder");
                 } else {
                     self.stack.set_visible_child_name("fallback");
                 }
             } else {
-                self.stack.set_visible_child_name("placeholder");
+                self.stack.set_visible_child_name("fallback");
             }
         }
 

@@ -7,19 +7,6 @@
       <object class="AdwViewStack" id="stack">
         <child>
           <object class="AdwViewStackPage">
-            <property name="name">placeholder</property>
-            <property name="child">
-              <object class="GtkImage" id="placeholder_image">
-                <property name="accessible_role">presentation</property>
-                <style>
-                  <class name="dimmed" />
-                </style>
-              </object>
-            </property>
-          </object>
-        </child>
-        <child>
-          <object class="AdwViewStackPage">
             <property name="name">fallback</property>
             <property name="child">
               <object class="GtkLabel" id="fallback_label" />

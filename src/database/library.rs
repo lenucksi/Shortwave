@@ -21,6 +21,7 @@ use glib::Properties;
 use gtk::glib;
 use gtk::prelude::*;
 use gtk::subclass::prelude::*;
+use indexmap::IndexMap;
 
 use super::models::StationEntry;
 use super::*;
@@ -59,7 +60,7 @@ mod imp {
                 connection::DB_PATH.to_str().unwrap()
             );
 
-            let mut stations = Vec::new();
+            let mut stations = IndexMap::new();
             for entry in entries {
                 // Station metadata
                 let metadata = if entry.is_local {
@@ -99,7 +100,7 @@ mod imp {
                 };
 
                 let station = SwStation::new(&entry.uuid, entry.is_local, metadata, favicon);
-                stations.push(station);
+                stations.insert(entry.uuid, station);
             }
 
             self.model.set_stations(stations);

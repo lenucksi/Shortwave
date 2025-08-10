@@ -18,9 +18,9 @@ use std::net::IpAddr;
 use std::sync::{Arc, LazyLock};
 use std::time::Duration;
 
-use async_compat::CompatExt;
 use async_std_resolver::{config as rconfig, resolver, resolver_from_system_conf};
 use gtk::gio;
+use indexmap::IndexMap;
 use rand::prelude::SliceRandom;
 use rand::rng;
 use reqwest::blocking::Request;
@@ -57,37 +57,43 @@ static HTTP_CLIENT: LazyLock<reqwest::blocking::Client> = LazyLock::new(|| {
         .unwrap()
 });
 
-pub async fn station_request(request: StationRequest) -> Result<Vec<SwStation>, Error> {
-    let url = build_url(STATION_SEARCH, Some(&request.url_encode()))?;
+pub async fn station_request(
+    request: StationRequest,
+) -> Result<IndexMap<String, SwStation>, Error> {
+    let handle = gio::spawn_blocking(move || {
+        let url = build_url(STATION_SEARCH, Some(&request.url_encode()))?;
+        let request = HTTP_CLIENT.get(url.as_ref()).build().map_err(Arc::new)?;
 
-    let request = HTTP_CLIENT.get(url.as_ref()).build().map_err(Arc::new)?;
-    let stations_md = send_request::<Vec<StationMetadata>>(request)
-        .compat()
-        .await?;
+        let stations_md = send_request::<Vec<StationMetadata>>(request)?;
+        let mut map = IndexMap::new();
+        for station_md in stations_md {
+            let uuid = station_md.stationuuid.clone();
+            let station = SwStation::new(&uuid, false, station_md, None);
+            map.insert(uuid, station);
+        }
 
-    let stations: Vec<SwStation> = stations_md
-        .into_iter()
-        .map(|metadata| SwStation::new(&metadata.stationuuid.clone(), false, metadata, None))
-        .collect();
-
-    Ok(stations)
+        Ok(map)
+    });
+    handle.await.unwrap()
 }
 
 pub async fn station_metadata_by_uuid(uuids: Vec<String>) -> Result<Vec<StationMetadata>, Error> {
-    let url = build_url(STATION_BY_UUID, None)?;
+    let handle = gio::spawn_blocking(move || {
+        let url = build_url(STATION_BY_UUID, None)?;
+        let uuids = format!(
+            r#"{{"uuids":{}}}"#,
+            serde_json::to_string(&uuids).unwrap_or_default()
+        );
+        debug!("Post body: {uuids}");
 
-    let uuids = format!(
-        r#"{{"uuids":{}}}"#,
-        serde_json::to_string(&uuids).unwrap_or_default()
-    );
-    debug!("Post body: {uuids}");
-
-    let request = HTTP_CLIENT
-        .post(url)
-        .body(uuids)
-        .build()
-        .map_err(Arc::new)?;
-    send_request(request).compat().await
+        let request = HTTP_CLIENT
+            .post(url)
+            .body(uuids)
+            .build()
+            .map_err(Arc::new)?;
+        send_request(request)
+    });
+    handle.await.unwrap()
 }
 
 pub async fn lookup_rb_server() -> Option<String> {
@@ -169,18 +175,13 @@ async fn server_stats(host: &str) -> Result<Stats, Error> {
         .build()
         .map_err(Arc::new)?;
 
-    send_request(request).compat().await
+    send_request(request)
 }
 
-async fn send_request<T: de::DeserializeOwned + std::marker::Send + 'static>(
-    request: Request,
-) -> Result<T, Error> {
-    let handle = gio::spawn_blocking(move || {
-        let response = HTTP_CLIENT.execute(request).map_err(Arc::new)?;
-        let json = response.text().map_err(Arc::new)?;
-        Ok::<Result<T, serde_json::Error>, Error>(serde_json::from_str::<T>(&json))
-    });
-    let deserialized = handle.await.unwrap()?;
+fn send_request<T: de::DeserializeOwned>(request: Request) -> Result<T, Error> {
+    let response = HTTP_CLIENT.execute(request).map_err(Arc::new)?;
+    let json = response.text().map_err(Arc::new)?;
+    let deserialized = serde_json::from_str::<T>(&json);
 
     match deserialized {
         Ok(d) => Ok(d),

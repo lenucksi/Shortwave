@@ -41,8 +41,6 @@ mod imp {
         #[template_child]
         subtitle_label: TemplateChild<gtk::Label>,
         #[template_child]
-        station_cover: TemplateChild<SwStationCover>,
-        #[template_child]
         local_image: TemplateChild<gtk::Image>,
         #[template_child]
         orphaned_image: TemplateChild<gtk::Image>,

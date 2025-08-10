@@ -67,19 +67,16 @@ impl SwStationModel {
         glib::Object::new()
     }
 
-    pub fn set_stations(&self, stations: Vec<SwStation>) {
+    pub fn set_stations(&self, stations: IndexMap<String, SwStation>) {
         let imp = self.imp();
 
         let (removed, added) = {
             let mut map = imp.map.borrow_mut();
 
             let removed = map.len();
-            map.clear();
+            let added = stations.len();
 
-            for station in stations {
-                map.insert(station.uuid(), station.clone());
-            }
-            let added = map.len();
+            *map = stations;
 
             (removed.try_into().unwrap(), added.try_into().unwrap())
         };
