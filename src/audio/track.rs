@@ -17,7 +17,7 @@
 use std::cell::{Cell, OnceCell, RefCell};
 use std::fs;
 use std::path::PathBuf;
-use std::rc::Rc;
+use std::sync::Arc;
 
 use adw::prelude::*;
 use glib::subclass::prelude::*;
@@ -188,7 +188,7 @@ impl SwTrack {
         let mut path = PathBuf::from(directory);
         path.push(filename);
 
-        fs::copy(self.file().path().unwrap(), &path).map_err(Rc::new)?;
+        fs::copy(self.file().path().unwrap(), &path).map_err(Arc::new)?;
 
         *self.imp().saved_to.borrow_mut() = Some(gio::File::for_path(path));
         self.notify_saved_to();

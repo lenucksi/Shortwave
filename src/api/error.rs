@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-use std::rc::Rc;
+use std::sync::Arc;
 
 use gtk::glib;
 use thiserror::Error;
@@ -23,16 +23,16 @@ use thiserror::Error;
 #[boxed_type(name = "SwError")]
 pub enum Error {
     #[error("Serde deserializer error: {0}")]
-    Deserializer(#[from] Rc<serde_json::error::Error>),
+    Deserializer(#[from] Arc<serde_json::error::Error>),
 
     #[error("GLib Error: {0}")]
     GLib(#[from] glib::error::Error),
 
     #[error("Input/Output error: {0}")]
-    Io(#[from] Rc<std::io::Error>),
+    Io(#[from] Arc<std::io::Error>),
 
     #[error("Network error: {0}")]
-    Network(#[from] Rc<reqwest::Error>),
+    Network(#[from] Arc<reqwest::Error>),
 
     #[error("Unsupported url scheme")]
     UnsupportedUrlScheme,

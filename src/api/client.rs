@@ -15,17 +15,15 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 use std::net::IpAddr;
-use std::rc::Rc;
-use std::sync::LazyLock;
+use std::sync::{Arc, LazyLock};
 use std::time::Duration;
 
 use async_compat::CompatExt;
 use async_std_resolver::{config as rconfig, resolver, resolver_from_system_conf};
-use glib::clone;
-use gtk::{gio, glib};
+use gtk::gio;
 use rand::prelude::SliceRandom;
 use rand::rng;
-use reqwest::Request;
+use reqwest::blocking::Request;
 use reqwest::header::{self, HeaderMap};
 use serde::de;
 use url::Url;
@@ -44,14 +42,14 @@ static USER_AGENT: LazyLock<String> = LazyLock::new(|| {
     )
 });
 
-static HTTP_CLIENT: LazyLock<reqwest::Client> = LazyLock::new(|| {
+static HTTP_CLIENT: LazyLock<reqwest::blocking::Client> = LazyLock::new(|| {
     let mut headers = HeaderMap::new();
     headers.insert(
         "content-type",
         header::HeaderValue::from_static("application/json"),
     );
 
-    reqwest::ClientBuilder::new()
+    reqwest::blocking::ClientBuilder::new()
         .user_agent(USER_AGENT.as_str())
         .default_headers(headers)
         .timeout(Duration::from_secs(15))
@@ -62,7 +60,7 @@ static HTTP_CLIENT: LazyLock<reqwest::Client> = LazyLock::new(|| {
 pub async fn station_request(request: StationRequest) -> Result<Vec<SwStation>, Error> {
     let url = build_url(STATION_SEARCH, Some(&request.url_encode()))?;
 
-    let request = HTTP_CLIENT.get(url.as_ref()).build().map_err(Rc::new)?;
+    let request = HTTP_CLIENT.get(url.as_ref()).build().map_err(Arc::new)?;
     let stations_md = send_request::<Vec<StationMetadata>>(request)
         .compat()
         .await?;
@@ -84,7 +82,11 @@ pub async fn station_metadata_by_uuid(uuids: Vec<String>) -> Result<Vec<StationM
     );
     debug!("Post body: {uuids}");
 
-    let request = HTTP_CLIENT.post(url).body(uuids).build().map_err(Rc::new)?;
+    let request = HTTP_CLIENT
+        .post(url)
+        .body(uuids)
+        .build()
+        .map_err(Arc::new)?;
     send_request(request).compat().await
 }
 
@@ -165,7 +167,7 @@ async fn server_stats(host: &str) -> Result<Stats, Error> {
     let request = HTTP_CLIENT
         .get(format!("https://{host}/{STATS}"))
         .build()
-        .map_err(Rc::new)?;
+        .map_err(Arc::new)?;
 
     send_request(request).compat().await
 }
@@ -173,15 +175,12 @@ async fn server_stats(host: &str) -> Result<Stats, Error> {
 async fn send_request<T: de::DeserializeOwned + std::marker::Send + 'static>(
     request: Request,
 ) -> Result<T, Error> {
-    let response = HTTP_CLIENT.execute(request).await.map_err(Rc::new)?;
-    let json = response.text().await.map_err(Rc::new)?;
-
-    let handle = gio::spawn_blocking(clone!(
-        #[strong]
-        json,
-        move || serde_json::from_str::<T>(&json)
-    ));
-    let deserialized = handle.await.unwrap();
+    let handle = gio::spawn_blocking(move || {
+        let response = HTTP_CLIENT.execute(request).map_err(Arc::new)?;
+        let json = response.text().map_err(Arc::new)?;
+        Ok::<Result<T, serde_json::Error>, Error>(serde_json::from_str::<T>(&json))
+    });
+    let deserialized = handle.await.unwrap()?;
 
     match deserialized {
         Ok(d) => Ok(d),
