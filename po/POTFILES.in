@@ -24,6 +24,7 @@ data/gtk/window.ui
 src/api/client.rs
 src/api/cover_loader.rs
 src/api/error.rs
+src/api/http.rs
 src/api/mod.rs
 src/api/station.rs
 src/api/station_metadata.rs
