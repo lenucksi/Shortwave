@@ -342,9 +342,10 @@ mod imp {
         /// Unsets the current playing track and adds it to the past played tracks history
         pub fn reset_track(&self) {
             if let Some(track) = self.playing_track.borrow_mut().take()
-                && track.state().include_in_past_tracks() {
-                    self.past_tracks.add_track(&track);
-                }
+                && track.state().include_in_past_tracks()
+            {
+                self.past_tracks.add_track(&track);
+            }
 
             *self.previous_track.borrow_mut() = None;
             self.obj().notify_playing_track();
@@ -663,9 +664,10 @@ impl SwPlayer {
 
     pub fn track_by_uuid(&self, uuid: &str) -> Option<SwTrack> {
         if let Some(track) = self.playing_track()
-            && track.uuid() == uuid {
-                return Some(track.clone());
-            }
+            && track.uuid() == uuid
+        {
+            return Some(track.clone());
+        }
 
         self.past_tracks().track_by_uuid(uuid)
     }
