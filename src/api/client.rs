@@ -67,8 +67,12 @@ pub async fn station_metadata_by_uuid(uuids: Vec<String>) -> Result<Vec<StationM
 }
 
 async fn send_request<T: de::DeserializeOwned + std::marker::Send + 'static>(
-    request: Request,
+    mut request: Request,
 ) -> Result<T, Error> {
+    request
+        .headers_mut()
+        .insert("Content-Type", "application/json".parse().unwrap());
+
     let response = crate::api::http::send(request).await.map_err(Arc::new)?;
     let json = response.text().await.map_err(Arc::new)?;
 
