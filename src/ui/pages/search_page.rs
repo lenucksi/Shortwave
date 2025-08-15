@@ -24,7 +24,7 @@ use indexmap::IndexMap;
 use rand::seq::IteratorRandom;
 
 use crate::api::{Error, StationRequest, SwStation, SwStationModel, client};
-use crate::ui::{DisplayError, search::SwSearchFilter, SwStationDialog, SwStationRow};
+use crate::ui::{DisplayError, SwStationDialog, SwStationRow, search::SwSearchFilter};
 
 mod imp {
     use super::*;

@@ -22,6 +22,7 @@ use glib::subclass;
 use gtk::glib::subclass::Signal;
 use gtk::{CompositeTemplate, glib};
 
+use super::*;
 use crate::api::StationRequest;
 
 mod imp {
@@ -30,6 +31,8 @@ mod imp {
     #[derive(Default, Debug, CompositeTemplate)]
     #[template(resource = "/de/haeckerfelix/Shortwave/gtk/search_filter.ui")]
     pub struct SwSearchFilter {
+        #[template_child]
+        pub wrapbox: TemplateChild<adw::WrapBox>,
         #[template_child]
         pub search_entry: TemplateChild<gtk::SearchEntry>,
     }
@@ -65,6 +68,13 @@ mod imp {
 
     #[gtk::template_callbacks]
     impl SwSearchFilter {
+        #[template_callback]
+        async fn add_filter(&self) {
+            let item = SwSearchFilterItem::new("foo");
+            self.wrapbox
+                .insert_child_after(&item, Some(&self.search_entry.get()));
+        }
+
         #[template_callback]
         async fn search_changed(&self) {
             self.obj().emit_by_name::<()>("filter-changed", &[]);

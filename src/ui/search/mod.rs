@@ -15,4 +15,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 mod search_filter;
+mod search_filter_item;
+
 pub use search_filter::SwSearchFilter;
+pub use search_filter_item::SwSearchFilterItem;
