@@ -12,6 +12,7 @@ data/gtk/player_toolbar.ui
 data/gtk/player_view.ui
 data/gtk/preferences_dialog.ui
 data/gtk/recording_indicator.ui
+data/gtk/search_filter.ui
 data/gtk/search_page.ui
 data/gtk/shortcuts_dialog.ui
 data/gtk/station_cover.ui
@@ -78,6 +79,7 @@ src/ui/player/player_view.rs
 src/ui/preferences_dialog.rs
 src/ui/recording_indicator.rs
 src/ui/scalable_image.rs
+src/ui/search_filter.rs
 src/ui/station_cover.rs
 src/ui/station_dialog.rs
 src/ui/station_row.rs

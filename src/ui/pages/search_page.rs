@@ -24,7 +24,7 @@ use indexmap::IndexMap;
 use rand::seq::IteratorRandom;
 
 use crate::api::{Error, StationRequest, SwStation, SwStationModel, client};
-use crate::ui::{DisplayError, SwStationDialog, SwStationRow};
+use crate::ui::{DisplayError, SwSearchFilter, SwStationDialog, SwStationRow};
 
 mod imp {
     use super::*;
@@ -33,7 +33,7 @@ mod imp {
     #[template(resource = "/de/haeckerfelix/Shortwave/gtk/search_page.ui")]
     pub struct SwSearchPage {
         #[template_child]
-        search_entry: TemplateChild<gtk::SearchEntry>,
+        search_filter: TemplateChild<SwSearchFilter>,
         #[template_child]
         stack: TemplateChild<adw::ViewStack>,
         #[template_child]
@@ -70,6 +70,8 @@ mod imp {
 
     impl ObjectImpl for SwSearchPage {
         fn constructed(&self) {
+            self.search_filter.set_sensitive(false);
+
             // Discover view
             let flowbox_widget_func = |s: &glib::Object| {
                 let station: &SwStation = s.downcast_ref().unwrap();
@@ -140,7 +142,7 @@ mod imp {
             match self.load_discover_stations().await {
                 Ok(()) => {
                     self.loaded.set(true);
-                    self.search_entry.set_sensitive(true);
+                    self.search_filter.set_sensitive(true);
                     self.stack.set_visible_child_name("discover");
                 }
                 Err(e) => {
@@ -194,21 +196,18 @@ mod imp {
         }
 
         #[template_callback]
-        async fn search_changed(&self) {
+        async fn filter_changed(&self) {
             if !self.loaded.get() {
                 return;
             }
 
-            let text = self.search_entry.text().trim().to_string();
-            let text = if text.is_empty() { None } else { Some(text) };
-
-            // Don't search if search entry is empty
-            if text.is_none() {
+            // Don't search when no filter is set
+            if !self.search_filter.has_filter() {
                 self.stack.set_visible_child_name("discover");
                 return;
             }
 
-            let request = StationRequest::search_for_name(text, 1000);
+            let request = self.search_filter.station_request();
             self.stack.set_visible_child_name("spinner");
 
             debug!("Search for: {request:?}");
