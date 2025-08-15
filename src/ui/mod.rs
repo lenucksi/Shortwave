@@ -16,6 +16,7 @@
 
 pub mod pages;
 pub mod player;
+pub mod search;
 
 pub mod about_dialog;
 mod add_station_dialog;
@@ -26,7 +27,6 @@ mod display_error;
 mod preferences_dialog;
 mod recording_indicator;
 mod scalable_image;
-mod search_filter;
 mod station_cover;
 mod station_dialog;
 mod station_row;
@@ -43,7 +43,6 @@ pub use display_error::{DisplayError, ToastWindow};
 pub use preferences_dialog::SwPreferencesDialog;
 pub use recording_indicator::SwRecordingIndicator;
 pub use scalable_image::SwScalableImage;
-pub use search_filter::SwSearchFilter;
 pub use station_cover::{SwStationCover, SwStationCoverAnimated};
 pub use station_dialog::SwStationDialog;
 pub use station_row::SwStationRow;

@@ -79,7 +79,8 @@ src/ui/player/player_view.rs
 src/ui/preferences_dialog.rs
 src/ui/recording_indicator.rs
 src/ui/scalable_image.rs
-src/ui/search_filter.rs
+src/ui/search/mod.rs
+src/ui/search/search_filter.rs
 src/ui/station_cover.rs
 src/ui/station_dialog.rs
 src/ui/station_row.rs
