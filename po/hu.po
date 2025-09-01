@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shortwave master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/Shortwave/issues\n"
-"POT-Creation-Date: 2025-02-13 05:11+0000\n"
-"PO-Revision-Date: 2025-03-07 00:44+0100\n"
+"POT-Creation-Date: 2025-08-11 00:16+0000\n"
+"PO-Revision-Date: 2025-09-01 14:50+0200\n"
 "Last-Translator: Balázs Úr <ur.balazs at fsf dot hu>\n"
 "Language-Team: Hungarian <openscope at fsf dot hu>\n"
 "Language: hu\n"
@@ -17,32 +17,29 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 24.12.3\n"
 
-#: data/de.haeckerfelix.Shortwave.desktop.in.in:3
+#: data/de.haeckerfelix.Shortwave.desktop.in.in:2
 #: data/de.haeckerfelix.Shortwave.metainfo.xml.in.in:5
 msgid "@NAME@"
 msgstr "@NAME@"
 
-#: data/de.haeckerfelix.Shortwave.desktop.in.in:4
+#: data/de.haeckerfelix.Shortwave.desktop.in.in:3
 msgid "Internet Radio Player"
 msgstr "Internetrádió-lejátszó"
 
 #. General
-#: data/de.haeckerfelix.Shortwave.desktop.in.in:5
+#: data/de.haeckerfelix.Shortwave.desktop.in.in:4
 #: data/de.haeckerfelix.Shortwave.metainfo.xml.in.in:10
 msgid "Listen to internet radio"
 msgstr "Internetes rádió hallgatása"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/de.haeckerfelix.Shortwave.desktop.in.in:14
+#: data/de.haeckerfelix.Shortwave.desktop.in.in:13
 msgid "Gradio;Radio;Stream;Wave;"
 msgstr "Gradio;rádió;adatfolyam;műsorszórás;közvetítés;hullám;"
 
 #: data/de.haeckerfelix.Shortwave.metainfo.xml.in.in:12
-#| msgid ""
-#| "Shortwave is an internet radio player that provides access to a station "
-#| "database with over 30,000 stations."
 msgid ""
 "Shortwave is an internet radio player that provides access to a station "
 "database with over 50,000 stations."
@@ -65,9 +62,6 @@ msgid "Easily search and discover new radio stations"
 msgstr "Új rádióállomások egyszerű keresése és felfedezése"
 
 #: data/de.haeckerfelix.Shortwave.metainfo.xml.in.in:19
-#| msgid ""
-#| "Automatic recognition of songs, with the possibility to save them "
-#| "individually"
 msgid ""
 "Automatic recognition of tracks, with the possibility to save them "
 "individually"
@@ -94,12 +88,10 @@ msgid "Felix Häcker"
 msgstr "Felix Häcker"
 
 #: data/gtk/add_station_dialog.ui:14
-#| msgid "Local Station"
 msgid "Add Local Station"
 msgstr "Helyi állomás hozzáadása"
 
 #: data/gtk/add_station_dialog.ui:64
-#| msgid "Change station image"
 msgid "Change Station Cover"
 msgstr "Állomás borítóképének megváltoztatása"
 
@@ -109,9 +101,9 @@ msgid ""
 "available to everyone, you should add it to the <a href=\"https://www.radio-"
 "browser.info/add\">public database</a>."
 msgstr ""
-"Ez az állomás csak a saját könyvtárához lesz hozzáadva. Ha azt szeretné, hogy"
-" mindenki számára elérhető legyen, akkor adja hozzá a <a"
-" href=\"https://www.radio-browser.info/add\">nyilvános adatbázishoz</a>."
+"Ez az állomás csak a saját könyvtárához lesz hozzáadva. Ha azt szeretné, "
+"hogy mindenki számára elérhető legyen, akkor adja hozzá a <a href=\"https://"
+"www.radio-browser.info/add\">nyilvános adatbázishoz</a>."
 
 #: data/gtk/add_station_dialog.ui:107
 msgid "Name"
@@ -122,7 +114,6 @@ msgid "Stream URL"
 msgstr "Közvetítési URL"
 
 #: data/gtk/add_station_dialog.ui:123
-#| msgid "Add Stations"
 msgid "Add Station"
 msgstr "Állomás hozzáadása"
 
@@ -150,69 +141,11 @@ msgstr "Nem található támogatott Google Cast eszköz"
 msgid "Disconnect From Device"
 msgstr "Leválasztás az eszközről"
 
-#: data/gtk/help_overlay.ui:11 data/gtk/preferences_dialog.ui:9
-msgid "General"
-msgstr "Általános"
-
-#: data/gtk/help_overlay.ui:14
-msgctxt "shortcut window"
-msgid "Open shortcut window"
-msgstr "Gyorsbillentyűablak megnyitása"
-
-#: data/gtk/help_overlay.ui:21
-msgctxt "shortcut window"
-msgid "Open application menu"
-msgstr "Alkalmazásmenü megnyitása"
-
-#: data/gtk/help_overlay.ui:26
-msgctxt "shortcut window"
-msgid "Open preferences"
-msgstr "Beállítások megnyitása"
-
-#: data/gtk/help_overlay.ui:32
-msgctxt "shortcut window"
-msgid "Close the window"
-msgstr "Az ablak bezárása"
-
-#: data/gtk/help_overlay.ui:38
-msgctxt "shortcut window"
-msgid "Quit the application"
-msgstr "Kilépés az alkalmazásból"
-
-#: data/gtk/help_overlay.ui:46 data/gtk/preferences_dialog.ui:12
-msgid "Playback"
-msgstr "Lejátszás"
-
-#: data/gtk/help_overlay.ui:49
-msgctxt "shortcut window"
-msgid "Toggle playback"
-msgstr "Lejátszás be- vagy kikapcsolása"
-
-#: data/gtk/help_overlay.ui:57 data/gtk/volume_control.ui:21
-msgid "Volume"
-msgstr "Hangerő"
-
-#: data/gtk/help_overlay.ui:60
-msgctxt "shortcut window"
-msgid "Toggle mute"
-msgstr "Némítás be- vagy kikapcsolása"
-
-#: data/gtk/help_overlay.ui:66
-msgctxt "shortcut window"
-msgid "Increase volume"
-msgstr "Hangerő növelése"
-
-#: data/gtk/help_overlay.ui:72
-msgctxt "shortcut window"
-msgid "Decrease volume"
-msgstr "Hangerő csökkentése"
-
 #: data/gtk/library_page.ui:4
 msgid "Shortwave"
 msgstr "Rövidhullám"
 
 #: data/gtk/library_page.ui:15 data/gtk/search_page.ui:4
-#| msgid "Most Voted Stations"
 msgid "Browse Stations"
 msgstr "Állomások tallózása"
 
@@ -220,65 +153,63 @@ msgstr "Állomások tallózása"
 msgid "Main Menu"
 msgstr "Főmenü"
 
-#: data/gtk/library_page.ui:92
-#| msgid "Add Stations"
+#: data/gtk/library_page.ui:91
 msgid "_Add New Stations"
 msgstr "Új állomások hozzá_adása"
 
-#: data/gtk/library_page.ui:115
+#: data/gtk/library_page.ui:114
 msgid "_Sorting"
 msgstr "_Rendezés"
 
-#: data/gtk/library_page.ui:118
+#: data/gtk/library_page.ui:117
 msgid "_Name"
 msgstr "_Név"
 
-#: data/gtk/library_page.ui:123
+#: data/gtk/library_page.ui:122
 msgid "_Language"
 msgstr "Nyel_v"
 
-#: data/gtk/library_page.ui:128
+#: data/gtk/library_page.ui:127
 msgid "_Country"
 msgstr "_Ország"
 
-#: data/gtk/library_page.ui:133
+#: data/gtk/library_page.ui:132
 msgid "S_tate"
 msgstr "Á_llam"
 
-#: data/gtk/library_page.ui:138
+#: data/gtk/library_page.ui:137
 msgid "_Bitrate"
 msgstr "_Bitsebesség"
 
-#: data/gtk/library_page.ui:145
+#: data/gtk/library_page.ui:144
 msgid "_Ascending"
 msgstr "_Növekvő"
 
-#: data/gtk/library_page.ui:150
+#: data/gtk/library_page.ui:149
 msgid "_Descending"
 msgstr "_Csökkenő"
 
-#: data/gtk/library_page.ui:159
+#: data/gtk/library_page.ui:158
 msgid "_Open radio-browser.info <sup>↗</sup>"
 msgstr "A radio-browser.info _megnyitása <sup>↗</sup>"
 
-#: data/gtk/library_page.ui:166
+#: data/gtk/library_page.ui:165
 msgid "_Preferences"
 msgstr "_Beállítások"
 
-#: data/gtk/library_page.ui:170
+#: data/gtk/library_page.ui:169
 msgid "_Keyboard Shortcuts"
 msgstr "_Gyorsbillentyűk"
 
-#: data/gtk/library_page.ui:174
+#: data/gtk/library_page.ui:173
 msgid "_About Shortwave"
 msgstr "A Rövidhullám _névjegye"
 
-#: data/gtk/library_page.ui:178
+#: data/gtk/library_page.ui:177
 msgid "_Quit"
 msgstr "_Kilépés"
 
-#: data/gtk/library_page.ui:186
-#| msgid "Local Station"
+#: data/gtk/library_page.ui:185
 msgid "Add _Local Station"
 msgstr "_Helyi állomás hozzáadása"
 
@@ -302,7 +233,7 @@ msgid "SHORTWAVE INTERNET RADIO"
 msgstr "RÖVIDHULLÁM INTERNETRÁDIÓ"
 
 #: data/gtk/player_gadget.ui:140 data/gtk/player_toolbar.ui:29
-#: data/gtk/player_view.ui:58 src/app.rs:257
+#: data/gtk/player_view.ui:58 src/app.rs:251
 msgid "No Playback"
 msgstr "Nincs lejátszás"
 
@@ -315,7 +246,6 @@ msgid "Restore Window"
 msgstr "Ablak helyreállítása"
 
 #: data/gtk/player_view.ui:13
-#| msgid "_Enable Gadget Player"
 msgid "Enable Gadget Mode"
 msgstr "Kisalkalmazás mód _engedélyezése"
 
@@ -335,8 +265,15 @@ msgstr "A lejátszott számok itt fognak megjelenni"
 msgid "An error occurred"
 msgstr "Hiba történt"
 
+#: data/gtk/preferences_dialog.ui:9 data/gtk/shortcuts_dialog.ui:6
+msgid "General"
+msgstr "Általános"
+
+#: data/gtk/preferences_dialog.ui:12 data/gtk/shortcuts_dialog.ui:41
+msgid "Playback"
+msgstr "Lejátszás"
+
 #: data/gtk/preferences_dialog.ui:15
-#| msgid "No Playback"
 msgid "_Background Playback"
 msgstr "Lejátszás a _háttérben"
 
@@ -349,28 +286,22 @@ msgid "_Notifications"
 msgstr "É_rtesítések"
 
 #: data/gtk/preferences_dialog.ui:29
-#| msgid "Show desktop notifications when a new song gets played"
 msgid "Show desktop notifications when a new track gets played"
 msgstr ""
 "Asztali értesítések megjelenítése egy új szám lejátszásának indításakor"
 
 #. Translators: This is a noun / preferences group title
 #: data/gtk/preferences_dialog.ui:43
-#| msgid "Recording in Progress"
 msgid "Recording"
 msgstr "Rögzítés"
 
 #: data/gtk/preferences_dialog.ui:44
-#| msgid ""
-#| "Songs are automatically recognized using the stream metadata.\n"
-#| "\n"
-#| "If the station does not send any metadata, no songs can be recognized."
 msgid ""
 "Tracks are automatically recognised based on the station stream metadata and "
 "can be saved."
 msgstr ""
-"A számok az állomás közvetítési metaadatai alapján automatikusan felismerésre"
-" kerülnek és elmenthetők."
+"A számok az állomás közvetítési metaadatai alapján automatikusan "
+"felismerésre kerülnek és elmenthetők."
 
 #: data/gtk/preferences_dialog.ui:47
 msgid "Track _Directory"
@@ -422,37 +353,32 @@ msgid "Search"
 msgstr "Keresés"
 
 #: data/gtk/search_page.ui:24
-#| msgid "Search Results"
 msgid "Search stations"
 msgstr "Állomások keresése"
 
 #: data/gtk/search_page.ui:72
-#| msgid "Browse over 50,000 stations"
 msgid "Discover over 50,000 public stations"
 msgstr "Fedezzen fel több mint 50 000 nyilvános állomást"
 
 #: data/gtk/search_page.ui:90
-#| msgid "_Play Station"
 msgid "Popular Stations"
 msgstr "Népszerű állomások"
 
 #: data/gtk/search_page.ui:112
-#| msgid "_Discover New Stations"
 msgid "Discover New Stations"
 msgstr "Új állomások felfedezése"
 
 #: data/gtk/search_page.ui:135
 msgid ""
-"The displayed information is provided by <a href=\"https://www.radio-browser."
-"info/\">radio-browser.info</a>. \n"
+"The displayed information is provided by <a href=\"https://www.radio-"
+"browser.info/\">radio-browser.info</a>.\n"
 "Shortwave has no influence on the listed stations."
 msgstr ""
-"A megjelenített információkat a <a href=\"https://www.radio-browser.info/"
-"\">radio-browser.info</a> biztosítja. \n"
+"A megjelenített információkat a <a href=\"https://www.radio-browser.info/\">ra"
+"dio-browser.info</a> biztosítja.\n"
 "A Rövidhullámnak nincs befolyása a felsorolt állomásokra."
 
 #: data/gtk/search_page.ui:201
-#| msgid "Searching…"
 msgid "Loading…"
 msgstr "Betöltés…"
 
@@ -468,7 +394,6 @@ msgstr ""
 "Ha a keresett állomás hiányzik, akkor hozzáadhatja a nyilvános adatbázishoz."
 
 #: data/gtk/search_page.ui:221
-#| msgid "Add Stations"
 msgid "Add Missing Station"
 msgstr "Hiányzó állomás hozzáadása"
 
@@ -480,8 +405,56 @@ msgstr "Nem lehet lekérni az állomás adatait"
 msgid "Try Again"
 msgstr "Próbálja újra"
 
+#: data/gtk/shortcuts_dialog.ui:9
+msgctxt "shortcut window"
+msgid "Open shortcut window"
+msgstr "Gyorsbillentyűablak megnyitása"
+
+#: data/gtk/shortcuts_dialog.ui:16
+msgctxt "shortcut window"
+msgid "Open application menu"
+msgstr "Alkalmazásmenü megnyitása"
+
+#: data/gtk/shortcuts_dialog.ui:21
+msgctxt "shortcut window"
+msgid "Open preferences"
+msgstr "Beállítások megnyitása"
+
+#: data/gtk/shortcuts_dialog.ui:27
+msgctxt "shortcut window"
+msgid "Close the window"
+msgstr "Az ablak bezárása"
+
+#: data/gtk/shortcuts_dialog.ui:33
+msgctxt "shortcut window"
+msgid "Quit the application"
+msgstr "Kilépés az alkalmazásból"
+
+#: data/gtk/shortcuts_dialog.ui:44
+msgctxt "shortcut window"
+msgid "Toggle playback"
+msgstr "Lejátszás be- vagy kikapcsolása"
+
+#: data/gtk/shortcuts_dialog.ui:52 data/gtk/volume_control.ui:21
+msgid "Volume"
+msgstr "Hangerő"
+
+#: data/gtk/shortcuts_dialog.ui:55
+msgctxt "shortcut window"
+msgid "Toggle mute"
+msgstr "Némítás be- vagy kikapcsolása"
+
+#: data/gtk/shortcuts_dialog.ui:61
+msgctxt "shortcut window"
+msgid "Increase volume"
+msgstr "Hangerő növelése"
+
+#: data/gtk/shortcuts_dialog.ui:67
+msgctxt "shortcut window"
+msgid "Decrease volume"
+msgstr "Hangerő csökkentése"
+
 #: data/gtk/station_dialog.ui:75
-#| msgid "Play"
 msgid "_Play"
 msgstr "_Lejátszás"
 
@@ -498,30 +471,24 @@ msgid "Local Station"
 msgstr "Helyi állomás"
 
 #: data/gtk/station_dialog.ui:128
-#| msgid ""
-#| "This station exists only in your library, and is not part of the public "
-#| "online station database."
 msgid ""
 "This station exists only in your library, and is not part of the public "
 "database"
 msgstr ""
-"Ez az állomás csak a saját könyvtárában létezik, és nem része a nyilvános"
-" adatbázisnak"
+"Ez az állomás csak a saját könyvtárában létezik, és nem része a nyilvános "
+"adatbázisnak"
 
 #: data/gtk/station_dialog.ui:142 data/gtk/station_row.ui:69
 msgid "Orphaned Station"
 msgstr "Árva állomás"
 
 #: data/gtk/station_dialog.ui:143
-#| msgid ""
-#| "The information could not be updated, probably this station was removed "
-#| "from the public online station database."
 msgid ""
 "The information could not be updated, probably this station was removed from "
 "the public database"
 msgstr ""
-"Az információkat nem sikerült frissíteni, valószínűleg ezt az állomást"
-" eltávolították a nyilvános adatbázisból"
+"Az információkat nem sikerült frissíteni, valószínűleg ezt az állomást "
+"eltávolították a nyilvános adatbázisból"
 
 #: data/gtk/station_dialog.ui:154
 msgid "Information"
@@ -531,40 +498,40 @@ msgstr "Információ"
 msgid "Language"
 msgstr "Nyelv"
 
-#: data/gtk/station_dialog.ui:168
+#: data/gtk/station_dialog.ui:169
 msgid "Tags"
 msgstr "Címkék"
 
-#: data/gtk/station_dialog.ui:180
+#: data/gtk/station_dialog.ui:182
 msgid "Location"
 msgstr "Hely"
 
-#: data/gtk/station_dialog.ui:184
+#: data/gtk/station_dialog.ui:186
 msgid "Country"
 msgstr "Ország"
 
-#: data/gtk/station_dialog.ui:194
+#: data/gtk/station_dialog.ui:197
 msgid "State"
 msgstr "Állam"
 
-#: data/gtk/station_dialog.ui:228
+#: data/gtk/station_dialog.ui:232
 msgid "Audio"
 msgstr "Hang"
 
-#: data/gtk/station_dialog.ui:231
+#: data/gtk/station_dialog.ui:235
 msgid "Bitrate"
 msgstr "Bitsebesség"
 
-#: data/gtk/station_dialog.ui:241
+#: data/gtk/station_dialog.ui:246
 msgid "Codec"
 msgstr "Kodek"
 
 #. This is a noun/label for the station stream url
-#: data/gtk/station_dialog.ui:251
+#: data/gtk/station_dialog.ui:257
 msgid "Stream"
 msgstr "Közvetítés"
 
-#: data/gtk/station_dialog.ui:257
+#: data/gtk/station_dialog.ui:263
 msgid "Copy"
 msgstr "Másolás"
 
@@ -577,12 +544,11 @@ msgid "The recorded track has been saved"
 msgstr "A rögzített szám el lett mentve"
 
 #: data/gtk/track_dialog.ui:137 data/gtk/track_dialog.ui:208
-#: data/gtk/track_row.ui:9 src/audio/player.rs:449
+#: data/gtk/track_row.ui:9 src/audio/player.rs:447
 msgid "Save Track"
 msgstr "Szám mentése"
 
 #: data/gtk/track_dialog.ui:148
-#| msgid "Playback"
 msgid "Play Track"
 msgstr "Szám lejátszása"
 
@@ -591,7 +557,6 @@ msgid "Cancel Recording"
 msgstr "Rögzítés megszakítása"
 
 #: data/gtk/track_dialog.ui:175
-#| msgid "Add Stations"
 msgid "Station"
 msgstr "Állomás"
 
@@ -620,15 +585,15 @@ msgstr "A szám már nem érhető el"
 msgid "This track is currently not being recorded"
 msgstr "Ez a szám jelenleg nincs rögzítve"
 
-#: src/app.rs:261
+#: src/app.rs:255
 msgid "Playing “{}”"
 msgstr "Lejátszás: „{}”"
 
-#: src/app.rs:360
+#: src/app.rs:349
 msgid "Active Playback"
 msgstr "Aktív lejátszás"
 
-#: src/audio/player.rs:459
+#: src/audio/player.rs:457
 msgid "Don't Record"
 msgstr "Ne rögzítse"
 
@@ -637,12 +602,10 @@ msgid "Not Recorded"
 msgstr "Nincs rögzítve"
 
 #: src/audio/recording_state.rs:55
-#| msgid "Ignored"
 msgid "Ignored Track"
 msgstr "Mellőzött szám"
 
 #: src/audio/recording_state.rs:58
-#| msgid "Buffering…"
 msgid "Recording…"
 msgstr "Rögzítés…"
 
@@ -663,8 +626,6 @@ msgid "Recording is deactivated in preferences"
 msgstr "A rögzítés ki van kapcsolva a beállításokban"
 
 #: src/audio/recording_state.rs:71
-#| msgid ""
-#| "No recording because the song title contains a word on the ignore list."
 msgid "The track contains a word that is on the ignore list"
 msgstr "A szám címe tartalmaz egy szót a mellőzési listáról"
 
@@ -675,7 +636,6 @@ msgstr ""
 "A szám nem az elejétől lett lejátszva, így nem lehet teljesen rögzíteni"
 
 #: src/audio/recording_state.rs:77
-#| msgid "The current song will be recorded until a new song is detected."
 msgid "The track will be recorded until a new track gets played"
 msgstr "A szám addig lesz rögzítve, amíg egy új szám el nem indul"
 
@@ -716,7 +676,6 @@ msgid "Donate"
 msgstr "Adományozás"
 
 #: src/ui/add_station_dialog.rs:94
-#| msgid "Select station image"
 msgid "Select Station Cover"
 msgstr "Állomás borítóképének kiválasztása"
 
