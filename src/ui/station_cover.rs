@@ -286,7 +286,8 @@ mod imp {
 
 glib::wrapper! {
     pub struct SwStationCover(ObjectSubclass<imp::SwStationCover>)
-        @extends gtk::Widget, adw::Bin;
+        @extends gtk::Widget, adw::Bin,
+        @implements gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget;
 }
 
 impl Default for SwStationCover {
@@ -364,5 +365,6 @@ mod imp_animated {
 glib::wrapper! {
     /// Transitions between station covers. Only useful when the underlying [SwStation] can change, for example in player widgets.
     pub struct SwStationCoverAnimated(ObjectSubclass<imp_animated::SwStationCoverAnimated>)
-        @extends gtk::Widget, adw::Bin;
+        @extends gtk::Widget, adw::Bin,
+        @implements gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget;
 }

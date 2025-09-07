@@ -204,7 +204,7 @@ mod imp {
 glib::wrapper! {
     pub struct SwVolumeControl(ObjectSubclass<imp::SwVolumeControl>)
         @extends gtk::Widget,
-        @implements gio::ActionGroup, gio::ActionMap;
+        @implements gio::ActionGroup, gio::ActionMap, gtk::Buildable,  gtk::ConstraintTarget, gtk::Accessible;
 }
 
 impl SwVolumeControl {
