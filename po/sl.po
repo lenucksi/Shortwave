@@ -9,18 +9,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shortwave master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/Shortwave/issues\n"
-"POT-Creation-Date: 2025-08-11 00:16+0000\n"
-"PO-Revision-Date: 2025-08-11 11:09+0200\n"
+"POT-Creation-Date: 2025-09-10 23:09+0000\n"
+"PO-Revision-Date: 2025-09-11 09:14+0200\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
-"%100==4 ? 3 : 0);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
+"n%100==4 ? 3 : 0);\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: data/de.haeckerfelix.Shortwave.desktop.in.in:2
 #: data/de.haeckerfelix.Shortwave.metainfo.xml.in.in:5
@@ -97,8 +97,8 @@ msgstr "Spremeni sliko postaje"
 #: data/gtk/add_station_dialog.ui:95
 msgid ""
 "This station will only be added to your library. If you want it to be available to "
-"everyone, you should add it to the <a href=\"https://www.radio-browser.info/add"
-"\">public database</a>."
+"everyone, you should add it to the <a href=\"https://www.radio-browser.info/"
+"add\">public database</a>."
 msgstr ""
 "Ta postaja bo dodana samo v vašo knjižnico. Če želite, da je na voljo vsem, jo "
 "dodajte v <a href=\"https://www.radio-browser.info/add\">javno zbirko podatkov</a>."
@@ -231,7 +231,7 @@ msgid "SHORTWAVE INTERNET RADIO"
 msgstr "INTERNETNI RADIO KRATKI VALOVI"
 
 #: data/gtk/player_gadget.ui:140 data/gtk/player_toolbar.ui:29
-#: data/gtk/player_view.ui:58 src/app.rs:251
+#: data/gtk/player_view.ui:58 src/app.rs:253
 msgid "No Playback"
 msgstr "Nič se ne predvajanja"
 
@@ -344,58 +344,58 @@ msgstr "Naj_daljše trajanje"
 msgid "Recording ends when the maximum duration is reached"
 msgstr "Snemanje se konča, ko je doseženo najdaljše trajanje"
 
-#: data/gtk/search_page.ui:23
+#: data/gtk/search_filter.ui:15
 msgid "Search"
 msgstr "Išči"
 
-#: data/gtk/search_page.ui:24
+#: data/gtk/search_filter.ui:16
 msgid "Search stations"
 msgstr "Iščite med postajami"
 
-#: data/gtk/search_page.ui:72
+#: data/gtk/search_page.ui:55
 msgid "Discover over 50,000 public stations"
 msgstr "Raziščite več kot 50.000 javnih postaj"
 
-#: data/gtk/search_page.ui:90
+#: data/gtk/search_page.ui:73
 msgid "Popular Stations"
 msgstr "Priljubljene postaje"
 
-#: data/gtk/search_page.ui:112
+#: data/gtk/search_page.ui:95
 msgid "Discover New Stations"
 msgstr "Odkrijte nove postaje"
 
-#: data/gtk/search_page.ui:135
+#: data/gtk/search_page.ui:118
 msgid ""
 "The displayed information is provided by <a href=\"https://www.radio-browser.info/"
 "\">radio-browser.info</a>.\n"
-"Shortwave has no influence on the listed stations."
+"                                  Shortwave has no influence on the listed stations."
 msgstr ""
 "Prikazane informacije zagotavlja <a href=\"https://www.radio-browser.info/\">radio-"
 "browser.info</a>.\n"
-"Kratki valovi nimajo vpliva na navedene postaje."
+"                                  Kratki valovi nimajo vpliva na navedene postaje."
 
-#: data/gtk/search_page.ui:201
+#: data/gtk/search_page.ui:184
 msgid "Loading…"
 msgstr "Nalaganje …"
 
-#: data/gtk/search_page.ui:216
+#: data/gtk/search_page.ui:199
 msgid "No Results"
 msgstr "Ni najdenih zadetkov"
 
-#: data/gtk/search_page.ui:217
+#: data/gtk/search_page.ui:200
 msgid ""
 "If the station you are looking for is missing, you can add it to the public database."
 msgstr "Če postaja, ki jo iščete, manjka, jo lahko dodate v javno zbirko podatkov."
 
-#: data/gtk/search_page.ui:221
+#: data/gtk/search_page.ui:204
 msgid "Add Missing Station"
 msgstr "Dodaj manjkajočo postajo"
 
-#: data/gtk/search_page.ui:239
+#: data/gtk/search_page.ui:222
 msgid "Unable to Retrieve Station Data"
 msgstr "Podatkov o postaji ni mogoče pridobiti"
 
-#: data/gtk/search_page.ui:242
+#: data/gtk/search_page.ui:225
 msgid "Try Again"
 msgstr "Poskusi znova"
 
@@ -536,7 +536,7 @@ msgid "The recorded track has been saved"
 msgstr "Posneta skladba je bila shranjena"
 
 #: data/gtk/track_dialog.ui:137 data/gtk/track_dialog.ui:208 data/gtk/track_row.ui:9
-#: src/audio/player.rs:447
+#: src/audio/player.rs:448
 msgid "Save Track"
 msgstr "Shrani skladbo"
 
@@ -572,19 +572,19 @@ msgstr "Preklopi slišnost"
 msgid "Track no longer available"
 msgstr "Skladba ni več na voljo"
 
-#: src/app.rs:108 src/app.rs:130
+#: src/app.rs:109 src/app.rs:132
 msgid "This track is currently not being recorded"
 msgstr "Ta posnetek se trenutno ne snema"
 
-#: src/app.rs:255
+#: src/app.rs:258
 msgid "Playing “{}”"
 msgstr "Predvajanje »{}«"
 
-#: src/app.rs:349
+#: src/app.rs:353
 msgid "Active Playback"
 msgstr "Dejavno predvajanje"
 
-#: src/audio/player.rs:457
+#: src/audio/player.rs:458
 msgid "Don't Record"
 msgstr "Ne snemaj"
 
