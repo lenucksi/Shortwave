@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shortwave master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/Shortwave/issues\n"
-"POT-Creation-Date: 2025-08-11 00:16+0000\n"
-"PO-Revision-Date: 2025-09-01 14:50+0200\n"
+"POT-Creation-Date: 2025-09-10 23:09+0000\n"
+"PO-Revision-Date: 2025-09-11 09:34+0200\n"
 "Last-Translator: Balázs Úr <ur.balazs at fsf dot hu>\n"
 "Language-Team: Hungarian <openscope at fsf dot hu>\n"
 "Language: hu\n"
@@ -233,7 +233,7 @@ msgid "SHORTWAVE INTERNET RADIO"
 msgstr "RÖVIDHULLÁM INTERNETRÁDIÓ"
 
 #: data/gtk/player_gadget.ui:140 data/gtk/player_toolbar.ui:29
-#: data/gtk/player_view.ui:58 src/app.rs:251
+#: data/gtk/player_view.ui:58 src/app.rs:253
 msgid "No Playback"
 msgstr "Nincs lejátszás"
 
@@ -348,60 +348,62 @@ msgstr "Legn_agyobb hossz"
 msgid "Recording ends when the maximum duration is reached"
 msgstr "A rögzítés véget ér a legnagyobb hossz elérésekor"
 
-#: data/gtk/search_page.ui:23
+#: data/gtk/search_filter.ui:15
 msgid "Search"
 msgstr "Keresés"
 
-#: data/gtk/search_page.ui:24
+#: data/gtk/search_filter.ui:16
 msgid "Search stations"
 msgstr "Állomások keresése"
 
-#: data/gtk/search_page.ui:72
+#: data/gtk/search_page.ui:55
 msgid "Discover over 50,000 public stations"
 msgstr "Fedezzen fel több mint 50 000 nyilvános állomást"
 
-#: data/gtk/search_page.ui:90
+#: data/gtk/search_page.ui:73
 msgid "Popular Stations"
 msgstr "Népszerű állomások"
 
-#: data/gtk/search_page.ui:112
+#: data/gtk/search_page.ui:95
 msgid "Discover New Stations"
 msgstr "Új állomások felfedezése"
 
-#: data/gtk/search_page.ui:135
+#: data/gtk/search_page.ui:118
 msgid ""
 "The displayed information is provided by <a href=\"https://www.radio-"
 "browser.info/\">radio-browser.info</a>.\n"
-"Shortwave has no influence on the listed stations."
+"                                  Shortwave has no influence on the listed "
+"stations."
 msgstr ""
 "A megjelenített információkat a <a href=\"https://www.radio-browser.info/\">ra"
 "dio-browser.info</a> biztosítja.\n"
-"A Rövidhullámnak nincs befolyása a felsorolt állomásokra."
+"                                  A Rövidhullámnak nincs befolyása a felsorolt"
+" állomásokra."
 
-#: data/gtk/search_page.ui:201
+#: data/gtk/search_page.ui:184
 msgid "Loading…"
 msgstr "Betöltés…"
 
-#: data/gtk/search_page.ui:216
+#: data/gtk/search_page.ui:199
 msgid "No Results"
 msgstr "Nincs találat"
 
-#: data/gtk/search_page.ui:217
+#: data/gtk/search_page.ui:200
 msgid ""
 "If the station you are looking for is missing, you can add it to the public "
 "database."
 msgstr ""
 "Ha a keresett állomás hiányzik, akkor hozzáadhatja a nyilvános adatbázishoz."
 
-#: data/gtk/search_page.ui:221
+#: data/gtk/search_page.ui:204
 msgid "Add Missing Station"
 msgstr "Hiányzó állomás hozzáadása"
 
-#: data/gtk/search_page.ui:239
+#: data/gtk/search_page.ui:222
 msgid "Unable to Retrieve Station Data"
 msgstr "Nem lehet lekérni az állomás adatait"
 
-#: data/gtk/search_page.ui:242
+#: data/gtk/search_page.ui:225
 msgid "Try Again"
 msgstr "Próbálja újra"
 
@@ -544,7 +546,7 @@ msgid "The recorded track has been saved"
 msgstr "A rögzített szám el lett mentve"
 
 #: data/gtk/track_dialog.ui:137 data/gtk/track_dialog.ui:208
-#: data/gtk/track_row.ui:9 src/audio/player.rs:447
+#: data/gtk/track_row.ui:9 src/audio/player.rs:448
 msgid "Save Track"
 msgstr "Szám mentése"
 
@@ -581,19 +583,19 @@ msgstr "Némítás be- vagy kikapcsolása"
 msgid "Track no longer available"
 msgstr "A szám már nem érhető el"
 
-#: src/app.rs:108 src/app.rs:130
+#: src/app.rs:109 src/app.rs:132
 msgid "This track is currently not being recorded"
 msgstr "Ez a szám jelenleg nincs rögzítve"
 
-#: src/app.rs:255
+#: src/app.rs:258
 msgid "Playing “{}”"
 msgstr "Lejátszás: „{}”"
 
-#: src/app.rs:349
+#: src/app.rs:353
 msgid "Active Playback"
 msgstr "Aktív lejátszás"
 
-#: src/audio/player.rs:457
+#: src/audio/player.rs:458
 msgid "Don't Record"
 msgstr "Ne rögzítse"
 
