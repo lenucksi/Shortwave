@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shortwave\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/Shortwave/issues\n"
-"POT-Creation-Date: 2025-08-11 00:16+0000\n"
-"PO-Revision-Date: 2025-08-12 13:16+0200\n"
+"POT-Creation-Date: 2025-09-10 23:09+0000\n"
+"PO-Revision-Date: 2025-09-11 12:50+0200\n"
 "Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
 "Language-Team: Georgian <(nothing)>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.7\n"
 
 #: data/de.haeckerfelix.Shortwave.desktop.in.in:2
 #: data/de.haeckerfelix.Shortwave.metainfo.xml.in.in:5
@@ -234,7 +234,7 @@ msgid "SHORTWAVE INTERNET RADIO"
 msgstr "SHORTWAVE INTERNET RADIO"
 
 #: data/gtk/player_gadget.ui:140 data/gtk/player_toolbar.ui:29
-#: data/gtk/player_view.ui:58 src/app.rs:251
+#: data/gtk/player_view.ui:58 src/app.rs:253
 msgid "No Playback"
 msgstr "არ ვუკრავ"
 
@@ -347,45 +347,47 @@ msgstr "მ_აქსიმალური ხანგრძლივობა"
 msgid "Recording ends when the maximum duration is reached"
 msgstr "ჩაწერა დასრულდება, როცა მიღწეული იქნება მაქს. ხანგრძლივობა"
 
-#: data/gtk/search_page.ui:23
+#: data/gtk/search_filter.ui:15
 msgid "Search"
 msgstr "ძებნა"
 
-#: data/gtk/search_page.ui:24
+#: data/gtk/search_filter.ui:16
 msgid "Search stations"
 msgstr "სადგურების ძებნა"
 
-#: data/gtk/search_page.ui:72
+#: data/gtk/search_page.ui:55
 msgid "Discover over 50,000 public stations"
 msgstr "აღმოაჩინეთ 50,000-ზე მეტი საჯარო სადგური"
 
-#: data/gtk/search_page.ui:90
+#: data/gtk/search_page.ui:73
 msgid "Popular Stations"
 msgstr "პოპულარული სადგურები"
 
-#: data/gtk/search_page.ui:112
+#: data/gtk/search_page.ui:95
 msgid "Discover New Stations"
 msgstr "აღმოაჩინეთ ახალი სადგურები"
 
-#: data/gtk/search_page.ui:135
+#: data/gtk/search_page.ui:118
 msgid ""
 "The displayed information is provided by <a href=\"https://www.radio-"
 "browser.info/\">radio-browser.info</a>.\n"
-"Shortwave has no influence on the listed stations."
+"                                  Shortwave has no influence on the listed "
+"stations."
 msgstr ""
 "ნაჩვენები ინფორმაცია მოცემულია <a href=\"https://www.radio-browser.info/"
 "\">radio-browser.info</a>-ის მიერ.\n"
-"Shortwave-ს არ აქვს გავლენა ჩამოთვლილ სადგურებზე."
+"                                  Shortwave-ს არ აქვს გავლენა ჩამოთვლილ "
+"სადგურებზე."
 
-#: data/gtk/search_page.ui:201
+#: data/gtk/search_page.ui:184
 msgid "Loading…"
 msgstr "ჩატვირთვა…"
 
-#: data/gtk/search_page.ui:216
+#: data/gtk/search_page.ui:199
 msgid "No Results"
 msgstr "შედეგების გარეშე"
 
-#: data/gtk/search_page.ui:217
+#: data/gtk/search_page.ui:200
 msgid ""
 "If the station you are looking for is missing, you can add it to the public "
 "database."
@@ -393,15 +395,15 @@ msgstr ""
 "თუ სადგური, რომელსაც ეძებთ, აკლია, შეგიძლიათ დაამატოთ იგი საჯარო მონაცემთა "
 "ბაზაში."
 
-#: data/gtk/search_page.ui:221
+#: data/gtk/search_page.ui:204
 msgid "Add Missing Station"
 msgstr "ნაკლული სადგურის დამატება"
 
-#: data/gtk/search_page.ui:239
+#: data/gtk/search_page.ui:222
 msgid "Unable to Retrieve Station Data"
 msgstr "სადგურის მონაცემების მიღება შეუძლებელია"
 
-#: data/gtk/search_page.ui:242
+#: data/gtk/search_page.ui:225
 msgid "Try Again"
 msgstr "კიდევ სცადეთ"
 
@@ -544,7 +546,7 @@ msgid "The recorded track has been saved"
 msgstr "ჩაწერილი ტრეკი შენახულია"
 
 #: data/gtk/track_dialog.ui:137 data/gtk/track_dialog.ui:208
-#: data/gtk/track_row.ui:9 src/audio/player.rs:447
+#: data/gtk/track_row.ui:9 src/audio/player.rs:448
 msgid "Save Track"
 msgstr "ტრკის შენახვა"
 
@@ -581,19 +583,19 @@ msgstr "დადუმების გადართვა"
 msgid "Track no longer available"
 msgstr "ტრეკი ხელმისაწვდომი აღარაა"
 
-#: src/app.rs:108 src/app.rs:130
+#: src/app.rs:109 src/app.rs:132
 msgid "This track is currently not being recorded"
 msgstr "ამ ტრეკის ჩაწერა, ამჟამად, არ მიმდინარეობს"
 
-#: src/app.rs:255
+#: src/app.rs:258
 msgid "Playing “{}”"
 msgstr "იკვრება “{}”"
 
-#: src/app.rs:349
+#: src/app.rs:353
 msgid "Active Playback"
 msgstr "აქტიური დაკვრა"
 
-#: src/audio/player.rs:457
+#: src/audio/player.rs:458
 msgid "Don't Record"
 msgstr "ჩაწერის გარეშე"
 
