@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shortwave master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/Shortwave/issues\n"
-"POT-Creation-Date: 2025-08-11 00:16+0000\n"
-"PO-Revision-Date: 2025-08-11 17:56+0300\n"
+"POT-Creation-Date: 2025-09-10 23:09+0000\n"
+"PO-Revision-Date: 2025-09-11 15:28+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -235,7 +235,7 @@ msgid "SHORTWAVE INTERNET RADIO"
 msgstr "КОРОТКОХВИЛЬОВЕ ІНТЕРНЕТ-РАДІО"
 
 #: data/gtk/player_gadget.ui:140 data/gtk/player_toolbar.ui:29
-#: data/gtk/player_view.ui:58 src/app.rs:251
+#: data/gtk/player_view.ui:58 src/app.rs:253
 msgid "No Playback"
 msgstr "Немає відтворення"
 
@@ -351,49 +351,50 @@ msgstr "М_аксимальна тривалість"
 msgid "Recording ends when the maximum duration is reached"
 msgstr "Записування завершується, якщо досягнуто максимальної тривалості"
 
-#: data/gtk/search_page.ui:23
+#: data/gtk/search_filter.ui:15
 msgid "Search"
 msgstr "Пошук"
 
-#: data/gtk/search_page.ui:24
+#: data/gtk/search_filter.ui:16
 msgid "Search stations"
 msgstr "Пошук станцій"
 
-#: data/gtk/search_page.ui:72
+#: data/gtk/search_page.ui:55
 msgid "Discover over 50,000 public stations"
 msgstr "Навігація списком із понад 50000 загальнодоступних станцій"
 
-#: data/gtk/search_page.ui:90
+#: data/gtk/search_page.ui:73
 msgid "Popular Stations"
 msgstr "Популярні станції"
 
-#: data/gtk/search_page.ui:112
+#: data/gtk/search_page.ui:95
 msgid "Discover New Stations"
 msgstr "Виявити нові станції"
 
-#: data/gtk/search_page.ui:135
+#: data/gtk/search_page.ui:118
 #| msgid ""
 #| "The displayed information is provided by <a href=\"https://www.radio-"
-#| "browser.info/\">radio-browser.info</a>. \n"
+#| "browser.info/\">radio-browser.info</a>.\n"
 #| "Shortwave has no influence on the listed stations."
 msgid ""
 "The displayed information is provided by <a href=\"https://www.radio-"
 "browser.info/\">radio-browser.info</a>.\n"
-"Shortwave has no influence on the listed stations."
+"                                  Shortwave has no influence on the listed "
+"stations."
 msgstr ""
 "Показані дані надано <a href=\"https://www.radio-browser.info/\">radio-"
 "browser.info</a>.\n"
 "Shortwave не має впливу на показаний перелік станцій."
 
-#: data/gtk/search_page.ui:201
+#: data/gtk/search_page.ui:184
 msgid "Loading…"
 msgstr "Завантаження…"
 
-#: data/gtk/search_page.ui:216
+#: data/gtk/search_page.ui:199
 msgid "No Results"
 msgstr "Нічого не знайдено"
 
-#: data/gtk/search_page.ui:217
+#: data/gtk/search_page.ui:200
 msgid ""
 "If the station you are looking for is missing, you can add it to the public "
 "database."
@@ -401,15 +402,15 @@ msgstr ""
 "Якщо у списку немає станції, яку ви шукаєте, ви можете додати її до "
 "громадської бази даних."
 
-#: data/gtk/search_page.ui:221
+#: data/gtk/search_page.ui:204
 msgid "Add Missing Station"
 msgstr "Додати пропущену станцію"
 
-#: data/gtk/search_page.ui:239
+#: data/gtk/search_page.ui:222
 msgid "Unable to Retrieve Station Data"
 msgstr "Не вдалося отримати дані станцій"
 
-#: data/gtk/search_page.ui:242
+#: data/gtk/search_page.ui:225
 msgid "Try Again"
 msgstr "Повторити спробу"
 
@@ -552,7 +553,7 @@ msgid "The recorded track has been saved"
 msgstr "Записану композицію збережено"
 
 #: data/gtk/track_dialog.ui:137 data/gtk/track_dialog.ui:208
-#: data/gtk/track_row.ui:9 src/audio/player.rs:447
+#: data/gtk/track_row.ui:9 src/audio/player.rs:448
 msgid "Save Track"
 msgstr "Зберегти доріжку"
 
@@ -589,19 +590,19 @@ msgstr "Увімкнути або вимкнути звук"
 msgid "Track no longer available"
 msgstr "Композиція недоступна"
 
-#: src/app.rs:108 src/app.rs:130
+#: src/app.rs:109 src/app.rs:132
 msgid "This track is currently not being recorded"
 msgstr "Запис цієї композиції не виконується"
 
-#: src/app.rs:255
+#: src/app.rs:258
 msgid "Playing “{}”"
 msgstr "Відтворення «{}»"
 
-#: src/app.rs:349
+#: src/app.rs:353
 msgid "Active Playback"
 msgstr "Активне відтворення"
 
-#: src/audio/player.rs:457
+#: src/audio/player.rs:458
 msgid "Don't Record"
 msgstr "Не записувати"
 
