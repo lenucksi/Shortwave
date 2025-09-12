@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shortwave master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/Shortwave/issues\n"
-"POT-Creation-Date: 2025-08-11 00:16+0000\n"
-"PO-Revision-Date: 2025-08-24 14:17+0300\n"
+"POT-Creation-Date: 2025-09-10 23:09+0000\n"
+"PO-Revision-Date: 2025-09-12 18:41+0300\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: Finnish <lokalisointi-lista@googlegroups.com>\n"
 "Language: fi\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.7\n"
 
 #: data/de.haeckerfelix.Shortwave.desktop.in.in:2
 #: data/de.haeckerfelix.Shortwave.metainfo.xml.in.in:5
@@ -234,7 +234,7 @@ msgid "SHORTWAVE INTERNET RADIO"
 msgstr "SHORTWAVE INTERNET RADIO"
 
 #: data/gtk/player_gadget.ui:140 data/gtk/player_toolbar.ui:29
-#: data/gtk/player_view.ui:58 src/app.rs:251
+#: data/gtk/player_view.ui:58 src/app.rs:253
 msgid "No Playback"
 msgstr "Mitään ei toisteta"
 
@@ -349,59 +349,64 @@ msgstr "_Enimmäiskesto"
 msgid "Recording ends when the maximum duration is reached"
 msgstr "Nauhoitus päättyy, kun enimmäiskesto täyttyy"
 
-#: data/gtk/search_page.ui:23
+#: data/gtk/search_filter.ui:15
 msgid "Search"
 msgstr "Etsi"
 
-#: data/gtk/search_page.ui:24
+#: data/gtk/search_filter.ui:16
 msgid "Search stations"
 msgstr "Etsi asemia"
 
-#: data/gtk/search_page.ui:72
+#: data/gtk/search_page.ui:55
 msgid "Discover over 50,000 public stations"
 msgstr "Selaa yli 50 000:tta julkista asemaa"
 
-#: data/gtk/search_page.ui:90
+#: data/gtk/search_page.ui:73
 msgid "Popular Stations"
 msgstr "Suositut asemat"
 
-#: data/gtk/search_page.ui:112
+#: data/gtk/search_page.ui:95
 msgid "Discover New Stations"
 msgstr "Löydä uusia asemia"
 
-#: data/gtk/search_page.ui:135
+#: data/gtk/search_page.ui:118
+#| msgid ""
+#| "The displayed information is provided by <a href=\"https://www.radio-"
+#| "browser.info/\">radio-browser.info</a>.\n"
+#| "Shortwave has no influence on the listed stations."
 msgid ""
 "The displayed information is provided by <a href=\"https://www.radio-"
 "browser.info/\">radio-browser.info</a>.\n"
-"Shortwave has no influence on the listed stations."
+"                                  Shortwave has no influence on the listed "
+"stations."
 msgstr ""
 "Näytettävät tiedot toimittaa <a href=\"https://www.radio-browser.info/"
 "\">radio-browser.info</a>.\n"
-"Shortwave ei vaikuta lueteltuihin asemiin."
+"                                  Shortwave ei vaikuta lueteltaviin asemiin."
 
-#: data/gtk/search_page.ui:201
+#: data/gtk/search_page.ui:184
 msgid "Loading…"
 msgstr "Ladataan…"
 
-#: data/gtk/search_page.ui:216
+#: data/gtk/search_page.ui:199
 msgid "No Results"
 msgstr "Ei tuloksia"
 
-#: data/gtk/search_page.ui:217
+#: data/gtk/search_page.ui:200
 msgid ""
 "If the station you are looking for is missing, you can add it to the public "
 "database."
 msgstr "Jos etsimäsi asema puuttuu, voit lisätä sen julkiseen tietokantaan."
 
-#: data/gtk/search_page.ui:221
+#: data/gtk/search_page.ui:204
 msgid "Add Missing Station"
 msgstr "Lisää puuttuva asema"
 
-#: data/gtk/search_page.ui:239
+#: data/gtk/search_page.ui:222
 msgid "Unable to Retrieve Station Data"
 msgstr "Aseman tietojen noutaminen ei onnistunut"
 
-#: data/gtk/search_page.ui:242
+#: data/gtk/search_page.ui:225
 msgid "Try Again"
 msgstr "Yritä uudelleen"
 
@@ -544,7 +549,7 @@ msgid "The recorded track has been saved"
 msgstr "Nauhoitettu kappale on tallennettu"
 
 #: data/gtk/track_dialog.ui:137 data/gtk/track_dialog.ui:208
-#: data/gtk/track_row.ui:9 src/audio/player.rs:447
+#: data/gtk/track_row.ui:9 src/audio/player.rs:448
 msgid "Save Track"
 msgstr "Tallenna kappale"
 
@@ -580,19 +585,19 @@ msgstr "Mykistys päällä/pois"
 msgid "Track no longer available"
 msgstr "Kappale ei ole enää saatavilla"
 
-#: src/app.rs:108 src/app.rs:130
+#: src/app.rs:109 src/app.rs:132
 msgid "This track is currently not being recorded"
 msgstr "Tätä kappaletta ei nauhoiteta tällä hetkellä"
 
-#: src/app.rs:255
+#: src/app.rs:258
 msgid "Playing “{}”"
 msgstr "Toistetaan “{}”"
 
-#: src/app.rs:349
+#: src/app.rs:353
 msgid "Active Playback"
 msgstr "Aktiivinen toisto"
 
-#: src/audio/player.rs:457
+#: src/audio/player.rs:458
 msgid "Don't Record"
 msgstr "Älä nauhoita"
 
