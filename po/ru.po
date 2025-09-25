@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shortwave master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/Shortwave/issues\n"
-"POT-Creation-Date: 2025-08-11 00:16+0000\n"
-"PO-Revision-Date: 2025-08-11 23:23+0800\n"
-"Last-Translator: Vyacheslav Gurin <slavkaplay6@gmail.com>\n"
+"POT-Creation-Date: 2025-09-10 23:09+0000\n"
+"PO-Revision-Date: 2025-09-11 13:43+0300\n"
+"Last-Translator: Artur So <arturios2005@mail.ru>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.7\n"
 
 #: data/de.haeckerfelix.Shortwave.desktop.in.in:2
 #: data/de.haeckerfelix.Shortwave.metainfo.xml.in.in:5
@@ -62,7 +62,6 @@ msgstr ""
 msgid "Easily search and discover new radio stations"
 msgstr "Легкий поиск и открытие новых радиостанций"
 
-# Строка была fuzzy из-за замены "songs" на "tracks". Перевод обновлён.
 #: data/de.haeckerfelix.Shortwave.metainfo.xml.in.in:19
 msgid ""
 "Automatic recognition of tracks, with the possibility to save them "
@@ -107,8 +106,8 @@ msgid ""
 "browser.info/add\">public database</a>."
 msgstr ""
 "Эта станция будет добавлена только в вашу библиотеку. Если вы хотите, чтобы "
-"она была доступна всем, добавьте ее в <a href=\"https://www.radio-browser."
-"info/add\">общедоступную базу данных</a>."
+"она была доступна всем, добавьте ее в <a href=\"https://www.radio-"
+"browser.info/add\">общедоступную базу данных</a>."
 
 #: data/gtk/add_station_dialog.ui:107
 msgid "Name"
@@ -218,7 +217,6 @@ msgstr "Закрыть"
 msgid "Add _Local Station"
 msgstr "Добавить _локальную станцию"
 
-# Существующий перевод «Играть» не подходит для медиаплеера. Заменено на стандартное «Воспроизвести»
 #: data/gtk/player_gadget.ui:40 data/gtk/player_toolbar.ui:92
 #: data/gtk/player_view.ui:156 data/gtk/station_row.ui:86
 msgid "Play"
@@ -239,7 +237,7 @@ msgid "SHORTWAVE INTERNET RADIO"
 msgstr "SHORTWAVE ИНТЕРНЕТ-РАДИО"
 
 #: data/gtk/player_gadget.ui:140 data/gtk/player_toolbar.ui:29
-#: data/gtk/player_view.ui:58 src/app.rs:251
+#: data/gtk/player_view.ui:58 src/app.rs:253
 msgid "No Playback"
 msgstr "Нет воспроизведения"
 
@@ -263,7 +261,6 @@ msgstr "Показать информацию о станции"
 msgid "No Tracks"
 msgstr "Нет треков"
 
-# Строка была fuzzy. Перевод обновлён с учётом нового текста ("Detected songs" -> "Played tracks").
 #: data/gtk/player_view.ui:277
 msgid "Played tracks will appear here"
 msgstr "Воспроизведённые треки будут отображаться здесь"
@@ -354,46 +351,46 @@ msgstr "М_аксимальная длительность"
 msgid "Recording ends when the maximum duration is reached"
 msgstr "Запись прекращается при достижении максимальной длительности"
 
-#: data/gtk/search_page.ui:23
+#: data/gtk/search_filter.ui:15
 msgid "Search"
 msgstr "Поиск"
 
-#: data/gtk/search_page.ui:24
+#: data/gtk/search_filter.ui:16
 msgid "Search stations"
 msgstr "Поиск станций"
 
-#: data/gtk/search_page.ui:72
+#: data/gtk/search_page.ui:55
 msgid "Discover over 50,000 public stations"
 msgstr "Просмотр более 50000 общедоступных станций"
 
-#: data/gtk/search_page.ui:90
+#: data/gtk/search_page.ui:73
 msgid "Popular Stations"
 msgstr "Популярные станции"
 
-#: data/gtk/search_page.ui:112
+#: data/gtk/search_page.ui:95
 msgid "Discover New Stations"
 msgstr "Открывайте для себя новые станции"
 
-# Перевод немного улучшен для большей естественности
-#: data/gtk/search_page.ui:135
+#: data/gtk/search_page.ui:118
 msgid ""
-"The displayed information is provided by <a href=\"https://www.radio-browser."
-"info/\">radio-browser.info</a>.\n"
-"Shortwave has no influence on the listed stations."
+"The displayed information is provided by <a href=\"https://www.radio-"
+"browser.info/\">radio-browser.info</a>.\n"
+"                                  Shortwave has no influence on the listed "
+"stations."
 msgstr ""
-"Отображаемая информация предоставлена <a href=\"https://www.radio-browser."
-"info/\">radio-browser.info</a>.\n"
-"Shortwave не влияет на перечень станций."
+"Отображаемая информация предоставлена <a href=\"https://www.radio-"
+"browser.info/\">radio-browser.info</a>.\n"
+"                                  Shortwave не влияет на перечень станций."
 
-#: data/gtk/search_page.ui:201
+#: data/gtk/search_page.ui:184
 msgid "Loading…"
 msgstr "Загрузка…"
 
-#: data/gtk/search_page.ui:216
+#: data/gtk/search_page.ui:199
 msgid "No Results"
 msgstr "Нет результатов"
 
-#: data/gtk/search_page.ui:217
+#: data/gtk/search_page.ui:200
 msgid ""
 "If the station you are looking for is missing, you can add it to the public "
 "database."
@@ -401,15 +398,15 @@ msgstr ""
 "Если искомая станция отсутствует, вы можете добавить ее в общедоступную базу "
 "данных."
 
-#: data/gtk/search_page.ui:221
+#: data/gtk/search_page.ui:204
 msgid "Add Missing Station"
 msgstr "Добавить отсутствующую станцию"
 
-#: data/gtk/search_page.ui:239
+#: data/gtk/search_page.ui:222
 msgid "Unable to Retrieve Station Data"
 msgstr "Невозможно получить данные о станции"
 
-#: data/gtk/search_page.ui:242
+#: data/gtk/search_page.ui:225
 msgid "Try Again"
 msgstr "Попробовать снова"
 
@@ -447,7 +444,6 @@ msgstr "Переключение воспроизведения"
 msgid "Volume"
 msgstr "Громкость"
 
-# Существующий перевод «Переключить звук» был неточным. Заменено на более корректный вариант, описывающий переключение состояния.
 #: data/gtk/shortcuts_dialog.ui:55
 msgctxt "shortcut window"
 msgid "Toggle mute"
@@ -553,7 +549,7 @@ msgid "The recorded track has been saved"
 msgstr "Записанный трек сохранён"
 
 #: data/gtk/track_dialog.ui:137 data/gtk/track_dialog.ui:208
-#: data/gtk/track_row.ui:9 src/audio/player.rs:447
+#: data/gtk/track_row.ui:9 src/audio/player.rs:448
 msgid "Save Track"
 msgstr "Сохранить трек"
 
@@ -589,19 +585,19 @@ msgstr "Отключить звук"
 msgid "Track no longer available"
 msgstr "Трек больше недоступен"
 
-#: src/app.rs:108 src/app.rs:130
+#: src/app.rs:109 src/app.rs:132
 msgid "This track is currently not being recorded"
 msgstr "Этот трек в данный момент не записывается"
 
-#: src/app.rs:255
+#: src/app.rs:258
 msgid "Playing “{}”"
 msgstr "Воспроизводится ”{}”"
 
-#: src/app.rs:349
+#: src/app.rs:353
 msgid "Active Playback"
 msgstr "Активное воспроизведение"
 
-#: src/audio/player.rs:457
+#: src/audio/player.rs:458
 msgid "Don't Record"
 msgstr "Не записывать"
 
@@ -729,7 +725,6 @@ msgstr "Скопировано"
 msgid "No Permission for Background Playback"
 msgstr "Нет разрешения на фоновое воспроизведение"
 
-# Перевод исправлен для точного соответствия формулировке в системных параметрах GNOME
 #: src/ui/window.rs:223
 msgid "“Run in Background” must be allowed for this app in system settings."
 msgstr ""
