@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/Shortwave/issues\n"
-"POT-Creation-Date: 2025-02-13 05:11+0000\n"
-"PO-Revision-Date: 2025-03-08 14:23+0100\n"
+"POT-Creation-Date: 2025-10-11 02:43+0000\n"
+"PO-Revision-Date: 2025-11-15 13:46+0100\n"
 "Last-Translator: maite guix <maite.guix@me.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
@@ -16,36 +16,35 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.6\n"
 
-#: data/de.haeckerfelix.Shortwave.desktop.in.in:3
+#: data/de.haeckerfelix.Shortwave.desktop.in.in:2
 #: data/de.haeckerfelix.Shortwave.metainfo.xml.in.in:5
 msgid "@NAME@"
 msgstr "@NAME@"
 
-#: data/de.haeckerfelix.Shortwave.desktop.in.in:4
+#: data/de.haeckerfelix.Shortwave.desktop.in.in:3
 msgid "Internet Radio Player"
 msgstr "Reproductor de ràdio per Internet"
 
 #. General
-#: data/de.haeckerfelix.Shortwave.desktop.in.in:5
+#: data/de.haeckerfelix.Shortwave.desktop.in.in:4
 #: data/de.haeckerfelix.Shortwave.metainfo.xml.in.in:10
 msgid "Listen to internet radio"
 msgstr "Escolteu la ràdio per internet"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/de.haeckerfelix.Shortwave.desktop.in.in:14
+#: data/de.haeckerfelix.Shortwave.desktop.in.in:13
 msgid "Gradio;Radio;Stream;Wave;"
-msgstr ""
-"Gradio;Ràdio;Ràdios;Emissores;Emissora;Retransmissió;retransmissions;directe;"
+msgstr "Gradio;Ràdio;Ràdios;Emissores;Emissora;Retransmissió;retransmissions;directe;"
 
 #: data/de.haeckerfelix.Shortwave.metainfo.xml.in.in:12
 msgid ""
-"Shortwave is an internet radio player that provides access to a station "
-"database with over 50,000 stations."
+"Shortwave is an internet radio player that provides access to a station database "
+"with over 50,000 stations."
 msgstr ""
-"El Shortwave és un reproductor de ràdio per Internet que proporciona accés a "
-"una base de dades amb més de 50.000 emissores."
+"El Shortwave és un reproductor de ràdio per Internet que proporciona accés a una "
+"base de dades amb més de 50.000 emissores."
 
 #: data/de.haeckerfelix.Shortwave.metainfo.xml.in.in:15
 msgid "Features:"
@@ -55,8 +54,7 @@ msgstr "Característiques:"
 #: data/de.haeckerfelix.Shortwave.metainfo.xml.in.in:64
 msgid "Create your own library where you can add your favorite stations"
 msgstr ""
-"Creeu la vostra pròpia biblioteca on podeu afegir les vostres emissores "
-"preferides"
+"Creeu la vostra pròpia biblioteca on podeu afegir les vostres emissores preferides"
 
 #: data/de.haeckerfelix.Shortwave.metainfo.xml.in.in:18
 #: data/de.haeckerfelix.Shortwave.metainfo.xml.in.in:68
@@ -65,23 +63,19 @@ msgstr "Cerqueu fàcilment i descobriu noves emissores de ràdio"
 
 #: data/de.haeckerfelix.Shortwave.metainfo.xml.in.in:19
 msgid ""
-"Automatic recognition of tracks, with the possibility to save them "
-"individually"
+"Automatic recognition of tracks, with the possibility to save them individually"
 msgstr ""
-"Reconeixement automàtic de cançons, amb la possibilitat de desar-les "
-"individualment"
+"Reconeixement automàtic de cançons, amb la possibilitat de desar-les individualment"
 
 #: data/de.haeckerfelix.Shortwave.metainfo.xml.in.in:20
 #: data/de.haeckerfelix.Shortwave.metainfo.xml.in.in:72
 msgid "Responsive application layout, compatible for small and large screens"
-msgstr ""
-"Disposició d'aplicació responsiva, compatible amb pantalles grans i petites"
+msgstr "Disposició d'aplicació responsiva, compatible amb pantalles grans i petites"
 
 #: data/de.haeckerfelix.Shortwave.metainfo.xml.in.in:21
 msgid "Play audio on supported network devices (e.g. Google Chromecasts)"
 msgstr ""
-"Reproduïu àudio en dispositius de xarxa compatibles (p. ex. Google "
-"Chromecasts)"
+"Reproduïu àudio en dispositius de xarxa compatibles (p. ex. Google Chromecasts)"
 
 #: data/de.haeckerfelix.Shortwave.metainfo.xml.in.in:22
 msgid "Seamless integration into the GNOME desktop environment"
@@ -102,13 +96,13 @@ msgstr "Canvia la caràtula de l'emissora"
 
 #: data/gtk/add_station_dialog.ui:95
 msgid ""
-"This station will only be added to your library. If you want it to be "
-"available to everyone, you should add it to the <a href=\"https://www.radio-"
-"browser.info/add\">public database</a>."
+"This station will only be added to your library. If you want it to be available to "
+"everyone, you should add it to the <a href=\"https://www.radio-browser.info/"
+"add\">public database</a>."
 msgstr ""
-"Aquesta emissora només s'afegirà a la vostra biblioteca. Si voleu que "
-"estigui disponible per a tothom, heu d'afegir-la a la <a href=\"https://www."
-"radio-browser.info/add\">base de dades pública </a>."
+"Aquesta emissora només s'afegirà a la vostra biblioteca. Si voleu que estigui "
+"disponible per a tothom, heu d'afegir-la a la <a href=\"https://www.radio-"
+"browser.info/add\">base de dades pública </a>."
 
 #: data/gtk/add_station_dialog.ui:107
 msgid "Name"
@@ -146,63 +140,6 @@ msgstr "No s'ha trobat cap dispositiu compatible amb Google Cast"
 msgid "Disconnect From Device"
 msgstr "Desconnecta el dispositiu"
 
-#: data/gtk/help_overlay.ui:11 data/gtk/preferences_dialog.ui:9
-msgid "General"
-msgstr "General"
-
-#: data/gtk/help_overlay.ui:14
-msgctxt "shortcut window"
-msgid "Open shortcut window"
-msgstr "Obre la finestra de dreceres"
-
-#: data/gtk/help_overlay.ui:21
-msgctxt "shortcut window"
-msgid "Open application menu"
-msgstr "Obre el menú de l'aplicació"
-
-#: data/gtk/help_overlay.ui:26
-msgctxt "shortcut window"
-msgid "Open preferences"
-msgstr "Obre les preferències"
-
-#: data/gtk/help_overlay.ui:32
-msgctxt "shortcut window"
-msgid "Close the window"
-msgstr "Tanca la finestra"
-
-#: data/gtk/help_overlay.ui:38
-msgctxt "shortcut window"
-msgid "Quit the application"
-msgstr "Surt de l'aplicació"
-
-#: data/gtk/help_overlay.ui:46 data/gtk/preferences_dialog.ui:12
-msgid "Playback"
-msgstr "Reproducció"
-
-#: data/gtk/help_overlay.ui:49
-msgctxt "shortcut window"
-msgid "Toggle playback"
-msgstr "Commuta la reproducció"
-
-#: data/gtk/help_overlay.ui:57 data/gtk/volume_control.ui:21
-msgid "Volume"
-msgstr "Volum"
-
-#: data/gtk/help_overlay.ui:60
-msgctxt "shortcut window"
-msgid "Toggle mute"
-msgstr "Silencia/deixa de silenciar"
-
-#: data/gtk/help_overlay.ui:66
-msgctxt "shortcut window"
-msgid "Increase volume"
-msgstr "Apuja el volum"
-
-#: data/gtk/help_overlay.ui:72
-msgctxt "shortcut window"
-msgid "Decrease volume"
-msgstr "Abaixa el volum"
-
 #: data/gtk/library_page.ui:4
 msgid "Shortwave"
 msgstr "Shortwave"
@@ -215,63 +152,63 @@ msgstr "Cerca emissores"
 msgid "Main Menu"
 msgstr "Menú principal"
 
-#: data/gtk/library_page.ui:92
+#: data/gtk/library_page.ui:91
 msgid "_Add New Stations"
 msgstr "_Afegeix una emissora nova"
 
-#: data/gtk/library_page.ui:115
+#: data/gtk/library_page.ui:114
 msgid "_Sorting"
 msgstr "_Ordenació"
 
-#: data/gtk/library_page.ui:118
+#: data/gtk/library_page.ui:117
 msgid "_Name"
 msgstr "_Nom"
 
-#: data/gtk/library_page.ui:123
+#: data/gtk/library_page.ui:122
 msgid "_Language"
 msgstr "_Llengua"
 
-#: data/gtk/library_page.ui:128
+#: data/gtk/library_page.ui:127
 msgid "_Country"
 msgstr "_País"
 
-#: data/gtk/library_page.ui:133
+#: data/gtk/library_page.ui:132
 msgid "S_tate"
 msgstr "E_stat"
 
-#: data/gtk/library_page.ui:138
+#: data/gtk/library_page.ui:137
 msgid "_Bitrate"
 msgstr "_Velocitat de transmissió"
 
-#: data/gtk/library_page.ui:145
+#: data/gtk/library_page.ui:144
 msgid "_Ascending"
 msgstr "_Ascendent"
 
-#: data/gtk/library_page.ui:150
+#: data/gtk/library_page.ui:149
 msgid "_Descending"
 msgstr "_Descendent"
 
-#: data/gtk/library_page.ui:159
+#: data/gtk/library_page.ui:158
 msgid "_Open radio-browser.info <sup>↗</sup>"
 msgstr "_Obre radio-browser.info <sup>↗</sup>"
 
-#: data/gtk/library_page.ui:166
+#: data/gtk/library_page.ui:165
 msgid "_Preferences"
 msgstr "_Preferències"
 
-#: data/gtk/library_page.ui:170
+#: data/gtk/library_page.ui:169
 msgid "_Keyboard Shortcuts"
 msgstr "_Dreceres de teclat"
 
-#: data/gtk/library_page.ui:174
+#: data/gtk/library_page.ui:173
 msgid "_About Shortwave"
 msgstr "_Quant al Shortwave"
 
-#: data/gtk/library_page.ui:178
+#: data/gtk/library_page.ui:177
 msgid "_Quit"
 msgstr "_Surt"
 
-#: data/gtk/library_page.ui:186
+#: data/gtk/library_page.ui:185
 msgid "Add _Local Station"
 msgstr "Afegeix una emissora _local"
 
@@ -295,7 +232,7 @@ msgid "SHORTWAVE INTERNET RADIO"
 msgstr "RÀDIO PER INTERNET SHORTWAVE"
 
 #: data/gtk/player_gadget.ui:140 data/gtk/player_toolbar.ui:29
-#: data/gtk/player_view.ui:58 src/app.rs:257
+#: data/gtk/player_view.ui:58 src/app.rs:253
 msgid "No Playback"
 msgstr "Sense reproducció"
 
@@ -327,6 +264,14 @@ msgstr "Les cançons reproduïdes apareixeran aquí"
 msgid "An error occurred"
 msgstr "S'ha produït un error"
 
+#: data/gtk/preferences_dialog.ui:9 data/gtk/shortcuts_dialog.ui:6
+msgid "General"
+msgstr "General"
+
+#: data/gtk/preferences_dialog.ui:12 data/gtk/shortcuts_dialog.ui:41
+msgid "Playback"
+msgstr "Reproducció"
+
 #: data/gtk/preferences_dialog.ui:15
 msgid "_Background Playback"
 msgstr "_Reproducció en segon pla"
@@ -350,11 +295,11 @@ msgstr "Enregistrament"
 
 #: data/gtk/preferences_dialog.ui:44
 msgid ""
-"Tracks are automatically recognised based on the station stream metadata and "
-"can be saved."
+"Tracks are automatically recognised based on the station stream metadata and can be "
+"saved."
 msgstr ""
-"Les cançons es reconeixen automàticament en funció de les metadades de "
-"l'emissora i es poden desar."
+"Les cançons es reconeixen automàticament en funció de les metadades de l'emissora i "
+"es poden desar."
 
 #: data/gtk/preferences_dialog.ui:47
 msgid "Track _Directory"
@@ -367,8 +312,7 @@ msgstr "Des_a totes les cançons"
 #: data/gtk/preferences_dialog.ui:70
 msgid "All recorded tracks are automatically saved in the track directory"
 msgstr ""
-"Totes les cançons enregistrades es desen automàticament al directori de "
-"cançons"
+"Totes les cançons enregistrades es desen automàticament al directori de cançons"
 
 #: data/gtk/preferences_dialog.ui:84
 msgid "Decide for Each _Track"
@@ -402,62 +346,111 @@ msgstr "Durada m_àxima"
 msgid "Recording ends when the maximum duration is reached"
 msgstr "L'enregistrament acaba quan s'arriba a la durada màxima"
 
-#: data/gtk/search_page.ui:23
+#: data/gtk/search_filter.ui:15
 msgid "Search"
 msgstr "Cerca"
 
-#: data/gtk/search_page.ui:24
+#: data/gtk/search_filter.ui:16
 msgid "Search stations"
 msgstr "Cerca emissores"
 
-#: data/gtk/search_page.ui:72
+#: data/gtk/search_page.ui:55
 msgid "Discover over 50,000 public stations"
 msgstr "Descobriu més de 50.000 emissores públiques"
 
-#: data/gtk/search_page.ui:90
+#: data/gtk/search_page.ui:73
 msgid "Popular Stations"
 msgstr "Emissores populars"
 
-#: data/gtk/search_page.ui:112
+#: data/gtk/search_page.ui:95
 msgid "Discover New Stations"
 msgstr "Descobreix emissores noves"
 
-#: data/gtk/search_page.ui:135
+#: data/gtk/search_page.ui:118
 msgid ""
-"The displayed information is provided by <a href=\"https://www.radio-browser."
-"info/\">radio-browser.info</a>. \n"
-"Shortwave has no influence on the listed stations."
+"The displayed information is provided by <a href=\"https://www.radio-browser.info/"
+"\">radio-browser.info</a>.\n"
+"                                  Shortwave has no influence on the listed stations."
 msgstr ""
 "La informació mostrada és proporcionada per <a href=\"https://www.radio-"
 "browser.info/\">radio-browser.info</a>.\n"
-"El Shortwave no té influència en les estacions llistades."
+"                                  El Shortwave no té influència en les estacions "
+"llistades."
 
-#: data/gtk/search_page.ui:201
+#: data/gtk/search_page.ui:184
 msgid "Loading…"
 msgstr "S'està carregant…"
 
-#: data/gtk/search_page.ui:216
+#: data/gtk/search_page.ui:199
 msgid "No Results"
 msgstr "Sense resultats"
 
-#: data/gtk/search_page.ui:217
+#: data/gtk/search_page.ui:200
 msgid ""
 "If the station you are looking for is missing, you can add it to the public "
 "database."
-msgstr ""
-"Si falta l'emissora que busqueu, podeu afegir-la a la base de dades pública."
+msgstr "Si falta l'emissora que busqueu, podeu afegir-la a la base de dades pública."
 
-#: data/gtk/search_page.ui:221
+#: data/gtk/search_page.ui:204
 msgid "Add Missing Station"
 msgstr "Afegeix una emissora"
 
-#: data/gtk/search_page.ui:239
+#: data/gtk/search_page.ui:222
 msgid "Unable to Retrieve Station Data"
 msgstr "No s'han pogut recuperar les dades de l'emissora"
 
-#: data/gtk/search_page.ui:242
+#: data/gtk/search_page.ui:225
 msgid "Try Again"
 msgstr "Torna-ho a provar"
+
+#: data/gtk/shortcuts_dialog.ui:9
+msgctxt "shortcut window"
+msgid "Open shortcut window"
+msgstr "Obre la finestra de dreceres"
+
+#: data/gtk/shortcuts_dialog.ui:16
+msgctxt "shortcut window"
+msgid "Open application menu"
+msgstr "Obre el menú de l'aplicació"
+
+#: data/gtk/shortcuts_dialog.ui:21
+msgctxt "shortcut window"
+msgid "Open preferences"
+msgstr "Obre les preferències"
+
+#: data/gtk/shortcuts_dialog.ui:27
+msgctxt "shortcut window"
+msgid "Close the window"
+msgstr "Tanca la finestra"
+
+#: data/gtk/shortcuts_dialog.ui:33
+msgctxt "shortcut window"
+msgid "Quit the application"
+msgstr "Surt de l'aplicació"
+
+#: data/gtk/shortcuts_dialog.ui:44
+msgctxt "shortcut window"
+msgid "Toggle playback"
+msgstr "Commuta la reproducció"
+
+#: data/gtk/shortcuts_dialog.ui:52 data/gtk/volume_control.ui:21
+msgid "Volume"
+msgstr "Volum"
+
+#: data/gtk/shortcuts_dialog.ui:55
+msgctxt "shortcut window"
+msgid "Toggle mute"
+msgstr "Silencia/deixa de silenciar"
+
+#: data/gtk/shortcuts_dialog.ui:61
+msgctxt "shortcut window"
+msgid "Increase volume"
+msgstr "Apuja el volum"
+
+#: data/gtk/shortcuts_dialog.ui:67
+msgctxt "shortcut window"
+msgid "Decrease volume"
+msgstr "Abaixa el volum"
 
 #: data/gtk/station_dialog.ui:75
 msgid "_Play"
@@ -477,11 +470,10 @@ msgstr "Emissora local"
 
 #: data/gtk/station_dialog.ui:128
 msgid ""
-"This station exists only in your library, and is not part of the public "
-"database"
+"This station exists only in your library, and is not part of the public database"
 msgstr ""
-"Aquesta emissora només existeix a la vostra biblioteca i no hi és a la base "
-"de dades pública"
+"Aquesta emissora només existeix a la vostra biblioteca i no hi és a la base de "
+"dades pública"
 
 #: data/gtk/station_dialog.ui:142 data/gtk/station_row.ui:69
 msgid "Orphaned Station"
@@ -489,8 +481,8 @@ msgstr "Emissora òrfena"
 
 #: data/gtk/station_dialog.ui:143
 msgid ""
-"The information could not be updated, probably this station was removed from "
-"the public database"
+"The information could not be updated, probably this station was removed from the "
+"public database"
 msgstr ""
 "No s'ha pogut actualitzar la informació, probablement aquesta emissora s'ha "
 "suprimit de la base de dades pública"
@@ -503,40 +495,40 @@ msgstr "Informació"
 msgid "Language"
 msgstr "Llengua"
 
-#: data/gtk/station_dialog.ui:168
+#: data/gtk/station_dialog.ui:169
 msgid "Tags"
 msgstr "Etiquetes"
 
-#: data/gtk/station_dialog.ui:180
+#: data/gtk/station_dialog.ui:182
 msgid "Location"
 msgstr "Ubicació"
 
-#: data/gtk/station_dialog.ui:184
+#: data/gtk/station_dialog.ui:186
 msgid "Country"
 msgstr "País"
 
-#: data/gtk/station_dialog.ui:194
+#: data/gtk/station_dialog.ui:197
 msgid "State"
 msgstr "Estat"
 
-#: data/gtk/station_dialog.ui:228
+#: data/gtk/station_dialog.ui:232
 msgid "Audio"
 msgstr "Àudio"
 
-#: data/gtk/station_dialog.ui:231
+#: data/gtk/station_dialog.ui:235
 msgid "Bitrate"
 msgstr "Velocitat de transmissió"
 
-#: data/gtk/station_dialog.ui:241
+#: data/gtk/station_dialog.ui:246
 msgid "Codec"
 msgstr "Còdec"
 
 #. This is a noun/label for the station stream url
-#: data/gtk/station_dialog.ui:251
+#: data/gtk/station_dialog.ui:257
 msgid "Stream"
 msgstr "Emissió"
 
-#: data/gtk/station_dialog.ui:257
+#: data/gtk/station_dialog.ui:263
 msgid "Copy"
 msgstr "Copia"
 
@@ -548,8 +540,8 @@ msgstr "Edita"
 msgid "The recorded track has been saved"
 msgstr "S'ha desat la cançó enregistrada"
 
-#: data/gtk/track_dialog.ui:137 data/gtk/track_dialog.ui:208
-#: data/gtk/track_row.ui:9 src/audio/player.rs:449
+#: data/gtk/track_dialog.ui:137 data/gtk/track_dialog.ui:208 data/gtk/track_row.ui:9
+#: src/audio/player.rs:448
 msgid "Save Track"
 msgstr "Desa la cançó"
 
@@ -572,8 +564,7 @@ msgstr "Desa aquesta cançó quan s'hagi completat l'enregistrament"
 #: data/gtk/track_dialog.ui:223
 msgid "Recording behaviour can be changed in <a href=\"\">preferences</a>"
 msgstr ""
-"El comportament d'enregistrament es pot canviar a les <a "
-"href=\"\">preferències</a>"
+"El comportament d'enregistrament es pot canviar a les <a href=\"\">preferències</a>"
 
 #: data/gtk/track_row.ui:20
 msgid "Saved"
@@ -587,19 +578,19 @@ msgstr "Silencia/deixa de silenciar"
 msgid "Track no longer available"
 msgstr "La cançó ja no està disponible"
 
-#: src/app.rs:108 src/app.rs:130
+#: src/app.rs:109 src/app.rs:132
 msgid "This track is currently not being recorded"
 msgstr "Aquesta cançó no s'està enregistrant"
 
-#: src/app.rs:261
+#: src/app.rs:258
 msgid "Playing “{}”"
 msgstr "S'està reproduint «{}»"
 
-#: src/app.rs:360
+#: src/app.rs:353
 msgid "Active Playback"
 msgstr "Reproducció activa"
 
-#: src/audio/player.rs:459
+#: src/audio/player.rs:458
 msgid "Don't Record"
 msgstr "No enregistris"
 
@@ -636,11 +627,10 @@ msgid "The track contains a word that is on the ignore list"
 msgstr "La cançó conté una paraula que està a la llista de paraules ignorades"
 
 #: src/audio/recording_state.rs:74
-msgid ""
-"The track wasn't played from the beginning, so it can't be fully recorded"
+msgid "The track wasn't played from the beginning, so it can't be fully recorded"
 msgstr ""
-"La cançó no s'ha reproduït des del principi, de manera que no es pot "
-"enregistrar per complet"
+"La cançó no s'ha reproduït des del principi, de manera que no es pot enregistrar "
+"per complet"
 
 #: src/audio/recording_state.rs:77
 msgid "The track will be recorded until a new track gets played"
@@ -655,11 +645,9 @@ msgid "The maximum recording duration has been reached"
 msgstr "S'ha arribat a la durada màxima de l'enregistrament"
 
 #: src/audio/recording_state.rs:84
-msgid ""
-"The track has been discarded as the duration was below the set threshold"
+msgid "The track has been discarded as the duration was below the set threshold"
 msgstr ""
-"S'ha descartat la cançó perquè la durada estava per sota del llindar "
-"establert"
+"S'ha descartat la cançó perquè la durada estava per sota del llindar establert"
 
 #: src/audio/recording_state.rs:86
 msgid "Recording has been cancelled"
@@ -767,11 +755,11 @@ msgstr[1] "{} segons"
 #~ msgstr "Crea una emissora nova"
 
 #~ msgid ""
-#~ "You can decide if you want the new station to be visible for all users "
-#~ "worldwide or if you want to create a local station."
+#~ "You can decide if you want the new station to be visible for all users worldwide "
+#~ "or if you want to create a local station."
 #~ msgstr ""
-#~ "Podeu decidir si voleu que la nova estació sigui visible per a tots els "
-#~ "usuaris del món o si voleu crear una estació local."
+#~ "Podeu decidir si voleu que la nova estació sigui visible per a tots els usuaris "
+#~ "del món o si voleu crear una estació local."
 
 #~ msgid "Create _Public Station"
 #~ msgstr "Crea una estació _pública"
@@ -866,8 +854,8 @@ msgstr[1] "{} segons"
 #~ "Audio playback can be streamed to a network device (requires Google Cast "
 #~ "support)."
 #~ msgstr ""
-#~ "La reproducció d'àudio es pot enviar a un dispositiu en xarxa (requereix "
-#~ "Google Cast)."
+#~ "La reproducció d'àudio es pot enviar a un dispositiu en xarxa (requereix Google "
+#~ "Cast)."
 
 #~ msgid "Search Completed"
 #~ msgstr "S'ha completat la cerca"
@@ -876,11 +864,11 @@ msgstr[1] "{} segons"
 #~ msgstr "No es pot connectar amb radio-browser.info"
 
 #~ msgid ""
-#~ "Access to the public online station database is not available. Ensure "
-#~ "that you are connected to the internet."
+#~ "Access to the public online station database is not available. Ensure that you "
+#~ "are connected to the internet."
 #~ msgstr ""
-#~ "L'accés a la base de dades pública d'estacions en línia no està "
-#~ "disponible. Assegureu-vos que esteu connectat a Internet."
+#~ "L'accés a la base de dades pública d'estacions en línia no està disponible. "
+#~ "Assegureu-vos que esteu connectat a Internet."
 
 #~ msgid "_Enable Mini Player"
 #~ msgstr "_Habilita el reproductor mini"
@@ -910,17 +898,17 @@ msgstr[1] "{} segons"
 #~ msgstr "Les dades de l'emissora no han pogut ser rebudes."
 
 #~ msgid ""
-#~ "The number of results is limited to {} item. Try using a more specific "
-#~ "search term."
+#~ "The number of results is limited to {} item. Try using a more specific search "
+#~ "term."
 #~ msgid_plural ""
-#~ "The number of results is limited to {} items. Try using a more specific "
-#~ "search term."
+#~ "The number of results is limited to {} items. Try using a more specific search "
+#~ "term."
 #~ msgstr[0] ""
-#~ "El nombre de resultats es limita a {} element. Proveu d'utilitzar un "
-#~ "terme de cerca més específic."
+#~ "El nombre de resultats es limita a {} element. Proveu d'utilitzar un terme de "
+#~ "cerca més específic."
 #~ msgstr[1] ""
-#~ "El nombre de resultats es limita a {} elements. Proveu d'utilitzar un "
-#~ "terme de cerca més específic."
+#~ "El nombre de resultats es limita a {} elements. Proveu d'utilitzar un terme de "
+#~ "cerca més específic."
 
 #~ msgid "Error details"
 #~ msgstr "Detalls d'error"
@@ -929,15 +917,13 @@ msgstr[1] "{} segons"
 #~ msgstr "_Connecta"
 
 #~ msgid "Devices which implement the Google Cast protocol are supported."
-#~ msgstr ""
-#~ "S'admeten els dispositius que implementen el protocol de Google Cast."
+#~ msgstr "S'admeten els dispositius que implementen el protocol de Google Cast."
 
 #~ msgid "_Retry search"
 #~ msgstr "_Torna a intentar la cerca"
 
 #~ msgid "This station cannot be played because the stream is offline."
-#~ msgstr ""
-#~ "Aquesta emissora no pot ser reproduïda perquè el flux està fora de línia."
+#~ msgstr "Aquesta emissora no pot ser reproduïda perquè el flux està fora de línia."
 
 #~ msgid "URL is not valid."
 #~ msgstr "L'URL no és vàlid."
