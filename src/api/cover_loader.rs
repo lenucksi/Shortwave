@@ -66,9 +66,11 @@ impl CoverRequest {
         let key = format!("{}@{}", self.favicon_url, self.size);
         let data = cacache::read(&*path::CACHE, key).await?;
 
-        let loader = Loader::new_vec(data);
-        let image = loader.load().await?;
-        let texture = image.next_frame().await?.texture();
+        let bytes = glib::Bytes::from_owned(data);
+        let loader = Loader::for_bytes(&bytes);
+        let image = loader.load_future().await?;
+        let frame = image.next_frame_future().await?;
+        let texture = glycin_gtk4::frame_get_texture(&frame);
 
         Ok(texture)
     }
@@ -77,9 +79,11 @@ impl CoverRequest {
         let response = crate::api::http::get(self.favicon_url.clone()).await?;
         let body_bytes = response.bytes().await?.to_vec();
 
-        let loader = Loader::new_vec(body_bytes);
-        let image = loader.load().await?;
-        let texture = image.next_frame().await?.texture();
+        let bytes = glib::Bytes::from_owned(body_bytes);
+        let loader = Loader::for_bytes(&bytes);
+        let image = loader.load_future().await?;
+        let frame = image.next_frame_future().await?;
+        let texture = glycin_gtk4::frame_get_texture(&frame);
 
         let snapshot = gtk::Snapshot::new();
         snapshot_thumbnail(&snapshot, texture, self.size as f32);

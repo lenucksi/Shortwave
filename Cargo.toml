@@ -42,7 +42,8 @@ uuid = { version = "1.17", features = [ "v4" ] }
 gettext-rs = { version = "0.7", features = [ "gettext-system" ] }
 
 adw = { version = "0.8", package = "libadwaita", features = [ "v1_7" ] }
-glycin = { version = "3.0.0-rc", features = [ "gdk4" ] }
+glycin = { package = "libglycin-rebind", version = "0.0.1" }
+glycin-gtk4 = { package = "libglycin-gtk4-rebind", version = "0.0.1" }
 gstreamer = { version = "0.24" }
 gstreamer-audio = { version = "0.24" }
 gtk = { version = "0.10", package = "gtk4", features = [ "gnome_46" ] }
