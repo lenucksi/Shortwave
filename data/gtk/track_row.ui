@@ -3,6 +3,7 @@
   <template class="SwTrackRow" parent="AdwActionRow">
     <property name="activatable">True</property>
     <property name="title_lines">3</property>
+    <property name="title_selectable">True</property>
     <property name="use_markup">False</property>
     <child>
       <object class="GtkButton" id="save_button">

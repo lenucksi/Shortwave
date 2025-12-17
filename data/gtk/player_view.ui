@@ -60,6 +60,7 @@
                                 <property name="ellipsize">end</property>
                                 <property name="wrap">True</property>
                                 <property name="lines">2</property>
+                                <property name="selectable">True</property>
                                 <binding name="label">
                                   <lookup name="title" type="SwStation">
                                     <lookup name="station" type="SwPlayer">
@@ -92,6 +93,7 @@
                                     <property name="ellipsize">end</property>
                                     <property name="wrap">True</property>
                                     <property name="lines">2</property>
+                                    <property name="selectable">True</property>
                                     <binding name="label">
                                       <lookup name="title" type="SwTrack">
                                         <lookup name="playing-track" type="SwPlayer">
