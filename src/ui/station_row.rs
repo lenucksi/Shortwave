@@ -17,12 +17,12 @@
 use std::cell::RefCell;
 
 use adw::subclass::prelude::*;
+use cruet::Inflector;
 use glib::Properties;
 use glib::clone;
 use glib::subclass;
 use gtk::prelude::*;
 use gtk::{CompositeTemplate, glib};
-use inflector::Inflector;
 
 use crate::SwApplication;
 use crate::api::StationMetadata;

@@ -18,9 +18,9 @@ use std::cell::OnceCell;
 
 use adw::prelude::*;
 use adw::subclass::prelude::*;
+use cruet::Inflector;
 use glib::{Properties, subclass};
 use gtk::{CompositeTemplate, gdk, glib};
-use inflector::Inflector;
 use shumate::prelude::*;
 
 use crate::api::SwStation;

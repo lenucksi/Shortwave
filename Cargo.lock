@@ -3,16 +3,6 @@
 version = 4
 
 [[package]]
-name = "Inflector"
-version = "0.11.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fe438c63458706e03479442743baae6c88256498e6431708f6dfc520a26515d3"
-dependencies = [
- "lazy_static",
- "regex",
-]
-
-[[package]]
 name = "aho-corasick"
 version = "1.1.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -537,6 +527,16 @@ name = "crossbeam-utils"
 version = "0.8.21"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d0a5c400df2834b80a4c3327b3aad3a4c4cd4de0629063962b03235697506a28"
+
+[[package]]
+name = "cruet"
+version = "0.15.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b7a9ae414b9768aada1b316493261653e41af05c9d2ccc9c504a8fc051c6a790"
+dependencies = [
+ "once_cell",
+ "regex",
+]
 
 [[package]]
 name = "crypto-common"
@@ -3154,7 +3154,6 @@ checksum = "0fda2ff0d084019ba4d7c6f371c95d8fd75ce3524c3cb8fb653a3023f6323e64"
 name = "shortwave"
 version = "0.0.0"
 dependencies = [
- "Inflector",
  "anyhow",
  "ashpd",
  "async-channel 2.5.0",
@@ -3163,6 +3162,7 @@ dependencies = [
  "async-std-resolver",
  "cacache",
  "cast-sender",
+ "cruet",
  "diesel",
  "diesel_migrations",
  "futures-util",

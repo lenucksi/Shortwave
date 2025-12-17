@@ -17,8 +17,8 @@
 use std::fmt::Write;
 use std::str::FromStr;
 
+use cruet::Inflector;
 use gtk::glib;
-use inflector::Inflector;
 use serde::{Deserialize, Deserializer, Serializer};
 use url::Url;
 
