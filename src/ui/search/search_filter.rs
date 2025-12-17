@@ -99,4 +99,8 @@ impl SwSearchFilter {
     pub fn has_filter(&self) -> bool {
         !self.imp().search_entry.text().trim().is_empty()
     }
+
+    pub fn grab_focus(&self) {
+        self.imp().search_entry.grab_focus();
+    }
 }

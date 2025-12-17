@@ -115,9 +115,11 @@ mod imp {
         }
     }
 
-    impl WidgetImpl for SwSearchPage {
-        fn map(&self) {
-            self.parent_map();
+    impl WidgetImpl for SwSearchPage {}
+
+    impl NavigationPageImpl for SwSearchPage {
+        fn shown(&self) {
+            self.parent_shown();
 
             if !self.loaded.get() {
                 glib::spawn_future_local(clone!(
@@ -128,10 +130,10 @@ mod imp {
                     }
                 ));
             }
+
+            self.search_filter.grab_focus();
         }
     }
-
-    impl NavigationPageImpl for SwSearchPage {}
 
     #[gtk::template_callbacks]
     impl SwSearchPage {
@@ -144,6 +146,7 @@ mod imp {
                     self.loaded.set(true);
                     self.search_filter.set_sensitive(true);
                     self.stack.set_visible_child_name("discover");
+                    self.search_filter.grab_focus();
                 }
                 Err(e) => {
                     self.stack.set_visible_child_name("failure");
@@ -229,7 +232,7 @@ mod imp {
         fn region_code() -> Option<String> {
             let locale = sys_locale::get_locale()?;
             let langtag = language_tags::LanguageTag::parse(&locale).ok()?;
-            langtag.region().map(|s| s.to_string())
+            langtag.region().map(|s: &str| s.to_string())
         }
     }
 }
