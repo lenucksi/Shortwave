@@ -75,7 +75,8 @@ mod imp {
 
 glib::wrapper! {
     pub struct SwSearchFilterItem(ObjectSubclass<imp::SwSearchFilterItem>)
-        @extends gtk::Widget, gtk::Button;
+        @extends gtk::Widget, gtk::Button,
+        @implements gtk::Actionable, gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget;
 }
 
 impl SwSearchFilterItem {
