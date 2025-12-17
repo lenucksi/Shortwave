@@ -48,9 +48,9 @@ mod imp {
         #[template_child]
         homepage_label: TemplateChild<gtk::Label>,
         #[template_child]
-        library_add_child: TemplateChild<gtk::FlowBoxChild>,
+        library_add_button: TemplateChild<gtk::Button>,
         #[template_child]
-        library_remove_child: TemplateChild<gtk::FlowBoxChild>,
+        library_remove_button: TemplateChild<gtk::Button>,
         #[template_child]
         information_group: TemplateChild<adw::PreferencesGroup>,
         #[template_child]
@@ -142,9 +142,9 @@ mod imp {
                 .library()
                 .contains_station(&station)
             {
-                self.library_remove_child.set_visible(true);
+                self.library_remove_button.set_visible(true);
             } else {
-                self.library_add_child.set_visible(true);
+                self.library_add_button.set_visible(true);
             }
 
             // Local station info row

@@ -60,61 +60,45 @@
                           </object>
                         </child>
                         <child>
-                          <object class="GtkFlowBox">
-                            <property name="halign">center</property>
-                            <property name="homogeneous">True</property>
-                            <property name="selection_mode">none</property>
-                            <property name="row_spacing">6</property>
-                            <property name="column_spacing">6</property>
+                          <object class="AdwWrapBox">
+                            <property name="halign">fill</property>
+                            <property name="align">0.50</property>
                             <property name="margin_bottom">6</property>
+                            <property name="child_spacing">12</property>
+                            <property name="line_spacing">12</property>
                             <child>
-                              <object class="GtkFlowBoxChild" id="start_playback_button_child">
-                                <property name="focusable">False</property>
-                                <child>
-                                  <object class="GtkButton">
-                                    <property name="label" translatable="yes">_Play</property>
-                                    <property name="use_underline">True</property>
-                                    <property name="can_shrink">True</property>
-                                    <signal name="clicked" handler="start_playback" swapped="true" />
-                                    <style>
-                                      <class name="pill" />
-                                    </style>
-                                  </object>
-                                </child>
+                              <object class="GtkButton" id="library_play_button">
+                                <property name="label" translatable="yes">_Play</property>
+                                <property name="use_underline">True</property>
+                                <property name="can_shrink">True</property>
+                                <signal name="clicked" handler="start_playback" swapped="true" />
+                                <style>
+                                  <class name="pill" />
+                                </style>
                               </object>
                             </child>
                             <child>
-                              <object class="GtkFlowBoxChild" id="library_add_child">
-                                <property name="focusable">False</property>
-                                <child>
-                                  <object class="GtkButton">
-                                    <property name="label" translatable="yes">_Add to Library</property>
-                                    <property name="use_underline">True</property>
-                                    <property name="can_shrink">True</property>
-                                    <signal name="clicked" handler="add_station" swapped="true" />
-                                    <style>
-                                      <class name="pill" />
-                                    </style>
-                                  </object>
-                                </child>
+                              <object class="GtkButton" id="library_add_button">
+                                <property name="label" translatable="yes">_Add to Library</property>
+                                <property name="use_underline">True</property>
+                                <property name="can_shrink">True</property>
                                 <property name="visible">False</property>
+                                <signal name="clicked" handler="add_station" swapped="true" />
+                                <style>
+                                  <class name="pill" />
+                                </style>
                               </object>
                             </child>
                             <child>
-                              <object class="GtkFlowBoxChild" id="library_remove_child">
-                                <property name="focusable">False</property>
-                                <child>
-                                  <object class="GtkButton">
-                                    <property name="label" translatable="yes">_Remove From Library</property>
-                                    <property name="use_underline">True</property>
-                                    <property name="can_shrink">True</property>
-                                    <signal name="clicked" handler="remove_station" swapped="true" />
-                                    <style>
-                                      <class name="pill" />
-                                    </style>
-                                  </object>
-                                </child>
+                              <object class="GtkButton" id="library_remove_button">
+                                <property name="label" translatable="yes">_Remove From Library</property>
+                                <property name="use_underline">True</property>
+                                <property name="can_shrink">True</property>
                                 <property name="visible">False</property>
+                                <signal name="clicked" handler="remove_station" swapped="true" />
+                                <style>
+                                  <class name="pill" />
+                                </style>
                               </object>
                             </child>
                           </object>
@@ -285,4 +269,12 @@
       </object>
     </child>
   </template>
+  <object class="GtkSizeGroup">
+    <property name="mode">horizontal</property>
+    <widgets>
+      <widget name="library_play_button" />
+      <widget name="library_add_button" />
+      <widget name="library_remove_button" />
+    </widgets>
+  </object>
 </interface>
