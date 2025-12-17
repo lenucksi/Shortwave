@@ -23,6 +23,7 @@ use adw::prelude::*;
 use glib::subclass::prelude::*;
 use glib::{Properties, clone};
 use gtk::{gio, glib};
+use sanitize_filename::Options;
 use uuid::Uuid;
 
 use crate::api::{Error, SwStation};
@@ -183,7 +184,13 @@ impl SwTrack {
         debug!("Save track \"{}\"", &self.title());
 
         let directory = settings_manager::string(Key::RecordingTrackDirectory);
-        let filename = sanitize_filename::sanitize(self.title()) + ".ogg";
+        let filename = sanitize_filename::sanitize_with_options(
+            self.title() + ".ogg",
+            Options {
+                truncate: true,
+                ..Default::default()
+            },
+        );
 
         let mut path = PathBuf::from(directory);
         path.push(filename);
