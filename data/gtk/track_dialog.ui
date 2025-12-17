@@ -55,6 +55,8 @@
                                     <property name="wrap">True</property>
                                     <property name="justify">center</property>
                                     <property name="margin_top">6</property>
+                                    <property name="ellipsize">end</property>
+                                    <property name="lines">5</property>
                                     <binding name="label">
                                       <lookup name="title" type="SwTrack">
                                         <lookup name="track">SwTrackDialog</lookup>
