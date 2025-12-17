@@ -205,3 +205,9 @@ entry.discover {
 .card.discover {
   background-color: #fcd85e;
 }
+
+@media (prefers-color-scheme: dark) {
+  .card.discover {
+    background-color: #865e3c;
+  }
+}
