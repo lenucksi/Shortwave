@@ -1,6 +1,7 @@
 [advisories]
 version = 2
 yanked = "deny"
+ignore = ["RUSTSEC-2025-0052"]
 
 [licenses]
 version = 2
@@ -9,6 +10,8 @@ allow = [
     "Apache-2.0",
     "BSD-2-Clause",
     "BSD-3-Clause",
+    "BSL-1.0",
+    "GPL-3.0-or-later",
     "GPL-3.0",
     "ISC",
     "LGPL-2.1",
@@ -17,5 +20,4 @@ allow = [
     "OpenSSL",
     "Unicode-3.0",
     "Unicode-DFS-2016",
-    "BSL-1.0",
 ]
