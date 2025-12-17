@@ -22,7 +22,7 @@ use gtk::gio;
 use indexmap::IndexMap;
 use rand::prelude::SliceRandom;
 use rand::rng;
-use reqwest::{Method, Request};
+use reqwest::{Method, Request, StatusCode};
 use serde::de;
 use url::Url;
 
@@ -74,16 +74,22 @@ async fn send_request<T: de::DeserializeOwned + std::marker::Send + 'static>(
         .insert("Content-Type", "application/json".parse().unwrap());
 
     let response = crate::api::http::send(request).await.map_err(Arc::new)?;
-    let json = response.text().await.map_err(Arc::new)?;
+    let status = response.status();
+    let text = response.text().await.map_err(Arc::new)?;
+
+    if status != StatusCode::OK {
+        return Err(Error::InvalidHttpStatus(text));
+    }
 
     // Deserializing JSON can be expensive -> do it on separate thread pool
-    let handle = gio::spawn_blocking(move || serde_json::from_str::<T>(&json));
+    let to_deserialize = text.clone();
+    let handle = gio::spawn_blocking(move || serde_json::from_str::<T>(&to_deserialize));
     let deserialized = handle.await.unwrap();
 
     match deserialized {
         Ok(d) => Ok(d),
         Err(err) => {
-            error!("Unable to deserialize data: {err}");
+            error!("Unable to deserialize data: {err}, body: {text}");
             Err(Error::Deserializer(err.into()))
         }
     }

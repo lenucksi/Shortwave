@@ -39,4 +39,7 @@ pub enum Error {
 
     #[error("No connectivity with radiobrowser server")]
     NoServerAvailable,
+
+    #[error("Server is not available, HTTP code: {0}")]
+    InvalidHttpStatus(String),
 }
