@@ -84,7 +84,8 @@ mod imp {
 
 glib::wrapper! {
     pub struct SwSearchFilter(ObjectSubclass<imp::SwSearchFilter>)
-        @extends gtk::Widget, adw::Bin;
+        @extends gtk::Widget, adw::Bin,
+        @implements gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget;
 }
 
 impl SwSearchFilter {

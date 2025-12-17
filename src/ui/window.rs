@@ -248,7 +248,7 @@ glib::wrapper! {
     pub struct SwApplicationWindow(
         ObjectSubclass<imp::SwApplicationWindow>)
         @extends gtk::Widget, gtk::Window, gtk::ApplicationWindow, adw::ApplicationWindow,
-        @implements gio::ActionMap, gio::ActionGroup;
+        @implements gio::ActionMap, gio::ActionGroup, gtk::Buildable, gtk::Accessible, gtk::ConstraintTarget, gtk::ShortcutManager, gtk::Root, gtk::Native;
 }
 
 impl SwApplicationWindow {

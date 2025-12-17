@@ -236,5 +236,6 @@ mod imp {
 
 glib::wrapper! {
     pub struct SwSearchPage(ObjectSubclass<imp::SwSearchPage>)
-        @extends gtk::Widget, adw::NavigationPage;
+        @extends gtk::Widget, adw::NavigationPage,
+        @implements gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget;
 }

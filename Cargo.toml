@@ -7,7 +7,7 @@ license = "GPL-3.0-or-later"
 
 [dependencies]
 anyhow = "1.0"
-ashpd = { version = "0.11", features = [ "gtk4", "async-std" ], default-features = false }
+ashpd = { version = "0.12", features = [ "gtk4", "async-std" ], default-features = false }
 async-channel = "2.5"
 async-compat = "0.2"
 async-io = "2.5"
@@ -41,9 +41,9 @@ url = "2.5"
 uuid = { version = "1.17", features = [ "v4" ] }
 gettext-rs = { version = "0.7", features = [ "gettext-system" ] }
 
-adw = { version = "0.7", package = "libadwaita", features = [ "v1_7" ] }
-glycin = { version = "3.0.0-beta.1", features = [ "gdk4" ] }
-gstreamer = { version = "0.23" }
-gstreamer-audio = { version = "0.23" }
-gtk = { version = "0.9", package = "gtk4", features = [ "gnome_46" ] }
-shumate = { version = "0.6", package = "libshumate" }
+adw = { version = "0.8", package = "libadwaita", features = [ "v1_7" ] }
+glycin = { version = "3.0.0-rc", features = [ "gdk4" ] }
+gstreamer = { version = "0.24" }
+gstreamer-audio = { version = "0.24" }
+gtk = { version = "0.10", package = "gtk4", features = [ "gnome_46" ] }
+shumate = { version = "0.7", package = "libshumate" }
