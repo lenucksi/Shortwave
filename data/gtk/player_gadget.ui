@@ -87,8 +87,8 @@
                           <object class="GtkMenuButton">
                             <property name="icon_name">dialog-error-symbolic</property>
                             <style>
-                              <class name="destructive-action"/>
-                              <class name="circular"/>
+                              <class name="destructive-action" />
+                              <class name="circular" />
                               <class name="gadget-controller-button" />
                             </style>
                           </object>
@@ -99,7 +99,7 @@
                 </child>
                 <child>
                   <object class="GtkMenuButton" id="volume_button">
-                    <property name="icon_name">multimedia-volume-control-symbolic</property>
+                    <property name="icon_name">volume-control-symbolic</property>
                     <property name="popover">volume_popover</property>
                     <style>
                       <class name="gadget-controller-volume-button" />

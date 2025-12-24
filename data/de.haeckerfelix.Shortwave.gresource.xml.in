@@ -35,6 +35,7 @@
     <file preprocess="xml-stripblanks" alias="remove-custom-cover-symbolic.svg">icons/hicolor/scalable/actions/remove-custom-cover-symbolic.svg</file>
     <file preprocess="xml-stripblanks" alias="remove-filter-symbolic.svg">icons/hicolor/scalable/actions/remove-filter-symbolic.svg</file>
     <file preprocess="xml-stripblanks" alias="streaming-symbolic.svg">icons/hicolor/scalable/actions/streaming-symbolic.svg</file>
+    <file preprocess="xml-stripblanks" alias="volume-control-symbolic.svg">icons/hicolor/scalable/actions/volume-control-symbolic.svg</file>
     <file preprocess="xml-stripblanks" alias="window-grow-symbolic.svg">icons/hicolor/scalable/actions/window-grow-symbolic.svg</file>
     <file preprocess="xml-stripblanks" alias="window-shrink-symbolic.svg">icons/hicolor/scalable/actions/window-shrink-symbolic.svg</file>
   </gresource>
