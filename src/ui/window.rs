@@ -39,6 +39,8 @@ mod imp {
     #[template(resource = "/de/haeckerfelix/Shortwave/gtk/window.ui")]
     pub struct SwApplicationWindow {
         #[template_child]
+        navigation_view: TemplateChild<adw::NavigationView>,
+        #[template_child]
         library_page: TemplateChild<SwLibraryPage>,
         #[template_child]
         search_page: TemplateChild<SwSearchPage>,
@@ -117,6 +119,9 @@ mod imp {
             });
             klass.install_action("win.disable-gadget-player", None, move |win, _, _| {
                 win.enable_gadget_player(false);
+            });
+            klass.install_action("win.show-search", None, move |win, _, _| {
+                win.imp().navigation_view.push_by_tag("search");
             });
             klass.install_action("win.show-preferences", None, move |win, _, _| {
                 let is_visible = win

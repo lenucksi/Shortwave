@@ -140,6 +140,7 @@ mod imp {
                     .build(),
             ]);
 
+            obj.set_accels_for_action("win.show-search", &["<primary>f"]);
             obj.set_accels_for_action("win.show-preferences", &["<primary>comma"]);
             obj.set_accels_for_action("app.quit", &["<primary>q"]);
             obj.set_accels_for_action("window.close", &["<primary>w"]);

@@ -21,6 +21,7 @@
                 <property name="tooltip_text" translatable="yes">Search</property>
                 <property name="placeholder_text" translatable="yes">Search stations</property>
                 <signal name="search_changed" handler="search_changed" swapped="true" />
+                <signal name="stop_search" handler="stop_search" swapped="true" />
                 <style>
                   <class name="discover" />
                 </style>

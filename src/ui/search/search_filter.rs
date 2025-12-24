@@ -79,6 +79,11 @@ mod imp {
         async fn search_changed(&self) {
             self.obj().emit_by_name::<()>("filter-changed", &[]);
         }
+
+        #[template_callback]
+        async fn stop_search(&self) {
+            self.obj().activate_action("navigation.pop", None).unwrap();
+        }
     }
 }
 
