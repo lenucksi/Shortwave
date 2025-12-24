@@ -19,6 +19,7 @@ use std::cell::{Cell, OnceCell, RefCell};
 use adw::prelude::*;
 use adw::subclass::prelude::*;
 use ashpd::desktop::background::BackgroundProxy;
+use async_compat::CompatExt;
 use gio::subclass::prelude::ApplicationImpl;
 use glib::{Properties, clone};
 use gtk::glib::VariantTy;
@@ -32,10 +33,9 @@ use crate::database::SwLibrary;
 use crate::i18n::{i18n, i18n_f};
 use crate::settings::*;
 use crate::ui::{SwApplicationWindow, SwTrackDialog};
+use crate::utils;
 
 mod imp {
-    use crate::utils;
-
     use super::*;
 
     #[derive(Default, Properties)]
@@ -281,7 +281,7 @@ mod imp {
 
         async fn lookup_rb_server(&self) {
             // Try to find a working radio-browser server
-            let rb_server = client::lookup_rb_server().await;
+            let rb_server = client::lookup_rb_server().compat().await;
 
             self.rb_server.borrow_mut().clone_from(&rb_server);
             self.obj().notify("rb-server");

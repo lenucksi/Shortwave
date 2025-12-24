@@ -17,8 +17,10 @@
 use std::net::IpAddr;
 use std::sync::Arc;
 
-use async_std_resolver::{config as rconfig, resolver, resolver_from_system_conf};
 use gtk::gio;
+use hickory_resolver::Resolver;
+use hickory_resolver::config::ResolverConfig;
+use hickory_resolver::name_server::TokioConnectionProvider;
 use indexmap::IndexMap;
 use rand::prelude::SliceRandom;
 use rand::rng;
@@ -97,14 +99,16 @@ async fn send_request<T: de::DeserializeOwned + std::marker::Send + 'static>(
 
 pub async fn lookup_rb_server() -> Option<String> {
     let lookup_domain = settings_manager::string(Key::ApiLookupDomain);
-    let resolver = if let Ok(resolver) = resolver_from_system_conf().await {
-        resolver
+    let resolver = if let Ok(resolver) = Resolver::builder_tokio() {
+        resolver.build()
     } else {
         warn!("Unable to use dns resolver from system conf");
 
-        let config = rconfig::ResolverConfig::default();
-        let opts = rconfig::ResolverOpts::default();
-        resolver(config, opts).await
+        Resolver::builder_with_config(
+            ResolverConfig::default(),
+            TokioConnectionProvider::default(),
+        )
+        .build()
     };
 
     // Do forward lookup to receive a list with the api servers
