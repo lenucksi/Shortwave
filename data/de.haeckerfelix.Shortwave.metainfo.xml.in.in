@@ -75,6 +75,20 @@
 
   <!-- Releases -->
   <releases>
+    <release version="5.1.0" date="2025-12-24">
+      <description>
+        <p>
+          This version includes minor improvements and bug fixes.
+        </p>
+        <ul>
+          <li>Track titles are selectable and copyable</li>
+          <li>Station search is accessible via Ctrl+F</li>
+          <li>Search entry now receives keyboard focus automatically</li>
+          <li>Faster loading of station cover art</li>
+          <li>Maximum recording duration increased to 3 hours</li>
+        </ul>
+      </description>
+    </release>
     <release version="5.0.0" date="2025-02-05">
       <description>
         <p>
