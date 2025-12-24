@@ -13,23 +13,23 @@ ashpd = { version = "0.12", features = [
 ], default-features = false }
 async-channel = "2.5"
 async-compat = "0.2"
-async-io = "2.5"
+async-io = "2.6"
 hickory-resolver = { version = "0.25", features = ["system-config"] }
 cacache = "13.1"
 cast-sender = "0.3"
 cruet = "0.15"
-diesel = { version = "2.2", features = ["sqlite", "r2d2"] }
-diesel_migrations = "2.2"
+diesel = { version = "2.3", features = ["sqlite", "r2d2"] }
+diesel_migrations = "2.3"
 futures-util = "0.3"
 gettext-rs = { version = "0.7", features = ["gettext-system"] }
-indexmap = "2.10"
+indexmap = "2.12"
 language-tags = "0.3"
 log = "0.4"
-mdns-sd = "0.13"
+mdns-sd = "0.17"
 mpris-server = "0.9"
 pretty_env_logger = "0.5"
 rand = "0.9"
-regex = "1.11"
+regex = "1.12"
 reqwest = { version = "0.12" }
 sanitize-filename = "0.6"
 serde = "1.0"
@@ -42,7 +42,7 @@ sys-locale = "0.3"
 thiserror = "1.0"
 tokio = { version = "1", features = ["rt", "sync"] }
 url = "2.5"
-uuid = { version = "1.17", features = ["v4"] }
+uuid = { version = "1.19", features = ["v4"] }
 
 adw = { version = "0.8", package = "libadwaita", features = ["v1_7"] }
 glycin = { package = "libglycin-rebind", version = "0.0.1" }
