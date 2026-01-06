@@ -33,7 +33,6 @@ mod ui;
 mod utils;
 
 mod app;
-#[rustfmt::skip]
 mod config;
 mod i18n;
 mod path;
@@ -57,20 +56,20 @@ fn main() -> glib::ExitCode {
     gstreamer::init().expect("Failed to initialize Gstreamer");
 
     // Initialize variables
-    glib::set_application_name(config::NAME);
-    gtk::Window::set_default_icon_name(config::APP_ID);
+    glib::set_application_name(*config::NAME);
+    gtk::Window::set_default_icon_name(*config::APP_ID);
 
     // Setup translations
     setlocale(LocaleCategory::LcAll, "");
-    bindtextdomain(config::PKGNAME, config::LOCALEDIR).unwrap();
-    textdomain(config::PKGNAME).unwrap();
+    bindtextdomain(*config::PKGNAME, *config::LOCALEDIR).unwrap();
+    textdomain(*config::PKGNAME).unwrap();
 
     // Load app resources
     let path = &format!(
         "{}/{}/{}.gresource",
-        config::DATADIR,
-        config::PKGNAME,
-        config::APP_ID
+        *config::DATADIR,
+        *config::PKGNAME,
+        *config::APP_ID
     );
     let res = gio::Resource::load(path).expect("Could not load resources");
     gio::resources_register(&res);

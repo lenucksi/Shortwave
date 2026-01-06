@@ -156,7 +156,7 @@ mod imp {
             let obj = self.obj();
 
             // Add devel style class for development or beta builds
-            if config::PROFILE == "development" || config::PROFILE == "beta" {
+            if *config::PROFILE == "development" || *config::PROFILE == "beta" {
                 obj.add_css_class("devel");
             }
 

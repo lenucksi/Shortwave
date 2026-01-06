@@ -30,9 +30,9 @@ pub struct MprisServer {
 
 impl MprisServer {
     pub async fn start() -> Result<Self> {
-        let player = Player::builder(config::APP_ID)
-            .desktop_entry(config::APP_ID)
-            .identity(config::NAME)
+        let player = Player::builder(*config::APP_ID)
+            .desktop_entry(*config::APP_ID)
+            .identity(*config::NAME)
             .can_play(true)
             // This is not true, but MPRIS has no concept of play/stop
             // for live streams, so we only can use play/pause here

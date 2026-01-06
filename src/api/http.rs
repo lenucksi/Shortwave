@@ -14,9 +14,9 @@ type RequestSender = UnboundedSender<(Request, Sender<Result<Response, reqwest::
 static USER_AGENT: LazyLock<String> = LazyLock::new(|| {
     format!(
         "{}/{}-{}",
-        config::PKGNAME,
-        config::VERSION,
-        config::PROFILE
+        *config::PKGNAME,
+        *config::VERSION,
+        *config::PROFILE
     )
 });
 

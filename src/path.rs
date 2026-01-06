@@ -24,13 +24,13 @@ use crate::config;
 
 pub static DATA: LazyLock<PathBuf> = LazyLock::new(|| {
     let mut path = glib::user_data_dir();
-    path.push(config::NAME);
+    path.push(*config::NAME);
     path
 });
 
 pub static CACHE: LazyLock<PathBuf> = LazyLock::new(|| {
     let mut path = glib::user_cache_dir();
-    path.push(config::NAME);
+    path.push(*config::NAME);
     path
 });
 
