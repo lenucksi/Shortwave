@@ -27,7 +27,11 @@ pub fn show(parent: &SwApplicationWindow) {
     );
 
     if *config::PROFILE == "development" {
-        dialog.set_version(&format!("{}-{} (devel)", *config::VERSION, *config::VCS_TAG));
+        dialog.set_version(&format!(
+            "{}-{} (devel)",
+            *config::VERSION,
+            *config::VCS_TAG
+        ));
     } else {
         dialog.set_version(*config::VERSION);
     }
