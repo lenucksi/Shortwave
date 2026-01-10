@@ -294,7 +294,7 @@ mod imp {
 
             // Show desktop notification
             if settings_manager::boolean(Key::Notifications) {
-                let id = format!("{}.TrackNotification", config::APP_ID);
+                let id = format!("{}.TrackNotification", *config::APP_ID);
                 SwApplication::default()
                     .send_notification(Some(&id), &self.track_notification(&track));
             }

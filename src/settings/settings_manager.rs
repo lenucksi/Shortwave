@@ -21,7 +21,7 @@ use crate::config;
 use crate::settings::Key;
 
 pub fn settings() -> gio::Settings {
-    gio::Settings::new(config::APP_ID)
+    gio::Settings::new(*config::APP_ID)
 }
 
 pub fn bind_property<P: IsA<glib::Object>>(key: Key, object: &P, property: &str) {

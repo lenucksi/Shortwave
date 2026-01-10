@@ -308,18 +308,18 @@ impl SwApplication {
     pub fn run() -> glib::ExitCode {
         debug!(
             "{} ({}) ({}) - Version {} ({})",
-            config::NAME,
-            config::APP_ID,
-            config::VCS_TAG,
-            config::VERSION,
-            config::PROFILE
+            *config::NAME,
+            *config::APP_ID,
+            *config::VCS_TAG,
+            *config::VERSION,
+            *config::PROFILE
         );
 
         // Create new GObject and downcast it into SwApplication
         let app = glib::Object::builder::<SwApplication>()
-            .property("application-id", Some(config::APP_ID))
+            .property("application-id", Some(*config::APP_ID))
             .property("flags", gio::ApplicationFlags::empty())
-            .property("resource-base-path", Some(config::PATH_ID))
+            .property("resource-base-path", Some(*config::PATH_ID))
             .build();
 
         // Start running gtk::Application

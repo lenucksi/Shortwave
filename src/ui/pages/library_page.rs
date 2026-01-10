@@ -103,12 +103,12 @@ mod imp {
             });
 
             // Setup empty state page
-            self.status_page.set_icon_name(Some(config::APP_ID));
+            self.status_page.set_icon_name(Some(*config::APP_ID));
 
             // Welcome text which gets displayed when the library is empty. "{}" is the
             // application name.
             self.status_page
-                .set_title(&i18n_f("Welcome to {}", &[config::NAME]));
+                .set_title(&i18n_f("Welcome to {}", &[*config::NAME]));
 
             // Set initial stack page
             self.update_stack_page();

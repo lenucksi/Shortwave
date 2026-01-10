@@ -22,14 +22,18 @@ use crate::ui::SwApplicationWindow;
 
 pub fn show(parent: &SwApplicationWindow) {
     let dialog = adw::AboutDialog::from_appdata(
-        &format!("{}/metainfo.xml", config::PATH_ID),
-        Some(config::VERSION),
+        &format!("{}/metainfo.xml", *config::PATH_ID),
+        Some(*config::VERSION),
     );
 
-    if config::PROFILE == "development" {
-        dialog.set_version(&format!("{}-{} (devel)", config::VERSION, config::VCS_TAG));
+    if *config::PROFILE == "development" {
+        dialog.set_version(&format!(
+            "{}-{} (devel)",
+            *config::VERSION,
+            *config::VCS_TAG
+        ));
     } else {
-        dialog.set_version(config::VERSION);
+        dialog.set_version(*config::VERSION);
     }
 
     dialog.set_developers(&[
