@@ -30,8 +30,8 @@
             <child>
               <object class="GtkButton">
                 <property name="tooltip_text" translatable="yes">Search Filter</property>
-                <property name="icon_name" translatable="yes">filter-symbolic</property>
-                <property name="visible" translatable="yes">False</property>
+                <property name="icon_name">filter-symbolic</property>
+                <property name="visible">False</property>
                 <signal name="clicked" handler="add_filter" swapped="true" />
                 <style>
                   <class name="flat" />
