@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shortwave master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/Shortwave/issues\n"
-"POT-Creation-Date: 2025-08-11 00:16+0000\n"
-"PO-Revision-Date: 2025-09-05 18:12+0200\n"
+"POT-Creation-Date: 2026-01-12 20:45+0000\n"
+"PO-Revision-Date: 2026-02-23 15:52+0100\n"
 "Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Poedit 3.7\n"
+"X-Generator: Poedit 3.8\n"
 "X-DL-Lang: cs\n"
 "X-DL-Module: shortwave\n"
 "X-DL-Branch: main\n"
@@ -125,7 +125,7 @@ msgstr "Adresa URL vysílání"
 msgid "Add Station"
 msgstr "Přidat stanici"
 
-#: data/gtk/device_dialog.ui:7 data/gtk/player_view.ui:132
+#: data/gtk/device_dialog.ui:7 data/gtk/player_view.ui:134
 msgid "Connect Device"
 msgstr "Připojte zařízení"
 
@@ -161,78 +161,78 @@ msgstr "Procházet stanice"
 msgid "Main Menu"
 msgstr "Hlavní nabídka"
 
-#: data/gtk/library_page.ui:91
+#: data/gtk/library_page.ui:92
 msgid "_Add New Stations"
 msgstr "_Přidat stanice"
 
-#: data/gtk/library_page.ui:114
+#: data/gtk/library_page.ui:115
 msgid "_Sorting"
 msgstr "Ř_azení"
 
-#: data/gtk/library_page.ui:117
+#: data/gtk/library_page.ui:118
 msgid "_Name"
 msgstr "_Název"
 
-#: data/gtk/library_page.ui:122
+#: data/gtk/library_page.ui:123
 msgid "_Language"
 msgstr "_Jazyk"
 
-#: data/gtk/library_page.ui:127
+#: data/gtk/library_page.ui:128
 msgid "_Country"
 msgstr "Z_emě"
 
-#: data/gtk/library_page.ui:132
+#: data/gtk/library_page.ui:133
 msgid "S_tate"
 msgstr "S_tát"
 
-#: data/gtk/library_page.ui:137
+#: data/gtk/library_page.ui:138
 msgid "_Bitrate"
 msgstr "_Datový tok"
 
-#: data/gtk/library_page.ui:144
+#: data/gtk/library_page.ui:145
 msgid "_Ascending"
 msgstr "Vzest_upně"
 
-#: data/gtk/library_page.ui:149
+#: data/gtk/library_page.ui:150
 msgid "_Descending"
 msgstr "_Sestupně"
 
-#: data/gtk/library_page.ui:158
+#: data/gtk/library_page.ui:159
 msgid "_Open radio-browser.info <sup>↗</sup>"
 msgstr "_Otevřít radio-browser.info <sup>↗</sup>"
 
-#: data/gtk/library_page.ui:165
+#: data/gtk/library_page.ui:166
 msgid "_Preferences"
 msgstr "_Předvolby"
 
-#: data/gtk/library_page.ui:169
+#: data/gtk/library_page.ui:170
 msgid "_Keyboard Shortcuts"
 msgstr "_Klávesové zkratky"
 
-#: data/gtk/library_page.ui:173
+#: data/gtk/library_page.ui:174
 msgid "_About Shortwave"
 msgstr "O _aplikaci Shortwave"
 
-#: data/gtk/library_page.ui:177
+#: data/gtk/library_page.ui:178
 msgid "_Quit"
 msgstr "_Ukončit"
 
-#: data/gtk/library_page.ui:185
+#: data/gtk/library_page.ui:186
 msgid "Add _Local Station"
 msgstr "Přidat _místní stabici"
 
 #: data/gtk/player_gadget.ui:40 data/gtk/player_toolbar.ui:92
-#: data/gtk/player_view.ui:156 data/gtk/station_row.ui:86
+#: data/gtk/player_view.ui:158 data/gtk/station_row.ui:86
 msgid "Play"
 msgstr "Přehrát"
 
 #: data/gtk/player_gadget.ui:55 data/gtk/player_toolbar.ui:106
-#: data/gtk/player_view.ui:170
+#: data/gtk/player_view.ui:172
 msgid "Stop"
 msgstr "Zastavit"
 
 #: data/gtk/player_gadget.ui:71 data/gtk/player_toolbar.ui:121
-#: data/gtk/player_view.ui:185
+#: data/gtk/player_view.ui:187
 msgid "Buffering…"
 msgstr "Načítání…"
 
@@ -241,7 +241,7 @@ msgid "SHORTWAVE INTERNET RADIO"
 msgstr "INTERNETOVÉ RÁDIO SHORTWAVE"
 
 #: data/gtk/player_gadget.ui:140 data/gtk/player_toolbar.ui:29
-#: data/gtk/player_view.ui:58 src/app.rs:251
+#: data/gtk/player_view.ui:58 src/app.rs:254
 msgid "No Playback"
 msgstr "Nepřehrává se"
 
@@ -257,19 +257,19 @@ msgstr "Obnovit okno"
 msgid "Enable Gadget Mode"
 msgstr "Povolit minipřehrávač"
 
-#: data/gtk/player_view.ui:215
+#: data/gtk/player_view.ui:217
 msgid "Show Station Details"
 msgstr "Zobrazit podrobnosti o stanici"
 
-#: data/gtk/player_view.ui:266
+#: data/gtk/player_view.ui:268
 msgid "No Tracks"
 msgstr "Žádné skladby"
 
-#: data/gtk/player_view.ui:277
+#: data/gtk/player_view.ui:279
 msgid "Played tracks will appear here"
 msgstr "Přehrané skladby se zobrazí zde."
 
-#: data/gtk/player_view.ui:311
+#: data/gtk/player_view.ui:313
 msgid "An error occurred"
 msgstr "Vyskytla se chyba"
 
@@ -277,7 +277,7 @@ msgstr "Vyskytla se chyba"
 msgid "General"
 msgstr "Obecné"
 
-#: data/gtk/preferences_dialog.ui:12 data/gtk/shortcuts_dialog.ui:41
+#: data/gtk/preferences_dialog.ui:12 data/gtk/shortcuts_dialog.ui:47
 msgid "Playback"
 msgstr "Přehrávání"
 
@@ -352,27 +352,31 @@ msgstr "Maximální trvání"
 msgid "Recording ends when the maximum duration is reached"
 msgstr "Delší skladby budou ignorovány"
 
-#: data/gtk/search_page.ui:23
+#: data/gtk/search_filter.ui:21
 msgid "Search"
 msgstr "Hledat"
 
-#: data/gtk/search_page.ui:24
+#: data/gtk/search_filter.ui:22
 msgid "Search stations"
-msgstr "Hledat stanice"
+msgstr "hledat stanice"
 
-#: data/gtk/search_page.ui:72
+#: data/gtk/search_filter.ui:32
+msgid "Search Filter"
+msgstr "Filtr vyhledávání"
+
+#: data/gtk/search_page.ui:55
 msgid "Discover over 50,000 public stations"
 msgstr "Procházet více jak 50 000 stanic"
 
-#: data/gtk/search_page.ui:90
+#: data/gtk/search_page.ui:73
 msgid "Popular Stations"
 msgstr "Oblíbené stanice"
 
-#: data/gtk/search_page.ui:112
+#: data/gtk/search_page.ui:95
 msgid "Discover New Stations"
 msgstr "Najít nové stanice"
 
-#: data/gtk/search_page.ui:135
+#: data/gtk/search_page.ui:118
 msgid ""
 "The displayed information is provided by <a href=\"https://www.radio-"
 "browser.info/\">radio-browser.info</a>.\n"
@@ -382,98 +386,103 @@ msgstr ""
 "\">radio-browser.info</a>.\n"
 "Shortwave nemá žádný vliv na uvedené stanice."
 
-#: data/gtk/search_page.ui:201
+#: data/gtk/search_page.ui:184
 msgid "Loading…"
 msgstr "Hledá se…"
 
-#: data/gtk/search_page.ui:216
+#: data/gtk/search_page.ui:199
 msgid "No Results"
 msgstr "Žádné výsledky"
 
-#: data/gtk/search_page.ui:217
+#: data/gtk/search_page.ui:200
 msgid ""
 "If the station you are looking for is missing, you can add it to the public "
 "database."
 msgstr "Pokud hledaná stanice chybí, můžete ji přidat do veřejné databáze."
 
-#: data/gtk/search_page.ui:221
+#: data/gtk/search_page.ui:204
 msgid "Add Missing Station"
 msgstr "Přidat chybějící stanici"
 
-#: data/gtk/search_page.ui:239
+#: data/gtk/search_page.ui:222
 msgid "Unable to Retrieve Station Data"
 msgstr "Není možné získat data stanice"
 
-#: data/gtk/search_page.ui:242
+#: data/gtk/search_page.ui:225
 msgid "Try Again"
 msgstr "Zkusit znovu"
 
 #: data/gtk/shortcuts_dialog.ui:9
 msgctxt "shortcut window"
+msgid "Search stations"
+msgstr "Hledat stanice"
+
+#: data/gtk/shortcuts_dialog.ui:15
+msgctxt "shortcut window"
 msgid "Open shortcut window"
 msgstr "Otevřít okno s klávesovými zkratkami"
 
-#: data/gtk/shortcuts_dialog.ui:16
+#: data/gtk/shortcuts_dialog.ui:22
 msgctxt "shortcut window"
 msgid "Open application menu"
 msgstr "Otevřít nabídku aplikace"
 
-#: data/gtk/shortcuts_dialog.ui:21
+#: data/gtk/shortcuts_dialog.ui:27
 msgctxt "shortcut window"
 msgid "Open preferences"
 msgstr "Otevřít předvolby"
 
-#: data/gtk/shortcuts_dialog.ui:27
+#: data/gtk/shortcuts_dialog.ui:33
 msgctxt "shortcut window"
 msgid "Close the window"
 msgstr "Zavřít okno"
 
-#: data/gtk/shortcuts_dialog.ui:33
+#: data/gtk/shortcuts_dialog.ui:39
 msgctxt "shortcut window"
 msgid "Quit the application"
 msgstr "Ukončit aplikaci"
 
-#: data/gtk/shortcuts_dialog.ui:44
+#: data/gtk/shortcuts_dialog.ui:50
 msgctxt "shortcut window"
 msgid "Toggle playback"
 msgstr "Zapnout/vypnout přehrávání"
 
-#: data/gtk/shortcuts_dialog.ui:52 data/gtk/volume_control.ui:21
+#: data/gtk/shortcuts_dialog.ui:58 data/gtk/volume_control.ui:21
 msgid "Volume"
 msgstr "Hlasitost"
 
-#: data/gtk/shortcuts_dialog.ui:55
+#: data/gtk/shortcuts_dialog.ui:61
 msgctxt "shortcut window"
 msgid "Toggle mute"
 msgstr "Ztlumit"
 
-#: data/gtk/shortcuts_dialog.ui:61
+#: data/gtk/shortcuts_dialog.ui:67
 msgctxt "shortcut window"
 msgid "Increase volume"
 msgstr "Zesílit"
 
-#: data/gtk/shortcuts_dialog.ui:67
+#: data/gtk/shortcuts_dialog.ui:73
 msgctxt "shortcut window"
 msgid "Decrease volume"
 msgstr "Zeslabit"
 
-#: data/gtk/station_dialog.ui:75
+#: data/gtk/station_dialog.ui:71
 msgid "_Play"
 msgstr "Přehrát"
 
-#: data/gtk/station_dialog.ui:91
+#: data/gtk/station_dialog.ui:82
 msgid "_Add to Library"
 msgstr "Přid_at do knihovny"
 
-#: data/gtk/station_dialog.ui:108
+#: data/gtk/station_dialog.ui:94
 msgid "_Remove From Library"
 msgstr "Odeb_rat z knihovny"
 
-#: data/gtk/station_dialog.ui:127 data/gtk/station_row.ui:57
+#: data/gtk/station_dialog.ui:111 data/gtk/station_row.ui:57
 msgid "Local Station"
 msgstr "Místní stanice"
 
-#: data/gtk/station_dialog.ui:128
+#: data/gtk/station_dialog.ui:112
 msgid ""
 "This station exists only in your library, and is not part of the public "
 "database"
@@ -481,11 +490,11 @@ msgstr ""
 "Tato stanice existuje pouze ve vaší knihovně a není součástí veřejné on-line "
 "databáze stanic"
 
-#: data/gtk/station_dialog.ui:142 data/gtk/station_row.ui:69
+#: data/gtk/station_dialog.ui:126 data/gtk/station_row.ui:69
 msgid "Orphaned Station"
 msgstr "Osiřelá stanice"
 
-#: data/gtk/station_dialog.ui:143
+#: data/gtk/station_dialog.ui:127
 msgid ""
 "The information could not be updated, probably this station was removed from "
 "the public database"
@@ -493,85 +502,85 @@ msgstr ""
 "Informace se nepodařilo aktualizovat, pravděpodobně byla tato stanice "
 "odstraněna z veřejné on-line databáze stanic."
 
-#: data/gtk/station_dialog.ui:154
+#: data/gtk/station_dialog.ui:138
 msgid "Information"
 msgstr "Informace"
 
-#: data/gtk/station_dialog.ui:158
+#: data/gtk/station_dialog.ui:142
 msgid "Language"
 msgstr "Jazyk"
 
-#: data/gtk/station_dialog.ui:169
+#: data/gtk/station_dialog.ui:153
 msgid "Tags"
 msgstr "Štítky"
 
-#: data/gtk/station_dialog.ui:182
+#: data/gtk/station_dialog.ui:166
 msgid "Location"
 msgstr "Místo"
 
-#: data/gtk/station_dialog.ui:186
+#: data/gtk/station_dialog.ui:170
 msgid "Country"
 msgstr "Země"
 
-#: data/gtk/station_dialog.ui:197
+#: data/gtk/station_dialog.ui:181
 msgid "State"
 msgstr "Stát"
 
-#: data/gtk/station_dialog.ui:232
+#: data/gtk/station_dialog.ui:216
 msgid "Audio"
 msgstr "Zvuk"
 
-#: data/gtk/station_dialog.ui:235
+#: data/gtk/station_dialog.ui:219
 msgid "Bitrate"
 msgstr "Datový tok"
 
-#: data/gtk/station_dialog.ui:246
+#: data/gtk/station_dialog.ui:230
 msgid "Codec"
 msgstr "Kodek"
 
 #. This is a noun/label for the station stream url
-#: data/gtk/station_dialog.ui:257
+#: data/gtk/station_dialog.ui:241
 msgid "Stream"
 msgstr "Vysílání"
 
-#: data/gtk/station_dialog.ui:263
+#: data/gtk/station_dialog.ui:247
 msgid "Copy"
 msgstr "Kopírovat"
 
-#: data/gtk/track_dialog.ui:74
+#: data/gtk/track_dialog.ui:76
 msgid "Edit"
 msgstr "Upravit"
 
-#: data/gtk/track_dialog.ui:121
+#: data/gtk/track_dialog.ui:123
 msgid "The recorded track has been saved"
 msgstr "Nahraná skladba byla uložena"
 
-#: data/gtk/track_dialog.ui:137 data/gtk/track_dialog.ui:208
-#: data/gtk/track_row.ui:9 src/audio/player.rs:447
+#: data/gtk/track_dialog.ui:139 data/gtk/track_dialog.ui:210
+#: data/gtk/track_row.ui:10 src/audio/player.rs:448
 msgid "Save Track"
 msgstr "Uložit skladbu"
 
-#: data/gtk/track_dialog.ui:148
+#: data/gtk/track_dialog.ui:150
 msgid "Play Track"
 msgstr "Přehrát skladbu"
 
-#: data/gtk/track_dialog.ui:159
+#: data/gtk/track_dialog.ui:161
 msgid "Cancel Recording"
 msgstr "Zrušit nahrávání"
 
-#: data/gtk/track_dialog.ui:175
+#: data/gtk/track_dialog.ui:177
 msgid "Station"
 msgstr "Stanice"
 
-#: data/gtk/track_dialog.ui:209
+#: data/gtk/track_dialog.ui:211
 msgid "Save this track when recording is complete"
 msgstr "Uložit skladbu po skončení nahrávání"
 
-#: data/gtk/track_dialog.ui:223
+#: data/gtk/track_dialog.ui:225
 msgid "Recording behaviour can be changed in <a href=\"\">preferences</a>"
 msgstr "Chování nahrvání lze ovlivnit v <a href=\"\">předvolbách</a>"
 
-#: data/gtk/track_row.ui:20
+#: data/gtk/track_row.ui:21
 msgid "Saved"
 msgstr "Uloženo"
 
@@ -583,19 +592,20 @@ msgstr "Ztlumit"
 msgid "Track no longer available"
 msgstr "Skladba není dostupná"
 
-#: src/app.rs:108 src/app.rs:130
+#: src/app.rs:109 src/app.rs:132
 msgid "This track is currently not being recorded"
 msgstr "Takto skladba se momentálně nahrává"
 
-#: src/app.rs:255
+#: src/app.rs:259
+#, rust-format
 msgid "Playing “{}”"
 msgstr "Přehrává se “{}”"
 
-#: src/app.rs:349
+#: src/app.rs:354
 msgid "Active Playback"
 msgstr "Aktivní přehrávání"
 
-#: src/audio/player.rs:457
+#: src/audio/player.rs:458
 msgid "Don't Record"
 msgstr "Nenahrávat"
 
@@ -665,11 +675,11 @@ msgstr "Zařízení Google Cast"
 msgid "Unknown Model"
 msgstr "Neznámý model"
 
-#: src/ui/about_dialog.rs:41
+#: src/ui/about_dialog.rs:45
 msgid "translator-credits"
 msgstr "Marek Černocký"
 
-#: src/ui/about_dialog.rs:42
+#: src/ui/about_dialog.rs:46
 msgid "Donate"
 msgstr "Přispět"
 
@@ -682,6 +692,7 @@ msgid "Show Details"
 msgstr "Zobrazit podrobnosti"
 
 #: src/ui/pages/library_page.rs:111
+#, rust-format
 msgid "Welcome to {}"
 msgstr "Vítejte v aplikaci {}"
 
@@ -694,6 +705,7 @@ msgid "_Select"
 msgstr "_Vybrat"
 
 #: src/ui/preferences_dialog.rs:163
+#, rust-format
 msgid "{} min"
 msgid_plural "{} min"
 msgstr[0] "{} minuta"
@@ -701,6 +713,7 @@ msgstr[1] "{} minuty"
 msgstr[2] "{} minut"
 
 #: src/ui/preferences_dialog.rs:172
+#, rust-format
 msgid "{} sec"
 msgid_plural "{} sec"
 msgstr[0] "{} sekunda"
@@ -708,6 +721,7 @@ msgstr[1] "{} sekundy"
 msgstr[2] "{} sekund"
 
 #: src/ui/station_dialog.rs:207
+#, rust-format
 msgid "{} kbit/s"
 msgstr "{} kb/s"
 
@@ -715,23 +729,24 @@ msgstr "{} kb/s"
 msgid "Copied"
 msgstr "Zkopírováno"
 
-#: src/ui/window.rs:221
+#: src/ui/window.rs:226
 msgid "No Permission for Background Playback"
 msgstr "Není uděleno oprávnění pro přehrávání na pozadí"
 
-#: src/ui/window.rs:223
+#: src/ui/window.rs:228
 msgid "“Run in Background” must be allowed for this app in system settings."
 msgstr "\"Přehrávání na pozadí\" musí být povoleno v předvolbách."
 
-#: src/ui/window.rs:227
+#: src/ui/window.rs:232
 msgid "Try Anyway"
 msgstr "Přesto zkusit"
 
-#: src/ui/window.rs:228
+#: src/ui/window.rs:233
 msgid "Disable Background Playback"
 msgstr "Zastavit přehrávání na pozadí"
 
 #: src/utils.rs:51
+#, rust-format
 msgid "{} hour"
 msgid_plural "{} hours"
 msgstr[0] "{} hodina"
@@ -739,6 +754,7 @@ msgstr[1] "{} hodiny"
 msgstr[2] "{} hodin"
 
 #: src/utils.rs:57
+#, rust-format
 msgid "{} minute"
 msgid_plural "{} minutes"
 msgstr[0] "{} minuta"
@@ -746,6 +762,7 @@ msgstr[1] "{} minuty"
 msgstr[2] "{} minut"
 
 #: src/utils.rs:62
+#, rust-format
 msgid "{} second"
 msgid_plural "{} seconds"
 msgstr[0] "{} sekunda"
@@ -822,9 +839,6 @@ msgstr[2] "{} sekund"
 
 #~ msgid "Try using a different search term"
 #~ msgstr "Zkuste hledat něco jiného"
-
-#~ msgid "Search Results"
-#~ msgstr "Výsledky vyhledávání"
 
 #~ msgid "Features"
 #~ msgstr "Vlastnosti"
