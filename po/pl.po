@@ -3,576 +3,775 @@
 # This file is distributed under the same license as the shortwave package.
 # Piotr Drąg <piotrdrag@gmail.com>, 2020-2023.
 # Aviary.pl <community-poland@mozilla.org>, 2020-2023.
+# Adam Lewicki <a.lewicki95@gmail.com>, 2025.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: shortwave\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/Shortwave/issues\n"
-"POT-Creation-Date: 2023-09-10 16:26+0000\n"
-"PO-Revision-Date: 2023-09-16 16:10+0200\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
-"Language-Team: Polish <community-poland@mozilla.org>\n"
+"POT-Creation-Date: 2026-01-12 20:45+0000\n"
+"PO-Revision-Date: 2026-03-26 15:42+0100\n"
+"Last-Translator: Adam Lewicki <a.lewicki95@gmail.com>\n"
+"Language-Team: Polish <https://l10n.gnome.org/teams/pl/>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
+"X-Generator: Gtranslator 47.1\n"
 
-#: data/de.haeckerfelix.Shortwave.desktop.in.in:3
+#: data/de.haeckerfelix.Shortwave.desktop.in.in:2
 #: data/de.haeckerfelix.Shortwave.metainfo.xml.in.in:5
 msgid "@NAME@"
 msgstr "@NAME@"
 
+#: data/de.haeckerfelix.Shortwave.desktop.in.in:3
+msgid "Internet Radio Player"
+msgstr "Odtwarzacz radia internetowego"
+
+#. General
+#: data/de.haeckerfelix.Shortwave.desktop.in.in:4
+#: data/de.haeckerfelix.Shortwave.metainfo.xml.in.in:10
+msgid "Listen to internet radio"
+msgstr "Słuchanie radia internetowego"
+
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/de.haeckerfelix.Shortwave.desktop.in.in:12
+#: data/de.haeckerfelix.Shortwave.desktop.in.in:13
 msgid "Gradio;Radio;Stream;Wave;"
 msgstr ""
 "Gradio;Radio;Strumień;Strumieniowe;Strumieniowanie;Stream;Wave;Fala radiowa;"
 
-#: data/de.haeckerfelix.Shortwave.metainfo.xml.in.in:6
-#: src/ui/about_window.rs:35
-msgid "Listen to internet radio"
-msgstr "Słuchanie radia internetowego"
-
-#: data/de.haeckerfelix.Shortwave.metainfo.xml.in.in:8
-msgid "Felix Häcker"
-msgstr "Felix Häcker"
-
-#: data/de.haeckerfelix.Shortwave.metainfo.xml.in.in:16
+#: data/de.haeckerfelix.Shortwave.metainfo.xml.in.in:12
 msgid ""
 "Shortwave is an internet radio player that provides access to a station "
-"database with over 30,000 stations."
+"database with over 50,000 stations."
 msgstr ""
 "Shortwave to odtwarzacz radia internetowego zapewniający dostęp do bazy "
-"ponad 30 000 stacji."
+"ponad 50 000 stacji."
 
-#: data/de.haeckerfelix.Shortwave.metainfo.xml.in.in:19
+#: data/de.haeckerfelix.Shortwave.metainfo.xml.in.in:15
 msgid "Features:"
 msgstr "Funkcje:"
 
-#: data/de.haeckerfelix.Shortwave.metainfo.xml.in.in:21
+#: data/de.haeckerfelix.Shortwave.metainfo.xml.in.in:17
+#: data/de.haeckerfelix.Shortwave.metainfo.xml.in.in:64
 msgid "Create your own library where you can add your favorite stations"
 msgstr "Tworzenie własnej kolekcji, do której można dodawać ulubione stacje"
 
-#: data/de.haeckerfelix.Shortwave.metainfo.xml.in.in:22
+#: data/de.haeckerfelix.Shortwave.metainfo.xml.in.in:18
+#: data/de.haeckerfelix.Shortwave.metainfo.xml.in.in:68
 msgid "Easily search and discover new radio stations"
 msgstr "Łatwe wyszukiwanie i odkrywanie nowych stacji radiowych"
 
-#: data/de.haeckerfelix.Shortwave.metainfo.xml.in.in:23
+#: data/de.haeckerfelix.Shortwave.metainfo.xml.in.in:19
 msgid ""
-"Automatic recognition of songs, with the possibility to save them "
+"Automatic recognition of tracks, with the possibility to save them "
 "individually"
 msgstr "Automatyczne rozpoznawanie utworów z możliwością ich zapisywania"
 
-#: data/de.haeckerfelix.Shortwave.metainfo.xml.in.in:24
+#: data/de.haeckerfelix.Shortwave.metainfo.xml.in.in:20
+#: data/de.haeckerfelix.Shortwave.metainfo.xml.in.in:72
 msgid "Responsive application layout, compatible for small and large screens"
 msgstr "Interfejs zgodny z małymi i wielkimi ekranami"
 
-#: data/de.haeckerfelix.Shortwave.metainfo.xml.in.in:25
+#: data/de.haeckerfelix.Shortwave.metainfo.xml.in.in:21
 msgid "Play audio on supported network devices (e.g. Google Chromecasts)"
 msgstr ""
 "Odtwarzanie dźwięku na obsługiwanych urządzeniach sieciowych (np. Google "
 "Chromecast)"
 
-#: data/de.haeckerfelix.Shortwave.metainfo.xml.in.in:26
+#: data/de.haeckerfelix.Shortwave.metainfo.xml.in.in:22
 msgid "Seamless integration into the GNOME desktop environment"
-msgstr "Integracja ze środowiskiem GNOME"
+msgstr "Płynna integracja ze środowiskiem GNOME"
 
-#: data/gtk/create_station_dialog.ui:8
-msgid "Create new station"
-msgstr "Utworzenie nowej stacji"
+#. Branding
+#: data/de.haeckerfelix.Shortwave.metainfo.xml.in.in:28
+msgid "Felix Häcker"
+msgstr "Felix Häcker"
 
-#: data/gtk/create_station_dialog.ui:32
-msgid "Create New Station"
-msgstr "Utworzenie nowej stacji"
+#: data/gtk/add_station_dialog.ui:14
+msgid "Add Local Station"
+msgstr "Dodaj stację lokalną"
 
-#: data/gtk/create_station_dialog.ui:33
+#: data/gtk/add_station_dialog.ui:64
+msgid "Change Station Cover"
+msgstr "Zmień okładkę stacji"
+
+#: data/gtk/add_station_dialog.ui:95
 msgid ""
-"You can decide if you want the new station to be visible for all users "
-"worldwide or if you want to create a local station."
+"This station will only be added to your library. If you want it to be "
+"available to everyone, you should add it to the <a href=\"https://www.radio-"
+"browser.info/add\">public database</a>."
 msgstr ""
-"Można zdecydować, czy nowa stacja ma być widoczna dla wszystkich "
-"użytkowników na świecie, czy utworzyć lokalną stację."
+"Ta stacja zostanie dodana tylko do Twojej biblioteki. Jeśli chcesz, aby była "
+"dostępna dla wszystkich, proszę ją dodać do <a href=\"https://www.radio-"
+"browser.info/add\">publicznej bazy danych</a>."
 
-#: data/gtk/create_station_dialog.ui:43
-msgid "Create _Public Station"
-msgstr "_Utwórz publiczną stację"
-
-#: data/gtk/create_station_dialog.ui:54
-msgid "Create _Local Station"
-msgstr "Ut_wórz lokalną stację"
-
-#: data/gtk/create_station_dialog.ui:80
-msgid "Create Local Station"
-msgstr "Utworzenie lokalnej stacji"
-
-#: data/gtk/create_station_dialog.ui:113
-msgid "Change station image"
-msgstr "Zmienia obraz stacji"
-
-#: data/gtk/create_station_dialog.ui:137 src/ui/pages/search_page.rs:211
+#: data/gtk/add_station_dialog.ui:107
 msgid "Name"
 msgstr "Nazwa"
 
-#: data/gtk/create_station_dialog.ui:145
+#: data/gtk/add_station_dialog.ui:115
 msgid "Stream URL"
 msgstr "Adres URL strumienia"
 
-#: data/gtk/create_station_dialog.ui:153
-msgid "Create Station"
-msgstr "Utwórz stację"
+#: data/gtk/add_station_dialog.ui:123
+msgid "Add Station"
+msgstr "Dodaje stację"
 
-#: data/gtk/discover_page.ui:4
-msgid "Discover"
-msgstr "Odkrywanie"
+#: data/gtk/device_dialog.ui:7 data/gtk/player_view.ui:134
+msgid "Connect Device"
+msgstr "Podłącz urządzenie"
 
-#: data/gtk/discover_page.ui:15 data/gtk/search_page.ui:4
-#: data/gtk/search_page.ui:28
-msgid "Search"
-msgstr "Wyszukiwanie"
+#: data/gtk/device_dialog.ui:18
+msgid "Searching for Devices…"
+msgstr "Wyszukiwanie urządzeń…"
 
-#: data/gtk/discover_page.ui:44
-msgid "Most Voted Stations"
-msgstr "Stacje z największą liczbą głosów"
+#: data/gtk/device_dialog.ui:25
+msgid "Search for Devices"
+msgstr "Wyszukiwanie urządzeń"
 
-#: data/gtk/discover_page.ui:61
-msgid "Trending"
-msgstr "Na czasie"
+#: data/gtk/device_dialog.ui:41
+msgid "No Devices Available"
+msgstr "Brak dostępnych urządzeń"
 
-#: data/gtk/discover_page.ui:78
-msgid "Other Users Are Listening To…"
-msgstr "Inni użytkownicy słuchają…"
+#: data/gtk/device_dialog.ui:42
+msgid "No supported Google Cast device found"
+msgstr "Nie znaleziono obsługiwanego urządzenia Google Cast"
 
-#: data/gtk/featured_carousel.ui:27
-msgid "Previous"
-msgstr "Wstecz"
-
-#: data/gtk/featured_carousel.ui:40
-msgid "Next"
-msgstr "Dalej"
-
-#: data/gtk/help_overlay.ui:11 data/gtk/settings_window.ui:7
-msgid "General"
-msgstr "Ogólne"
-
-#: data/gtk/help_overlay.ui:14
-msgctxt "shortcut window"
-msgid "Open shortcut window"
-msgstr "Otwarcie okna skrótów"
-
-#: data/gtk/help_overlay.ui:21
-msgctxt "shortcut window"
-msgid "Open application menu"
-msgstr "Otwarcie menu programu"
-
-#: data/gtk/help_overlay.ui:26
-msgctxt "shortcut window"
-msgid "Open preferences"
-msgstr "Otwarcie preferencji"
-
-#: data/gtk/help_overlay.ui:32
-msgctxt "shortcut window"
-msgid "Close the window"
-msgstr "Zamknięcie okna"
-
-#: data/gtk/help_overlay.ui:38
-msgctxt "shortcut window"
-msgid "Quit the application"
-msgstr "Zakończenie działania programu"
-
-#: data/gtk/help_overlay.ui:46 data/gtk/player.ui:5
-msgid "Playback"
-msgstr "Odtwarzanie"
-
-#: data/gtk/help_overlay.ui:49
-msgctxt "shortcut window"
-msgid "Toggle playback"
-msgstr "Przełączenie odtwarzania"
+#: data/gtk/device_indicator.ui:7
+msgid "Disconnect From Device"
+msgstr "Rozłącz się z urządzeniem"
 
 #: data/gtk/library_page.ui:4
 msgid "Shortwave"
 msgstr "Shortwave"
 
-#: data/gtk/library_page.ui:15
-msgid "Add Stations"
-msgstr "Dodaje stacje"
+#: data/gtk/library_page.ui:15 data/gtk/search_page.ui:4
+msgid "Browse Stations"
+msgstr "Przeglądaj stacje"
 
-#: data/gtk/library_page.ui:22
+#: data/gtk/library_page.ui:23
 msgid "Main Menu"
 msgstr "Menu główne"
 
-#: data/gtk/library_page.ui:51
-msgid "Library"
-msgstr "Kolekcja"
+#: data/gtk/library_page.ui:92
+msgid "_Add New Stations"
+msgstr "_Dodaj nową stację"
 
-#: data/gtk/library_page.ui:85
-msgid "Receiving Station Data…"
-msgstr "Odbieranie danych stacji…"
-
-#: data/gtk/library_page.ui:112
-msgid "_Discover New Stations"
-msgstr "_Odkrywaj nowe stacje"
-
-#: data/gtk/library_page.ui:134
-msgid "_Enable Mini Player"
-msgstr "_Miniodtwarzacz"
-
-#: data/gtk/library_page.ui:138
+#: data/gtk/library_page.ui:115
 msgid "_Sorting"
-msgstr "Porzą_dkowanie"
+msgstr "_Sortowanie"
 
-#: data/gtk/library_page.ui:141 data/gtk/search_page.ui:158
+#: data/gtk/library_page.ui:118
 msgid "_Name"
 msgstr "_Nazwa"
 
-#: data/gtk/library_page.ui:146 data/gtk/search_page.ui:163
+#: data/gtk/library_page.ui:123
 msgid "_Language"
 msgstr "_Język"
 
-#: data/gtk/library_page.ui:151 data/gtk/search_page.ui:168
+#: data/gtk/library_page.ui:128
 msgid "_Country"
 msgstr "_Kraj"
 
-#: data/gtk/library_page.ui:156 data/gtk/search_page.ui:173
+#: data/gtk/library_page.ui:133
 msgid "S_tate"
 msgstr "St_an"
 
-#: data/gtk/library_page.ui:161 data/gtk/search_page.ui:178
-msgid "_Votes"
-msgstr "_Głosy"
-
-#: data/gtk/library_page.ui:166 data/gtk/search_page.ui:183
+#: data/gtk/library_page.ui:138
 msgid "_Bitrate"
-msgstr "Gęstość _bitowa"
+msgstr "_Szybkość strumienia"
 
-#: data/gtk/library_page.ui:173 data/gtk/search_page.ui:190
+#: data/gtk/library_page.ui:145
 msgid "_Ascending"
 msgstr "_Rosnąco"
 
-#: data/gtk/library_page.ui:178 data/gtk/search_page.ui:195
+#: data/gtk/library_page.ui:150
 msgid "_Descending"
 msgstr "_Malejąco"
 
-#: data/gtk/library_page.ui:187
+#: data/gtk/library_page.ui:159
 msgid "_Open radio-browser.info <sup>↗</sup>"
 msgstr "_Otwórz radio-browser.info <sup>↗</sup>"
 
-#: data/gtk/library_page.ui:192
-msgid "_Create New Station"
-msgstr "_Utwórz nową stację"
-
-#: data/gtk/library_page.ui:199
+#: data/gtk/library_page.ui:166
 msgid "_Preferences"
 msgstr "_Preferencje"
 
-#: data/gtk/library_page.ui:203
+#: data/gtk/library_page.ui:170
 msgid "_Keyboard Shortcuts"
 msgstr "_Skróty klawiszowe"
 
-#: data/gtk/library_page.ui:207
+#: data/gtk/library_page.ui:174
 msgid "_About Shortwave"
 msgstr "_O programie"
 
-#: data/gtk/mini_controller.ui:27 data/gtk/sidebar_controller.ui:116
-#: data/gtk/toolbar_controller.ui:79
-msgid "Stop"
-msgstr "Zatrzymuje"
+#: data/gtk/library_page.ui:178
+msgid "_Quit"
+msgstr "_Zakończ działanie"
 
-#: data/gtk/mini_controller.ui:42
-msgid "Start"
-msgstr "Rozpoczyna"
+#: data/gtk/library_page.ui:186
+msgid "Add _Local Station"
+msgstr "Dodaj _stację lokalną"
 
-#: data/gtk/mini_controller.ui:87
-msgid "SHORTWAVE INTERNET RADIO"
-msgstr "RADIO INTERNETOWE SHORTWAVE"
-
-#: data/gtk/mini_controller.ui:109 data/gtk/sidebar_controller.ui:64
-#: data/gtk/toolbar_controller.ui:38
-msgid "No Playback"
-msgstr "Brak odtwarzania"
-
-#: data/gtk/mini_controller.ui:149
-msgid "Close"
-msgstr "Zamyka"
-
-#: data/gtk/mini_controller.ui:160
-msgid "Resize"
-msgstr "Zmienia rozmiar"
-
-#: data/gtk/player.ui:19
-msgid "Back"
-msgstr "Wstecz"
-
-#: data/gtk/search_page.ui:39 data/gtk/station_dialog.ui:172
-#: src/ui/pages/search_page.rs:215
-msgid "Votes"
-msgstr "Głosy"
-
-#: data/gtk/search_page.ui:44
-msgid "Change the sorting of the search results"
-msgstr "Zmienia kolejność wyników wyszukiwania"
-
-#: data/gtk/search_page.ui:71
-msgid "No Results"
-msgstr "Brak wyników"
-
-#: data/gtk/search_page.ui:72
-msgid "Try using a different search term"
-msgstr "Proszę spróbować innych słów"
-
-#: data/gtk/search_page.ui:99
-msgid "Search Results"
-msgstr "Wyniki wyszukiwania"
-
-#: data/gtk/settings_window.ui:10
-msgid "Features"
-msgstr "Funkcje"
-
-#: data/gtk/settings_window.ui:13
-msgid "_Notifications"
-msgstr "_Powiadomienia"
-
-#: data/gtk/settings_window.ui:15
-msgid "Show desktop notifications when a new song gets played"
-msgstr "Powiadomienia na pulpicie, kiedy odtwarzany jest nowy utwór"
-
-#: data/gtk/sidebar_controller.ui:23
-msgid "An error occurred"
-msgstr "Wystąpił błąd"
-
-#: data/gtk/sidebar_controller.ui:131 data/gtk/station_row.ui:69
-#: data/gtk/toolbar_controller.ui:90
+#: data/gtk/player_gadget.ui:40 data/gtk/player_toolbar.ui:92
+#: data/gtk/player_view.ui:158 data/gtk/station_row.ui:86
 msgid "Play"
 msgstr "Odtwarza"
 
-#: data/gtk/sidebar_controller.ui:177
-msgid "Station Menu"
-msgstr "Menu stacji"
+#: data/gtk/player_gadget.ui:55 data/gtk/player_toolbar.ui:106
+#: data/gtk/player_view.ui:172
+msgid "Stop"
+msgstr "Zatrzymuje"
 
-#: data/gtk/sidebar_controller.ui:191
-msgid "_Show Station Details"
-msgstr "_Informacje o stacji"
+#: data/gtk/player_gadget.ui:71 data/gtk/player_toolbar.ui:121
+#: data/gtk/player_view.ui:187
+msgid "Buffering…"
+msgstr "Buforowanie…"
 
-#: data/gtk/sidebar_controller.ui:195
-msgid "Stream to a _Device"
-msgstr "_Wyślij na urządzenie"
+#: data/gtk/player_gadget.ui:118
+msgid "SHORTWAVE INTERNET RADIO"
+msgstr "RADIO INTERNETOWE SHORTWAVE"
 
-#: data/gtk/song_listbox.ui:29
-msgid "No Songs Detected"
-msgstr "Nie wykryto żadnych utworów"
+#: data/gtk/player_gadget.ui:140 data/gtk/player_toolbar.ui:29
+#: data/gtk/player_view.ui:58 src/app.rs:254
+msgid "No Playback"
+msgstr "Brak odtwarzania"
 
-#: data/gtk/song_listbox.ui:40
+#: data/gtk/player_gadget.ui:199
+msgid "Close"
+msgstr "Zamyka"
+
+#: data/gtk/player_gadget.ui:210
+msgid "Restore Window"
+msgstr "Przywraca okno"
+
+#: data/gtk/player_view.ui:13
+msgid "Enable Gadget Mode"
+msgstr "Włącza tryb gadżetowy"
+
+#: data/gtk/player_view.ui:217
+msgid "Show Station Details"
+msgstr "Wyświetla informacje o stacji"
+
+#: data/gtk/player_view.ui:268
+msgid "No Tracks"
+msgstr "Brak utworów"
+
+#: data/gtk/player_view.ui:279
+msgid "Played tracks will appear here"
+msgstr "Odtwarzane utwory pojawią się tuta"
+
+#: data/gtk/player_view.ui:313
+msgid "An error occurred"
+msgstr "Wystąpił błąd"
+
+#: data/gtk/preferences_dialog.ui:9 data/gtk/shortcuts_dialog.ui:6
+msgid "General"
+msgstr "Ogólne"
+
+#: data/gtk/preferences_dialog.ui:12 data/gtk/shortcuts_dialog.ui:47
+msgid "Playback"
+msgstr "Odtwarzanie"
+
+#: data/gtk/preferences_dialog.ui:15
+msgid "_Background Playback"
+msgstr "_Odtwarzanie w tle"
+
+#: data/gtk/preferences_dialog.ui:16
+msgid "Playback continues when window is closed"
+msgstr "Odtwarzanie kontynuuje w tle, gdy okno jest zamknięte"
+
+#: data/gtk/preferences_dialog.ui:28
+msgid "_Notifications"
+msgstr "_Powiadomienia"
+
+#: data/gtk/preferences_dialog.ui:29
+msgid "Show desktop notifications when a new track gets played"
+msgstr "Wyświetl powiadomienia na pulpicie, gdy odtwarzany jest nowy utwór"
+
+#. Translators: This is a noun / preferences group title
+#: data/gtk/preferences_dialog.ui:43
+msgid "Recording"
+msgstr "Nagrywanie"
+
+#: data/gtk/preferences_dialog.ui:44
 msgid ""
-"Songs are automatically recognized using the stream metadata.\n"
-"\n"
-"If the station does not send any metadata, no songs can be recognized."
+"Tracks are automatically recognised based on the station stream metadata and "
+"can be saved."
 msgstr ""
-"Utwory są automatycznie rozpoznawane za pomocą metadanych strumienia.\n"
-"\n"
-"Jeśli stacja nie wysyła żadnych metadanych, to żadne utwory nie mogą zostać "
-"rozpoznane."
+"Utwory są automatycznie rozpoznawane za pomocą metadanych transmisji stacji "
+"i mogą zostać zapisane."
 
-#: data/gtk/song_listbox.ui:76
-msgid "Saved songs are located in your Music folder."
-msgstr "Zapisane utwory znajdują się w katalogu Muzyka."
+#: data/gtk/preferences_dialog.ui:47
+msgid "Track _Directory"
+msgstr "_Katalog utworów"
 
-#: data/gtk/song_listbox.ui:86
-msgid "_Open"
-msgstr "_Otwórz"
+#: data/gtk/preferences_dialog.ui:69
+msgid "Save _All Tracks"
+msgstr "Zapisz _wszystkie utwory"
 
-#: data/gtk/song_row.ui:16
-msgid "Save recorded song"
-msgstr "Zapisuje nagrany utwór"
+#: data/gtk/preferences_dialog.ui:70
+msgid "All recorded tracks are automatically saved in the track directory"
+msgstr ""
+"Wszystkie nagrane utwory są automatycznie zapisywane w katalogu utworów"
+
+#: data/gtk/preferences_dialog.ui:84
+msgid "Decide for Each _Track"
+msgstr "Decyduj dla każdego _utworu"
+
+#: data/gtk/preferences_dialog.ui:85
+msgid "Tracks are temporarily recorded and can be saved if desired"
+msgstr "Utwory są nagrywane tymczasowo i w razie potrzeby można je zapisać"
+
+#: data/gtk/preferences_dialog.ui:100
+msgid "Record N_othing"
+msgstr "N_ie nagrywaj nic"
+
+#: data/gtk/preferences_dialog.ui:101
+msgid "Stations are played without recording"
+msgstr "Stacje są odtwarzane bez nagrywania"
+
+#: data/gtk/preferences_dialog.ui:120
+msgid "M_inimum Duration"
+msgstr "M_inimalny czas trwania"
+
+#: data/gtk/preferences_dialog.ui:121
+msgid "Tracks shorter than the minimum duration will be ignored"
+msgstr "Utwory krótsze niż minimalny czas trwania będą ignorowane"
+
+#: data/gtk/preferences_dialog.ui:136
+msgid "M_aximum Duration"
+msgstr "M_aksymalny czas trwania"
+
+#: data/gtk/preferences_dialog.ui:137
+msgid "Recording ends when the maximum duration is reached"
+msgstr ""
+"Nagrywanie zakończy się, gdy maksymalny czas trwania zostanie osiągnięty"
+
+#: data/gtk/search_filter.ui:21
+msgid "Search"
+msgstr "Wyszukiwanie"
+
+#: data/gtk/search_filter.ui:22
+msgid "Search stations"
+msgstr "Wyszukiwanie  stacji"
+
+# ten ciąg jest częścią nieukończonej funkcji, więc na razie oznaczam jako „niepewne” — Victoria
+#: data/gtk/search_filter.ui:32
+#, fuzzy
+msgid "Search Filter"
+msgstr "Filtry wyszukiwania"
+
+#: data/gtk/search_page.ui:55
+msgid "Discover over 50,000 public stations"
+msgstr "Odkrywaj ponad 50 000 publicznych stacji"
+
+#: data/gtk/search_page.ui:73
+msgid "Popular Stations"
+msgstr "Popularne stacje"
+
+#: data/gtk/search_page.ui:95
+msgid "Discover New Stations"
+msgstr "Odkrywaj nowe stacje"
+
+#: data/gtk/search_page.ui:118
+msgid ""
+"The displayed information is provided by <a href=\"https://www.radio-"
+"browser.info/\">radio-browser.info</a>.\n"
+"Shortwave has no influence on the listed stations."
+msgstr ""
+"Wyświetlane informacje pochodzą ze strony <a href=\"https://www.radio-"
+"browser.info/\">radio-browser.info</a>.\n"
+"Shortwave nie ma wpływu na wymienione stacje."
+
+#: data/gtk/search_page.ui:184
+msgid "Loading…"
+msgstr "Ładowanie…"
+
+#: data/gtk/search_page.ui:199
+msgid "No Results"
+msgstr "Brak wyników"
+
+#: data/gtk/search_page.ui:200
+msgid ""
+"If the station you are looking for is missing, you can add it to the public "
+"database."
+msgstr ""
+"Jeśli stacja, której szukasz nie istnieje, możesz dodać ją do publicznej "
+"bazy danych."
+
+#: data/gtk/search_page.ui:204
+msgid "Add Missing Station"
+msgstr "Dodaj brakujące stacje"
+
+#: data/gtk/search_page.ui:222
+msgid "Unable to Retrieve Station Data"
+msgstr "Nie można odebrać danych stacji"
+
+#: data/gtk/search_page.ui:225
+msgid "Try Again"
+msgstr "Proszę spróbować ponownie"
+
+#: data/gtk/shortcuts_dialog.ui:9
+msgctxt "shortcut window"
+msgid "Search stations"
+msgstr "Wyszukiwanie stacji"
+
+#: data/gtk/shortcuts_dialog.ui:15
+msgctxt "shortcut window"
+msgid "Open shortcut window"
+msgstr "Otwarcie okna skrótów"
+
+#: data/gtk/shortcuts_dialog.ui:22
+msgctxt "shortcut window"
+msgid "Open application menu"
+msgstr "Otwarcie menu programu"
+
+#: data/gtk/shortcuts_dialog.ui:27
+msgctxt "shortcut window"
+msgid "Open preferences"
+msgstr "Otwarcie preferencji"
+
+#: data/gtk/shortcuts_dialog.ui:33
+msgctxt "shortcut window"
+msgid "Close the window"
+msgstr "Zamknięcie okna"
+
+#: data/gtk/shortcuts_dialog.ui:39
+msgctxt "shortcut window"
+msgid "Quit the application"
+msgstr "Zakończenie działania programu"
+
+#: data/gtk/shortcuts_dialog.ui:50
+msgctxt "shortcut window"
+msgid "Toggle playback"
+msgstr "Przełączenie odtwarzania"
+
+#: data/gtk/shortcuts_dialog.ui:58 data/gtk/volume_control.ui:21
+msgid "Volume"
+msgstr "Głośność"
+
+#: data/gtk/shortcuts_dialog.ui:61
+msgctxt "shortcut window"
+msgid "Toggle mute"
+msgstr "Przełączenie wyciszenia"
+
+#: data/gtk/shortcuts_dialog.ui:67
+msgctxt "shortcut window"
+msgid "Increase volume"
+msgstr "Zwiększanie głośności"
+
+#: data/gtk/shortcuts_dialog.ui:73
+msgctxt "shortcut window"
+msgid "Decrease volume"
+msgstr "Zmniejszanie głośności"
 
 #: data/gtk/station_dialog.ui:71
-msgid "_Play Station"
-msgstr "_Odtwórz stację"
+msgid "_Play"
+msgstr "_Odtwarzaj"
 
-#: data/gtk/station_dialog.ui:86
+#: data/gtk/station_dialog.ui:82
 msgid "_Add to Library"
 msgstr "_Dodaj do kolekcji"
 
-#: data/gtk/station_dialog.ui:102
+#: data/gtk/station_dialog.ui:94
 msgid "_Remove From Library"
 msgstr "_Usuń z kolekcji"
 
-#: data/gtk/station_dialog.ui:120
+#: data/gtk/station_dialog.ui:111 data/gtk/station_row.ui:57
 msgid "Local Station"
 msgstr "Lokalna stacja"
 
-#: data/gtk/station_dialog.ui:121
+#: data/gtk/station_dialog.ui:112
 msgid ""
 "This station exists only in your library, and is not part of the public "
-"online station database."
+"database"
 msgstr ""
-"Ta stacja istnieje tylko w kolekcji użytkownika i nie jest częścią "
-"publicznej bazy stacji online."
+"Ta stacja istnieje tylko w Twojej bibliotece i nie jest częścią publicznej "
+"bazy danych"
 
-#: data/gtk/station_dialog.ui:136
+#: data/gtk/station_dialog.ui:126 data/gtk/station_row.ui:69
 msgid "Orphaned Station"
 msgstr "Osierocona stacja"
 
-#: data/gtk/station_dialog.ui:137
+#: data/gtk/station_dialog.ui:127
 msgid ""
 "The information could not be updated, probably this station was removed from "
-"the public online station database."
+"the public database"
 msgstr ""
-"Nie można zaktualizować informacji. Prawdopodobnie ta stacja została "
-"usunięta z publicznej bazy stacji online."
+"Nie można zaktualizować informacji, prawdopodobnie ta stacja została usunięta z publicznej bazy danych"
 
-#: data/gtk/station_dialog.ui:149
+#: data/gtk/station_dialog.ui:138
 msgid "Information"
 msgstr "Informacje"
 
-#: data/gtk/station_dialog.ui:152 src/ui/pages/search_page.rs:212
+#: data/gtk/station_dialog.ui:142
 msgid "Language"
 msgstr "Język"
 
-#: data/gtk/station_dialog.ui:162
+#: data/gtk/station_dialog.ui:153
 msgid "Tags"
 msgstr "Etykiety"
 
-#: data/gtk/station_dialog.ui:183
+#: data/gtk/station_dialog.ui:166
 msgid "Location"
 msgstr "Położenie"
 
-#: data/gtk/station_dialog.ui:188 src/ui/pages/search_page.rs:213
+#: data/gtk/station_dialog.ui:170
 msgid "Country"
 msgstr "Kraj"
 
-#: data/gtk/station_dialog.ui:198 src/ui/pages/search_page.rs:214
+#: data/gtk/station_dialog.ui:181
 msgid "State"
 msgstr "Stan"
 
-#: data/gtk/station_dialog.ui:232
+#: data/gtk/station_dialog.ui:216
 msgid "Audio"
 msgstr "Dźwięk"
 
-#: data/gtk/station_dialog.ui:236 src/ui/pages/search_page.rs:216
+#: data/gtk/station_dialog.ui:219
 msgid "Bitrate"
-msgstr "Gęstość bitowa"
+msgstr "Szybkość strumienia"
 
-#: data/gtk/station_dialog.ui:246
+#: data/gtk/station_dialog.ui:230
 msgid "Codec"
 msgstr "Kodek"
 
 #. This is a noun/label for the station stream url
-#: data/gtk/station_dialog.ui:256
+#: data/gtk/station_dialog.ui:241
 msgid "Stream"
 msgstr "Strumień"
 
-#: data/gtk/station_dialog.ui:265
+#: data/gtk/station_dialog.ui:247
 msgid "Copy"
 msgstr "Kopiuje"
 
-#: data/gtk/streaming_dialog.ui:10
-msgid "Stream to a Device"
-msgstr "Wysyłanie na urządzenie"
+#: data/gtk/track_dialog.ui:76
+msgid "Edit"
+msgstr "Modyfikuj"
 
-#: data/gtk/streaming_dialog.ui:26
+#: data/gtk/track_dialog.ui:123
+msgid "The recorded track has been saved"
+msgstr "Nagrany utwór został zapisany"
+
+#: data/gtk/track_dialog.ui:139 data/gtk/track_dialog.ui:210
+#: data/gtk/track_row.ui:10 src/audio/player.rs:448
+msgid "Save Track"
+msgstr "Zapisz utwór"
+
+#: data/gtk/track_dialog.ui:150
+msgid "Play Track"
+msgstr "Odtwarzaj utwór"
+
+#: data/gtk/track_dialog.ui:161
+msgid "Cancel Recording"
+msgstr "Anuluj nagrywanie"
+
+#: data/gtk/track_dialog.ui:177
+msgid "Station"
+msgstr "Stacja"
+
+#: data/gtk/track_dialog.ui:211
+msgid "Save this track when recording is complete"
+msgstr "Zapisz ten utwór po zakończeniu nagrywania"
+
+#: data/gtk/track_dialog.ui:225
+msgid "Recording behaviour can be changed in <a href=\"\">preferences</a>"
+msgstr "Zachowanie nagrywania można zmienić w <a href=\"\">preferencjach	</a>"
+
+#: data/gtk/track_row.ui:21
+msgid "Saved"
+msgstr "Zapisano"
+
+#: data/gtk/volume_control.ui:9
+msgid "Toggle Mute"
+msgstr "Przełącza wyciszenie"
+
+#: src/app.rs:85
+msgid "Track no longer available"
+msgstr "Utwór nie jest już dostępny"
+
+#: src/app.rs:109 src/app.rs:132
+msgid "This track is currently not being recorded"
+msgstr "Ten utwór nie jest obecnie nagrywany"
+
+#: src/app.rs:259
+#, rust-format
+msgid "Playing “{}”"
+msgstr "Odtwarzanie „{}”"
+
+#: src/app.rs:354
+msgid "Active Playback"
+msgstr "Aktywne odtwarzanie"
+
+#: src/audio/player.rs:458
+msgid "Don't Record"
+msgstr "Nie nagrywaj"
+
+#: src/audio/recording_state.rs:54 src/audio/recording_state.rs:56
+msgid "Not Recorded"
+msgstr "Nie nagrano"
+
+#: src/audio/recording_state.rs:55
+msgid "Ignored Track"
+msgstr "Pominięty utwór"
+
+#: src/audio/recording_state.rs:58
+msgid "Recording…"
+msgstr "Nagrywanie…"
+
+#: src/audio/recording_state.rs:59 src/audio/recording_state.rs:60
+msgid "Recorded"
+msgstr "Nagrano"
+
+#: src/audio/recording_state.rs:62
+msgid "Below Threshold"
+msgstr "Poniżej progu"
+
+#: src/audio/recording_state.rs:63
+msgid "Cancelled"
+msgstr "Anulowano"
+
+#: src/audio/recording_state.rs:69
+msgid "Recording is deactivated in preferences"
+msgstr "Nagrywanie jest wyłączone w preferencjach"
+
+#: src/audio/recording_state.rs:71
+msgid "The track contains a word that is on the ignore list"
+msgstr "Utwór zawiera słowo, które znajduje się na liście ignorowanych"
+
+#: src/audio/recording_state.rs:74
 msgid ""
-"Audio playback can be streamed to a network device (requires Google Cast "
-"support)."
+"The track wasn't played from the beginning, so it can't be fully recorded"
 msgstr ""
-"Dźwięk może być wysyłany do urządzenia sieciowego (wymaga obsługi Google "
-"Cast)."
+"Utwór nie był odtwarzany od początku, więc nie można go w całości nagrać"
 
-#: data/gtk/streaming_dialog.ui:41
-msgid "No Devices Found"
-msgstr "Nie odnaleziono urządzeń"
+#: src/audio/recording_state.rs:77
+msgid "The track will be recorded until a new track gets played"
+msgstr "Utwór będzie nagrywany do momentu odtworzenia nowego utworu"
 
-#: data/gtk/streaming_dialog.ui:47 data/gtk/streaming_dialog.ui:70
-msgid "Search again"
-msgstr "Wyszukuje jeszcze raz"
+#: src/audio/recording_state.rs:79
+msgid "The track has been temporarily recorded"
+msgstr "Utwór został tymczasowo nagrany"
 
-#: data/gtk/streaming_dialog.ui:64
-msgid "Search Completed"
-msgstr "Ukończono wyszukiwanie"
+#: src/audio/recording_state.rs:81
+msgid "The maximum recording duration has been reached"
+msgstr "Osiągnięto maksymalny czas trwania nagrania"
 
-#: data/gtk/streaming_dialog.ui:87
-msgid "Searching for Devices…"
-msgstr "Wyszukiwanie urządzeń…"
+#: src/audio/recording_state.rs:84
+msgid ""
+"The track has been discarded as the duration was below the set threshold"
+msgstr "Odrzucono utwór, ponieważ czas trwania był poniżej ustawionego progu"
 
-#: data/gtk/window.ui:40
-msgid "Main View"
-msgstr "Widok główny"
+#: src/audio/recording_state.rs:86
+msgid "Recording has been cancelled"
+msgstr "Nagrywanie zostało anulowane"
 
-#. Fallback to xdg-home when xdg-music is not available
-#: src/audio/backend/song_backend.rs:97
-msgid "Unable to access music directory. Saving song in home directory."
-msgstr ""
-"Nie można uzyskać dostępu do katalogu z muzyką. Zapisywanie utworu "
-"w katalogu domowym."
+#: src/device/device_discovery.rs:83
+msgid "Google Cast Device"
+msgstr "Urządzenie Google Cast"
 
-#: src/audio/player.rs:190
-msgid "Station cannot be streamed. URL is not valid."
-msgstr "Nie można odtwarzać stacji. Adres URL jest nieprawidłowy."
+#: src/device/device_discovery.rs:86
+msgid "Unknown Model"
+msgstr "Nieznany model"
 
-#: src/audio/player.rs:241
-msgid "Cannot save song."
-msgstr "Nie można zapisać utworu."
-
-#: src/ui/about_window.rs:46
+#: src/ui/about_dialog.rs:45
 msgid "translator-credits"
 msgstr ""
 "Piotr Drąg <piotrdrag@gmail.com>, 2020-2023\n"
-"Aviary.pl <community-poland@mozilla.org>, 2020-2023"
+"Aviary.pl <community-poland@mozilla.org>, 2020-2023\n"
+"Adam Lewicki <a.lewicki95@gmail.com>, 2025"
 
-#: src/ui/create_station_dialog.rs:103
-msgid "Select station image"
-msgstr "Wybór obrazu stacji"
+#: src/ui/about_dialog.rs:46
+msgid "Donate"
+msgstr "Przekaż datek"
 
-#. TODO: Implement show-server-stats action
-#: src/ui/pages/discover_page.rs:134
-msgid "Show statistics"
-msgstr "Wyświetl statystyki"
+#: src/ui/add_station_dialog.rs:94
+msgid "Select Station Cover"
+msgstr "Wybierz okładkę stacji"
 
-#: src/ui/pages/discover_page.rs:136
-msgid "Browse over 30,000 stations"
-msgstr "Przeglądaj ponad 30 000 stacji"
+#: src/ui/display_error.rs:50
+msgid "Show Details"
+msgstr "Wyświetl szczegóły"
 
-#: src/ui/pages/discover_page.rs:138
-msgid "Add new station"
-msgstr "Dodaj nową stację"
-
-#: src/ui/pages/discover_page.rs:140
-msgid "Your favorite station is missing?"
-msgstr "Brakuje Twojej ulubionej stacji?"
-
-#: src/ui/pages/discover_page.rs:145
-msgid "Open website"
-msgstr "Otwórz witrynę"
-
-#: src/ui/pages/discover_page.rs:147
-msgid "Powered by radio-browser.info"
-msgstr "Korzystamy z witryny radio-browser.info"
-
-#: src/ui/pages/discover_page.rs:158 src/ui/pages/search_page.rs:191
-msgid "Station data could not be received."
-msgstr "Nie można odebrać danych stacji."
-
-#: src/ui/pages/library_page.rs:121
+#: src/ui/pages/library_page.rs:111
+#, rust-format
 msgid "Welcome to {}"
-msgstr "Witamy w programie {}"
+msgstr "Witamy w {}"
 
-#: src/ui/pages/search_page.rs:104
-msgid ""
-"The number of results is limited to {} item. Try using a more specific "
-"search term."
-msgid_plural ""
-"The number of results is limited to {} items. Try using a more specific "
-"search term."
-msgstr[0] ""
-"Wyniki są ograniczone do {} elementu. Proszę spróbować bardziej konkretnych "
-"słów."
-msgstr[1] ""
-"Wyniki są ograniczone do {} elementów. Proszę spróbować bardziej konkretnych "
-"słów."
-msgstr[2] ""
-"Wyniki są ograniczone do {} elementów. Proszę spróbować bardziej konkretnych "
-"słów."
+#: src/ui/preferences_dialog.rs:139
+msgid "Select Save Directory"
+msgstr "Wybierz katalog do zapisywania"
 
-#: src/ui/station_dialog.rs:221
+#: src/ui/preferences_dialog.rs:140
+msgid "_Select"
+msgstr "_Wybierz"
+
+#: src/ui/preferences_dialog.rs:163
+#, rust-format
+msgid "{} min"
+msgid_plural "{} min"
+msgstr[0] "{} min"
+msgstr[1] "{} min"
+msgstr[2] "{} min"
+
+#: src/ui/preferences_dialog.rs:172
+#, rust-format
+msgid "{} sec"
+msgid_plural "{} sec"
+msgstr[0] "{} sek."
+msgstr[1] "{} sek."
+msgstr[2] "{} sek."
+
+#: src/ui/station_dialog.rs:207
+#, rust-format
 msgid "{} kbit/s"
 msgstr "{} kb/s"
+
+#: src/ui/station_dialog.rs:292
+msgid "Copied"
+msgstr "Skopiowano"
+
+#: src/ui/window.rs:226
+msgid "No Permission for Background Playback"
+msgstr "Brak uprawnień do odtwarzania w tle"
+
+#: src/ui/window.rs:228
+msgid "“Run in Background” must be allowed for this app in system settings."
+msgstr ""
+"Należy zezwolić na „Działanie w tle” dla tej aplikacji w ustawieniach systemowych."
+
+#: src/ui/window.rs:232
+msgid "Try Anyway"
+msgstr "Spróbuj mimo tego"
+
+#: src/ui/window.rs:233
+msgid "Disable Background Playback"
+msgstr "Wyłącz odtwarzanie w tle"
+
+#: src/utils.rs:51
+#, rust-format
+msgid "{} hour"
+msgid_plural "{} hours"
+msgstr[0] "{} godzina"
+msgstr[1] "{} godzny"
+msgstr[2] "{} godzin"
+
+#: src/utils.rs:57
+#, rust-format
+msgid "{} minute"
+msgid_plural "{} minutes"
+msgstr[0] "{} minuta"
+msgstr[1] "{} minuty"
+msgstr[2] "{} minut"
+
+#: src/utils.rs:62
+#, rust-format
+msgid "{} second"
+msgid_plural "{} seconds"
+msgstr[0] "{} sekunda"
+msgstr[1] "{} sekundy"
+msgstr[2] "{} sekund"
