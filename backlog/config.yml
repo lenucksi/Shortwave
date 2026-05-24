@@ -1,0 +1,20 @@
+project_name: "Shortwave"
+default_status: "To Do"
+statuses: ["To Do", "In Progress", "Done"]
+labels: []
+max_column_width: 20
+auto_open_browser: true
+default_port: 6420
+remote_operations: true
+auto_commit: false
+filesystem_only: false
+bypass_git_hooks: false
+check_active_branches: true
+active_branch_days: 30
+task_prefix: "SW"
+definition_of_done:
+  - cargo test passes (all tests)
+  - cargo clippy --all -- -D warnings clean
+  - Test coverage added where possible (pure functions, parsers, serialization)
+  - Human user-signoff: working UI if UI changed (else N/A)
+  - Branch gemerged in lokales main (oder PR-ready falls remote tot)
