@@ -1,0 +1,20 @@
+backlog/config.yml
+  s_9f72d5847e057f::t_1985999c60f6e7 15-20
+  s_9f72d5847e057f::t_394d304490d7f3 1-14
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.0",
+  "base_commit_sha": "51b28b6b32f835a20f3c51e3da0d6a6ee82f65ec",
+  "prompts": {},
+  "sessions": {
+    "s_9f72d5847e057f": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1a6d5cd29ffe5HGo33SmMT479L",
+        "model": "deepseek-v4-flash-free"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    }
+  }
+}
