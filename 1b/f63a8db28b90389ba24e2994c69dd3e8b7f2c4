@@ -1,0 +1,19 @@
+.gitignore
+  s_9f72d5847e057f::t_dc9445d839d9c1 43-48
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.0",
+  "base_commit_sha": "1bf63a8db28b90389ba24e2994c69dd3e8b7f2c4",
+  "prompts": {},
+  "sessions": {
+    "s_9f72d5847e057f": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1a6d5cd29ffe5HGo33SmMT479L",
+        "model": "deepseek-v4-flash-free"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    }
+  }
+}
