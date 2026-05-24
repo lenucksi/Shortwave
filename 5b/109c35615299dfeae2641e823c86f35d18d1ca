@@ -1,0 +1,12 @@
+data/gtk/add_station_dialog.ui
+  s_9f72d5847e057f::t_8baf85c979cc08 146-152,154-156
+  s_9f72d5847e057f::t_80fda68a01ce23 8-11
+  s_9f72d5847e057f::t_8bd7e25ef6be50 153
+  s_9f72d5847e057f::t_0d73ab289043a0 145
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.0",
+  "base_commit_sha": "5b109c35615299dfeae2641e823c86f35d18d1ca",
+  "prompts": {}
+}
