@@ -45,6 +45,7 @@ mod imp {
         url_row: TemplateChild<adw::EntryRow>,
         #[template_child]
         pls_status: TemplateChild<gtk::Label>,
+        pls_fetched_url: std::cell::RefCell<String>,
 
         #[property(get)]
         station: SwStation,
@@ -68,6 +69,7 @@ mod imp {
                 name_row: TemplateChild::default(),
                 url_row: TemplateChild::default(),
                 pls_status: TemplateChild::default(),
+                pls_fetched_url: std::cell::RefCell::new(String::new()),
                 station,
             }
         }
@@ -145,9 +147,10 @@ mod imp {
 
         #[template_callback]
         fn update_metadata(&self) {
+            let url_str = self.url_row.text().to_string();
             let name = self.name_row.text().to_string();
             let has_name = !name.is_empty();
-            let url = Url::parse(&self.url_row.text()).ok();
+            let url = Url::parse(&url_str).ok();
 
             match url {
                 Some(_) => {
@@ -170,6 +173,11 @@ mod imp {
             if let Some(ref url) = url {
                 let path = url.path().to_lowercase();
                 if path.ends_with(".pls") || path.ends_with(".m3u") || path.ends_with(".m3u8") {
+                    if *self.pls_fetched_url.borrow() == url_str {
+                        return;
+                    }
+                    *self.pls_fetched_url.borrow_mut() = url_str;
+
                     self.pls_status.set_text(&i18n("Fetching playlist..."));
                     self.pls_status.remove_css_class("error");
                     self.pls_status.set_visible(true);
@@ -191,25 +199,32 @@ mod imp {
                                     entries.iter().skip(1).map(|e| e.url.clone()).collect();
                                 metadata.playlist_url = Some(url.clone());
 
+                                let had_name = !obj.station().metadata().name.is_empty();
                                 if let Some(ref title) = first.title
-                                    && obj.station().metadata().name.is_empty()
+                                    && !had_name
                                 {
                                     metadata.name = title.clone();
                                 }
 
                                 obj.station().set_metadata(metadata);
 
-                                let count = entries.len();
-                                let msg =
-                                    i18n_f("Found {numStreams} stream URLs", &[&count.to_string()]);
                                 let imp = imp::SwAddStationDialog::from_obj(&obj);
-                                imp.pls_status.set_text(&msg);
+                                imp.pls_status.set_text(&i18n_f(
+                                    "Found {} stream URLs",
+                                    &[&entries.len().to_string()],
+                                ));
+                                imp.add_button.set_sensitive(true);
+                                imp.url_row.set_text(first.url.as_ref());
+
+                                if let Some(ref title) = first.title {
+                                    imp.name_row.set_text(title);
+                                }
                             }
                             Err(e) => {
                                 let imp = imp::SwAddStationDialog::from_obj(&obj);
                                 imp.pls_status.add_css_class("error");
                                 imp.pls_status.set_text(&i18n_f(
-                                    "Failed to fetch playlist: {error}",
+                                    "Failed to fetch playlist: {}",
                                     &[&e.to_string()],
                                 ));
                             }
