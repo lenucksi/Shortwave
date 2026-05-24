@@ -41,3 +41,8 @@ shortwave.pot
 .flatpak
 .vscode
 *.syscap
+
+# Tooling artifacts
+.serena/
+.claude/
+backlog/tmp/
