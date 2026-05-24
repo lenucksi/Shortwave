@@ -1,0 +1,19 @@
+data/gtk/add_station_dialog.ui
+  s_9f72d5847e057f::t_ab0e204de7ea00 7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.0",
+  "base_commit_sha": "a8ce3a47b98ee7b90ff77437fc38e8cd39014d83",
+  "prompts": {},
+  "sessions": {
+    "s_9f72d5847e057f": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1a6d5cd29ffe5HGo33SmMT479L",
+        "model": "deepseek-v4-flash-free"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    }
+  }
+}
