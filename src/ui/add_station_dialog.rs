@@ -23,7 +23,7 @@ use uuid::Uuid;
 
 use crate::api::{StationMetadata, SwStation};
 use crate::app::SwApplication;
-use crate::i18n::i18n;
+use crate::i18n::{i18n, i18n_f};
 use crate::ui::SwStationCover;
 
 mod imp {
@@ -43,6 +43,8 @@ mod imp {
         name_row: TemplateChild<adw::EntryRow>,
         #[template_child]
         url_row: TemplateChild<adw::EntryRow>,
+        #[template_child]
+        pls_status: TemplateChild<gtk::Label>,
 
         #[property(get)]
         station: SwStation,
@@ -65,6 +67,7 @@ mod imp {
                 remove_cover_button: TemplateChild::default(),
                 name_row: TemplateChild::default(),
                 url_row: TemplateChild::default(),
+                pls_status: TemplateChild::default(),
                 station,
             }
         }
@@ -159,10 +162,64 @@ mod imp {
 
             let metadata = StationMetadata {
                 name,
-                url,
+                url: url.clone(),
                 ..Default::default()
             };
             self.obj().station().set_metadata(metadata);
+
+            if let Some(ref url) = url {
+                let path = url.path().to_lowercase();
+                if path.ends_with(".pls") || path.ends_with(".m3u") || path.ends_with(".m3u8") {
+                    self.pls_status.set_text(&i18n("Fetching playlist..."));
+                    self.pls_status.remove_css_class("error");
+                    self.pls_status.set_visible(true);
+                    self.add_button.set_sensitive(false);
+
+                    let obj = self.obj().clone();
+                    let url = url.clone();
+                    glib::spawn_future_local(async move {
+                        match crate::playlist::fetch_and_parse(&url).await {
+                            Ok(entries) => {
+                                if entries.is_empty() {
+                                    return;
+                                }
+
+                                let first = &entries[0];
+                                let mut metadata = obj.station().metadata();
+                                metadata.url = Some(first.url.clone());
+                                metadata.alternate_urls =
+                                    entries.iter().skip(1).map(|e| e.url.clone()).collect();
+                                metadata.playlist_url = Some(url.clone());
+
+                                if let Some(ref title) = first.title
+                                    && obj.station().metadata().name.is_empty()
+                                {
+                                    metadata.name = title.clone();
+                                }
+
+                                obj.station().set_metadata(metadata);
+
+                                let count = entries.len();
+                                let msg =
+                                    i18n_f("Found {numStreams} stream URLs", &[&count.to_string()]);
+                                let imp = imp::SwAddStationDialog::from_obj(&obj);
+                                imp.pls_status.set_text(&msg);
+                            }
+                            Err(e) => {
+                                let imp = imp::SwAddStationDialog::from_obj(&obj);
+                                imp.pls_status.add_css_class("error");
+                                imp.pls_status.set_text(&i18n_f(
+                                    "Failed to fetch playlist: {error}",
+                                    &[&e.to_string()],
+                                ));
+                            }
+                        }
+                    });
+                    return;
+                }
+            }
+
+            self.pls_status.set_visible(false);
         }
     }
 }

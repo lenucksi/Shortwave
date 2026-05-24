@@ -34,6 +34,20 @@ pub struct StationMetadata {
     #[serde(serialize_with = "url_to_str")]
     #[serde(deserialize_with = "str_to_url")]
     pub url_resolved: Option<Url>,
+    #[serde(
+        default,
+        serialize_with = "urls_to_vec",
+        deserialize_with = "vec_to_urls"
+    )]
+    pub alternate_urls: Vec<Url>,
+    #[serde(
+        default,
+        serialize_with = "url_to_str",
+        deserialize_with = "str_to_url"
+    )]
+    pub playlist_url: Option<Url>,
+    #[serde(default)]
+    pub fetched_at: Option<i64>,
     #[serde(serialize_with = "url_to_str")]
     #[serde(deserialize_with = "str_to_url")]
     pub homepage: Option<Url>,
@@ -108,4 +122,155 @@ where
 {
     let s = String::deserialize(deserializer)?;
     Ok(Url::from_str(&s).ok())
+}
+
+fn urls_to_vec<S>(urls: &[Url], serializer: S) -> Result<S::Ok, S::Error>
+where
+    S: Serializer,
+{
+    use serde::ser::SerializeSeq;
+    let mut seq = serializer.serialize_seq(Some(urls.len()))?;
+    for url in urls {
+        seq.serialize_element(url.as_str())?;
+    }
+    seq.end()
+}
+
+fn vec_to_urls<'de, D>(deserializer: D) -> Result<Vec<Url>, D::Error>
+where
+    D: Deserializer<'de>,
+{
+    let strings = Vec::<String>::deserialize(deserializer)?;
+    Ok(strings
+        .iter()
+        .filter_map(|s| Url::from_str(s).ok())
+        .collect())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use serde_json;
+
+    #[test]
+    fn test_serialize_deserialize_default() {
+        let metadata = StationMetadata::default();
+        let json = serde_json::to_string(&metadata).expect("serialize");
+        let deserialized: StationMetadata = serde_json::from_str(&json).expect("deserialize");
+        assert_eq!(metadata.name, deserialized.name);
+        assert_eq!(metadata.homepage, deserialized.homepage);
+        assert_eq!(metadata.tags, deserialized.tags);
+        assert_eq!(metadata.country, deserialized.country);
+        assert_eq!(metadata.language, deserialized.language);
+        assert_eq!(metadata.codec, deserialized.codec);
+        assert_eq!(metadata.state, deserialized.state);
+        assert_eq!(metadata.alternate_urls, deserialized.alternate_urls);
+        assert_eq!(metadata.playlist_url, deserialized.playlist_url);
+        assert_eq!(metadata.fetched_at, deserialized.fetched_at);
+    }
+
+    #[test]
+    fn test_serialize_deserialize_with_urls() {
+        let metadata = StationMetadata {
+            alternate_urls: vec![
+                Url::from_str("https://example.com/stream1").unwrap(),
+                Url::from_str("https://example.com/stream2").unwrap(),
+            ],
+            playlist_url: Some(Url::from_str("https://example.com/playlist.m3u8").unwrap()),
+            fetched_at: Some(1234567890),
+            ..Default::default()
+        };
+        let json = serde_json::to_string(&metadata).expect("serialize");
+        let deserialized: StationMetadata = serde_json::from_str(&json).expect("deserialize");
+        assert_eq!(metadata.alternate_urls, deserialized.alternate_urls);
+        assert_eq!(metadata.playlist_url, deserialized.playlist_url);
+        assert_eq!(metadata.fetched_at, deserialized.fetched_at);
+    }
+
+    #[test]
+    fn test_backward_compat_no_alternate_urls() {
+        let json = serde_json::json!({
+            "changeuuid": "",
+            "stationuuid": "",
+            "name": "test",
+            "url": "",
+            "url_resolved": "",
+            "homepage": "",
+            "favicon": "",
+            "tags": "",
+            "country": "",
+            "countrycode": "",
+            "state": "",
+            "language": "",
+            "languagecodes": "",
+            "votes": 0,
+            "lastchangetime": null,
+            "lastchangetime_iso8601": null,
+            "codec": "",
+            "bitrate": 0,
+            "hls": 0,
+            "lastcheckok": 0,
+            "lastchecktime": null,
+            "lastchecktime_iso8601": null,
+            "lastcheckoktime": null,
+            "lastcheckoktime_iso8601": null,
+            "lastlocalchecktime": null,
+            "clicktimestamp": null,
+            "clicktimestamp_iso8601": null,
+            "clickcount": 0,
+            "clicktrend": 0,
+            "ssl_error": 0,
+            "geo_lat": null,
+            "geo_long": null,
+            "has_extended_info": false
+        });
+        let metadata: StationMetadata = serde_json::from_value(json).expect("deserialize");
+        assert!(metadata.alternate_urls.is_empty());
+        assert!(metadata.playlist_url.is_none());
+        assert!(metadata.fetched_at.is_none());
+    }
+
+    #[test]
+    fn test_backward_compat_partial() {
+        let json = serde_json::json!({
+            "changeuuid": "",
+            "stationuuid": "",
+            "name": "test",
+            "url": "",
+            "url_resolved": "",
+            "homepage": "",
+            "favicon": "",
+            "tags": "",
+            "country": "",
+            "countrycode": "",
+            "state": "",
+            "language": "",
+            "languagecodes": "",
+            "votes": 0,
+            "lastchangetime": null,
+            "lastchangetime_iso8601": null,
+            "codec": "",
+            "bitrate": 0,
+            "hls": 0,
+            "lastcheckok": 0,
+            "lastchecktime": null,
+            "lastchecktime_iso8601": null,
+            "lastcheckoktime": null,
+            "lastcheckoktime_iso8601": null,
+            "lastlocalchecktime": null,
+            "clicktimestamp": null,
+            "clicktimestamp_iso8601": null,
+            "clickcount": 0,
+            "clicktrend": 0,
+            "ssl_error": 0,
+            "geo_lat": null,
+            "geo_long": null,
+            "has_extended_info": false,
+            "alternate_urls": ["https://example.com/alt1"]
+        });
+        let metadata: StationMetadata = serde_json::from_value(json).expect("deserialize");
+        assert_eq!(metadata.alternate_urls.len(), 1);
+        assert!(metadata.playlist_url.is_none());
+        assert!(metadata.fetched_at.is_none());
+    }
 }

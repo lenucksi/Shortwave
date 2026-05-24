@@ -525,20 +525,20 @@ impl GstreamerBackend {
                     }
                 }
             }
-            MessageView::StateChanged(sc) => {
+            MessageView::StateChanged(sc)
                 // Only report the state change once the pipeline itself changed a state,
                 // not whenever any of the internal elements does that.
                 // https://gitlab.gnome.org/World/Shortwave/-/issues/528
-                if message.src() == Some(pipeline.upcast_ref::<gstreamer::Object>()) {
-                    let playback_state = match sc.current() {
-                        gstreamer::State::Playing => SwPlaybackState::Playing,
-                        gstreamer::State::Paused => SwPlaybackState::Playing,
-                        gstreamer::State::Ready => SwPlaybackState::Loading,
-                        _ => SwPlaybackState::Stopped,
-                    };
+                if message.src() == Some(pipeline.upcast_ref::<gstreamer::Object>()) =>
+            {
+                let playback_state = match sc.current() {
+                    gstreamer::State::Playing => SwPlaybackState::Playing,
+                    gstreamer::State::Paused => SwPlaybackState::Playing,
+                    gstreamer::State::Ready => SwPlaybackState::Loading,
+                    _ => SwPlaybackState::Stopped,
+                };
 
-                    crate::utils::send(&sender, GstreamerChange::PlaybackState(playback_state));
-                }
+                crate::utils::send(&sender, GstreamerChange::PlaybackState(playback_state));
             }
             MessageView::Buffering(buffering) => {
                 let percent = buffering.percent();

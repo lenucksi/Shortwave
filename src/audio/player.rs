@@ -82,6 +82,9 @@ mod imp {
         #[property(get)]
         cast_sender: SwCastSender,
 
+        pub fallback_urls: RefCell<Vec<url::Url>>,
+        pub current_url_index: Cell<usize>,
+
         pub backend: OnceCell<RefCell<GstreamerBackend>>,
         pub mpris_server: OnceCell<MprisServer>,
     }
@@ -302,8 +305,10 @@ mod imp {
 
         fn gst_playback_change(&self, state: &SwPlaybackState) {
             if state == &SwPlaybackState::Failure {
-                // Discard recorded data when a failure occurs,
-                // since the track has not been recorded completely.
+                if self.try_next_fallback_url() {
+                    return;
+                }
+
                 if self.backend.get().unwrap().borrow().is_recording() {
                     self.stop_recording(RecordingStopReason::StreamFailure);
                     self.reset_track();
@@ -337,6 +342,35 @@ mod imp {
         fn gst_failure(&self, failure: &str) {
             *self.last_failure.borrow_mut() = failure.to_string();
             self.obj().notify_last_failure();
+        }
+
+        fn try_next_fallback_url(&self) -> bool {
+            let url = advance_fallback_url(
+                &self.fallback_urls.borrow(),
+                &self.current_url_index,
+            );
+            if let Some(url) = url {
+                debug!("Trying fallback URL: {url}");
+
+                *self.last_failure.borrow_mut() = String::new();
+                self.obj().notify_last_failure();
+
+                self.backend
+                    .get()
+                    .unwrap()
+                    .borrow_mut()
+                    .set_source_uri(url.as_ref());
+
+                self.backend
+                    .get()
+                    .unwrap()
+                    .borrow_mut()
+                    .set_state(gstreamer::State::Playing);
+
+                true
+            } else {
+                false
+            }
         }
 
         /// Unsets the current playing track and adds it to the past played tracks history
@@ -465,6 +499,82 @@ mod imp {
             notification
         }
     }
+
+    pub(crate) fn advance_fallback_url(
+        fallback_urls: &[url::Url],
+        current_index: &Cell<usize>,
+    ) -> Option<url::Url> {
+        let next = current_index.get() + 1;
+        if next < fallback_urls.len() {
+            current_index.set(next);
+            Some(fallback_urls[next].clone())
+        } else {
+            None
+        }
+    }
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+
+        #[test]
+        fn advance_fallback_single_url() {
+            let urls = vec![
+                url::Url::parse("https://example.com/stream").unwrap(),
+            ];
+            let index = Cell::new(0);
+            assert!(advance_fallback_url(&urls, &index).is_none());
+            assert_eq!(index.get(), 0);
+        }
+
+        #[test]
+        fn advance_fallback_multiple_urls() {
+            let urls = vec![
+                url::Url::parse("https://a.example.com/stream").unwrap(),
+                url::Url::parse("https://b.example.com/stream").unwrap(),
+                url::Url::parse("https://c.example.com/stream").unwrap(),
+            ];
+            let index = Cell::new(0);
+
+            let r = advance_fallback_url(&urls, &index);
+            assert_eq!(
+                r.as_ref().map(|u| u.as_str()),
+                Some("https://b.example.com/stream")
+            );
+            assert_eq!(index.get(), 1);
+
+            let r = advance_fallback_url(&urls, &index);
+            assert_eq!(
+                r.as_ref().map(|u| u.as_str()),
+                Some("https://c.example.com/stream")
+            );
+            assert_eq!(index.get(), 2);
+
+            let r = advance_fallback_url(&urls, &index);
+            assert!(r.is_none());
+            assert_eq!(index.get(), 2);
+        }
+
+        #[test]
+        fn advance_fallback_exhausted() {
+            let urls = vec![
+                url::Url::parse("https://a.example.com/stream").unwrap(),
+                url::Url::parse("https://b.example.com/stream").unwrap(),
+                url::Url::parse("https://c.example.com/stream").unwrap(),
+            ];
+            let index = Cell::new(2);
+            assert!(advance_fallback_url(&urls, &index).is_none());
+            assert_eq!(index.get(), 2);
+        }
+
+        #[test]
+        fn advance_fallback_empty_vec() {
+            let urls: Vec<url::Url> = vec![];
+            let index = Cell::new(0);
+            assert!(advance_fallback_url(&urls, &index).is_none());
+            assert_eq!(index.get(), 0);
+        }
+    }
 }
 
 glib::wrapper! {
@@ -485,6 +595,9 @@ impl SwPlayer {
         self.notify_has_station();
 
         self.stop_playback().await;
+
+        *imp.fallback_urls.borrow_mut() = station.stream_urls();
+        imp.current_url_index.set(0);
 
         if let Some(url) = station.stream_url() {
             debug!("Set new playback URI: {url}");

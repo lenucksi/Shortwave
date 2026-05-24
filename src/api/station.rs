@@ -96,4 +96,15 @@ impl SwStation {
     pub fn stream_url(&self) -> Option<url::Url> {
         self.metadata().url_resolved.or(self.metadata().url)
     }
+
+    pub fn stream_urls(&self) -> Vec<url::Url> {
+        let meta = self.metadata();
+        let primary = meta.url_resolved.clone().or(meta.url.clone());
+        let mut urls = Vec::new();
+        if let Some(u) = primary {
+            urls.push(u);
+        }
+        urls.extend(meta.alternate_urls.iter().cloned());
+        urls
+    }
 }

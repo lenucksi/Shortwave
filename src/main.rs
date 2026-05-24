@@ -28,6 +28,7 @@ mod api;
 mod audio;
 mod database;
 mod device;
+mod playlist;
 mod settings;
 mod ui;
 mod utils;
