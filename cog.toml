@@ -21,7 +21,6 @@ build = { changelog_title = "Build System", changelog_order = 9, omit_from_chang
 perf = { changelog_title = "Performance Improvements", changelog_order = 10 }
 revert = { changelog_title = "Reverts", changelog_order = 11, omit_from_changelog = true }
 
-[tag_prefix]
-prefix = "v"
+tag_prefix = "v"
 
 # cocogitto ignores merge commits by default

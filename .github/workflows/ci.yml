@@ -42,6 +42,8 @@ jobs:
 
   build-test:
     runs-on: ubuntu-latest
+    container:
+      image: quay.io/gnome_infrastructure/gnome-runtime-images:gnome-master
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@5c7944e73c4c2a096b17a9cb74d65b6c2bbafbde # v2.9.1
@@ -49,24 +51,33 @@ jobs:
           egress-policy: audit
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-      - name: Install Rust
-        run: rustup toolchain install stable --profile minimal --no-self-updates
-      - name: Install build dependencies
+      - name: Bootstrap Flatpak SDK
         run: |
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends \
-            meson ninja-build \
-            libgtk-4-dev libadwaita-1-dev \
-            libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev \
-            libgstreamer-plugins-bad1.0-dev \
-            libssl-dev libdbus-1-dev
+          flatpak-builder \
+            --user --disable-rofiles-fuse --keep-build-dirs \
+            --stop-at=shortwave \
+            flatpak_app \
+            build-aux/de.haeckerfelix.Shortwave.Devel.json
+          flatpak build-finish --share=network flatpak_app
       - name: Cargo build
-        run: cargo build
+        run: |
+          echo "cd .. && cargo build" | \
+            flatpak-builder --user --disable-rofiles-fuse \
+              --build-shell=shortwave \
+              flatpak_app \
+              build-aux/de.haeckerfelix.Shortwave.Devel.json
       - name: Cargo test
-        run: cargo test
+        run: |
+          echo "cd .. && cargo test" | \
+            flatpak-builder --user --disable-rofiles-fuse \
+              --build-shell=shortwave \
+              flatpak_app \
+              build-aux/de.haeckerfelix.Shortwave.Devel.json
 
   lint:
     runs-on: ubuntu-latest
+    container:
+      image: quay.io/gnome_infrastructure/gnome-runtime-images:gnome-master
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@5c7944e73c4c2a096b17a9cb74d65b6c2bbafbde # v2.9.1
@@ -74,14 +85,23 @@ jobs:
           egress-policy: audit
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-      - name: Install Rust
-        run: rustup toolchain install stable --profile minimal --no-self-updates
-      - name: Add rustfmt and clippy
-        run: rustup component add rustfmt clippy
-      - name: Check formatting
+      - name: Bootstrap Flatpak SDK
+        run: |
+          flatpak-builder \
+            --user --disable-rofiles-fuse --keep-build-dirs \
+            --stop-at=shortwave \
+            flatpak_app \
+            build-aux/de.haeckerfelix.Shortwave.Devel.json
+          flatpak build-finish --share=network flatpak_app
+      - name: Cargo fmt
         run: cargo fmt --all --check
-      - name: Clippy
-        run: cargo clippy --all -- -D warnings
+      - name: Cargo clippy
+        run: |
+          echo "cd .. && cargo clippy --all -- -D warnings" | \
+            flatpak-builder --user --disable-rofiles-fuse \
+              --build-shell=shortwave \
+              flatpak_app \
+              build-aux/de.haeckerfelix.Shortwave.Devel.json
 
   deny:
     runs-on: ubuntu-latest
@@ -93,7 +113,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Install Rust
-        run: rustup toolchain install stable --profile minimal --no-self-updates
+        uses: actions-rust-lang/setup-rust-toolchain@9399c7bb15d4c7d47b27263d024f8a21cce8c9d0 # v1.11.0
       - name: Install cargo-deny
         run: cargo install cargo-deny --locked
       - name: Check advisories and licenses

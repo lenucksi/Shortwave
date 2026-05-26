@@ -765,4 +765,3 @@ msgstr[1] "{} secondi"
 #: src/utils.rs:75
 msgid "0 seconds"
 msgstr "0 secondi"
-

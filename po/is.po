@@ -948,4 +948,3 @@ msgstr[1] "{} sekúndur"
 
 #~ msgid "Open Application Menu"
 #~ msgstr "Opna forritavalmynd"
-

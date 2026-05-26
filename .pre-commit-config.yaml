@@ -27,13 +27,6 @@ repos:
         pass_filenames: false
         types: [rust]
 
-      - id: cargo-clippy
-        name: cargo clippy
-        entry: cargo clippy --all -- -D warnings
-        language: system
-        pass_filenames: false
-        types: [rust]
-
       - id: cargo-deny
         name: cargo deny
         entry: cargo deny check advisories licenses

@@ -345,10 +345,7 @@ mod imp {
         }
 
         fn try_next_fallback_url(&self) -> bool {
-            let url = advance_fallback_url(
-                &self.fallback_urls.borrow(),
-                &self.current_url_index,
-            );
+            let url = advance_fallback_url(&self.fallback_urls.borrow(), &self.current_url_index);
             if let Some(url) = url {
                 debug!("Trying fallback URL: {url}");
 
@@ -519,9 +516,7 @@ mod imp {
 
         #[test]
         fn advance_fallback_single_url() {
-            let urls = vec![
-                url::Url::parse("https://example.com/stream").unwrap(),
-            ];
+            let urls = vec![url::Url::parse("https://example.com/stream").unwrap()];
             let index = Cell::new(0);
             assert!(advance_fallback_url(&urls, &index).is_none());
             assert_eq!(index.get(), 0);
