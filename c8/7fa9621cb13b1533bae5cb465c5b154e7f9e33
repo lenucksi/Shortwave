@@ -1,0 +1,27 @@
+Cargo.toml
+  s_118528d5383dc5::t_faaeb1fc2907ec 10
+src/discovery/registry.rs
+  ai_agent 93-99
+src/discovery/runner.rs
+  ai_agent 60-120
+src/discovery/provider.rs
+  ai_agent 18-39
+Cargo.lock
+  ai_agent 3609
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "c87fa9621cb13b1533bae5cb465c5b154e7f9e33",
+  "prompts": {},
+  "sessions": {
+    "s_118528d5383dc5": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_19a8323eeffe8eS0d9Uj265YvT",
+        "model": "deepseek-v4-flash-free"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    }
+  }
+}
