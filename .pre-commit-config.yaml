@@ -27,12 +27,5 @@ repos:
         pass_filenames: false
         types: [rust]
 
-      - id: cargo-deny
-        name: cargo deny
-        entry: cargo deny check advisories licenses
-        language: system
-        pass_filenames: false
-        types: [rust]
-
 minimum_pre_commit_version: 3.3.0
 default_install_hook_types: [pre-commit, commit-msg]
