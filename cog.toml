@@ -1,26 +1,21 @@
-[package]
-version = "5.1.0"
-
 [changelog]
 path = "CHANGELOG.md"
 template = "remote"
 remote = "github.com"
-repository = "lenucksi/Shortwave"
-# owner/repo will be inferred from git remote
+owner = "lenucksi"
+repository = "Shortwave"
 
 [commit_types]
-feat = { changelog_title = "Features", changelog_order = 1 }
-fix = { changelog_title = "Bug Fixes", changelog_order = 2 }
-docs = { changelog_title = "Documentation", changelog_order = 3, omit_from_changelog = true }
-style = { changelog_title = "Style", changelog_order = 4, omit_from_changelog = true }
-refactor = { changelog_title = "Code Refactoring", changelog_order = 5, omit_from_changelog = true }
-test = { changelog_title = "Tests", changelog_order = 6, omit_from_changelog = true }
-chore = { changelog_title = "Miscellaneous", changelog_order = 7, omit_from_changelog = true }
-ci = { changelog_title = "Continuous Integration", changelog_order = 8, omit_from_changelog = true }
-build = { changelog_title = "Build System", changelog_order = 9, omit_from_changelog = true }
-perf = { changelog_title = "Performance Improvements", changelog_order = 10 }
-revert = { changelog_title = "Reverts", changelog_order = 11, omit_from_changelog = true }
+feat = { changelog_title = "Features", order = 1 }
+fix = { changelog_title = "Bug Fixes", order = 2 }
+docs = { changelog_title = "Documentation", order = 3, omit_from_changelog = true }
+style = { changelog_title = "Style", order = 4, omit_from_changelog = true }
+refactor = { changelog_title = "Code Refactoring", order = 5, omit_from_changelog = true }
+test = { changelog_title = "Tests", order = 6, omit_from_changelog = true }
+chore = { changelog_title = "Miscellaneous", order = 7, omit_from_changelog = true }
+ci = { changelog_title = "Continuous Integration", order = 8, omit_from_changelog = true }
+build = { changelog_title = "Build System", order = 9, omit_from_changelog = true }
+perf = { changelog_title = "Performance Improvements", order = 10 }
+revert = { changelog_title = "Reverts", order = 11, omit_from_changelog = true }
 
 tag_prefix = "v"
-
-# cocogitto ignores merge commits by default
