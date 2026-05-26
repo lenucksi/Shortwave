@@ -1,0 +1,120 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  prek:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
+        with:
+          egress-policy: audit
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - name: Run prek hooks
+        uses: j178/prek-action@bdca6f102f98e2b4c7029491a53dfd366469e33d # v2.0.4
+
+  conventional-commits:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
+        with:
+          egress-policy: audit
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+      - name: Check conventional commits
+        uses: cocogitto/cocogitto-action@52d0023b4396897f1815648e553db2ab8d782f3a # v4.2.0
+        with:
+          command: check
+          args: --from-latest-tag
+
+  build-test:
+    runs-on: ubuntu-latest
+    container:
+      image: quay.io/gnome_infrastructure/gnome-runtime-images:gnome-master
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
+        with:
+          egress-policy: audit
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - name: Bootstrap Flatpak SDK
+        run: |
+          flatpak-builder \
+            --user --disable-rofiles-fuse --keep-build-dirs \
+            --stop-at=shortwave \
+            flatpak_app \
+            build-aux/de.haeckerfelix.Shortwave.Devel.json
+          flatpak build-finish --share=network flatpak_app
+      - name: Cargo build
+        run: |
+          echo "cd .. && cargo build" | \
+            flatpak-builder --user --disable-rofiles-fuse \
+              --build-shell=shortwave \
+              flatpak_app \
+              build-aux/de.haeckerfelix.Shortwave.Devel.json
+      - name: Cargo test
+        run: |
+          echo "cd .. && cargo test" | \
+            flatpak-builder --user --disable-rofiles-fuse \
+              --build-shell=shortwave \
+              flatpak_app \
+              build-aux/de.haeckerfelix.Shortwave.Devel.json
+
+  lint:
+    runs-on: ubuntu-latest
+    container:
+      image: quay.io/gnome_infrastructure/gnome-runtime-images:gnome-master
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
+        with:
+          egress-policy: audit
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - name: Bootstrap Flatpak SDK
+        run: |
+          flatpak-builder \
+            --user --disable-rofiles-fuse --keep-build-dirs \
+            --stop-at=shortwave \
+            flatpak_app \
+            build-aux/de.haeckerfelix.Shortwave.Devel.json
+          flatpak build-finish --share=network flatpak_app
+      - name: Cargo fmt
+        run: cargo fmt --all --check
+      - name: Cargo clippy
+        run: |
+          echo "cd .. && cargo clippy --all -- -D warnings" | \
+            flatpak-builder --user --disable-rofiles-fuse \
+              --build-shell=shortwave \
+              flatpak_app \
+              build-aux/de.haeckerfelix.Shortwave.Devel.json
+
+  deny:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
+        with:
+          egress-policy: audit
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - name: Install Rust
+        uses: actions-rust-lang/setup-rust-toolchain@46268bd060767258de96ed93c1251119784f2ab6 # v1.16.1
+      - name: Install cargo-deny
+        run: cargo install cargo-deny --locked
+      - name: Check advisories and licenses
+        run: cargo deny check advisories licenses

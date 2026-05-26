@@ -1,0 +1,23 @@
+[changelog]
+path = "CHANGELOG.md"
+template = "remote"
+remote = "github.com"
+owner = "lenucksi"
+repository = "Shortwave"
+
+tag_prefix = "v"
+
+[commit_types]
+feat = { changelog_title = "Features", order = 1 }
+fix = { changelog_title = "Bug Fixes", order = 2 }
+docs = { changelog_title = "Documentation", order = 3, omit_from_changelog = true }
+style = { changelog_title = "Style", order = 4, omit_from_changelog = true }
+refactor = { changelog_title = "Code Refactoring", order = 5, omit_from_changelog = true }
+test = { changelog_title = "Tests", order = 6, omit_from_changelog = true }
+chore = { changelog_title = "Miscellaneous", order = 7, omit_from_changelog = true }
+ci = { changelog_title = "Continuous Integration", order = 8, omit_from_changelog = true }
+build = { changelog_title = "Build System", order = 9, omit_from_changelog = true }
+perf = { changelog_title = "Performance Improvements", order = 10 }
+revert = { changelog_title = "Reverts", order = 11, omit_from_changelog = true }
+
+tag_prefix = "v"

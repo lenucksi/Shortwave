@@ -1,6 +1,6 @@
 # Manage the database with diesel_cli
 
-1. Install the diesel_cli tool 
+1. Install the diesel_cli tool
 `cargo install diesel_cli`
 
 2. Create empty database file
