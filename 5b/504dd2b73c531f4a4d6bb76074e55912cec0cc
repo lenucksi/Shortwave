@@ -1,0 +1,194 @@
+.github/workflows/flatpak.yml
+  s_4c37722fb36820::t_322de3b3e8121e 33,38
+  s_4c37722fb36820::t_864c67e51282ec 73,80
+  s_4c37722fb36820::t_db215f404c28b9 127
+  s_4c37722fb36820::t_4bca6dab2bc252 54
+  s_4c37722fb36820::t_6c551c8046e225 60
+  s_4c37722fb36820::t_d46a6d1ea39013 87
+  s_4c37722fb36820::t_67a42c40086887 103,108
+  s_68b850c878bff4::t_3f9eecc83c4ad4 1-32,34-37,39-53,55-59,61-72,74-79,81-86,88-102,104-107,109-126,128-132,134-142,144-147,149-156
+  s_4c37722fb36820::t_d1fd27d55de846 143,148
+  s_4c37722fb36820::t_59c9ee9a3d4136 133
+"backlog/tasks/sw-13 - Radio-Browser-API-Provider-Script.md"
+  s_d4e94471ffc600::t_93760256524719 1-109
+"backlog/tasks/sw-21 - Network Connectivity Monitoring via Portal.md"
+  s_60a159a28114df::t_6375d7769722da 1-119
+"backlog/tasks/sw-10 - SomaFM-Scraper-Provider-Script.md"
+  s_d4e94471ffc600::t_74018bd6f6ea92 1-18,21-60,74-76,78-81,84,115,125,127,139-145,151,156,159,161-176
+  s_d4e94471ffc600::t_662cd915c6aa46 19-20
+  s_d4e94471ffc600::t_0e05833bd75eb3 61-73,77,82-83,85-114,116-124,126,128-138,146-150,152-155,157-158,160
+"backlog/tasks/sw-11 - Discovery-Sources-UI.md"
+  s_d4e94471ffc600::t_9d1b575e12bf9f 1-101
+tools/rhai-runner/Cargo.toml
+  s_d4e94471ffc600::t_928c3b57bf7494 1-11
+"backlog/tasks/sw-6 - Discovery-Engine-Core-Rhai-Engine-und-Typen.md"
+  s_d4e94471ffc600::t_ceb1cc7b8a5883 1-18,20-70,79-82,84-129
+  s_d4e94471ffc600::t_daef93cc90cd84 71-78,83
+  s_d4e94471ffc600::t_de8170b2e779e8 19
+"backlog/tasks/sw-18 - Manual Recording Sessions.md"
+  s_60a159a28114df::t_bacb315a1d49db 1-117
+"backlog/tasks/sw-8 - Provider-Registry-und-Script-Runner.md"
+  s_d4e94471ffc600::t_18f171701e2b03 1-20,22-122
+  s_d4e94471ffc600::t_e844646e25ce00 21
+renovate.json
+  s_d212cdf0fcf317::t_7d8416ce0e9dd0 1-45
+"backlog/tasks/sw-4 - PR: Playlist-Support-fuer-upstream.md"
+  s_9f72d5847e057f::t_2e1eee62760663 1-71
+build-aux/de.haeckerfelix.Shortwave.Local.json
+  s_9f72d5847e057f::t_e2ac4c13151518 1-71
+.github/workflows/ci.yml
+  s_d8d7d45e4c19ad::t_e4da4426a6416c 1-17,19-21,23,25-29,31-33,35-37,39-46,48-50,52-71,73-75,77-89,91-93,95-100
+  s_4c37722fb36820::t_1d1bfa71ce904b 30,34,38
+  s_4c37722fb36820::t_fd887d3ced078f 18,22,24
+  s_4c37722fb36820::t_d27d64c8efc45b 47,51
+  s_4c37722fb36820::t_d61276f7ed8ada 90,94
+  s_4c37722fb36820::t_4ece495f0e8c65 72,76
+"backlog/tasks/sw-9 - WebradioDB-Provider-Script.md"
+  s_d4e94471ffc600::t_8c165752948d34 68-77,81,86
+  s_d4e94471ffc600::t_7a48b76a8fa1e0 1-67,78-80,82-85,87-120
+cog.toml
+  s_900f454d8bd71c::t_6ef7fd3fce6010 1-27
+.pre-commit-config.yaml
+  s_4c37722fb36820::t_a64a3aefc36fc0 11-12,14,17
+  s_93406ab8ab0283::t_151155018587f0 1-2,4-10,13,15-16,18-45
+  s_4c37722fb36820::t_6cce5b179fb2a2 3
+data/providers/somafm.rhai
+  s_d4e94471ffc600::t_25809d85578410 1-70
+"backlog/tasks/sw-16 - Docs-und-Example-Scripts.md"
+  s_d4e94471ffc600::t_041209fbe4c639 1-96
+"backlog/tasks/sw-19 - Gadget Mode PrevNext + Record Button.md"
+  s_60a159a28114df::t_fcee04734e74fa 1-83
+README.md
+  s_7bba61ea4450a3::t_8c2cb2cd634d97 78
+  s_4c37722fb36820::t_47f7c508e82199 84-85
+  s_4c37722fb36820::t_b6cf4c87d096e5 3-8
+"backlog/tasks/sw-20 - Favorite Pin Stations to Top.md"
+  s_60a159a28114df::t_a72bb70fc71324 1-115
+"backlog/docs/doc-3 - PR-Branch-Workflow.md"
+  s_9f72d5847e057f::t_908700d68d0e68 1-72
+"backlog/tasks/sw-22 - AAC+ HE-AAC SBR Low Quality Fix.md"
+  s_60a159a28114df::t_e5a8dff37f3242 1-120
+"backlog/tasks/sw-15 - Custom-Provider-Management.md"
+  s_d4e94471ffc600::t_eadf2fc96a2a41 1-91
+"backlog/tasks/sw-12 - Import-Results-Dialog.md"
+  s_d4e94471ffc600::t_0373c326ec55fa 1-99
+"backlog/tasks/sw-3 - Multi-URL-Anzeige-plus-PLS-LogoURL.md"
+  s_9f72d5847e057f::t_203a42fa1cc1cb 66-81
+  s_9f72d5847e057f::t_71705c3b4ea6e0 7
+  s_9f72d5847e057f::t_0c9fa95e24d855 40
+  s_9f72d5847e057f::t_1e452a84495ab6 86
+.github/workflows/release.yml
+  s_900f454d8bd71c::t_cdd2139466bad3 1-19,21-24,26-34,36-39
+  s_4c37722fb36820::t_a0c530778e3950 20,25,35
+"backlog/tasks/sw-5 - PR-Multi-URL-und-LogoURL-fuer-upstream.md"
+  s_9f72d5847e057f::t_cf3f3812d2d13a 1-66
+"backlog/docs/doc-4 - Discovery-Script-Engine-Architecture.md"
+  s_d4e94471ffc600::t_e16b7eb27ecf90 1-80,82,101-102,104-105,107-112,115-226
+  s_d4e94471ffc600::t_7c02b50eb65042 81,83-100,103,106,113-114
+"backlog/tasks/sw-14 - CLI-Tool-shortwave-script.md"
+  s_d4e94471ffc600::t_e4251aae60df6c 1-16,18-111
+  s_d4e94471ffc600::t_142e7d3549013f 17
+.github/workflows/actionlint.yml
+  s_4f98d179ac8096::t_9953b92f22e48e 1-16,18-21,23-31
+  s_4c37722fb36820::t_ff076481fc3d36 17,22
+"backlog/tasks/sw-17 - System Tray Icon StatusNotifierItem + MPRIS Fix.md"
+  s_60a159a28114df::t_a9b050b9136465 1-109
+"backlog/tasks/sw-7 - HTML-Parsing-Functions-fuer-Rhai.md"
+  s_d4e94471ffc600::t_4bd07addab4826 1-90
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.1",
+  "base_commit_sha": "5b504dd2b73c531f4a4d6bb76074e55912cec0cc",
+  "prompts": {},
+  "sessions": {
+    "s_4c37722fb36820": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_19b953129ffeOUx7tEqIf4dr9J",
+        "model": "deepseek-v4-flash-free"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    },
+    "s_4f98d179ac8096": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_19b7a710effe7c5NJtlejWr3BF",
+        "model": "deepseek-v4-flash-free"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    },
+    "s_60a159a28114df": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1a5a6cb06ffeSnruxkLmc0h2lo",
+        "model": "deepseek-v4-flash"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    },
+    "s_68b850c878bff4": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_19b7ab444ffelYgAdxhhGzfnxt",
+        "model": "deepseek-v4-flash-free"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    },
+    "s_7bba61ea4450a3": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_19b7af146ffeE0UkqyUzpRRVM9",
+        "model": "deepseek-v4-flash-free"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    },
+    "s_900f454d8bd71c": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_19b7a958affePCZEPIJ7VaNzDX",
+        "model": "deepseek-v4-flash-free"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    },
+    "s_93406ab8ab0283": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_19b7a797affez8n7XLBJ9frsA4",
+        "model": "deepseek-v4-flash-free"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    },
+    "s_9f72d5847e057f": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1a6d5cd29ffe5HGo33SmMT479L",
+        "model": "deepseek-v4-flash-free"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    },
+    "s_d212cdf0fcf317": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_19b7a874cffezkW6t3v5H1OI4t",
+        "model": "deepseek-v4-flash-free"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    },
+    "s_d4e94471ffc600": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1a5a91d30ffekonzN6h0mCKEtu",
+        "model": "deepseek-v4-flash"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    },
+    "s_d8d7d45e4c19ad": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_19b7adc6cffeKFfZvWlzp5Mol3",
+        "model": "deepseek-v4-flash-free"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    }
+  }
+}
