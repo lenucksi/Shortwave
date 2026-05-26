@@ -14,9 +14,18 @@ repos:
       - id: conventional-pre-commit
         stages: [commit-msg]
         args:
-          - --types=feat,fix,docs,style,refactor,test,chore,ci,build,perf,revert,change
-          - --allow-breaking
-          - --subject-min-length=15
+          - --strict
+          - feat
+          - fix
+          - docs
+          - style
+          - refactor
+          - test
+          - chore
+          - ci
+          - build
+          - perf
+          - revert
 
   - repo: local
     hooks:

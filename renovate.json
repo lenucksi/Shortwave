@@ -5,6 +5,7 @@
     "helpers:pinGitHubActionDigests",
     ":dependencyDashboard",
     ":semanticCommits",
+    ":semanticCommitTypeAll(chore)",
     "default:automergeDigest"
   ],
   "labels": ["dependencies"],
@@ -40,6 +41,5 @@
   "dependencyDashboardTitle": "Dependency Dashboard 🤖",
   "dependencyDashboardHeader": "This dashboard tracks pending dependency updates and provides an overview of the repository's dependency status.",
   "dependencyDashboardFooter": "Managed by Renovate Bot. Updates are checked daily at 04:00 CET.",
-  "commitMessagePrefix": "chore(deps):",
-  "commitBody": "This PR contains the following updates:\n\n| Package | Update | Change |\n|---|---|---|\n{{#each upgrades as |upgrade|}}\n| {{upgrade.depName}} | {{upgrade.updateType}} | `{{upgrade.currentValue}}` -> `{{upgrade.newValue}}` |\n{{/each}}"
+
 }
