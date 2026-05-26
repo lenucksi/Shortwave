@@ -25,6 +25,8 @@ extern crate diesel;
 extern crate strum_macros;
 
 mod api;
+mod discovery;
+
 mod audio;
 mod database;
 mod device;
