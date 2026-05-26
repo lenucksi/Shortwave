@@ -1,0 +1,22 @@
+.pre-commit-config.yaml
+  s_4c37722fb36820::t_a14af49954142d 17-28
+renovate.json
+  s_4c37722fb36820::t_d1190d54842293 8
+  s_4c37722fb36820::t_d5a942d3359772 44
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.1",
+  "base_commit_sha": "250838557e4acc54c9d49a819e0796ebb72939d9",
+  "prompts": {},
+  "sessions": {
+    "s_4c37722fb36820": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_19b953129ffeOUx7tEqIf4dr9J",
+        "model": "deepseek-v4-flash-free"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    }
+  }
+}
