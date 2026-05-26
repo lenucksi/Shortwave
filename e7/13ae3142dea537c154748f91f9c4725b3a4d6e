@@ -1,0 +1,45 @@
+Cargo.toml
+  s_9dd9a4c6c69eeb::t_d3497dacf9c1b1 52
+  s_9dd9a4c6c69eeb::t_5287cf1314f1ed 10
+  s_9dd9a4c6c69eeb::t_681a74df21fdfa 53
+  s_9dd9a4c6c69eeb::t_c06df264093611 12
+  s_9dd9a4c6c69eeb::t_4160e33659495a 54
+  s_9dd9a4c6c69eeb::t_f1347e7a631a34 48
+  s_9dd9a4c6c69eeb::t_979e860633d770 49-50
+  s_e2bc1cb5c85e3b::t_b080238db0ceba 29
+  s_0d814fb37f59a6::t_e80370025b11f7 32
+  s_9dd9a4c6c69eeb::t_085f5471d3f89d 51
+  s_9dd9a4c6c69eeb::t_bd17ed9f05f65e 13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.1",
+  "base_commit_sha": "e713ae3142dea537c154748f91f9c4725b3a4d6e",
+  "prompts": {},
+  "sessions": {
+    "s_0d814fb37f59a6": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_19b1ef8c1ffebVIVrR9ye8TT9w",
+        "model": "deepseek-v4-flash-free"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    },
+    "s_9dd9a4c6c69eeb": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_19b0e5d20ffeQbpexKEnfkCoSZ",
+        "model": "deepseek-v4-flash-free"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    },
+    "s_e2bc1cb5c85e3b": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_19b132486ffeZGlYoLkp45pOjZ",
+        "model": "deepseek-v4-flash-free"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    }
+  }
+}
