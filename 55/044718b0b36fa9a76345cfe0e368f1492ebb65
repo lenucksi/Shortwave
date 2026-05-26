@@ -1,0 +1,21 @@
+Cargo.lock
+  ai_agent 630-651,803-823,912-926,933-938,1342-1350,1817-1826,2396-2406,2455,2561-2566,2767-2819,2893-2898,3209-3214,3348-3362,3386-3404,3518-3526,3601,3625-3630,3756-3779,3915-3924,4302-4307,4332-4337,4532-4541
+Cargo.toml
+  s_76ca29acc13410::t_548d5fab73d6e0 56
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "55044718b0b36fa9a76345cfe0e368f1492ebb65",
+  "prompts": {},
+  "sessions": {
+    "s_76ca29acc13410": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_199e81656ffejLy63V045UkgpC",
+        "model": "deepseek-v4-flash-free"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    }
+  }
+}
