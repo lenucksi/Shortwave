@@ -21,6 +21,7 @@ async-io = "2.6"
 hickory-resolver = { version = "0.25", features = ["system-config"] }
 cacache = "13.1"
 cast-sender = "0.3"
+clap = { version = "4", features = ["derive"] }
 cruet = "0.15"
 diesel = { version = "2.3", features = ["sqlite", "r2d2"] }
 diesel_migrations = "2.3"
