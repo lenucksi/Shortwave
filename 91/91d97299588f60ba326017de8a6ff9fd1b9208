@@ -1,0 +1,19 @@
+cog.toml
+  s_4c37722fb36820::t_1f6f9db54926a5 5-6,9-19
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.1",
+  "base_commit_sha": "9191d97299588f60ba326017de8a6ff9fd1b9208",
+  "prompts": {},
+  "sessions": {
+    "s_4c37722fb36820": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_19b953129ffeOUx7tEqIf4dr9J",
+        "model": "deepseek-v4-flash-free"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    }
+  }
+}
