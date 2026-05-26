@@ -5,6 +5,8 @@ remote = "github.com"
 owner = "lenucksi"
 repository = "Shortwave"
 
+tag_prefix = "v"
+
 [commit_types]
 feat = { changelog_title = "Features", order = 1 }
 fix = { changelog_title = "Bug Fixes", order = 2 }
