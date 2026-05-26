@@ -23,7 +23,6 @@ use hickory_resolver::config::ResolverConfig;
 use hickory_resolver::name_server::TokioConnectionProvider;
 use indexmap::IndexMap;
 use rand::prelude::SliceRandom;
-use rand::rng;
 use reqwest::{Method, Request, StatusCode};
 use serde::de;
 use url::Url;
@@ -116,7 +115,7 @@ pub async fn lookup_rb_server() -> Option<String> {
     let mut ips: Vec<IpAddr> = response.iter().collect();
 
     // Shuffle it to make sure we're not using always the same one
-    ips.shuffle(&mut rng());
+    ips.shuffle(&mut rand::rng());
 
     for ip in ips {
         // Do a reverse lookup to get the hostname

@@ -177,7 +177,7 @@ mod imp {
             // Randomize the selection to avoid that always the same stations are visible
             let stations: IndexMap<String, SwStation> = stations
                 .iter()
-                .choose_multiple(&mut rand::rng(), 12)
+                .sample(&mut rand::rng(), 12)
                 .into_iter()
                 .map(|(k, v)| (k.clone(), v.clone()))
                 .collect();

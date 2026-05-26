@@ -9,11 +9,11 @@ set -euo pipefail
 # dependency hell neu durchlaufen zu müssen.
 #
 # Usage:
-#   ./tmp/dev-build.sh            # build alles
-#   ./tmp/dev-build.sh run        # build + start
-#   ./tmp/dev-build.sh gresource  # nur gresource neu
-#   ./tmp/dev-build.sh binary     # nur Rust binary neu
-#   ./tmp/dev-build.sh check      # nur state check + diagnose
+#   ./tools/dev-build.sh            # build alles
+#   ./tools/dev-build.sh run        # build + start
+#   ./tools/dev-build.sh gresource  # nur gresource neu
+#   ./tools/dev-build.sh binary     # nur Rust binary neu
+#   ./tools/dev-build.sh check      # nur state check + diagnose
 # ──────────────────────────────────────────────
 
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -140,7 +140,7 @@ build_binary() {
     echo "─── Rust Binary bauen ───"
     # Force rebuild: config.rs cached sonst falsch wegen option_env!
     touch "$REPO_ROOT/src/config.rs"
-    cd "$REPO_ROOT" && cargo build --release 2>&1 | tail -3
+    cd "$REPO_ROOT" && cargo build --release
     echo "→ Binary: $BINARY"
 }
 

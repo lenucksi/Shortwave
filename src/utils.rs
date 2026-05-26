@@ -98,7 +98,7 @@ pub fn ellipsize_end<S: std::fmt::Display>(x: S, max_len: usize) -> String {
 }
 
 pub async fn background_portal_permissions() -> bool {
-    if !ashpd::is_sandboxed().await {
+    if !ashpd::is_sandboxed() {
         debug!("App is not sandboxed, background playback is allowed.");
         return true;
     }

@@ -18,7 +18,7 @@ use std::cell::{Cell, OnceCell, RefCell};
 
 use adw::prelude::*;
 use adw::subclass::prelude::*;
-use ashpd::desktop::background::BackgroundProxy;
+use ashpd::desktop::background::{BackgroundProxy, SetStatusOptions};
 use async_compat::CompatExt;
 use gio::subclass::prelude::ApplicationImpl;
 use glib::{Properties, clone};
@@ -53,7 +53,7 @@ mod imp {
         pub cover_loader: CoverLoader,
         pub inhibit_cookie: Cell<u32>,
         pub background_hold: RefCell<Option<gio::ApplicationHoldGuard>>,
-        pub background_proxy: OnceCell<BackgroundProxy<'static>>,
+        pub background_proxy: OnceCell<BackgroundProxy>,
     }
 
     #[glib::object_subclass]
@@ -219,7 +219,7 @@ mod imp {
         }
 
         async fn setup_background_portal_proxy(&self) {
-            if !ashpd::is_sandboxed().await {
+            if !ashpd::is_sandboxed() {
                 debug!("Not sandboxed, not setting up background portal proxy.");
                 return;
             }
@@ -274,7 +274,9 @@ mod imp {
         async fn set_background_portal_status(&self, message: &str) {
             let message = utils::ellipsize_end(message, 96);
             if let Some(proxy) = self.background_proxy.get()
-                && let Err(err) = proxy.set_status(&message).await
+                && let Err(err) = proxy
+                    .set_status(SetStatusOptions::default().set_message(&message))
+                    .await
             {
                 warn!("Unable to update background portal status message: {err}");
             }
