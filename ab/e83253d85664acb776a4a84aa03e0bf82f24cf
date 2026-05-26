@@ -1,0 +1,21 @@
+src/discovery/engine.rs
+  s_118528d5383dc5::t_2ac19849d7ec96 6-275
+Cargo.toml
+  s_118528d5383dc5::t_0792525f5fe5c0 34-35
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "abe83253d85664acb776a4a84aa03e0bf82f24cf",
+  "prompts": {},
+  "sessions": {
+    "s_118528d5383dc5": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_19a8323eeffe8eS0d9Uj265YvT",
+        "model": "deepseek-v4-flash-free"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    }
+  }
+}
