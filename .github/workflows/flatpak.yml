@@ -1,0 +1,156 @@
+name: Flatpak
+
+on:
+  push:
+    branches: [main, master]
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Version string (e.g., 1.0.0)
+        required: false
+        type: string
+      tag_name:
+        description: Tag name for deployment (e.g., v1.0.0)
+        required: false
+        type: string
+
+permissions:
+  contents: read
+  id-token: write
+  attestations: write
+  pages: write
+
+jobs:
+  package-flatpak:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/flathub-infra/flatpak-github-actions:gnome-master
+      options: --privileged
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@5c7944e73c4c2a096b17a9cb74d65b6c2bbafbde # v2.9.1
+        with:
+          egress-policy: audit
+
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Determine version
+        id: version
+        run: |
+          if [ -n "${{ inputs.version }}" ]; then
+            echo "version=${{ inputs.version }}" >> "$GITHUB_OUTPUT"
+          elif [ "${{ github.event_name }}" = "release" ]; then
+            TAG="${{ github.event.release.tag_name }}"
+            echo "version=${TAG#v}" >> "$GITHUB_OUTPUT"
+          else
+            echo "version=nightly-${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Import GPG key
+        id: gpg
+        uses: crazy-max/ghaction-import-gpg@2dc316deee8e90f13e1a351ab510b4d5bc0c82cd # v7.0.0
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.GPG_PASSPHRASE }}
+
+      - name: Build Flatpak
+        uses: flatpak/flatpak-github-actions/flatpak-builder@401fe28a8384095fc1531b9d320b292f0ee45adb # v6.7
+        with:
+          bundle: Shortwave-${{ steps.version.outputs.version }}.flatpak
+          manifest-path: build-aux/de.haeckerfelix.Shortwave.Devel.json
+          cache-key: flatpak-builder-${{ hashFiles('build-aux/de.haeckerfelix.Shortwave.Devel.json') }}
+          arch: x86_64
+          gpg-sign: ${{ steps.gpg.outputs.fingerprint }}
+          upload-artifact: false
+
+      - name: Update Flatpak repository summary
+        run: flatpak build-update-repo --gpg-sign="${{ steps.gpg.outputs.fingerprint }}" --generate-static-deltas --prune repo/
+
+      - name: Upload Flatpak bundle
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: shortwave-flatpak
+          path: Shortwave-${{ steps.version.outputs.version }}.flatpak
+          retention-days: 30
+
+      - name: Upload Flatpak repo
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: shortwave-flatpak-repo
+          path: repo/
+          retention-days: 30
+
+      - name: Attest build provenance
+        uses: actions/attest-build-provenance@a2bbfa25375fe432b6a289bc6b6cd05ecd0c4c32 # v4.1.0
+        with:
+          subject-path: Shortwave-${{ steps.version.outputs.version }}.flatpak
+
+  deploy-flatpak-pages:
+    runs-on: ubuntu-latest
+    needs: package-flatpak
+    if: github.event_name == 'release' || inputs.tag_name != ''
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@5c7944e73c4c2a096b17a9cb74d65b6c2bbafbde # v2.9.1
+        with:
+          egress-policy: audit
+
+      - name: Download Flatpak repo artifact
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: shortwave-flatpak-repo
+          path: repo
+
+      - name: Generate index.flatpakrepo
+        run: |
+          cat > repo/index.flatpakrepo << 'EOF'
+          [Flatpak Repo]
+          Title=Shortwave
+          Url=https://lenucksi.github.io/Shortwave/
+          Homepage=https://github.com/lenucksi/Shortwave
+          Comment=GNOME internet radio player
+          Description=Access over 50,000 radio stations
+          Icon=https://raw.githubusercontent.com/lenucksi/Shortwave/main/data/icons/de.haeckerfelix.Shortwave.svg
+          GPGKey=${{ secrets.GPG_PUBLIC_KEY_BASE64 }}
+          EOF
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: repo
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5.0.0
+
+  upload-to-release:
+    if: github.event_name == 'release'
+    needs: package-flatpak
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@5c7944e73c4c2a096b17a9cb74d65b6c2bbafbde # v2.9.1
+        with:
+          egress-policy: audit
+
+      - name: Download Flatpak bundle
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: shortwave-flatpak
+
+      - name: Upload to release
+        run: |
+          gh release upload "${{ github.event.release.tag_name }}" Shortwave-*.flatpak --repo "${{ github.repository }}"
+        env:
+          GH_TOKEN: ${{ github.token }}

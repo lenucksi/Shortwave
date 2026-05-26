@@ -1,5 +1,11 @@
 # Shortwave
 
+> **Note:** This is a local development fork of [Shortwave](https://gitlab.gnome.org/World/Shortwave),
+> originally created by [Felix Häcker](https://gitlab.gnome.org/haeckerfelix).
+> It is used to prepare submissions to the [upstream project](https://gitlab.gnome.org/World/Shortwave) —
+> **not** intended as a permanent fork. All credit for the original application goes to
+> Felix Häcker and the GNOME community.
+
 ![screenshot](data/screenshots/1.png)
 ![screenshot](data/screenshots/4.png)
 
@@ -20,7 +26,7 @@ Or by clicking this button:
 
 #### Nightly Builds
 
-Development builds of Shortwave are available from the `gnome-nightly` Flatpak repository: 
+Development builds of Shortwave are available from the `gnome-nightly` Flatpak repository:
 
 ```
 flatpak remote-add --if-not-exists gnome-nightly https://nightly.gnome.org/gnome-nightly.flatpakrepo
@@ -30,8 +36,8 @@ flatpak install gnome-nightly de.haeckerfelix.Shortwave.Devel
 ## FAQ
 - **Why is it called 'Shortwave'?**
 
-    Shortwave signals have a very long range because of their very good reflection properties. 
-Due to their long range, they can be received almost anywhere in the world. 
+    Shortwave signals have a very long range because of their very good reflection properties.
+Due to their long range, they can be received almost anywhere in the world.
 The same applies to Internet radio stations, which can also be received almost anywhere in the world.
 That's why we decided to call the project 'Shortwave', because internet radio stations and shortwave radio stations share many characteristics.
 
@@ -51,7 +57,7 @@ That's why we decided to call the project 'Shortwave', because internet radio st
 - **Which database does Shortwave use?**
 
     [radio-browser.info](http://www.radio-browser.info/gui/#/). It's a community database, everybody can contribute information.
-    
+
 - **How I can get debug information?**
 
     Run Shortwave using `RUST_BACKTRACE=1 RUST_LOG=shortwave=debug flatpak run de.haeckerfelix.Shortwave` (`.Devel`).
@@ -69,11 +75,13 @@ To build the development version of Shortwave and hack on the code see the
 building GNOME apps with Flatpak and GNOME Builder.
 
 ### Building it manually
-1. `git clone https://gitlab.gnome.org/World/Shortwave.git`
+1. `git clone https://github.com/lenucksi/Shortwave.git`
 2. `cd Shortwave`
 3. `meson --prefix=/usr build`
 4. `ninja -C build`
 5. `sudo ninja -C build install`
+
+The original upstream repository is at [gitlab.gnome.org/World/Shortwave](https://gitlab.gnome.org/World/Shortwave).
 
 To learn more about the required dependencies, please check the [Flatpak manifest](build-aux/de.haeckerfelix.Shortwave.Devel.json).
 
