@@ -1,0 +1,35 @@
+.github/workflows/ci.yml
+  s_4c37722fb36820::t_457658039f0d97 18,30,49,83,110
+  s_4c37722fb36820::t_262560d2eb2ab3 116
+scripts/verify-action-shas.sh
+  s_4c37722fb36820::t_e64bce1bb1a90e 42,70-71,76
+  s_4c37722fb36820::t_aa5a3dd47f72a8 10,19
+  s_4c37722fb36820::t_9af47549c87b4c 68-69
+  s_4c37722fb36820::t_652059d8d6fd33 8,12,14-16,20-22,26,29,31-37,39-40,43-44,46,48,51,53-57,75
+  s_4c37722fb36820::t_0d013465e6dcdc 1-7,9,17-18,23-25,38,47,49-50,52,58,60
+  s_4c37722fb36820::t_8de3410a25d7ee 11,13,27-28,41,45
+  s_4c37722fb36820::t_4887d852447f26 30,61-67,72-74,77
+  s_4c37722fb36820::t_4a8784f8931b19 59
+.github/workflows/actionlint.yml
+  s_4c37722fb36820::t_3d5b96413e0142 17
+.github/workflows/flatpak.yml
+  s_4c37722fb36820::t_ccdfe8482d43b2 33,103,143
+.github/workflows/release.yml
+  s_4c37722fb36820::t_1909e4575089b8 20
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.1",
+  "base_commit_sha": "91c6dc1cda564ea85995e23dc91b07a3c7ea6ae7",
+  "prompts": {},
+  "sessions": {
+    "s_4c37722fb36820": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_19b953129ffeOUx7tEqIf4dr9J",
+        "model": "deepseek-v4-flash-free"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    }
+  }
+}
