@@ -1,0 +1,11 @@
+Cargo.lock
+  ai_agent 38-86,550-595,2247-2252,2742-2747,3685,4454-4458
+src/bin/shortwave-script.rs
+  ai_agent 8-140
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "4d1f41cc1bd1b5be3a494b7eda4d1709f56e20b6",
+  "prompts": {}
+}
