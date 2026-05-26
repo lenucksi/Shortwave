@@ -1,0 +1,19 @@
+data/providers/radiobrowser.rhai
+  s_1817dca40b847e::t_07c28ef0f1ab0c 1-42
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "f196163040b303c3f254806c7bce5db84daf5099",
+  "prompts": {},
+  "sessions": {
+    "s_1817dca40b847e": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_199e29ffeffez0jraoCo1UHCDs",
+        "model": "deepseek-v4-flash-free"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    }
+  }
+}
