@@ -1,10 +1,10 @@
 ---
 id: SW-11
-title: "Discovery Sources UI + Ergebnisanzeige"
-status: Pending
+title: Discovery Sources UI + Ergebnisanzeige
+status: Done
 assignee: []
-created_date: '2026-05-24'
-updated_date: '2026-05-24'
+created_date: 2026-05-24
+updated_date: 2026-05-27 08:12
 labels: []
 milestone: ui-integration
 dependencies:
