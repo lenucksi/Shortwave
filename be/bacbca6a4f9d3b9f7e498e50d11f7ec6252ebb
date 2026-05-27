@@ -1,0 +1,50 @@
+data/gtk/discovery_source_row.ui
+  s_118528d5383dc5::t_fafc9686f5ffbc 1-61
+"backlog/archive/tasks/sw-6 - Discovery-Engine-Core-Rhai-Engine-und-Typen.md"
+  s_118528d5383dc5::t_9e1af1cc108e58 1-128
+"backlog/docs/doc-5 - Discovery-Script-Engine-Architecture.md"
+  s_118528d5383dc5::t_9e1af1cc108e58 1-136
+"backlog/tasks/sw-14 - CLI-Tool-shortwave-script.md"
+  s_118528d5383dc5::t_bb90f075d48b60 6-7,16,18,25,30-42,47,49-50
+"backlog/tasks/sw-7 - HTML-Parsing-Functions-fuer-Rhai.md"
+  s_118528d5383dc5::t_bb90f075d48b60 3,6-7,13-14,25,30-42,49-52
+src/ui/discovery_results_dialog.rs
+  s_cdbd3a0b1a4a84::t_d898028a7bc641 11-13,103-107
+  s_cdbd3a0b1a4a84::t_18c0c9e8a9742c 81
+  s_cdbd3a0b1a4a84::t_58380893e52470 1-2,4-10,14-75,77-80,82-102,108-118
+data/gtk/search_page.ui
+  s_cdbd3a0b1a4a84::t_f95d05b143ddbf 115-129
+data/gtk/discovery_results_dialog.ui
+  s_cdbd3a0b1a4a84::t_e4f1707b5dae21 15
+  s_118528d5383dc5::t_6d4b8f4e78c542 1-14,16-59
+src/ui/discovery_source_row.rs
+  s_118528d5383dc5::t_5eb6fbeb15055a 1-6,9-49,52-55,57-142,145-149
+"backlog/archive/tasks/sw-10 - SomaFM-Scraper-Provider-Script.md"
+  s_118528d5383dc5::t_9e1af1cc108e58 1-175
+src/discovery/engine.rs
+  s_118528d5383dc5::t_bb90f075d48b60 4,66,74-106,137,163,316-332
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "bebacbca6a4f9d3b9f7e498e50d11f7ec6252ebb",
+  "prompts": {},
+  "sessions": {
+    "s_118528d5383dc5": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_19a8323eeffe8eS0d9Uj265YvT",
+        "model": "deepseek-v4-flash-free"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    },
+    "s_cdbd3a0b1a4a84": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1979e4c85ffe5cCnCZVIeKi35n",
+        "model": "deepseek-v4-flash-free"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    }
+  }
+}
