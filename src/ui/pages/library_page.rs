@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-use std::cell::Cell;
+use std::cell::{Cell, OnceCell};
 
 use adw::prelude::*;
 use adw::subclass::prelude::*;
@@ -27,7 +27,7 @@ use crate::config;
 use crate::database::SwLibraryStatus;
 use crate::i18n::*;
 use crate::settings::{Key, settings_manager};
-use crate::ui::{SwStationDialog, SwStationRow};
+use crate::ui::{SwApplicationWindow, SwStationDialog, SwStationRow, ToastWindow};
 
 mod imp {
     use super::*;
@@ -42,6 +42,13 @@ mod imp {
         stack: TemplateChild<adw::ViewStack>,
         #[template_child]
         gridview: TemplateChild<gtk::GridView>,
+        #[template_child]
+        select_toggle: TemplateChild<gtk::ToggleButton>,
+        #[template_child]
+        delete_selected_button: TemplateChild<gtk::Button>,
+
+        selection_mode: Cell<bool>,
+        sort_list_model: OnceCell<gtk::SortListModel>,
 
         #[property(get, set, builder(SwStationSorting::default()))]
         sorting: Cell<SwStationSorting>,
@@ -86,21 +93,57 @@ mod imp {
                 .bidirectional()
                 .build();
 
-            let model = gtk::SortListModel::new(Some(library.model()), Some(sorter.clone()));
+            let sort_list_model =
+                gtk::SortListModel::new(Some(library.model()), Some(sorter.clone()));
+            self.sort_list_model.set(sort_list_model.clone()).unwrap();
 
             // Ensure that row type is registered
             SwStationRow::static_type();
 
             // Station grid view
-            let model = gtk::NoSelection::new(Some(model));
+            let model = gtk::NoSelection::new(Some(sort_list_model));
             self.gridview.set_model(Some(&model));
 
-            self.gridview.connect_activate(|gridview, pos| {
-                let model = gridview.model().unwrap();
-                let station = model.item(pos).unwrap().downcast::<SwStation>().unwrap();
-                let station_dialog = SwStationDialog::new(&station);
-                station_dialog.present(Some(gridview));
-            });
+            self.gridview.connect_activate(clone!(
+                #[weak(rename_to = imp)]
+                self,
+                move |gridview, pos| {
+                    if imp.selection_mode.get() {
+                        return;
+                    }
+                    let model = gridview.model().unwrap();
+                    let station = model.item(pos).unwrap().downcast::<SwStation>().unwrap();
+                    let station_dialog = SwStationDialog::new(&station);
+                    station_dialog.present(Some(gridview));
+                }
+            ));
+
+            self.select_toggle.connect_toggled(clone!(
+                #[weak(rename_to = imp)]
+                self,
+                move |toggle| {
+                    if toggle.is_active() {
+                        imp.enter_selection_mode();
+                    } else {
+                        imp.exit_selection_mode();
+                    }
+                }
+            ));
+
+            self.delete_selected_button.connect_clicked(clone!(
+                #[weak(rename_to = imp)]
+                self,
+                move |_| {
+                    let imp = imp.clone();
+                    glib::spawn_future_local(clone!(
+                        #[weak]
+                        imp,
+                        async move {
+                            imp.delete_selected_stations().await;
+                        }
+                    ));
+                }
+            ));
 
             // Setup empty state page
             self.status_page.set_icon_name(Some(*config::APP_ID));
@@ -129,6 +172,106 @@ mod imp {
     impl NavigationPageImpl for SwLibraryPage {}
 
     impl SwLibraryPage {
+        fn enter_selection_mode(&self) {
+            self.selection_mode.set(true);
+            self.select_toggle.set_label(&i18n("Done"));
+
+            let sort_list_model = self.sort_list_model.get().unwrap();
+            let selection = gtk::MultiSelection::new(Some(sort_list_model.clone()));
+            self.gridview.set_model(Some(&selection));
+
+            self.delete_selected_button.set_visible(true);
+        }
+
+        fn exit_selection_mode(&self) {
+            self.selection_mode.set(false);
+            self.select_toggle.set_label(&i18n("Select"));
+
+            if let Some(model) = self.gridview.model() {
+                if let Ok(selection) = model.downcast::<gtk::MultiSelection>() {
+                    selection.unselect_all();
+                }
+            }
+
+            let sort_list_model = self.sort_list_model.get().unwrap();
+            let model = gtk::NoSelection::new(Some(sort_list_model.clone()));
+            self.gridview.set_model(Some(&model));
+
+            self.delete_selected_button.set_visible(false);
+        }
+
+        async fn delete_selected_stations(&self) {
+            let model = self.gridview.model().unwrap();
+            let Some(selection) = model.downcast::<gtk::MultiSelection>().ok() else {
+                return;
+            };
+
+            let n_items = selection.n_items();
+            let mut stations = Vec::new();
+            for i in 0..n_items {
+                if selection.is_selected(i) {
+                    if let Some(item) = selection.item(i) {
+                        if let Ok(station) = item.downcast::<SwStation>() {
+                            stations.push(station);
+                        }
+                    }
+                }
+            }
+
+            if stations.is_empty() {
+                return;
+            }
+
+            let names: Vec<String> = stations.iter().map(|s| s.metadata().name.clone()).collect();
+            let title = if stations.len() == 1 {
+                i18n_f("Delete station “{}”?", &[&names[0]])
+            } else {
+                i18n_f("Delete {} stations?", &[&stations.len().to_string()])
+            };
+
+            let body = names
+                .iter()
+                .take(20)
+                .map(|n| format!("• {}", n))
+                .collect::<Vec<_>>()
+                .join("\n");
+            let body = if names.len() > 20 {
+                format!("{}\n…", body)
+            } else {
+                body
+            };
+
+            let dialog = adw::AlertDialog::new(Some(&title), Some(&body));
+            dialog.add_response("cancel", &i18n("Cancel"));
+            dialog.add_response("delete", &i18n("Delete"));
+            dialog.set_response_appearance("delete", adw::ResponseAppearance::Destructive);
+            dialog.set_default_response(Some("cancel"));
+            dialog.set_close_response("cancel");
+
+            let result = dialog.choose_future(Some(&*self.obj())).await;
+
+            if result == "delete" {
+                self.select_toggle.set_active(false);
+
+                let library = SwApplication::default().library();
+                library.remove_stations(stations);
+
+                let msg = if names.len() == 1 {
+                    i18n_f("Deleted “{}”", &[&names[0]])
+                } else {
+                    i18n_f("Deleted {} stations", &[&names.len().to_string()])
+                };
+
+                if let Some(window) = self
+                    .obj()
+                    .root()
+                    .and_then(|r| r.downcast::<SwApplicationWindow>().ok())
+                {
+                    window.toast_overlay().add_toast(adw::Toast::new(&msg));
+                }
+            }
+        }
+
         fn update_stack_page(&self) {
             let status = SwApplication::default().library().status();
             match status {
