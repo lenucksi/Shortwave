@@ -1,0 +1,19 @@
+"backlog/tasks/sw-11 - Discovery-Sources-UI.md"
+  s_118528d5383dc5::t_2d46f35a0c5e81 3-4,6-7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "57dc222a55d6bbfb8384a4ac10ac002712891798",
+  "prompts": {},
+  "sessions": {
+    "s_118528d5383dc5": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_19a8323eeffe8eS0d9Uj265YvT",
+        "model": "deepseek-v4-flash-free"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    }
+  }
+}
