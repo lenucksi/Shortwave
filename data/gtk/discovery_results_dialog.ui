@@ -5,29 +5,37 @@
     <property name="default_width">480</property>
     <property name="default_height">500</property>
     <child>
-      <object class="AdwToolbarView">
-        <child type="top">
-          <object class="AdwHeaderBar">
-            <child type="end">
-              <object class="GtkButton" id="import_button">
-                <property name="label" translatable="yes">Import</property>
-                <property name="sensitive">False</property>
-                <signal name="clicked" handler="import_clicked" swapped="true" />
-                <style>
-                  <class name="suggested-action" />
-                </style>
+      <object class="AdwToastOverlay" id="toast_overlay">
+        <child>
+          <object class="AdwToolbarView">
+            <child type="top">
+              <object class="AdwHeaderBar">
+                <child type="start">
+                  <object class="GtkButton" id="cancel_button">
+                    <property name="label" translatable="yes">Cancel</property>
+                    <signal name="clicked" handler="cancel_clicked" swapped="true" />
+                  </object>
+                </child>
+                <child type="end">
+                  <object class="GtkButton" id="import_button">
+                    <property name="label" translatable="yes">Import</property>
+                    <property name="sensitive">False</property>
+                    <signal name="clicked" handler="import_clicked" swapped="true" />
+                    <style>
+                      <class name="suggested-action" />
+                    </style>
+                  </object>
+                </child>
               </object>
             </child>
-          </object>
-        </child>
-        <child>
-          <object class="GtkScrolledWindow">
-            <property name="hscrollbar_policy">never</property>
             <child>
-              <object class="GtkListView" id="stations_list">
-                <property name="factory">
-                  <object class="GtkBuilderListItemFactory">
-                    <property name="bytes"><![CDATA[
+              <object class="GtkScrolledWindow">
+                <property name="hscrollbar_policy">never</property>
+                <child>
+                  <object class="GtkListView" id="stations_list">
+                    <property name="factory">
+                      <object class="GtkBuilderListItemFactory">
+                        <property name="bytes"><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <template class="GtkListItem">
@@ -47,8 +55,11 @@
     </property>
   </template>
 </interface>]]>
-                  </property>
-                </property>
+                        </property>
+                      </object>
+                    </property>
+                  </object>
+                </child>
               </object>
             </child>
           </object>

@@ -18,6 +18,10 @@ mod imp {
         #[template_child]
         pub import_button: TemplateChild<gtk::Button>,
         #[template_child]
+        pub cancel_button: TemplateChild<gtk::Button>,
+        #[template_child]
+        pub toast_overlay: TemplateChild<adw::ToastOverlay>,
+        #[template_child]
         pub stations_list: TemplateChild<gtk::ListView>,
 
         pub stations: RefCell<Vec<StationData>>,
@@ -49,12 +53,24 @@ mod imp {
     impl SwDiscoveryResultsDialog {
         #[template_callback]
         fn import_clicked(&self) {
+            let count = self.stations.borrow().len();
             let stations = self.stations.borrow();
             let app = SwApplication::default();
             for station in stations.iter() {
                 let station = station.to_sw_station();
                 app.library().add_station(station);
             }
+            drop(stations);
+            let toast = adw::Toast::new(&crate::i18n::i18n_f(
+                "Imported {} stations",
+                &[&count.to_string()],
+            ));
+            self.toast_overlay.add_toast(toast);
+            self.obj().close();
+        }
+
+        #[template_callback]
+        fn cancel_clicked(&self) {
             self.obj().close();
         }
     }
