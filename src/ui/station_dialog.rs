@@ -19,13 +19,14 @@ use std::cell::OnceCell;
 use adw::prelude::*;
 use adw::subclass::prelude::*;
 use cruet::Inflector;
-use glib::{Properties, subclass};
+use glib::{Properties, clone, subclass};
 use gtk::{CompositeTemplate, gdk, glib};
 use shumate::prelude::*;
 
 use crate::api::SwStation;
 use crate::app::SwApplication;
 use crate::i18n::{i18n, i18n_f};
+use crate::playlist::fetch_and_parse;
 use crate::ui::{SwStationCover, ToastWindow};
 
 mod imp {
@@ -63,6 +64,10 @@ mod imp {
         bitrate_row: TemplateChild<adw::ActionRow>,
         #[template_child]
         stream_row: TemplateChild<adw::ActionRow>,
+        #[template_child]
+        playlist_row: TemplateChild<adw::ActionRow>,
+        #[template_child]
+        alternate_urls_group: TemplateChild<adw::PreferencesGroup>,
         #[template_child]
         location_group: TemplateChild<adw::PreferencesGroup>,
         #[template_child]
@@ -219,6 +224,91 @@ mod imp {
 
             self.stream_row.set_subtitle(&subtitle);
             self.stream_row.set_tooltip_text(Some(&url));
+
+            // Playlist url
+            if let Some(ref playlist_url) = metadata.playlist_url {
+                self.playlist_row.set_visible(true);
+                self.playlist_row.set_subtitle(&playlist_url.to_string());
+            }
+
+            // Alternate streams
+            if !metadata.alternate_urls.is_empty() {
+                self.alternate_urls_group.set_visible(true);
+
+                for alt_url in &metadata.alternate_urls {
+                    let row = adw::ActionRow::new();
+                    row.set_title(&alt_url.to_string());
+                    row.set_title_lines(1);
+                    row.set_tooltip_text(Some(alt_url.as_ref()));
+                    row.add_css_class("property");
+
+                    let switch_btn = gtk::Button::builder()
+                        .icon_name("media-playback-start-symbolic")
+                        .valign(gtk::Align::Center)
+                        .tooltip_text(&i18n("Switch"))
+                        .build();
+                    switch_btn.add_css_class("flat");
+
+                    let url = alt_url.clone();
+                    let station = self.obj().station();
+
+                    switch_btn.connect_clicked(clone!(
+                        #[strong]
+                        station,
+                        #[strong]
+                        url,
+                        #[weak(rename_to = dialog)]
+                        self,
+                        move |_| {
+                            glib::spawn_future_local(clone!(
+                                #[strong]
+                                station,
+                                #[strong]
+                                url,
+                                #[weak]
+                                dialog,
+                                async move {
+                                    match fetch_and_parse(&url).await {
+                                        Ok(entries) if !entries.is_empty() => {
+                                            let mut metadata = station.metadata();
+                                            metadata.url = Some(entries[0].url.clone());
+                                            metadata.url_resolved = None;
+                                            metadata.alternate_urls = entries
+                                                .iter()
+                                                .skip(1)
+                                                .map(|e| e.url.clone())
+                                                .collect();
+                                            metadata.playlist_url = Some(url.clone());
+                                            station.set_metadata(metadata);
+
+                                            let url_str = entries[0].url.to_string();
+                                            let escaped = url_str.replace('&', "&amp;");
+                                            let subtitle =
+                                                format!("<a href=\"{0}\">{0}</a>", &escaped);
+                                            dialog.stream_row.set_subtitle(&subtitle);
+                                            dialog.stream_row.set_tooltip_text(Some(&url_str));
+
+                                            dialog.playlist_row.set_visible(true);
+                                            dialog.playlist_row.set_subtitle(&url.to_string());
+
+                                            let toast = adw::Toast::new(&i18n("Stream switched"));
+                                            dialog.toast_overlay.add_toast(toast);
+                                        }
+                                        _ => {
+                                            let toast =
+                                                adw::Toast::new(&i18n("Failed to resolve stream"));
+                                            dialog.toast_overlay.add_toast(toast);
+                                        }
+                                    }
+                                }
+                            ));
+                        }
+                    ));
+
+                    row.add_suffix(&switch_btn);
+                    self.alternate_urls_group.add(&row);
+                }
+            }
         }
 
         fn setup_map_widget(&self) {
@@ -288,6 +378,20 @@ mod imp {
                 let display = gdk::Display::default().unwrap();
                 let clipboard = display.clipboard();
                 clipboard.set_text(url_resolved.as_ref());
+
+                let toast = adw::Toast::new(&i18n("Copied"));
+                self.toast_overlay.add_toast(toast);
+            }
+        }
+
+        #[template_callback]
+        fn copy_playlist_clipboard(&self) {
+            let metadata = self.obj().station().metadata();
+
+            if let Some(ref playlist_url) = metadata.playlist_url {
+                let display = gdk::Display::default().unwrap();
+                let clipboard = display.clipboard();
+                clipboard.set_text(playlist_url.as_ref());
 
                 let toast = adw::Toast::new(&i18n("Copied"));
                 self.toast_overlay.add_toast(toast);
