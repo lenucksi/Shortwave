@@ -1,0 +1,29 @@
+data/de.haeckerfelix.Shortwave.gschema.xml.in
+  s_118528d5383dc5::t_fc851bc3b3a09b 52-54
+src/discovery/registry.rs
+  s_118528d5383dc5::t_fc851bc3b3a09b 87,96-108
+data/gtk/discovery_source_row.ui
+  s_118528d5383dc5::t_fc851bc3b3a09b 14,44-49,62-71
+src/ui/discovery_source_row.rs
+  s_118528d5383dc5::t_fc851bc3b3a09b 7,26-29,34,55-60,70-72,89-91,101,115-129,146,157-158,166-171,175-191,204-210
+src/ui/pages/search_page.rs
+  s_118528d5383dc5::t_fc851bc3b3a09b 2,18,23,35-60,81-84,89,156,274-328,334-442
+data/gtk/search_page.ui
+  s_118528d5383dc5::t_fc851bc3b3a09b 131-157
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "ca18b2ac811d375596ff2a0fa63cdbda25481200",
+  "prompts": {},
+  "sessions": {
+    "s_118528d5383dc5": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_19a8323eeffe8eS0d9Uj265YvT",
+        "model": "deepseek-v4-flash-free"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    }
+  }
+}
