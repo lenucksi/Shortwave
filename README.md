@@ -10,6 +10,8 @@
 ![screenshot](data/screenshots/4.png)
 
 Shortwave is an internet radio player that provides access to a station database with over 50,000 stations.
+It includes a **Discovery Script System** powered by [Rhai](https://rhai.rs/) that lets you
+write scripts to scrape radio directories and APIs for new stations.
 
 ## Getting in Touch
 If you have any questions regarding the use or development of Shortwave,
@@ -61,6 +63,14 @@ That's why we decided to call the project 'Shortwave', because internet radio st
 - **How I can get debug information?**
 
     Run Shortwave using `RUST_BACKTRACE=1 RUST_LOG=shortwave=debug flatpak run de.haeckerfelix.Shortwave` (`.Devel`).
+
+## Discovery Scripts
+
+Shortwave supports discovery scripts written in [Rhai](https://rhai.rs/) that let you
+scrape radio station directories and APIs. Scripts are registered as providers
+and can be run from the Browse Stations page or the `shortwave-script` CLI tool.
+
+See [docs/discovery-scripts.md](docs/discovery-scripts.md) for the full guide.
 
 ## Translations
 Translation of this project takes place on the GNOME translation platform,
