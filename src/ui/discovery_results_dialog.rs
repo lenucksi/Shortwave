@@ -1,10 +1,13 @@
 use adw::prelude::*;
 use adw::subclass::prelude::*;
+use glib::clone;
 use gtk::{CompositeTemplate, TemplateChild, gio, glib};
 
 use crate::api::SwStation;
 use crate::app::SwApplication;
 use crate::discovery::types::StationData;
+use crate::playlist::fetch_and_parse;
+use url::Url;
 
 mod imp {
     use super::*;
@@ -23,6 +26,8 @@ mod imp {
         pub toast_overlay: TemplateChild<adw::ToastOverlay>,
         #[template_child]
         pub stations_list: TemplateChild<gtk::ListView>,
+        #[template_child]
+        pub import_progress_label: TemplateChild<gtk::Label>,
 
         pub stations: RefCell<Vec<StationData>>,
     }
@@ -53,20 +58,98 @@ mod imp {
     impl SwDiscoveryResultsDialog {
         #[template_callback]
         fn import_clicked(&self) {
-            let count = self.stations.borrow().len();
-            let stations = self.stations.borrow();
-            let app = SwApplication::default();
-            for station in stations.iter() {
-                let station = station.to_sw_station();
-                app.library().add_station(station);
+            let stations = self.stations.borrow().clone();
+            if stations.is_empty() {
+                return;
             }
-            drop(stations);
-            let toast = adw::Toast::new(&crate::i18n::i18n_f(
-                "Imported {} stations",
-                &[&count.to_string()],
+            let total = stations.len();
+
+            let body = stations
+                .iter()
+                .map(|s| format!("• {}", s.name))
+                .collect::<Vec<_>>()
+                .join("\n");
+
+            let obj = self.obj();
+
+            glib::spawn_future_local(clone!(
+                #[weak]
+                obj,
+                async move {
+                    let dialog = adw::AlertDialog::new(
+                        Some(&format!("Import these {} stations?", total)),
+                        Some(&body),
+                    );
+                    dialog.add_response("cancel", "_Cancel");
+                    dialog.add_response("import", "_Import");
+                    dialog.set_response_appearance("import", adw::ResponseAppearance::Suggested);
+                    dialog.set_default_response(Some("import"));
+                    dialog.set_close_response("cancel");
+
+                    let response = dialog.choose_future(Some(&obj)).await;
+                    if response != "import" {
+                        return;
+                    }
+
+                    let imp = obj.imp();
+                    imp.import_progress_label.set_visible(true);
+                    imp.import_button.set_sensitive(false);
+
+                    let app = SwApplication::default();
+
+                    for (i, station) in stations.iter().enumerate() {
+                        let progress = format!("Importing {} / {}: {}", i + 1, total, station.name);
+                        imp.import_progress_label.set_label(&progress);
+
+                        let is_playlist = station.stream_url.ends_with(".pls")
+                            || station.stream_url.ends_with(".m3u")
+                            || station.stream_url.ends_with(".m3u8");
+
+                        let (url, alternate_urls, playlist_url) = if is_playlist {
+                            let pls_url = Url::parse(&station.stream_url).ok();
+                            let mut resolved_url = None;
+                            let mut alt_urls = Vec::new();
+                            if let Some(ref pu) = pls_url {
+                                if let Ok(entries) = fetch_and_parse(pu).await {
+                                    let urls: Vec<Url> =
+                                        entries.into_iter().map(|e| e.url).collect();
+                                    let mut iter = urls.into_iter();
+                                    resolved_url = iter.next();
+                                    alt_urls = iter.collect();
+                                }
+                            }
+                            (resolved_url, alt_urls, pls_url)
+                        } else {
+                            let (chosen, alts) = select_best_format(&station);
+                            (Url::parse(&chosen).ok(), alts, None)
+                        };
+
+                        let mut metadata = crate::api::StationMetadata::default();
+                        metadata.name = station.name.clone();
+                        metadata.url = url;
+                        metadata.alternate_urls = alternate_urls;
+                        metadata.playlist_url = playlist_url;
+                        metadata.homepage =
+                            station.homepage.as_ref().and_then(|h| Url::parse(h).ok());
+                        metadata.favicon =
+                            station.icon_url.as_ref().and_then(|i| Url::parse(i).ok());
+                        metadata.tags = station.tags.clone().unwrap_or_default();
+                        metadata.country = station.country.clone().unwrap_or_default();
+                        metadata.language = station.language.clone().unwrap_or_default();
+
+                        let sw_station =
+                            SwStation::new(&uuid::Uuid::new_v4().to_string(), true, metadata, None);
+                        app.library().add_station(sw_station);
+                    }
+
+                    let toast = adw::Toast::new(&crate::i18n::i18n_f(
+                        "Imported {} stations",
+                        &[&total.to_string()],
+                    ));
+                    imp.toast_overlay.add_toast(toast);
+                    obj.close();
+                }
             ));
-            self.toast_overlay.add_toast(toast);
-            self.obj().close();
         }
 
         #[template_callback]
@@ -87,7 +170,7 @@ impl SwDiscoveryResultsDialog {
         let obj: Self = glib::Object::builder().build();
         let imp = obj.imp();
 
-        obj.set_size_request(420, 500);
+        obj.set_size_request(500, 500);
 
         *imp.stations.borrow_mut() = stations.to_vec();
 
@@ -103,6 +186,42 @@ impl SwDiscoveryResultsDialog {
 
         obj
     }
+}
+
+fn select_best_format(station: &StationData) -> (String, Vec<Url>) {
+    if station.stream_urls.is_empty() {
+        return (station.stream_url.clone(), Vec::new());
+    }
+
+    let mut candidates: Vec<&crate::discovery::types::StreamUrlInfo> =
+        station.stream_urls.iter().collect();
+    candidates.sort_by(|a, b| {
+        let a_tls = a.tls.unwrap_or(false);
+        let b_tls = b.tls.unwrap_or(false);
+        b_tls
+            .cmp(&a_tls)
+            .then_with(|| {
+                let a_codec = a.codec.as_deref().unwrap_or("").to_lowercase();
+                let b_codec = b.codec.as_deref().unwrap_or("").to_lowercase();
+                let a_is_aac = a_codec.contains("aac");
+                let b_is_aac = b_codec.contains("aac");
+                b_is_aac.cmp(&a_is_aac)
+            })
+            .then_with(|| {
+                let a_bitrate = a.bitrate.unwrap_or(0);
+                let b_bitrate = b.bitrate.unwrap_or(0);
+                b_bitrate.cmp(&a_bitrate)
+            })
+    });
+
+    let best = candidates[0];
+    let chosen = best.url.clone();
+    let alts: Vec<Url> = candidates[1..]
+        .iter()
+        .filter_map(|u| Url::parse(&u.url).ok())
+        .collect();
+
+    (chosen, alts)
 }
 
 trait ToSwStation {
