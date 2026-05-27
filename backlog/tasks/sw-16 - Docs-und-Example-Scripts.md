@@ -1,10 +1,10 @@
 ---
 id: SW-16
-title: "Dokumentation + Example Scripts"
-status: Pending
+title: Dokumentation + Example Scripts
+status: Done
 assignee: []
-created_date: '2026-05-24'
-updated_date: '2026-05-24'
+created_date: 2026-05-24
+updated_date: 2026-05-27 09:51
 labels: []
 milestone: tooling
 dependencies:

@@ -1,10 +1,10 @@
 ---
 id: SW-12
-title: "Import Results Dialog (Preview + Select + Import)"
-status: Pending
+title: Import Results Dialog (Preview + Select + Import)
+status: Done
 assignee: []
-created_date: '2026-05-24'
-updated_date: '2026-05-24'
+created_date: 2026-05-24
+updated_date: 2026-05-27 09:51
 labels: []
 milestone: ui-integration
 dependencies:

@@ -1,10 +1,10 @@
 ---
 id: SW-15
-title: "Custom Provider Management UI"
-status: Pending
+title: Custom Provider Management UI
+status: Done
 assignee: []
-created_date: '2026-05-24'
-updated_date: '2026-05-24'
+created_date: 2026-05-24
+updated_date: 2026-05-27 09:51
 labels: []
 milestone: tooling
 dependencies:
