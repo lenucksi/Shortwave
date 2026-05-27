@@ -1,0 +1,41 @@
+src/ui/discovery_source_row.rs
+  s_1f9ceff7025eed::t_c8ed875d41d2ca 7,26-29,34,55-60,70-72,89-91,101,115-129,146,157-158,166-169,178-187,204-210
+  s_118528d5383dc5::t_b4f2c7380648ab 175-177
+  s_1f9ceff7025eed::t_293f6638f948f5 190-191
+src/ui/pages/search_page.rs
+  s_118528d5383dc5::t_b4f2c7380648ab 45-46,427
+  s_1f9ceff7025eed::t_181d6ba57bee96 2,18,23,35-44,47-60,81-84,89,156,274-279,281-287,289-325,334-410,415-419,422-425,430-432,434-442
+data/gtk/search_page.ui
+  s_1f9ceff7025eed::t_c94070d711a531 131-157
+src/discovery/registry.rs
+  s_118528d5383dc5::t_b4f2c7380648ab 98
+  s_1f9ceff7025eed::t_04c2b9ebe56d32 87,96-97,99-110
+data/gtk/discovery_source_row.ui
+  s_1f9ceff7025eed::t_75179141f81b27 14,44-49,62-73
+data/de.haeckerfelix.Shortwave.gschema.xml.in
+  s_1f9ceff7025eed::t_842de55b68c3e0 52-54
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "556cb29ad67a8b6dfddc1ef82029cf8f481f6270",
+  "prompts": {},
+  "sessions": {
+    "s_118528d5383dc5": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_19a8323eeffe8eS0d9Uj265YvT",
+        "model": "deepseek-v4-flash-free"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    },
+    "s_1f9ceff7025eed": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_19780a36dffeHNhSkqEUg5vVFv",
+        "model": "deepseek-v4-flash-free"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    }
+  }
+}
