@@ -40,6 +40,8 @@ mod imp {
         metadata: RwLock<StationMetadata>,
         #[property(get=Self::title)]
         title: PhantomData<String>,
+        #[property(get=Self::country)]
+        country: PhantomData<String>,
         #[property(get, set, nullable)]
         custom_cover: RwLock<Option<gdk::Texture>>,
         #[property(get, set)]
@@ -58,6 +60,10 @@ mod imp {
     impl SwStation {
         fn title(&self) -> String {
             self.obj().metadata().name
+        }
+
+        fn country(&self) -> String {
+            self.obj().metadata().country.clone()
         }
 
         fn set_metadata(&self, mut metadata: StationMetadata) {

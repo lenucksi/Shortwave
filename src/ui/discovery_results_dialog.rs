@@ -87,6 +87,8 @@ impl SwDiscoveryResultsDialog {
         let obj: Self = glib::Object::builder().build();
         let imp = obj.imp();
 
+        obj.set_size_request(420, 500);
+
         *imp.stations.borrow_mut() = stations.to_vec();
 
         let store = gio::ListStore::new::<SwStation>();

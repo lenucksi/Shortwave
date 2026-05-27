@@ -323,7 +323,13 @@ mod imp {
             let _ = std::fs::create_dir_all(&user_dir);
             let uri = format!("file://{}", user_dir.display());
             let launcher = gtk::UriLauncher::new(&uri);
-            let _ = launcher.launch_future(None::<&gtk::Window>).await;
+            let parent = self
+                .obj()
+                .root()
+                .and_then(|r| r.downcast::<gtk::Window>().ok());
+            if let Err(e) = launcher.launch_future(parent.as_ref()).await {
+                log::error!("Failed to open provider folder: {e}");
+            }
         }
 
         fn region_code() -> Option<String> {

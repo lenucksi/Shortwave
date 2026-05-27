@@ -2,8 +2,6 @@
 <interface>
   <template class="SwDiscoveryResultsDialog" parent="AdwDialog">
     <property name="title" translatable="yes">Discovery Results</property>
-    <property name="default_width">480</property>
-    <property name="default_height">500</property>
     <child>
       <object class="AdwToastOverlay" id="toast_overlay">
         <child>
@@ -42,7 +40,7 @@
     <property name="child">
       <object class="AdwActionRow">
         <binding name="title">
-          <lookup name="name" type="SwStation">
+          <lookup name="title" type="SwStation">
             <lookup name="item">GtkListItem</lookup>
           </lookup>
         </binding>

@@ -1,22 +1,20 @@
 // Discovery-Provider: WebradioDB
 // Description: Community-kuratierte Radios, Alternative zu Radio-Browser.info
 
-let url = "https://api.webradiodb.com/v1/stations";
+let url = "https://jcorporation.github.io/webradiodb/db/index/webradios.min.json";
 
-let result = try http_get_json(url) catch {
+let raw = [];
+try {
+   raw = http_get_json(url);
+} catch (error) {
    // API nicht erreichbar, leeres Ergebnis zurückgeben
-   json_stringify(#{
-      "provider": "WebradioDB",
-      "stations": []
-   })
 };
 
-let stations = [];
-
-for station in result {
-   let stream_url = station.url;
+let results = [];
+for station in raw {
+   let stream_url = if station.url == () { "" } else { station.url };
    let urls = [];
-   if station.url != "" {
+   if stream_url != "" {
       urls.push(#{
          "url": station.url,
          "codec": station.codec,
@@ -25,7 +23,7 @@ for station in result {
       });
    }
 
-   stations.push(#{
+   results.push(#{
       "name": station.name,
       "stream_url": stream_url,
       "stream_urls": urls,
@@ -39,5 +37,5 @@ for station in result {
 
 json_stringify(#{
    "provider": "WebradioDB",
-   "stations": stations
+   "stations": results
 })

@@ -1,21 +1,20 @@
 // Discovery-Provider: Radio-Browser.info
 // Description: Große öffentliche DB mit Tausenden Radiosendern
 
-let url = "https://at1.api.radio-browser.info/json/stations?limit=100";
+let url = "https://all.api.radio-browser.info/json/stations?limit=100";
 
-let result = try http_get_json(url) catch {
-   json_stringify(#{
-      "provider": "Radio-Browser.info",
-      "stations": []
-   })
+let raw = [];
+try {
+   raw = http_get_json(url);
+} catch (error) {
+   // API nicht erreichbar, leeres Ergebnis zurückgeben
 };
 
-let stations = [];
-
-for station in result {
-   let stream_url = station.url;
+let results = [];
+for station in raw {
+   let stream_url = if station.url == () { "" } else { station.url };
    let urls = [];
-   if station.url != "" {
+   if stream_url != "" {
       urls.push(#{
          "url": station.url,
          "codec": station.codec,
@@ -24,7 +23,7 @@ for station in result {
       });
    }
 
-   stations.push(#{
+   results.push(#{
       "name": station.name,
       "stream_url": stream_url,
       "stream_urls": urls,
@@ -38,5 +37,5 @@ for station in result {
 
 json_stringify(#{
    "provider": "Radio-Browser.info",
-   "stations": stations
+   "stations": results
 })

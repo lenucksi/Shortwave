@@ -1,8 +1,19 @@
 // Discovery-Provider: SomaFM
 // Description: 30+ kuratierte Channels (ambient, electronic, indie, ...)
 
-let html = http_get("https://somafm.com/");
-let links_json = html_select(html, "a[href^='/player24/station/']");
+let html = "";
+try {
+   html = http_get("https://somafm.com/");
+} catch (error) {
+   // SomaFM nicht erreichbar, leeres Ergebnis zurückgeben
+};
+
+let links_json = "";
+if html != "" {
+   links_json = html_select(html, "a[href^='/player24/station/']");
+} else {
+   links_json = "[]";
+};
 let links = json_parse(links_json);
 
 let seen = #{};
