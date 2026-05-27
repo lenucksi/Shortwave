@@ -1,6 +1,7 @@
 #![allow(dead_code)]
 
 use rhai::{Dynamic, Engine, EvalAltResult};
+use scraper::{Html, Selector};
 use serde_json::Value;
 
 fn http_get_with_client(
@@ -62,9 +63,42 @@ fn json_stringify(val: Dynamic) -> Result<String, Box<EvalAltResult>> {
             rhai::Position::NONE,
         ))
     })?;
-    serde_json::to_string_pretty(&val).map_err(|e| {
+    serde_json::to_string(&val).map_err(|e| {
         Box::new(EvalAltResult::ErrorRuntime(
             format!("json_stringify: {e}").into(),
+            rhai::Position::NONE,
+        ))
+    })
+}
+
+fn html_select(html_str: &str, css: &str) -> Result<String, Box<EvalAltResult>> {
+    let html = Html::parse_document(html_str);
+    let sel = Selector::parse(css).map_err(|e| {
+        Box::new(EvalAltResult::ErrorRuntime(
+            format!("invalid css '{css}': {e}").into(),
+            rhai::Position::NONE,
+        ))
+    })?;
+
+    let results: Vec<serde_json::Value> = html
+        .select(&sel)
+        .map(|el| {
+            let mut attrs = serde_json::Map::new();
+            for (k, v) in el.value().attrs() {
+                attrs.insert(k.to_string(), serde_json::Value::String(v.to_string()));
+            }
+            serde_json::json!({
+                "tag": el.value().name(),
+                "attrs": attrs,
+                "text": el.text().collect::<Vec<_>>().join(""),
+                "html": el.html(),
+            })
+        })
+        .collect();
+
+    serde_json::to_string(&results).map_err(|e| {
+        Box::new(EvalAltResult::ErrorRuntime(
+            format!("html_select serialize: {e}").into(),
             rhai::Position::NONE,
         ))
     })
@@ -100,6 +134,7 @@ pub fn create() -> Engine {
 
     engine.register_fn("json_parse", json_parse);
     engine.register_fn("json_stringify", json_stringify);
+    engine.register_fn("html_select", html_select);
 
     configure_engine(&mut engine);
     engine
@@ -125,6 +160,7 @@ pub fn create_with_client(client: reqwest::blocking::Client) -> Engine {
 
     engine.register_fn("json_parse", json_parse);
     engine.register_fn("json_stringify", json_stringify);
+    engine.register_fn("html_select", html_select);
 
     configure_engine(&mut engine);
     engine
@@ -276,5 +312,23 @@ mod tests {
         let parsed: serde_json::Value = serde_json::from_str(&result).unwrap();
         assert_eq!(parsed["x"], 10);
         assert_eq!(parsed["y"], 20);
+    }
+
+    #[test]
+    fn test_html_select() {
+        let engine = create();
+        let script = r#"
+            let results = html_select(`<ul><li id="a">Item A</li><li id="b">Item B</li></ul>`, `li`);
+            results
+        "#;
+        let result = engine
+            .eval_ast::<String>(&engine.compile(script).expect("compile"))
+            .expect("eval");
+        let parsed: serde_json::Value = serde_json::from_str(&result).unwrap();
+        assert!(parsed.is_array());
+        assert_eq!(parsed.as_array().unwrap().len(), 2);
+        assert_eq!(parsed[0]["tag"], "li");
+        assert_eq!(parsed[0]["text"], "Item A");
+        assert!(parsed[0]["attrs"]["id"].is_string());
     }
 }

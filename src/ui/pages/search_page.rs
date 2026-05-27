@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-use std::cell::Cell;
+use std::cell::{Cell, RefCell};
 
 use adw::prelude::*;
 use adw::subclass::prelude::*;
@@ -24,7 +24,12 @@ use indexmap::IndexMap;
 use rand::seq::IteratorRandom;
 
 use crate::api::{Error, StationRequest, SwStation, SwStationModel, client};
-use crate::ui::{DisplayError, SwStationDialog, SwStationRow, search::SwSearchFilter};
+use crate::discovery::registry::ProviderRegistry;
+use crate::discovery::{engine, runner};
+use crate::ui::{
+    DisplayError, SwDiscoveryResultsDialog, SwDiscoverySourceRow, SwStationDialog, SwStationRow,
+    search::SwSearchFilter,
+};
 
 mod imp {
     use super::*;
@@ -43,9 +48,13 @@ mod imp {
         #[template_child]
         search_gridview: TemplateChild<gtk::GridView>,
         #[template_child]
+        discovery_flowbox: TemplateChild<gtk::FlowBox>,
+        #[template_child]
         failure_statuspage: TemplateChild<adw::StatusPage>,
 
         popular_model: SwStationModel,
+
+        provider_registry: RefCell<Option<ProviderRegistry>>,
         random_model: SwStationModel,
         search_model: SwStationModel,
 
@@ -110,6 +119,70 @@ mod imp {
                     let station_dialog = SwStationDialog::new(&station);
                     station_dialog.present(Some(gv));
                 });
+
+            // Discovery providers
+            self.discovery_flowbox.set_max_children_per_line(1);
+            self.discovery_flowbox
+                .set_selection_mode(gtk::SelectionMode::None);
+
+            let registry = ProviderRegistry::scan();
+            let providers = registry.providers().to_vec();
+            self.provider_registry.replace(Some(registry));
+
+            for provider in &providers {
+                let row = SwDiscoverySourceRow::new(provider);
+                let child = gtk::FlowBoxChild::new();
+                child.set_child(Some(&row));
+                self.discovery_flowbox.append(&child);
+
+                let p = provider.clone();
+                let discovery_fb = self.discovery_flowbox.get();
+                row.connect_run_provider(move |row| {
+                    row.set_loading(true);
+                    let p = p.clone();
+                    let fb = discovery_fb.clone();
+                    let row_clone = row.clone();
+
+                    let (tx, rx) = std::sync::mpsc::channel();
+                    let thread_p = p.clone();
+
+                    std::thread::spawn(move || {
+                        let engine = engine::create();
+                        let result = runner::run_provider(&engine, &thread_p);
+                        let _ = tx.send(result);
+                    });
+
+                    glib::idle_add_local(move || {
+                        match rx.try_recv() {
+                            Ok(result) => {
+                                row_clone.set_loading(false);
+                                match result {
+                                    Ok(r) => {
+                                        let dialog = SwDiscoveryResultsDialog::new(
+                                            &r.stations,
+                                        );
+                                        dialog.present(Some(&fb));
+                                    }
+                                    Err(e) => {
+                                        log::error!(
+                                            "Failed to run discovery provider '{}': {e}",
+                                            p.id,
+                                        );
+                                    }
+                                }
+                                glib::ControlFlow::Break
+                            }
+                            Err(std::sync::mpsc::TryRecvError::Empty) => {
+                                glib::ControlFlow::Continue
+                            }
+                            Err(std::sync::mpsc::TryRecvError::Disconnected) => {
+                                row_clone.set_loading(false);
+                                glib::ControlFlow::Break
+                            }
+                        }
+                    });
+                });
+            }
 
             self.stack.set_visible_child_name("spinner");
         }

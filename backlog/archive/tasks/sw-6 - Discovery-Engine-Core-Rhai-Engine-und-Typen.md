@@ -1,18 +1,18 @@
 ---
 id: SW-6
 title: "Discovery Engine Core: Rhai Engine + Typen + HTTP"
-status: Pending
+status: Archived
 assignee: []
-created_date: '2026-05-24'
-updated_date: '2026-05-24'
+created_date: 2026-05-24
+updated_date: 2026-05-24
 labels: []
 milestone: engine-core
 dependencies: []
 references:
-  - 'https://rhai.rs/'
-  - 'https://docs.rs/rhai/latest/rhai/'
-  - 'https://docs.rs/reqwest/latest/reqwest/'
-  - 'https://gitlab.gnome.org/World/Shortwave/-/work_items/717'
+  - https://rhai.rs/
+  - https://docs.rs/rhai/latest/rhai/
+  - https://docs.rs/reqwest/latest/reqwest/
+  - https://gitlab.gnome.org/World/Shortwave/-/work_items/717
   - src/discovery/
   - src/api/station_metadata.rs
   - Cargo.toml
@@ -20,7 +20,6 @@ references:
 priority: high
 ordinal: 6000
 ---
-
 ## Description
 
 <!-- SECTION:DESCRIPTION:BEGIN -->

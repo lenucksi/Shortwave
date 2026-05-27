@@ -1,17 +1,17 @@
 ---
 id: SW-10
-title: "SomaFM Scraper Provider Script"
-status: Pending
+title: SomaFM Scraper Provider Script
+status: Archived
 assignee: []
-created_date: '2026-05-24'
-updated_date: '2026-05-24'
+created_date: 2026-05-24
+updated_date: 2026-05-24
 labels: []
 milestone: provider-system
 dependencies:
   - SW-8
 references:
-  - 'https://somafm.com/'
-  - 'https://somafm.com/#alpha'
+  - https://somafm.com/
+  - https://somafm.com/#alpha
   - src/discovery/runner.rs
   - src/discovery/types.rs
   - src/discovery/engine.rs
@@ -21,7 +21,6 @@ references:
 priority: medium
 ordinal: 10000
 ---
-
 ## Description
 
 <!-- SECTION:DESCRIPTION:BEGIN -->

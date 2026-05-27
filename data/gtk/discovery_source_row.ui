@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="SwDiscoverySourceRow" parent="AdwBin">
+    <property name="margin_start">6</property>
+    <property name="margin_end">6</property>
+    <property name="margin_top">3</property>
+    <property name="margin_bottom">3</property>
+    <child>
+      <object class="AdwClamp">
+        <property name="maximum_size">400</property>
+        <child>
+          <object class="GtkBox">
+            <property name="orientation">horizontal</property>
+            <property name="spacing">12</property>
+            <property name="valign">center</property>
+            <child>
+              <object class="GtkBox">
+                <property name="orientation">vertical</property>
+                <property name="spacing">3</property>
+                <property name="hexpand">True</property>
+                <child>
+                  <object class="GtkLabel" id="name_label">
+                    <property name="hexpand">True</property>
+                    <property name="xalign">0</property>
+                    <property name="use_markup">True</property>
+                    <property name="label">label</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="description_label">
+                    <property name="hexpand">True</property>
+                    <property name="xalign">0</property>
+                    <property name="wrap">True</property>
+                    <property name="label">label</property>
+                    <property name="visible">False</property>
+                    <style>
+                      <class name="dimmed" />
+                      <class name="caption" />
+                    </style>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkSpinner" id="loading_spinner">
+                <property name="visible">False</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton" id="run_button">
+                <property name="label" translatable="yes">Load Stations</property>
+                <property name="valign">center</property>
+                <signal name="clicked" handler="run_clicked" swapped="true" />
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

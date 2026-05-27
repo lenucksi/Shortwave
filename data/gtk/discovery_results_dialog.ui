@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="SwDiscoveryResultsDialog" parent="AdwDialog">
+    <property name="title" translatable="yes">Discovery Results</property>
+    <property name="default_width">480</property>
+    <property name="default_height">500</property>
+    <child>
+      <object class="AdwToolbarView">
+        <child type="top">
+          <object class="AdwHeaderBar">
+            <child type="end">
+              <object class="GtkButton" id="import_button">
+                <property name="label" translatable="yes">Import</property>
+                <property name="sensitive">False</property>
+                <signal name="clicked" handler="import_clicked" swapped="true" />
+                <style>
+                  <class name="suggested-action" />
+                </style>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkScrolledWindow">
+            <property name="hscrollbar_policy">never</property>
+            <child>
+              <object class="GtkListView" id="stations_list">
+                <property name="factory">
+                  <object class="GtkBuilderListItemFactory">
+                    <property name="bytes"><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="GtkListItem">
+    <property name="child">
+      <object class="AdwActionRow">
+        <binding name="title">
+          <lookup name="name" type="SwStation">
+            <lookup name="item">GtkListItem</lookup>
+          </lookup>
+        </binding>
+        <binding name="subtitle">
+          <lookup name="country" type="SwStation">
+            <lookup name="item">GtkListItem</lookup>
+          </lookup>
+        </binding>
+      </object>
+    </property>
+  </template>
+</interface>]]>
+                  </property>
+                </property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>
