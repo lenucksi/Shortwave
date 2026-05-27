@@ -84,15 +84,28 @@ impl ProviderRegistry {
 
     pub fn scan() -> Self {
         let datadir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join(SYSTEM_DIR);
-        let homedir = dirs_data_dir()
-            .map(|d| d.join("shortwave").join("providers"))
-            .unwrap_or_else(|| PathBuf::from(USER_DIR));
+        let homedir = Self::user_dir();
 
         Self::scan_from(&datadir, &homedir)
     }
 
     pub fn providers(&self) -> &[DiscoveryProvider] {
         &self.providers
+    }
+
+    pub fn user_dir() -> PathBuf {
+        dirs_data_dir()
+            .map(|d| d.join("shortwave").join("providers"))
+            .unwrap_or_else(|| PathBuf::from(USER_DIR))
+    }
+
+    pub fn remove_provider(id: &str) -> Result<(), std::io::Error> {
+        let dir = Self::user_dir();
+        let path = dir.join(format!("{id}.rhai"));
+        if path.exists() {
+            std::fs::remove_file(&path)?;
+        }
+        Ok(())
     }
 
     pub fn enable(&mut self, id: &str) {

@@ -1,5 +1,5 @@
 // Shortwave - search_page.rs
-// Copyright (C) 2021-2025  Felix Häcker <haeckerfelix@gnome.org>
+// Copyright (C) 2021-2025  Felix Haecker <haeckerfelix@gnome.org>
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,11 +15,12 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 use std::cell::{Cell, RefCell};
+use std::collections::HashSet;
 
 use adw::prelude::*;
 use adw::subclass::prelude::*;
 use glib::{clone, subclass};
-use gtk::{CompositeTemplate, glib};
+use gtk::{CompositeTemplate, gio, glib};
 use indexmap::IndexMap;
 use rand::seq::IteratorRandom;
 
@@ -30,6 +31,32 @@ use crate::ui::{
     DisplayError, SwDiscoveryResultsDialog, SwDiscoverySourceRow, SwStationDialog, SwStationRow,
     search::SwSearchFilter,
 };
+
+const DISABLED_STATE_FILE: &str = ".disabled.json";
+
+fn disabled_state_path() -> std::path::PathBuf {
+    ProviderRegistry::user_dir().join(DISABLED_STATE_FILE)
+}
+
+fn load_disabled_state() -> HashSet<String> {
+    let path = disabled_state_path();
+    std::fs::read_to_string(&path)
+        .ok()
+        .and_then(|s| serde_json::from_str::<Vec<String>>(&s).ok())
+        .map(|v| v.into_iter().collect())
+        .unwrap_or_default()
+}
+
+fn save_disabled_state(disabled: &HashSet<String>) {
+    let path = disabled_state_path();
+    if let Some(dir) = path.parent() {
+        let _ = std::fs::create_dir_all(dir);
+    }
+    let ids: Vec<&String> = disabled.iter().collect();
+    if let Ok(json) = serde_json::to_string(&ids) {
+        let _ = std::fs::write(&path, json);
+    }
+}
 
 mod imp {
     use super::*;
@@ -51,10 +78,15 @@ mod imp {
         discovery_flowbox: TemplateChild<gtk::FlowBox>,
         #[template_child]
         failure_statuspage: TemplateChild<adw::StatusPage>,
+        #[template_child]
+        add_provider_button: TemplateChild<gtk::Button>,
+        #[template_child]
+        open_provider_folder_button: TemplateChild<gtk::Button>,
 
         popular_model: SwStationModel,
 
         provider_registry: RefCell<Option<ProviderRegistry>>,
+        disabled_providers: RefCell<HashSet<String>>,
         random_model: SwStationModel,
         search_model: SwStationModel,
 
@@ -121,70 +153,7 @@ mod imp {
                 });
 
             // Discovery providers
-            self.discovery_flowbox.set_max_children_per_line(1);
-            self.discovery_flowbox
-                .set_selection_mode(gtk::SelectionMode::None);
-
-            let registry = ProviderRegistry::scan();
-            let providers = registry.providers().to_vec();
-            self.provider_registry.replace(Some(registry));
-
-            for provider in &providers {
-                let row = SwDiscoverySourceRow::new(provider);
-                let child = gtk::FlowBoxChild::new();
-                child.set_child(Some(&row));
-                self.discovery_flowbox.append(&child);
-
-                let p = provider.clone();
-                let discovery_fb = self.discovery_flowbox.get();
-                row.connect_run_provider(move |row| {
-                    row.set_loading(true);
-                    let p = p.clone();
-                    let fb = discovery_fb.clone();
-                    let row_clone = row.clone();
-
-                    let (tx, rx) = std::sync::mpsc::channel();
-                    let thread_p = p.clone();
-
-                    std::thread::spawn(move || {
-                        let engine = engine::create();
-                        let result = runner::run_provider(&engine, &thread_p);
-                        let _ = tx.send(result);
-                    });
-
-                    glib::idle_add_local(move || {
-                        match rx.try_recv() {
-                            Ok(result) => {
-                                row_clone.set_loading(false);
-                                match result {
-                                    Ok(r) => {
-                                        let dialog = SwDiscoveryResultsDialog::new(
-                                            &r.stations,
-                                        );
-                                        dialog.present(Some(&fb));
-                                    }
-                                    Err(e) => {
-                                        log::error!(
-                                            "Failed to run discovery provider '{}': {e}",
-                                            p.id,
-                                        );
-                                    }
-                                }
-                                glib::ControlFlow::Break
-                            }
-                            Err(std::sync::mpsc::TryRecvError::Empty) => {
-                                glib::ControlFlow::Continue
-                            }
-                            Err(std::sync::mpsc::TryRecvError::Disconnected) => {
-                                row_clone.set_loading(false);
-                                glib::ControlFlow::Break
-                            }
-                        }
-                    });
-                });
-            }
-
-            self.stack.set_visible_child_name("spinner");
+            self.build_discovery_providers();
         }
     }
 
@@ -302,10 +271,175 @@ mod imp {
             }
         }
 
+        #[template_callback]
+        async fn add_provider_clicked(&self) {
+            let filter = gtk::FileFilter::new();
+            filter.set_name(Some("Rhai Scripts"));
+            filter.add_pattern("*.rhai");
+
+            let filter_list = gio::ListStore::new::<gtk::FileFilter>();
+            filter_list.append(&filter);
+
+            let dialog = gtk::FileDialog::new();
+            dialog.set_title("Select Discovery Script");
+            dialog.set_default_filter(Some(&filter));
+            dialog.set_filters(Some(&filter_list));
+
+            let future = dialog.open_future(None::<&gtk::Window>);
+            match future.await {
+                Ok(file) => {
+                    if let Some(path) = file.path() {
+                        let user_dir = ProviderRegistry::user_dir();
+                        let _ = std::fs::create_dir_all(&user_dir);
+
+                        let filename = path
+                            .file_name()
+                            .unwrap_or_default()
+                            .to_string_lossy()
+                            .to_string();
+                        let dest = user_dir.join(&filename);
+
+                        match std::fs::copy(&path, &dest) {
+                            Ok(_) => {
+                                self.rebuild_discovery_providers();
+                            }
+                            Err(e) => {
+                                log::error!("Failed to copy provider script: {e}");
+                            }
+                        }
+                    }
+                }
+                Err(e) => {
+                    if !e.matches(gtk::DialogError::Dismissed) {
+                        log::error!("File dialog error: {e}");
+                    }
+                }
+            }
+        }
+
+        #[template_callback]
+        async fn open_provider_folder_clicked(&self) {
+            let user_dir = ProviderRegistry::user_dir();
+            let _ = std::fs::create_dir_all(&user_dir);
+            let uri = format!("file://{}", user_dir.display());
+            let launcher = gtk::UriLauncher::new(&uri);
+            let _ = launcher.launch_future(None::<&gtk::Window>).await;
+        }
+
         fn region_code() -> Option<String> {
             let locale = sys_locale::get_locale()?;
             let langtag = language_tags::LanguageTag::parse(&locale).ok()?;
             langtag.region().map(|s: &str| s.to_string())
+        }
+
+        fn build_discovery_providers(&self) {
+            // Clear existing children
+            while let Some(child) = self.discovery_flowbox.first_child() {
+                self.discovery_flowbox.remove(&child);
+            }
+
+            let disabled = load_disabled_state();
+            *self.disabled_providers.borrow_mut() = disabled.clone();
+
+            let registry = ProviderRegistry::scan();
+            let providers = registry.providers().to_vec();
+            self.provider_registry.replace(Some(registry));
+
+            for provider in &providers {
+                let row = SwDiscoverySourceRow::new(provider);
+                let is_disabled = disabled.contains(&provider.id);
+                if is_disabled {
+                    row.set_enabled(false);
+                }
+
+                // Only show remove button for user providers
+                if !row.is_user_provider() {
+                    row.imp().remove_button.set_visible(false);
+                }
+
+                let child = gtk::FlowBoxChild::new();
+                child.set_child(Some(&row));
+                self.discovery_flowbox.append(&child);
+
+                let p = provider.clone();
+                let discovery_fb = self.discovery_flowbox.get();
+                row.connect_run_provider(move | row | {
+                    row.set_loading(true);
+                    let p = p.clone();
+                    let fb = discovery_fb.clone();
+                    let row_clone = row.clone();
+
+                    let (tx, rx) = std::sync::mpsc::channel();
+                    let thread_p = p.clone();
+
+                    std::thread::spawn(move || {
+                        let engine = engine::create();
+                        let result = runner::run_provider(&engine, &thread_p);
+                        let _ = tx.send(result);
+                    });
+
+                    glib::idle_add_local(move || {
+                        match rx.try_recv() {
+                            Ok(result) => {
+                                row_clone.set_loading(false);
+                                match result {
+                                    Ok(r) => {
+                                        let dialog = SwDiscoveryResultsDialog::new(&r.stations);
+                                        dialog.present(Some(&fb));
+                                    }
+                                    Err(e) => {
+                                        log::error!(
+                                            "Failed to run discovery provider '{}': {e}",
+                                            p.id,
+                                        );
+                                    }
+                                }
+                                glib::ControlFlow::Break
+                            }
+                            Err(std::sync::mpsc::TryRecvError::Empty) => {
+                                glib::ControlFlow::Continue
+                            }
+                            Err(std::sync::mpsc::TryRecvError::Disconnected) => {
+                                row_clone.set_loading(false);
+                                glib::ControlFlow::Break
+                            }
+                        }
+                    });
+                });
+
+                let provider_id = provider.id.clone();
+                let obj = self.obj().downgrade();
+                row.connect_remove_provider(move |_row| {
+                    let p_id = provider_id.clone();
+                    if let Some(obj) = obj.upgrade() {
+                        glib::spawn_future_local(async move {
+                            if let Err(e) = ProviderRegistry::remove_provider(&p_id) {
+                                log::error!("Failed to remove provider '{p_id}': {e}");
+                                return;
+                            }
+                            obj.imp().rebuild_discovery_providers();
+                        });
+                    }
+                });
+
+                let provider_id = provider.id.clone();
+                let obj = self.obj().downgrade();
+                row.connect_notify_local(Some("provider-enabled"), move |row, _| {
+                    if let Some(obj) = obj.upgrade() {
+                        let mut disabled = obj.imp().disabled_providers.borrow_mut();
+                        if row.is_enabled() {
+                            disabled.remove(&provider_id);
+                        } else {
+                            disabled.insert(provider_id.clone());
+                        }
+                        save_disabled_state(&disabled);
+                    }
+                });
+            }
+        }
+
+        fn rebuild_discovery_providers(&self) {
+            self.build_discovery_providers();
         }
     }
 }

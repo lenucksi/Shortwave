@@ -49,5 +49,8 @@
     <key name="notifications" type="b">
       <default>false</default>
     </key>
+    <key name="disabled-providers" type="as">
+      <default>[]</default>
+    </key>
   </schema>
 </schemalist>

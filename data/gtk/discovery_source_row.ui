@@ -11,7 +11,7 @@
         <child>
           <object class="GtkBox">
             <property name="orientation">horizontal</property>
-            <property name="spacing">12</property>
+            <property name="spacing">6</property>
             <property name="valign">center</property>
             <child>
               <object class="GtkBox">
@@ -42,6 +42,12 @@
               </object>
             </child>
             <child>
+              <object class="GtkSwitch" id="enable_switch">
+                <property name="valign">center</property>
+                <signal name="notify::active" handler="enable_toggled" swapped="true" />
+              </object>
+            </child>
+            <child>
               <object class="GtkSpinner" id="loading_spinner">
                 <property name="visible">False</property>
               </object>
@@ -51,6 +57,18 @@
                 <property name="label" translatable="yes">Load Stations</property>
                 <property name="valign">center</property>
                 <signal name="clicked" handler="run_clicked" swapped="true" />
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton" id="remove_button">
+                <property name="icon_name">user-trash-symbolic</property>
+                <property name="valign">center</property>
+                <property name="tooltip_text" translatable="yes">Remove custom provider</property>
+                <signal name="clicked" handler="remove_clicked" swapped="true" />
+                <style>
+                  <class name="flat" />
+                  <class name="circular" />
+                </style>
               </object>
             </child>
           </object>
