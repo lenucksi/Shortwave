@@ -1,0 +1,23 @@
+"backlog/tasks/sw-12 - Import-Results-Dialog.md"
+  s_118528d5383dc5::t_039b025019d65c 3-4,6-7
+"backlog/tasks/sw-16 - Docs-und-Example-Scripts.md"
+  s_118528d5383dc5::t_039b025019d65c 3-4,6-7
+"backlog/tasks/sw-15 - Custom-Provider-Management.md"
+  s_118528d5383dc5::t_039b025019d65c 3-4,6-7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "254fee0e5594d2655c43cde8cc48fe19db9f96ad",
+  "prompts": {},
+  "sessions": {
+    "s_118528d5383dc5": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_19a8323eeffe8eS0d9Uj265YvT",
+        "model": "deepseek-v4-flash-free"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    }
+  }
+}
