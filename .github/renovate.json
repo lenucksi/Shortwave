@@ -10,7 +10,7 @@
   ],
   "labels": ["dependencies"],
   "assignees": ["@lenucksi"],
-  "schedule": ["0 4 * * *"],
+  "schedule": ["before 5am"],
   "timezone": "Europe/Berlin",
   "minimumReleaseAge": "3 days",
   "platformAutomerge": true,
