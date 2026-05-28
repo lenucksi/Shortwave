@@ -1,4 +1,5 @@
 tag_prefix = "v"
+ignore_merge_commits = true
 
 [changelog]
 path = "CHANGELOG.md"
