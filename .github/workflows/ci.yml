@@ -43,7 +43,7 @@ jobs:
   build-test:
     runs-on: ubuntu-latest
     container:
-      image: quay.io/gnome_infrastructure/gnome-runtime-images:gnome-master
+      image: quay.io/gnome_infrastructure/gnome-runtime-images:gnome-50
       options: --user root
     steps:
       - name: Harden Runner
@@ -78,7 +78,7 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     container:
-      image: quay.io/gnome_infrastructure/gnome-runtime-images:gnome-master
+      image: quay.io/gnome_infrastructure/gnome-runtime-images:gnome-50
       options: --user root
     steps:
       - name: Harden Runner
