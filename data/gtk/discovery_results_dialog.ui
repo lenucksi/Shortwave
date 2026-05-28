@@ -30,35 +30,115 @@
               <object class="GtkBox">
                 <property name="orientation">vertical</property>
                 <child>
-                  <object class="GtkScrolledWindow">
-                    <property name="hscrollbar_policy">never</property>
-                    <child>
-                      <object class="GtkListView" id="stations_list">
-                        <property name="factory">
-                          <object class="GtkBuilderListItemFactory">
-                            <property name="bytes"><![CDATA[
-<?xml version="1.0" encoding="UTF-8"?>
-<interface>
-  <template class="GtkListItem">
-    <property name="child">
-      <object class="AdwActionRow">
-        <binding name="title">
-          <lookup name="title" type="SwStation">
-            <lookup name="item">GtkListItem</lookup>
-          </lookup>
-        </binding>
-        <binding name="subtitle">
-          <lookup name="country" type="SwStation">
-            <lookup name="item">GtkListItem</lookup>
-          </lookup>
-        </binding>
-      </object>
-    </property>
-  </template>
-</interface>]]>
-                            </property>
+                  <object class="GtkSearchEntry" id="search_entry">
+                    <property name="placeholder_text" translatable="yes">Search stations…</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkPaned">
+                    <property name="orientation">horizontal</property>
+                    <property name="position">350</property>
+                    <child resize="true" shrink="false">
+                      <object class="GtkScrolledWindow">
+                        <property name="hscrollbar_policy">never</property>
+                        <child>
+                          <object class="GtkListView" id="stations_list" />
+                        </child>
+                      </object>
+                    </child>
+                    <child resize="true" shrink="true">
+                      <object class="GtkScrolledWindow">
+                        <property name="hscrollbar_policy">never</property>
+                        <child>
+                          <object class="GtkBox" id="details_box">
+                            <property name="orientation">vertical</property>
+                            <property name="spacing">12</property>
+                            <property name="margin-start">16</property>
+                            <property name="margin-end">16</property>
+                            <property name="margin-top">16</property>
+                            <property name="margin-bottom">16</property>
+                            <child>
+                              <object class="GtkImage" id="details_icon">
+                                <property name="pixel-size">128</property>
+                                <property name="visible">False</property>
+                                <property name="halign">center</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="details_name">
+                                <property name="visible">False</property>
+                                <property name="wrap">True</property>
+                                <property name="justify">center</property>
+                                <property name="selectable">True</property>
+                                <style>
+                                  <class name="heading" />
+                                </style>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="details_country">
+                                <property name="visible">False</property>
+                                <property name="selectable">True</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="details_tags">
+                                <property name="visible">False</property>
+                                <property name="wrap">True</property>
+                                <property name="selectable">True</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="details_url_label">
+                                <property name="label" translatable="yes">Stream URL:</property>
+                                <property name="visible">False</property>
+                                <property name="xalign">0</property>
+                                <style>
+                                  <class name="dim-label" />
+                                </style>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="details_url">
+                                <property name="visible">False</property>
+                                <property name="selectable">True</property>
+                                <property name="ellipsize">end</property>
+                                <property name="xalign">0</property>
+                                <style>
+                                  <class name="monospace" />
+                                </style>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="details_homepage_label">
+                                <property name="label" translatable="yes">Homepage:</property>
+                                <property name="visible">False</property>
+                                <property name="xalign">0</property>
+                                <style>
+                                  <class name="dim-label" />
+                                </style>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="details_homepage">
+                                <property name="visible">False</property>
+                                <property name="selectable">True</property>
+                                <property name="ellipsize">end</property>
+                                <property name="xalign">0</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="details_placeholder">
+                                <property name="label" translatable="yes">Select stations</property>
+                                <property name="halign">center</property>
+                                <property name="valign">center</property>
+                                <style>
+                                  <class name="dim-label" />
+                                </style>
+                              </object>
+                            </child>
                           </object>
-                        </property>
+                        </child>
                       </object>
                     </child>
                   </object>

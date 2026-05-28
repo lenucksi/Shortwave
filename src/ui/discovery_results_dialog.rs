@@ -1,13 +1,29 @@
+// Shortwave - discovery_results_dialog.rs
+// Copyright (C) 2021-2025  Felix Häcker <haeckerfelix@gnome.org>
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 use adw::prelude::*;
 use adw::subclass::prelude::*;
 use glib::clone;
-use gtk::{CompositeTemplate, TemplateChild, gio, glib};
+use gtk::{CompositeTemplate, TemplateChild, gdk, gio, glib, pango};
+use url::Url;
 
 use crate::api::SwStation;
 use crate::app::SwApplication;
 use crate::discovery::types::StationData;
 use crate::playlist::fetch_and_parse;
-use url::Url;
 
 mod imp {
     use super::*;
@@ -28,6 +44,26 @@ mod imp {
         pub stations_list: TemplateChild<gtk::ListView>,
         #[template_child]
         pub import_progress_label: TemplateChild<gtk::Label>,
+        #[template_child]
+        pub search_entry: TemplateChild<gtk::SearchEntry>,
+        #[template_child]
+        pub details_icon: TemplateChild<gtk::Image>,
+        #[template_child]
+        pub details_name: TemplateChild<gtk::Label>,
+        #[template_child]
+        pub details_country: TemplateChild<gtk::Label>,
+        #[template_child]
+        pub details_tags: TemplateChild<gtk::Label>,
+        #[template_child]
+        pub details_url_label: TemplateChild<gtk::Label>,
+        #[template_child]
+        pub details_url: TemplateChild<gtk::Label>,
+        #[template_child]
+        pub details_homepage_label: TemplateChild<gtk::Label>,
+        #[template_child]
+        pub details_homepage: TemplateChild<gtk::Label>,
+        #[template_child]
+        pub details_placeholder: TemplateChild<gtk::Label>,
 
         pub stations: RefCell<Vec<StationData>>,
     }
@@ -58,13 +94,33 @@ mod imp {
     impl SwDiscoveryResultsDialog {
         #[template_callback]
         fn import_clicked(&self) {
-            let stations = self.stations.borrow().clone();
-            if stations.is_empty() {
+            let model = self.stations_list.model().unwrap();
+            let selection = model.downcast::<gtk::MultiSelection>().unwrap();
+
+            let all_stations = self.stations.borrow();
+            let mut selected_stations = Vec::new();
+
+            for i in 0..selection.n_items() {
+                if selection.is_selected(i) {
+                    if let Some(item) = selection.item(i) {
+                        if let Ok(sw_station) = item.downcast::<SwStation>() {
+                            let meta = sw_station.metadata();
+                            if let Some(sd) = all_stations.iter().find(|s| s.name == meta.name) {
+                                selected_stations.push(sd.clone());
+                            }
+                        }
+                    }
+                }
+            }
+
+            drop(all_stations);
+
+            if selected_stations.is_empty() {
                 return;
             }
-            let total = stations.len();
+            let total = selected_stations.len();
 
-            let body = stations
+            let body = selected_stations
                 .iter()
                 .map(|s| format!("• {}", s.name))
                 .collect::<Vec<_>>()
@@ -75,6 +131,8 @@ mod imp {
             glib::spawn_future_local(clone!(
                 #[weak]
                 obj,
+                #[strong]
+                selected_stations,
                 async move {
                     let dialog = adw::AlertDialog::new(
                         Some(&format!("Import these {} stations?", total)),
@@ -97,7 +155,7 @@ mod imp {
 
                     let app = SwApplication::default();
 
-                    for (i, station) in stations.iter().enumerate() {
+                    for (i, station) in selected_stations.iter().enumerate() {
                         let progress = format!("Importing {} / {}: {}", i + 1, total, station.name);
                         imp.import_progress_label.set_label(&progress);
 
@@ -169,19 +227,201 @@ impl SwDiscoveryResultsDialog {
         let obj: Self = glib::Object::builder().build();
         let imp = obj.imp();
 
-        obj.set_size_request(500, 500);
+        obj.set_size_request(700, 500);
 
         *imp.stations.borrow_mut() = stations.to_vec();
 
         let store = gio::ListStore::new::<SwStation>();
         for station in stations.iter() {
-            store.append(&station.to_sw_station());
+            if !station.name.is_empty() && !station.stream_url.is_empty() {
+                store.append(&station.to_sw_station());
+            }
         }
 
-        let no_selection = gtk::NoSelection::new(Some(store));
-        imp.stations_list.set_model(Some(&no_selection));
+        let filter = gtk::CustomFilter::new(|_| true);
+        let filter_model = gtk::FilterListModel::new(Some(store), Some(filter));
 
-        imp.import_button.set_sensitive(!stations.is_empty());
+        let selection = gtk::MultiSelection::new(Some(filter_model.clone()));
+        imp.stations_list.set_model(Some(&selection));
+
+        let factory = gtk::SignalListItemFactory::new();
+        factory.connect_setup(|_factory, item| {
+            let list_item = item.downcast_ref::<gtk::ListItem>().unwrap();
+
+            let vbox = gtk::Box::new(gtk::Orientation::Vertical, 2);
+            vbox.set_margin_start(8);
+            vbox.set_margin_end(8);
+            vbox.set_margin_top(4);
+            vbox.set_margin_bottom(4);
+
+            let name = gtk::Label::new(None);
+            name.set_halign(gtk::Align::Start);
+            name.set_ellipsize(pango::EllipsizeMode::End);
+            name.set_css_classes(&["heading"]);
+
+            let subtitle = gtk::Label::new(None);
+            subtitle.set_halign(gtk::Align::Start);
+            subtitle.set_ellipsize(pango::EllipsizeMode::End);
+            subtitle.set_css_classes(&["dim-label", "caption"]);
+
+            vbox.append(&name);
+            vbox.append(&subtitle);
+
+            list_item.set_child(Some(&vbox));
+        });
+
+        factory.connect_bind(|_factory, item| {
+            let list_item = item.downcast_ref::<gtk::ListItem>().unwrap();
+            let station = list_item
+                .item()
+                .and_then(|o| o.downcast::<SwStation>().ok())
+                .unwrap();
+
+            let vbox = list_item.child().unwrap().downcast::<gtk::Box>().unwrap();
+            let name_label = vbox
+                .first_child()
+                .unwrap()
+                .downcast::<gtk::Label>()
+                .unwrap();
+            let subtitle_label = name_label
+                .next_sibling()
+                .unwrap()
+                .downcast::<gtk::Label>()
+                .unwrap();
+
+            let meta = station.metadata();
+            name_label.set_text(&meta.name);
+
+            let mut subtitle = meta.country.clone();
+            if !meta.tags.is_empty() {
+                if !subtitle.is_empty() {
+                    subtitle.push_str("  •  ");
+                }
+                subtitle.push_str(&meta.tags);
+            }
+            subtitle_label.set_text(&subtitle);
+        });
+
+        imp.stations_list.set_factory(Some(&factory));
+
+        let details_icon = imp.details_icon.clone();
+        let details_name = imp.details_name.clone();
+        let details_country = imp.details_country.clone();
+        let details_tags = imp.details_tags.clone();
+        let details_url_label = imp.details_url_label.clone();
+        let details_url = imp.details_url.clone();
+        let details_homepage_label = imp.details_homepage_label.clone();
+        let details_homepage = imp.details_homepage.clone();
+        let details_placeholder = imp.details_placeholder.clone();
+        let import_button = imp.import_button.clone();
+
+        selection.connect_selection_changed(move |sel, _pos, _n_items| {
+            let count = sel.n_items();
+            let n_selected: u32 = (0..count).filter(|i| sel.is_selected(*i)).count() as u32;
+
+            import_button.set_sensitive(n_selected > 0);
+
+            details_icon.set_visible(false);
+            details_name.set_visible(false);
+            details_country.set_visible(false);
+            details_tags.set_visible(false);
+            details_url_label.set_visible(false);
+            details_url.set_visible(false);
+            details_homepage_label.set_visible(false);
+            details_homepage.set_visible(false);
+
+            if n_selected == 0 {
+                details_placeholder.set_text("Select stations");
+                details_placeholder.set_visible(true);
+                return;
+            }
+
+            if n_selected == 1 {
+                for i in 0..count {
+                    if sel.is_selected(i) {
+                        if let Some(item) = sel.item(i) {
+                            if let Ok(station) = item.downcast::<SwStation>() {
+                                details_placeholder.set_visible(false);
+
+                                let meta = station.metadata();
+
+                                details_name.set_text(&meta.name);
+                                details_name.set_visible(true);
+
+                                if !meta.country.is_empty() {
+                                    details_country.set_text(&meta.country);
+                                    details_country.set_visible(true);
+                                }
+
+                                if !meta.tags.is_empty() {
+                                    details_tags.set_text(&meta.tags);
+                                    details_tags.set_visible(true);
+                                }
+
+                                if let Some(ref url) = meta.url {
+                                    details_url.set_text(&url.to_string());
+                                    details_url.set_visible(true);
+                                    details_url_label.set_visible(true);
+                                }
+
+                                if let Some(ref hp) = meta.homepage {
+                                    details_homepage.set_text(&hp.to_string());
+                                    details_homepage.set_visible(true);
+                                    details_homepage_label.set_visible(true);
+                                }
+
+                                if let Some(ref favicon) = meta.favicon {
+                                    let url = favicon.clone();
+                                    let icon = details_icon.clone();
+                                    glib::spawn_future_local(async move {
+                                        match crate::api::http::get(url).await {
+                                            Ok(resp) => {
+                                                if let Ok(bytes) = resp.bytes().await {
+                                                    let gbytes = glib::Bytes::from(bytes.as_ref());
+                                                    if let Ok(texture) =
+                                                        gdk::Texture::from_bytes(&gbytes)
+                                                    {
+                                                        icon.set_paintable(Some(&texture));
+                                                        icon.set_visible(true);
+                                                    }
+                                                }
+                                            }
+                                            Err(_) => {}
+                                        }
+                                    });
+                                }
+                            }
+                        }
+                        break;
+                    }
+                }
+            } else {
+                details_placeholder.set_text(&format!("{} stations selected", n_selected));
+                details_placeholder.set_visible(true);
+            }
+        });
+
+        imp.search_entry.connect_search_changed(move |entry| {
+            let query = entry.text().to_string();
+            let filter = gtk::CustomFilter::new(move |obj| {
+                let station = obj.downcast_ref::<SwStation>().unwrap();
+                if query.is_empty() {
+                    return true;
+                }
+                let meta = station.metadata();
+                let haystack = format!(
+                    "{} {} {} {}",
+                    meta.name.to_lowercase(),
+                    meta.country.to_lowercase(),
+                    meta.tags.to_lowercase(),
+                    meta.language.to_lowercase(),
+                );
+                haystack.contains(&query.to_lowercase())
+            });
+            filter_model.set_filter(Some(&filter));
+        });
+
+        imp.import_button.set_sensitive(false);
 
         obj
     }
