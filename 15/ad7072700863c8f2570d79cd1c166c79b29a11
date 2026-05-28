@@ -1,0 +1,28 @@
+src/ui/discovery_results_dialog.rs
+  s_118528d5383dc5::t_2e2e8d510af7dd 375-376
+  s_118528d5383dc5::t_593428ab05e28a 104-106,340-341,360,366,377-382
+"backlog/tasks/sw-31 - Playback-Codec-Quality-Preferences-SW-10.md"
+  s_118528d5383dc5::t_2263803ab7c9bb 1-46
+src/api/station_metadata.rs
+  s_118528d5383dc5::t_c9b2b7936acc20 153
+"backlog/archive/tasks/sw-9 - WebradioDB-Provider-Script.md"
+  s_118528d5383dc5::t_8d9326752b5ee3 3-4,6-7,13-15,119
+"backlog/tasks/sw-32 - API-Backed-Search-in-Library-SW-32.md"
+  s_118528d5383dc5::t_a023ae4fea5218 1-48
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "15ad7072700863c8f2570d79cd1c166c79b29a11",
+  "prompts": {},
+  "sessions": {
+    "s_118528d5383dc5": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_19a8323eeffe8eS0d9Uj265YvT",
+        "model": "deepseek-v4-flash-free"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    }
+  }
+}
