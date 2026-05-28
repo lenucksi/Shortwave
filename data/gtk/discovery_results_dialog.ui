@@ -38,7 +38,7 @@
                   <object class="GtkPaned">
                     <property name="orientation">horizontal</property>
                     <property name="position">350</property>
-                    <child resize="true" shrink="false">
+                    <child>
                       <object class="GtkScrolledWindow">
                         <property name="hscrollbar_policy">never</property>
                         <child>
@@ -46,7 +46,7 @@
                         </child>
                       </object>
                     </child>
-                    <child resize="true" shrink="true">
+                    <child>
                       <object class="GtkScrolledWindow">
                         <property name="hscrollbar_policy">never</property>
                         <child>

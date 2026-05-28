@@ -45,5 +45,4 @@ shortwave.pot
 # Tooling artifacts
 .serena/
 .claude/
-backlog/tmp/
 tmp/

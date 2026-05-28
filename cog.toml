@@ -1,11 +1,11 @@
+tag_prefix = "v"
+
 [changelog]
 path = "CHANGELOG.md"
 template = "remote"
 remote = "github.com"
 owner = "lenucksi"
 repository = "Shortwave"
-
-tag_prefix = "v"
 
 [commit_types]
 feat = { changelog_title = "Features", order = 1 }
@@ -19,5 +19,3 @@ ci = { changelog_title = "Continuous Integration", order = 8, omit_from_changelo
 build = { changelog_title = "Build System", order = 9, omit_from_changelog = true }
 perf = { changelog_title = "Performance Improvements", order = 10 }
 revert = { changelog_title = "Reverts", order = 11, omit_from_changelog = true }
-
-tag_prefix = "v"

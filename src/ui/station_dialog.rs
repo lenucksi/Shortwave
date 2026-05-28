@@ -128,7 +128,8 @@ mod imp {
                 .build();
 
             // Title
-            self.obj().set_title(&metadata.name);
+            self.obj()
+                .set_title(&glib::markup_escape_text(&metadata.name));
             self.title_label.set_text(&metadata.name);
 
             // Homepage
@@ -237,7 +238,7 @@ mod imp {
 
                 for alt_url in &metadata.alternate_urls {
                     let row = adw::ActionRow::new();
-                    row.set_title(alt_url.as_ref());
+                    row.set_title(&glib::markup_escape_text(alt_url.as_ref()));
                     row.set_title_lines(1);
                     row.set_tooltip_text(Some(alt_url.as_ref()));
                     row.add_css_class("property");

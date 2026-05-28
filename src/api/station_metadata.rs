@@ -151,7 +151,6 @@ where
 mod tests {
     use super::*;
 
-
     #[test]
     fn test_serialize_deserialize_default() {
         let metadata = StationMetadata::default();

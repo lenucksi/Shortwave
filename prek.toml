@@ -1,0 +1,25 @@
+exclude = { glob = ["backlog/**"] }
+
+[[repos]]
+repo = "https://github.com/pre-commit/pre-commit-hooks"
+rev = "v6.0.0"
+hooks = [
+  { id = "trailing-whitespace" },
+  { id = "end-of-file-fixer" },
+  { id = "check-merge-conflict" },
+  { id = "check-yaml" },
+  { id = "check-added-large-files" },
+]
+
+[[repos]]
+repo = "https://github.com/compilerla/conventional-pre-commit"
+rev = "v4.4.0"
+hooks = [
+  { id = "conventional-pre-commit", stages = ["commit-msg"], args = ["--strict", "feat", "fix", "docs", "style", "refactor", "test", "chore", "ci", "build", "perf", "revert"] },
+]
+
+[[repos]]
+repo = "local"
+hooks = [
+  { id = "cargo-fmt", name = "cargo fmt", language = "system", entry = "cargo fmt --all --check", pass_filenames = false, types = ["rust"] },
+]

@@ -103,12 +103,13 @@ mod imp {
             for i in 0..selection.n_items() {
                 if selection.is_selected(i)
                     && let Some(item) = selection.item(i)
-                        && let Ok(sw_station) = item.downcast::<SwStation>() {
-                            let meta = sw_station.metadata();
-                            if let Some(sd) = all_stations.iter().find(|s| s.name == meta.name) {
-                                selected_stations.push(sd.clone());
-                            }
-                        }
+                    && let Ok(sw_station) = item.downcast::<SwStation>()
+                {
+                    let meta = sw_station.metadata();
+                    if let Some(sd) = all_stations.iter().find(|s| s.name == meta.name) {
+                        selected_stations.push(sd.clone());
+                    }
+                }
             }
 
             drop(all_stations);
@@ -338,53 +339,53 @@ impl SwDiscoveryResultsDialog {
                 for i in 0..count {
                     if sel.is_selected(i) {
                         if let Some(item) = sel.item(i)
-                            && let Ok(station) = item.downcast::<SwStation>() {
-                                details_placeholder.set_visible(false);
+                            && let Ok(station) = item.downcast::<SwStation>()
+                        {
+                            details_placeholder.set_visible(false);
 
-                                let meta = station.metadata();
+                            let meta = station.metadata();
 
-                                details_name.set_text(&meta.name);
-                                details_name.set_visible(true);
+                            details_name.set_text(&meta.name);
+                            details_name.set_visible(true);
 
-                                if !meta.country.is_empty() {
-                                    details_country.set_text(&meta.country);
-                                    details_country.set_visible(true);
-                                }
-
-                                if !meta.tags.is_empty() {
-                                    details_tags.set_text(&meta.tags);
-                                    details_tags.set_visible(true);
-                                }
-
-                                if let Some(ref url) = meta.url {
-                                    details_url.set_text(url.as_ref());
-                                    details_url.set_visible(true);
-                                    details_url_label.set_visible(true);
-                                }
-
-                                if let Some(ref hp) = meta.homepage {
-                                    details_homepage.set_text(hp.as_ref());
-                                    details_homepage.set_visible(true);
-                                    details_homepage_label.set_visible(true);
-                                }
-
-                                if let Some(ref favicon) = meta.favicon {
-                                    let url = favicon.clone();
-                                    let icon = details_icon.clone();
-                                    glib::spawn_future_local(async move {
-                                        if let Ok(resp) = crate::api::http::get(url).await
-                                            && let Ok(bytes) = resp.bytes().await {
-                                                let gbytes = glib::Bytes::from(bytes.as_ref());
-                                                if let Ok(texture) =
-                                                    gdk::Texture::from_bytes(&gbytes)
-                                                {
-                                                    icon.set_paintable(Some(&texture));
-                                                    icon.set_visible(true);
-                                                }
-                                            }
-                                    });
-                                }
+                            if !meta.country.is_empty() {
+                                details_country.set_text(&meta.country);
+                                details_country.set_visible(true);
                             }
+
+                            if !meta.tags.is_empty() {
+                                details_tags.set_text(&meta.tags);
+                                details_tags.set_visible(true);
+                            }
+
+                            if let Some(ref url) = meta.url {
+                                details_url.set_text(url.as_ref());
+                                details_url.set_visible(true);
+                                details_url_label.set_visible(true);
+                            }
+
+                            if let Some(ref hp) = meta.homepage {
+                                details_homepage.set_text(hp.as_ref());
+                                details_homepage.set_visible(true);
+                                details_homepage_label.set_visible(true);
+                            }
+
+                            if let Some(ref favicon) = meta.favicon {
+                                let url = favicon.clone();
+                                let icon = details_icon.clone();
+                                glib::spawn_future_local(async move {
+                                    if let Ok(resp) = crate::api::http::get(url).await
+                                        && let Ok(bytes) = resp.bytes().await
+                                    {
+                                        let gbytes = glib::Bytes::from(bytes.as_ref());
+                                        if let Ok(texture) = gdk::Texture::from_bytes(&gbytes) {
+                                            icon.set_paintable(Some(&texture));
+                                            icon.set_visible(true);
+                                        }
+                                    }
+                                });
+                            }
+                        }
                         break;
                     }
                 }

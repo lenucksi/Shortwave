@@ -162,6 +162,11 @@ cover {
   border-radius: 12px;
 }
 
+.station-grid>child:selected {
+  background-color: alpha(@accent_bg_color, 0.3);
+  border: 2px solid @accent_bg_color;
+}
+
 .station-flowbox>flowboxchild {
   padding: 0px;
   border-radius: 12px;

@@ -20,7 +20,7 @@ use std::sync::Arc;
 use gtk::gio;
 use hickory_resolver::Resolver;
 use hickory_resolver::config::ResolverConfig;
-use hickory_resolver::name_server::TokioConnectionProvider;
+use hickory_resolver::net::runtime::TokioRuntimeProvider;
 use indexmap::IndexMap;
 use rand::prelude::SliceRandom;
 use reqwest::{Method, Request, StatusCode};
@@ -103,12 +103,10 @@ pub async fn lookup_rb_server() -> Option<String> {
     } else {
         warn!("Unable to use dns resolver from system conf");
 
-        Resolver::builder_with_config(
-            ResolverConfig::default(),
-            TokioConnectionProvider::default(),
-        )
-        .build()
-    };
+        Resolver::builder_with_config(ResolverConfig::default(), TokioRuntimeProvider::default())
+            .build()
+    }
+    .ok()?;
 
     // Do forward lookup to receive a list with the api servers
     let response = resolver.lookup_ip(lookup_domain).await.ok()?;
@@ -123,7 +121,7 @@ pub async fn lookup_rb_server() -> Option<String> {
             .reverse_lookup(ip)
             .await
             .ok()
-            .and_then(|r| r.into_iter().next());
+            .and_then(|r| r.answers().first().cloned());
 
         if result.is_none() {
             warn!("Reverse lookup for {ip} failed");
