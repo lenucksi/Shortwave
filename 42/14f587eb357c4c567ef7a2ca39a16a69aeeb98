@@ -1,0 +1,21 @@
+data/gtk/discovery_results_dialog.ui
+  s_118528d5383dc5::t_ca4efb2aa4d66e 33-139,141
+src/ui/discovery_results_dialog.rs
+  s_118528d5383dc5::t_ca4efb2aa4d66e 1-16,20-21,47-66,97-118,121,123,134-135,158,230,236-238,241-337,339-424
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "4214f587eb357c4c567ef7a2ca39a16a69aeeb98",
+  "prompts": {},
+  "sessions": {
+    "s_118528d5383dc5": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_19a8323eeffe8eS0d9Uj265YvT",
+        "model": "deepseek-v4-flash-free"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    }
+  }
+}
