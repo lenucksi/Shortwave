@@ -41,6 +41,29 @@ fn http_get_json_with_client(
     })
 }
 
+fn http_get_json_relaxed_with_client(
+    client: &reqwest::blocking::Client,
+    url: &str,
+) -> Result<Dynamic, Box<EvalAltResult>> {
+    let body = http_get_with_client(client, url)?;
+    let cleaned: String = body
+        .chars()
+        .filter(|&c| c as u32 >= 0x20 || c == '\t' || c == '\n' || c == '\r')
+        .collect();
+    let val: Value = serde_json::from_str(&cleaned).map_err(|e| {
+        Box::new(EvalAltResult::ErrorRuntime(
+            format!("http_get_json_relaxed parse: {e}").into(),
+            rhai::Position::NONE,
+        ))
+    })?;
+    rhai::serde::to_dynamic(&val).map_err(|e| {
+        Box::new(EvalAltResult::ErrorRuntime(
+            format!("http_get_json_relaxed to_dynamic: {e}").into(),
+            rhai::Position::NONE,
+        ))
+    })
+}
+
 fn json_parse(s: &str) -> Result<Dynamic, Box<EvalAltResult>> {
     let val: Value = serde_json::from_str(s).map_err(|e| {
         Box::new(EvalAltResult::ErrorRuntime(
@@ -120,6 +143,7 @@ pub fn create() -> Engine {
     let client = std::sync::Arc::new(client);
     let c1 = client.clone();
     let c2 = client.clone();
+    let c3 = client.clone();
 
     engine.register_fn(
         "http_get",
@@ -129,6 +153,12 @@ pub fn create() -> Engine {
         "http_get_json",
         move |url: &str| -> Result<Dynamic, Box<EvalAltResult>> {
             http_get_json_with_client(&c2, url)
+        },
+    );
+    engine.register_fn(
+        "http_get_json_relaxed",
+        move |url: &str| -> Result<Dynamic, Box<EvalAltResult>> {
+            http_get_json_relaxed_with_client(&c3, url)
         },
     );
 
@@ -146,6 +176,7 @@ pub fn create_with_client(client: reqwest::blocking::Client) -> Engine {
     let client = std::sync::Arc::new(client);
     let c1 = client.clone();
     let c2 = client.clone();
+    let c3 = client.clone();
 
     engine.register_fn(
         "http_get",
@@ -155,6 +186,12 @@ pub fn create_with_client(client: reqwest::blocking::Client) -> Engine {
         "http_get_json",
         move |url: &str| -> Result<Dynamic, Box<EvalAltResult>> {
             http_get_json_with_client(&c2, url)
+        },
+    );
+    engine.register_fn(
+        "http_get_json_relaxed",
+        move |url: &str| -> Result<Dynamic, Box<EvalAltResult>> {
+            http_get_json_relaxed_with_client(&c3, url)
         },
     );
 
