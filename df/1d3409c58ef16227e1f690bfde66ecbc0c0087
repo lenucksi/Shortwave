@@ -1,0 +1,74 @@
+src/ui/discovery_results_dialog.rs
+  s_95d02f2e850e9c::t_977623762972e1 106-112,342-386,388
+"backlog/tasks/sw-36 - CI-Fix-4-Fix-cargo-deny-config-for-licenses-and-advisories.md"
+  s_95d02f2e850e9c::t_7401892fdf4f60 1-3,5-6,8-33,40-47
+  s_95d02f2e850e9c::t_46dd679ae80472 34-39
+  s_95d02f2e850e9c::t_debed99695914d 4,7
+src/ui/station_dialog.rs
+  s_95d02f2e850e9c::t_977623762972e1 131-132
+data/gtk/style.css
+  s_118528d5383dc5::t_4c6e90ed62f4bf 165-169
+"backlog/tasks/sw-38 - CI-Fix-6-Run-cargo-fmt-to-fix-Rust-formatting.md"
+  s_95d02f2e850e9c::t_debed99695914d 4
+  s_95d02f2e850e9c::t_df9ff6a9a9b4bb 1-3,5-6,8-31,38-45
+  s_95d02f2e850e9c::t_512fb65e204f19 7,32-37
+.deny.toml
+  s_95d02f2e850e9c::t_11dc1bf64b7b0f 16
+  s_95d02f2e850e9c::t_19698115004ce6 4-6
+"backlog/tasks/sw-35 - CI-Fix-3-Switch-CI-container-to-gnome-master-image.md"
+  s_95d02f2e850e9c::t_1e78c01f09ff48 36-41
+  s_95d02f2e850e9c::t_debed99695914d 4,7
+  s_95d02f2e850e9c::t_cce8f5fcd3834e 1-3,5-6,8-35,42-49
+cog.toml
+  s_95d02f2e850e9c::t_5a2597f1bcfada 1-2
+prek.toml
+  s_95d02f2e850e9c::t_91110c208c86bc 1-25
+Cargo.lock
+  ai_agent 535,596-605,1477,1866-1867,1869,1877-1895,1898,1900-1901,1911,1913,1917,1920-1921,1923,1926,1929,2257-2259,2293-2341,2737-2742,3078-3088,3190,3758,3788-3802
+"backlog/tasks/sw-34 - CI-Fix-2-Create-prek.toml-config-exclude-backlog.md"
+  s_95d02f2e850e9c::t_42374757fc0345 36-41
+  s_95d02f2e850e9c::t_81450ac1a9b8e2 1-3,5-6,8-35,42-49
+  s_95d02f2e850e9c::t_debed99695914d 4,7
+src/api/client.rs
+  s_95d02f2e850e9c::t_977623762972e1 106-107
+Cargo.toml
+  s_95d02f2e850e9c::t_bf919e4725d083 21
+.github/workflows/ci.yml
+  s_95d02f2e850e9c::t_cf677a054aa413 81
+  s_95d02f2e850e9c::t_6235c1e5b6036f 46
+data/gtk/discovery_results_dialog.ui
+  s_118528d5383dc5::t_7d652cfc401d75 49
+  s_118528d5383dc5::t_c34a0293d9211d 41
+"backlog/tasks/sw-33 - CI-Fix-1-Fix-cocogitto-cog.toml-config-for-v7.md"
+  s_95d02f2e850e9c::t_9b99b04d730b1a 1-3,5-6,8-34,41-49
+  s_95d02f2e850e9c::t_debed99695914d 4,7
+  s_95d02f2e850e9c::t_c5a1ea13ca9d05 35-40
+"backlog/tasks/sw-37 - CI-Fix-5-Upgrade-hickory-resolver-0.25-→-0.26.md"
+  s_95d02f2e850e9c::t_f1e31aa8e68e9e 1-3,5-6,8-38,45-52
+  s_95d02f2e850e9c::t_debed99695914d 4
+  s_95d02f2e850e9c::t_34de60c5860461 7,39-44
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "df1d3409c58ef16227e1f690bfde66ecbc0c0087",
+  "prompts": {},
+  "sessions": {
+    "s_118528d5383dc5": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_19a8323eeffe8eS0d9Uj265YvT",
+        "model": "deepseek-v4-flash-free"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    },
+    "s_95d02f2e850e9c": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_191cbba11ffefs4DEqBbyoAs4A",
+        "model": "deepseek-v4-flash-free"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    }
+  }
+}
