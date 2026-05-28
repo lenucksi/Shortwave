@@ -1,0 +1,27 @@
+data/providers/webradiodb.rhai
+  s_118528d5383dc5::t_e2c1f5d6f2a4d1 6,14-16
+src/ui/discovery_results_dialog.rs
+  ai_agent 113-118,127-137
+  s_118528d5383dc5::t_632a1abad08b78 112,122
+src/ui/pages/library_page.rs
+  ai_agent 191-193,214-216
+  s_118528d5383dc5::t_632a1abad08b78 190,212-213
+src/ui/station_dialog.rs
+  s_118528d5383dc5::t_632a1abad08b78 231,240,248,292
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "5e24e8516769462d63bb5baa7a7b17fcea339d37",
+  "prompts": {},
+  "sessions": {
+    "s_118528d5383dc5": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_19a8323eeffe8eS0d9Uj265YvT",
+        "model": "deepseek-v4-flash-free"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    }
+  }
+}
