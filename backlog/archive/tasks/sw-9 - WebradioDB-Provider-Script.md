@@ -1,18 +1,18 @@
 ---
 id: SW-9
-title: "WebradioDB API Provider Script"
-status: Pending
+title: WebradioDB API Provider Script
+status: Archived
 assignee: []
-created_date: '2026-05-24'
-updated_date: '2026-05-24'
+created_date: 2026-05-24
+updated_date: 2026-05-24
 labels: []
 milestone: provider-system
 dependencies:
   - SW-8
 references:
-  - 'https://github.com/jcorporation/webradiodb'
-  - 'https://jcorporation.github.io/webradiodb/'
-  - 'https://gitlab.gnome.org/World/Shortwave/-/work_items/717'
+  - https://github.com/jcorporation/webradiodb
+  - https://jcorporation.github.io/webradiodb/
+  - https://gitlab.gnome.org/World/Shortwave/-/work_items/717
   - src/discovery/runner.rs
   - src/discovery/types.rs
   - src/discovery/engine.rs
@@ -20,7 +20,6 @@ references:
 priority: high
 ordinal: 9000
 ---
-
 ## Description
 
 <!-- SECTION:DESCRIPTION:BEGIN -->
