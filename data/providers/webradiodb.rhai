@@ -3,7 +3,7 @@
 
 let url = "https://jcorporation.github.io/webradiodb/db/index/webradios.min.json";
 
-let raw = [];
+let raw = #{};
 try {
    raw = http_get_json(url);
 } catch (error) {
@@ -11,7 +11,9 @@ try {
 };
 
 let results = [];
-for station in raw {
+let station_keys = raw.keys();
+for key in station_keys {
+   let station = raw[key];
    let stream_url = if station.url == () { "" } else { station.url };
    let urls = [];
    if stream_url != "" {

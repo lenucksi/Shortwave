@@ -228,7 +228,7 @@ mod imp {
             // Playlist url
             if let Some(ref playlist_url) = metadata.playlist_url {
                 self.playlist_row.set_visible(true);
-                self.playlist_row.set_subtitle(&playlist_url.to_string());
+                self.playlist_row.set_subtitle(playlist_url.as_ref());
             }
 
             // Alternate streams
@@ -237,7 +237,7 @@ mod imp {
 
                 for alt_url in &metadata.alternate_urls {
                     let row = adw::ActionRow::new();
-                    row.set_title(&alt_url.to_string());
+                    row.set_title(alt_url.as_ref());
                     row.set_title_lines(1);
                     row.set_tooltip_text(Some(alt_url.as_ref()));
                     row.add_css_class("property");
@@ -245,7 +245,7 @@ mod imp {
                     let switch_btn = gtk::Button::builder()
                         .icon_name("media-playback-start-symbolic")
                         .valign(gtk::Align::Center)
-                        .tooltip_text(&i18n("Switch"))
+                        .tooltip_text(i18n("Switch"))
                         .build();
                     switch_btn.add_css_class("flat");
 
@@ -289,7 +289,7 @@ mod imp {
                                             dialog.stream_row.set_tooltip_text(Some(&url_str));
 
                                             dialog.playlist_row.set_visible(true);
-                                            dialog.playlist_row.set_subtitle(&url.to_string());
+                                            dialog.playlist_row.set_subtitle(url.as_ref());
 
                                             let toast = adw::Toast::new(&i18n("Stream switched"));
                                             dialog.toast_overlay.add_toast(toast);

@@ -187,10 +187,10 @@ mod imp {
             self.selection_mode.set(false);
             self.select_toggle.set_label(&i18n("Select"));
 
-            if let Some(model) = self.gridview.model() {
-                if let Ok(selection) = model.downcast::<gtk::MultiSelection>() {
-                    selection.unselect_all();
-                }
+            if let Some(model) = self.gridview.model()
+                && let Ok(selection) = model.downcast::<gtk::MultiSelection>()
+            {
+                selection.unselect_all();
             }
 
             let sort_list_model = self.sort_list_model.get().unwrap();
@@ -209,12 +209,11 @@ mod imp {
             let n_items = selection.n_items();
             let mut stations = Vec::new();
             for i in 0..n_items {
-                if selection.is_selected(i) {
-                    if let Some(item) = selection.item(i) {
-                        if let Ok(station) = item.downcast::<SwStation>() {
-                            stations.push(station);
-                        }
-                    }
+                if selection.is_selected(i)
+                    && let Some(item) = selection.item(i)
+                    && let Ok(station) = item.downcast::<SwStation>()
+                {
+                    stations.push(station);
                 }
             }
 

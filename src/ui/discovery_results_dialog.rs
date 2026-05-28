@@ -109,33 +109,32 @@ mod imp {
                             let pls_url = Url::parse(&station.stream_url).ok();
                             let mut resolved_url = None;
                             let mut alt_urls = Vec::new();
-                            if let Some(ref pu) = pls_url {
-                                if let Ok(entries) = fetch_and_parse(pu).await {
-                                    let urls: Vec<Url> =
-                                        entries.into_iter().map(|e| e.url).collect();
-                                    let mut iter = urls.into_iter();
-                                    resolved_url = iter.next();
-                                    alt_urls = iter.collect();
-                                }
+                            if let Some(ref pu) = pls_url
+                                && let Ok(entries) = fetch_and_parse(pu).await
+                            {
+                                let urls: Vec<Url> = entries.into_iter().map(|e| e.url).collect();
+                                let mut iter = urls.into_iter();
+                                resolved_url = iter.next();
+                                alt_urls = iter.collect();
                             }
                             (resolved_url, alt_urls, pls_url)
                         } else {
-                            let (chosen, alts) = select_best_format(&station);
+                            let (chosen, alts) = select_best_format(station);
                             (Url::parse(&chosen).ok(), alts, None)
                         };
 
-                        let mut metadata = crate::api::StationMetadata::default();
-                        metadata.name = station.name.clone();
-                        metadata.url = url;
-                        metadata.alternate_urls = alternate_urls;
-                        metadata.playlist_url = playlist_url;
-                        metadata.homepage =
-                            station.homepage.as_ref().and_then(|h| Url::parse(h).ok());
-                        metadata.favicon =
-                            station.icon_url.as_ref().and_then(|i| Url::parse(i).ok());
-                        metadata.tags = station.tags.clone().unwrap_or_default();
-                        metadata.country = station.country.clone().unwrap_or_default();
-                        metadata.language = station.language.clone().unwrap_or_default();
+                        let metadata = crate::api::StationMetadata {
+                            name: station.name.clone(),
+                            url,
+                            alternate_urls,
+                            playlist_url,
+                            homepage: station.homepage.as_ref().and_then(|h| Url::parse(h).ok()),
+                            favicon: station.icon_url.as_ref().and_then(|i| Url::parse(i).ok()),
+                            tags: station.tags.clone().unwrap_or_default(),
+                            country: station.country.clone().unwrap_or_default(),
+                            language: station.language.clone().unwrap_or_default(),
+                            ..Default::default()
+                        };
 
                         let sw_station =
                             SwStation::new(&uuid::Uuid::new_v4().to_string(), true, metadata, None);
