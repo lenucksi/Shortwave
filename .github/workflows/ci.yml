@@ -69,9 +69,15 @@ jobs:
             flatpak_app \
             build-aux/de.haeckerfelix.Shortwave.Devel.json
           flatpak build-finish --share=network flatpak_app
+      - name: Restore cargo cache
+        run: |
+          if [ -d .flatpak-builder/cargo-home ]; then
+            mkdir -p .flatpak-builder/build/shortwave/run/build/shortwave
+            cp -r .flatpak-builder/cargo-home .flatpak-builder/build/shortwave/run/build/shortwave/.
+          fi
       - name: Cargo build
         run: |
-          echo "cd .. && cargo build" | \
+          echo "export CARGO_HOME=/run/build/shortwave/.cargo-home && cd .. && cargo build" | \
             flatpak-builder --disable-rofiles-fuse \
               --state-dir=.flatpak-builder \
               --build-shell=shortwave \
@@ -79,12 +85,19 @@ jobs:
               build-aux/de.haeckerfelix.Shortwave.Devel.json
       - name: Cargo test
         run: |
-          echo "cd .. && cargo test" | \
+          echo "export CARGO_HOME=/run/build/shortwave/.cargo-home && cd .. && cargo test" | \
             flatpak-builder --disable-rofiles-fuse \
               --state-dir=.flatpak-builder \
               --build-shell=shortwave \
               flatpak_app \
               build-aux/de.haeckerfelix.Shortwave.Devel.json
+      - name: Save cargo cache
+        run: |
+          DIR=$(ls -d .flatpak-builder/build/shortwave-* 2>/dev/null | sort -V | tail -1)
+          if [ -n "$DIR" ] && [ -d "$DIR/run/build/shortwave/.cargo-home" ]; then
+            rm -rf .flatpak-builder/cargo-home
+            cp -r "$DIR/run/build/shortwave/.cargo-home" .flatpak-builder/cargo-home
+          fi
 
   lint:
     needs: build-test
@@ -116,9 +129,15 @@ jobs:
             flatpak_app \
             build-aux/de.haeckerfelix.Shortwave.Devel.json
           flatpak build-finish --share=network flatpak_app
+      - name: Restore cargo cache
+        run: |
+          if [ -d .flatpak-builder/cargo-home ]; then
+            mkdir -p .flatpak-builder/build/shortwave/run/build/shortwave
+            cp -r .flatpak-builder/cargo-home .flatpak-builder/build/shortwave/run/build/shortwave/.
+          fi
       - name: Cargo fmt
         run: |
-          echo "cd .. && cargo fmt --all --check" | \
+          echo "export CARGO_HOME=/run/build/shortwave/.cargo-home && cd .. && cargo fmt --all --check" | \
             flatpak-builder --disable-rofiles-fuse \
               --state-dir=.flatpak-builder \
               --build-shell=shortwave \
@@ -126,7 +145,7 @@ jobs:
               build-aux/de.haeckerfelix.Shortwave.Devel.json
       - name: Cargo clippy
         run: |
-          echo "cd .. && cargo clippy --all -- -D warnings" | \
+          echo "export CARGO_HOME=/run/build/shortwave/.cargo-home && cd .. && cargo clippy --all -- -D warnings" | \
             flatpak-builder --disable-rofiles-fuse \
               --state-dir=.flatpak-builder \
               --build-shell=shortwave \
@@ -166,9 +185,15 @@ jobs:
             flatpak_app \
             build-aux/de.haeckerfelix.Shortwave.Devel.json
           flatpak build-finish --share=network flatpak_app
+      - name: Restore cargo cache
+        run: |
+          if [ -d .flatpak-builder/cargo-home ]; then
+            mkdir -p .flatpak-builder/build/shortwave/run/build/shortwave
+            cp -r .flatpak-builder/cargo-home .flatpak-builder/build/shortwave/run/build/shortwave/.
+          fi
       - name: Cargo build (release)
         run: |
-          echo "cd .. && cargo build --release" | \
+          echo "export CARGO_HOME=/run/build/shortwave/.cargo-home && cd .. && cargo build --release" | \
             flatpak-builder --disable-rofiles-fuse \
               --state-dir=.flatpak-builder \
               --build-shell=shortwave \
@@ -176,12 +201,19 @@ jobs:
               build-aux/de.haeckerfelix.Shortwave.Devel.json
       - name: Cargo test (release)
         run: |
-          echo "cd .. && cargo test --release" | \
+          echo "export CARGO_HOME=/run/build/shortwave/.cargo-home && cd .. && cargo test --release" | \
             flatpak-builder --disable-rofiles-fuse \
               --state-dir=.flatpak-builder \
               --build-shell=shortwave \
               flatpak_app \
               build-aux/de.haeckerfelix.Shortwave.Devel.json
+      - name: Save cargo cache
+        run: |
+          DIR=$(ls -d .flatpak-builder/build/shortwave-* 2>/dev/null | sort -V | tail -1)
+          if [ -n "$DIR" ] && [ -d "$DIR/run/build/shortwave/.cargo-home" ]; then
+            rm -rf .flatpak-builder/cargo-home
+            cp -r "$DIR/run/build/shortwave/.cargo-home" .flatpak-builder/cargo-home
+          fi
 
   deny:
     runs-on: ubuntu-latest
