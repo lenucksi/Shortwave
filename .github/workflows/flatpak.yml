@@ -22,10 +22,6 @@ permissions:
   attestations: write
   pages: write
 
-concurrency:
-  group: pages-deploy
-  cancel-in-progress: false
-
 jobs:
   package-flatpak:
     runs-on: ubuntu-latest
@@ -113,7 +109,7 @@ jobs:
           name: shortwave-flatpak-repo
           path: repo
 
-      - name: Generate index.flatpakrepo
+      - name: Generate repo index files
         run: |
           cat > repo/index.flatpakrepo << 'EOF'
           [Flatpak Repo]
@@ -125,6 +121,7 @@ jobs:
           Icon=https://raw.githubusercontent.com/lenucksi/Shortwave/main/data/icons/de.haeckerfelix.Shortwave.svg
           GPGKey=${{ secrets.GPG_PUBLIC_KEY_BASE64 }}
           EOF
+          cp build-aux/pages-index.html repo/index.html
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
