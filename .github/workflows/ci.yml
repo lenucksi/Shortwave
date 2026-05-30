@@ -136,6 +136,53 @@ jobs:
         run: |
           flatpak-builder-lint manifest build-aux/de.haeckerfelix.Shortwave.Devel.json
 
+  build-release:
+    needs: build-test
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/flathub-infra/flatpak-github-actions:gnome-50
+      options: --privileged
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
+        with:
+          egress-policy: audit
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - name: Restore Flatpak builder state
+        uses: actions/cache/restore@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+        with:
+          path: .flatpak-builder
+          key: flatpak-builder-${{ hashFiles('build-aux/de.haeckerfelix.Shortwave.Devel.json') }}-${{ runner.arch }}
+          restore-keys: |
+            flatpak-builder-
+      - name: Bootstrap Flatpak SDK
+        run: |
+          flatpak-builder \
+            --disable-rofiles-fuse --keep-build-dirs \
+            --state-dir=.flatpak-builder \
+            --install-deps-from=flathub \
+            --stop-at=shortwave \
+            flatpak_app \
+            build-aux/de.haeckerfelix.Shortwave.Devel.json
+          flatpak build-finish --share=network flatpak_app
+      - name: Cargo build (release)
+        run: |
+          echo "cd .. && cargo build --release" | \
+            flatpak-builder --disable-rofiles-fuse \
+              --state-dir=.flatpak-builder \
+              --build-shell=shortwave \
+              flatpak_app \
+              build-aux/de.haeckerfelix.Shortwave.Devel.json
+      - name: Cargo test (release)
+        run: |
+          echo "cd .. && cargo test --release" | \
+            flatpak-builder --disable-rofiles-fuse \
+              --state-dir=.flatpak-builder \
+              --build-shell=shortwave \
+              flatpak_app \
+              build-aux/de.haeckerfelix.Shortwave.Devel.json
+
   deny:
     runs-on: ubuntu-latest
     steps:
