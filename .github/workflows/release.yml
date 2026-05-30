@@ -2,14 +2,50 @@ name: Release
 
 on:
   push:
+    branches: [main]
     tags: ['v*']
   workflow_dispatch:
 
 permissions:
   contents: read
 
+concurrency:
+  group: pages-deploy
+  cancel-in-progress: false
+
 jobs:
-  release:
+  bump-version:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
+        with:
+          egress-policy: audit
+
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Auto-bump version
+        id: bump
+        uses: cocogitto/cocogitto-action@52d0023b4396897f1815648e553db2ab8d782f3a # v4.2.0
+        with:
+          command: bump
+          args: --auto
+          git-user: "github-actions[bot]"
+          git-user-email: "github-actions[bot]@users.noreply.github.com"
+
+  build-release:
+    if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/flathub-infra/flatpak-github-actions:gnome-50
@@ -18,6 +54,7 @@ jobs:
       contents: write
       attestations: write
       id-token: write
+      pages: write
 
     steps:
       - name: Harden Runner
@@ -36,6 +73,13 @@ jobs:
           command: changelog
           args: --from-latest-tag
 
+      - name: Import GPG key
+        id: gpg
+        uses: crazy-max/ghaction-import-gpg@2dc316deee8e90f13e1a351ab510b4d5bc0c82cd # v7.0.0
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.GPG_PASSPHRASE }}
+
       - name: Build production Flatpak
         uses: flatpak/flatpak-github-actions/flatpak-builder@401fe28a8384095fc1531b9d320b292f0ee45adb # v6.7
         with:
@@ -43,7 +87,32 @@ jobs:
           manifest-path: build-aux/de.haeckerfelix.Shortwave.json
           cache-key: flatpak-builder-release-${{ hashFiles('Cargo.lock') }}
           arch: x86_64
-          upload-artifact: true
+          gpg-sign: ${{ steps.gpg.outputs.fingerprint }}
+
+      - name: Update Flatpak repository summary
+        run: flatpak build-update-repo --gpg-sign="${{ steps.gpg.outputs.fingerprint }}" --generate-static-deltas --prune repo/
+
+      - name: Generate index.flatpakrepo
+        run: |
+          cat > repo/index.flatpakrepo << 'EOF'
+          [Flatpak Repo]
+          Title=Shortwave
+          Url=https://lenucksi.github.io/Shortwave/
+          Homepage=https://github.com/lenucksi/Shortwave
+          Comment=GNOME internet radio player
+          Description=Access over 50,000 radio stations
+          Icon=https://raw.githubusercontent.com/lenucksi/Shortwave/main/data/icons/de.haeckerfelix.Shortwave.svg
+          GPGKey=${{ secrets.GPG_PUBLIC_KEY_BASE64 }}
+          EOF
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: repo
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5.0.0
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@c95fe6059398b0a5e1df16a60e9e46db327092e9 # v2.2.1
