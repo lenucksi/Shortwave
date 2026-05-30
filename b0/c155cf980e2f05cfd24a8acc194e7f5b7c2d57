@@ -1,0 +1,24 @@
+.github/workflows/flatpak.yml
+  s_95d02f2e850e9c::t_f3a6fedc9fe070 112
+  s_95d02f2e850e9c::t_822c13a3f88f89 124
+.github/workflows/release.yml
+  s_95d02f2e850e9c::t_5e51d1bb772dc4 91,103
+build-aux/pages-index.html
+  s_95d02f2e850e9c::t_c27a38ec199dae 1-64
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "b0c155cf980e2f05cfd24a8acc194e7f5b7c2d57",
+  "prompts": {},
+  "sessions": {
+    "s_95d02f2e850e9c": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_191cbba11ffefs4DEqBbyoAs4A",
+        "model": "deepseek-v4-flash-free"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    }
+  }
+}
