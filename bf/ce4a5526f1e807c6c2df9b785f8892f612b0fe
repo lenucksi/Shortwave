@@ -1,0 +1,19 @@
+build-aux/de.haeckerfelix.Shortwave.Devel.json
+  s_95d02f2e850e9c::t_8620b672ce0f1e 52-53
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "bfce4a5526f1e807c6c2df9b785f8892f612b0fe",
+  "prompts": {},
+  "sessions": {
+    "s_95d02f2e850e9c": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_191cbba11ffefs4DEqBbyoAs4A",
+        "model": "deepseek-v4-flash-free"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    }
+  }
+}
