@@ -1,0 +1,21 @@
+build-aux/pages-index.html
+  s_95d02f2e850e9c::t_d074e93977da85 52
+.github/workflows/release.yml
+  s_95d02f2e850e9c::t_ec17eff2ecbef7 88-97
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "2b989c7da8ec126a72e150613b9ef6a3836559db",
+  "prompts": {},
+  "sessions": {
+    "s_95d02f2e850e9c": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_191cbba11ffefs4DEqBbyoAs4A",
+        "model": "deepseek-v4-flash-free"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    }
+  }
+}
