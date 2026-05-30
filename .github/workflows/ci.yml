@@ -73,7 +73,7 @@ jobs:
         run: |
           if [ -d .flatpak-builder/cargo-home ]; then
             mkdir -p .flatpak-builder/build/shortwave/run/build/shortwave
-            cp -r .flatpak-builder/cargo-home .flatpak-builder/build/shortwave/run/build/shortwave/.
+            cp -r .flatpak-builder/cargo-home .flatpak-builder/build/shortwave/run/build/shortwave/.cargo-home
           fi
       - name: Cargo build
         run: |
@@ -133,7 +133,7 @@ jobs:
         run: |
           if [ -d .flatpak-builder/cargo-home ]; then
             mkdir -p .flatpak-builder/build/shortwave/run/build/shortwave
-            cp -r .flatpak-builder/cargo-home .flatpak-builder/build/shortwave/run/build/shortwave/.
+            cp -r .flatpak-builder/cargo-home .flatpak-builder/build/shortwave/run/build/shortwave/.cargo-home
           fi
       - name: Cargo fmt
         run: |
@@ -189,7 +189,7 @@ jobs:
         run: |
           if [ -d .flatpak-builder/cargo-home ]; then
             mkdir -p .flatpak-builder/build/shortwave/run/build/shortwave
-            cp -r .flatpak-builder/cargo-home .flatpak-builder/build/shortwave/run/build/shortwave/.
+            cp -r .flatpak-builder/cargo-home .flatpak-builder/build/shortwave/run/build/shortwave/.cargo-home
           fi
       - name: Cargo build (release)
         run: |
