@@ -123,7 +123,9 @@ jobs:
           Icon=https://raw.githubusercontent.com/lenucksi/Shortwave/main/data/icons/de.haeckerfelix.Shortwave.svg
           GPGKey=${{ secrets.GPG_PUBLIC_KEY_BASE64 }}
           EOF
-          cp build-aux/pages-index.html repo/index.html
+          if [ -f build-aux/pages-index.html ]; then
+            cp build-aux/pages-index.html repo/index.html
+          fi
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
