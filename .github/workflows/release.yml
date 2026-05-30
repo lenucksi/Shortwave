@@ -2,21 +2,25 @@ name: Release
 
 on:
   push:
-    branches: [main, master]
+    tags: ['v*']
+  workflow_dispatch:
 
 permissions:
-  contents: write
-  pull-requests: write
-  id-token: write
-  attestations: write
+  contents: read
 
 jobs:
   release:
-    name: Conventional Commit Release
     runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/flathub-infra/flatpak-github-actions:gnome-50
+      options: --privileged
+    permissions:
+      contents: write
+      attestations: write
+      id-token: write
 
     steps:
-      - name: Harden the runner
+      - name: Harden Runner
         uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
         with:
           egress-policy: audit
@@ -26,14 +30,24 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Configure Git
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-
-      - name: Cocogitto Release
+      - name: Generate changelog
         uses: cocogitto/cocogitto-action@52d0023b4396897f1815648e553db2ab8d782f3a # v4.2.0
         with:
-          release: true
-          git-user: "github-actions[bot]"
-          git-user-email: "github-actions[bot]@users.noreply.github.com"
+          command: changelog
+          args: --from-latest-tag
+
+      - name: Build production Flatpak
+        uses: flatpak/flatpak-github-actions/flatpak-builder@401fe28a8384095fc1531b9d320b292f0ee45adb # v6.7
+        with:
+          bundle: Shortwave-${{ github.ref_name }}.flatpak
+          manifest-path: build-aux/de.haeckerfelix.Shortwave.json
+          cache-key: flatpak-builder-release-${{ hashFiles('Cargo.lock') }}
+          arch: x86_64
+          upload-artifact: true
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@c95fe6059398b0a5e1df16a60e9e46db327092e9 # v2.2.1
+        with:
+          files: Shortwave-*.flatpak
+          body_path: CHANGELOG.md
+          generate_release_notes: true
