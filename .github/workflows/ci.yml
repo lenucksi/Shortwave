@@ -87,6 +87,7 @@ jobs:
               build-aux/de.haeckerfelix.Shortwave.Devel.json
 
   lint:
+    needs: build-test
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/flathub-infra/flatpak-github-actions:gnome-50
