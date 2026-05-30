@@ -56,9 +56,9 @@ jobs:
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
         with:
           path: .flatpak-builder
-          key: flatpak-builder-${{ runner.arch }}-${{ hashFiles('build-aux/de.haeckerfelix.Shortwave.Devel.json') }}
+          key: flatpak-builder-${{ hashFiles('build-aux/de.haeckerfelix.Shortwave.Devel.json') }}-${{ runner.arch }}
           restore-keys: |
-            flatpak-builder-${{ runner.arch }}-
+            flatpak-builder-
       - name: Bootstrap Flatpak SDK
         run: |
           flatpak-builder \
@@ -102,9 +102,9 @@ jobs:
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
         with:
           path: .flatpak-builder
-          key: flatpak-builder-${{ runner.arch }}-${{ hashFiles('build-aux/de.haeckerfelix.Shortwave.Devel.json') }}
+          key: flatpak-builder-${{ hashFiles('build-aux/de.haeckerfelix.Shortwave.Devel.json') }}-${{ runner.arch }}
           restore-keys: |
-            flatpak-builder-${{ runner.arch }}-
+            flatpak-builder-
       - name: Bootstrap Flatpak SDK
         run: |
           flatpak-builder \
