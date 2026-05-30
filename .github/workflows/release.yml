@@ -85,6 +85,16 @@ jobs:
           arch: x86_64
           gpg-sign: ${{ steps.gpg.outputs.fingerprint }}
 
+      - name: Build Dev Flatpak (add to same repo)
+        run: |
+          flatpak-builder \
+            --disable-rofiles-fuse --keep-build-dirs \
+            --state-dir=.flatpak-builder-dev \
+            --install-deps-from=flathub \
+            --repo=repo \
+            flatpak_app_dev \
+            build-aux/de.haeckerfelix.Shortwave.Devel.json
+
       - name: Update Flatpak repository summary
         run: flatpak build-update-repo --gpg-sign="${{ steps.gpg.outputs.fingerprint }}" --generate-static-deltas --prune repo/
 
