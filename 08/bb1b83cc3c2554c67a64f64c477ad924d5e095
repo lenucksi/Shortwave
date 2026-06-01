@@ -1,0 +1,29 @@
+research/fedora-version-compat.md
+  s_081cd66f076d09::t_e7d5bba65809ce 1-132
+research/accesskit-waydriver-analysis.md
+  s_9714d2f6b2ad74::t_6ab796cc570dac 1-139
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "08bb1b83cc3c2554c67a64f64c477ad924d5e095",
+  "prompts": {},
+  "sessions": {
+    "s_081cd66f076d09": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_17d414827ffe8RL6oxXi8TNFjL",
+        "model": "deepseek-v4-flash"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    },
+    "s_9714d2f6b2ad74": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_17d412cacffeRD6tnyU8rl9Nd2",
+        "model": "deepseek-v4-flash"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    }
+  }
+}
