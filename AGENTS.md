@@ -16,15 +16,18 @@ docker pull ghcr.io/bohdantkachenko/waydriver-mcp-builder:latest
 
 ## Architecture
 
-We use **Fedora 43** as the base (not the WayDriver F42 images) because
-Fedora 42 ships `libadwaita-1.7.12` but Shortwave 5.1 requires
-`libadwaita >= 1.8` (uses `AdwDialog`, `AdwAlertDialog`, `AdwPreferencesDialog`).
-Fedora 43 ships `libadwaita-1.8.5.1` and `glycin-2.0.8`.
+We use **Fedora 44** as the base (not the WayDriver F42 images) because:
+- Fedora 42 ships `libadwaita-1.7.12` but Shortwave 5.1 requires `libadwaita >= 1.8`
+- Fedora 44 ships `libadwaita-1.9.0` and `glycin-2.0.8`
+- Research confirmed glibc backwards compat (F42 binary → F44 runtime)
+- GTK4 soname `libgtk-4.so.1` is stable across all 4.x releases
+- See `research/fedora-version-compat.md` for full analysis
 
 The `waydriver-mcp` binary is copied from the official F42-based image; it's a
-static-ish Rust binary and works fine on F43.
+Rust binary whose glibc symbol requirements (GLIBC_2.41) are satisfied by F44's
+glibc 2.43.
 
-## Full System Dependencies (Fedora 43)
+## Full System Dependencies (Fedora 44)
 
 ### Build-time (`dnf install`)
 
@@ -66,9 +69,9 @@ python3
 
 See `tmp/Dockerfile` in the worktree. Key stages:
 
-1. **builder** (Fedora 43): installs build deps + Rust, runs `meson setup build
+1. **builder** (Fedora 44): installs build deps + Rust, runs `meson setup build
    -Dprofile=development`, `ninja -C build`, `ninja -C build install`
-2. **runtime** (Fedora 43): WayDriver runtime deps + Shortwave binary + installed
+2. **runtime** (Fedora 44): WayDriver runtime deps + Shortwave binary + installed
    resources (gresource, schemas, desktop files, icons) + `waydriver-mcp` binary
    copied from the official F42 image.
 
