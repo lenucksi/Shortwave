@@ -1,0 +1,19 @@
+AGENTS.md
+  s_37779fe57d4e0a::t_ac641d9a476873 1-208
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "847bd4241e5edd5dfc9685eabcd9bb4b05301234",
+  "prompts": {},
+  "sessions": {
+    "s_37779fe57d4e0a": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_17d82fb2bffeuo5lLgQiyRRb9D",
+        "model": "deepseek-v4-flash"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    }
+  }
+}
