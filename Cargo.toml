@@ -45,7 +45,7 @@ serde_urlencoded = "0.7"
 strum = "0.28"
 strum_macros = "0.28"
 sys-locale = "0.3"
-thiserror = "1.0"
+thiserror = "2.0"
 tokio = { version = "1", features = ["rt", "sync"] }
 url = "2.5"
 uuid = { version = "1.19", features = ["v4"] }
