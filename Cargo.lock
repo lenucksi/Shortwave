@@ -3728,7 +3728,7 @@ dependencies = [
  "strum_macros 0.28.0",
  "sys-locale",
  "tempfile",
- "thiserror 1.0.69",
+ "thiserror 2.0.18",
  "tokio",
  "url",
  "uuid",
