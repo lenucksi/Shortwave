@@ -6,6 +6,6 @@ description = "Prototyp: Rhai Discovery Script Runner für Shortwave"
 
 [dependencies]
 rhai = { version = "1", features = ["serde"] }
-reqwest = { version = "0.12", features = ["blocking"] }
+reqwest = { version = "0.13", features = ["blocking"] }
 scraper = "0.27"
 serde_json = "1"
