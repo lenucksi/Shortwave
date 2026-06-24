@@ -22,7 +22,7 @@ hickory-resolver = { version = "0.26", features = ["system-config"] }
 cacache = "13.1"
 cast-sender = "0.3"
 clap = { version = "4", features = ["derive"] }
-cruet = "0.15"
+cruet = "1.0"
 diesel = { version = "2.3", features = ["sqlite", "r2d2"] }
 diesel_migrations = "2.3"
 futures-util = "0.3"
