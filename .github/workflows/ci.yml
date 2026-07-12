@@ -43,7 +43,7 @@ jobs:
   build-test:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/flathub-infra/flatpak-github-actions:gnome-50@sha256:fc05dbaf105152ae43b7fa3de1df75b575833a5ae86cf722b6ea589da398fc3c
+      image: ghcr.io/flathub-infra/flatpak-github-actions:gnome-50@sha256:c0016af307453083b5acc12c8645f391dbda2fb1e06265eb201eee03db42e27a
       options: --privileged
     steps:
       - name: Harden Runner
@@ -103,7 +103,7 @@ jobs:
     needs: build-test
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/flathub-infra/flatpak-github-actions:gnome-50@sha256:fc05dbaf105152ae43b7fa3de1df75b575833a5ae86cf722b6ea589da398fc3c
+      image: ghcr.io/flathub-infra/flatpak-github-actions:gnome-50@sha256:c0016af307453083b5acc12c8645f391dbda2fb1e06265eb201eee03db42e27a
       options: --privileged
     steps:
       - name: Harden Runner
@@ -159,7 +159,7 @@ jobs:
     needs: build-test
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/flathub-infra/flatpak-github-actions:gnome-50@sha256:fc05dbaf105152ae43b7fa3de1df75b575833a5ae86cf722b6ea589da398fc3c
+      image: ghcr.io/flathub-infra/flatpak-github-actions:gnome-50@sha256:c0016af307453083b5acc12c8645f391dbda2fb1e06265eb201eee03db42e27a
       options: --privileged
     steps:
       - name: Harden Runner
