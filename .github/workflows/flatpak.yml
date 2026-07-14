@@ -28,7 +28,7 @@ jobs:
   package-flatpak:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/flathub-infra/flatpak-github-actions:gnome-50@sha256:c0016af307453083b5acc12c8645f391dbda2fb1e06265eb201eee03db42e27a
+      image: ghcr.io/flathub-infra/flatpak-github-actions:gnome-50@sha256:b270d0044182e436c872e4450815fe7de7e2730bf6d238ad35a3f5469b3c4871
       options: --privileged
     steps:
       - name: Harden Runner
