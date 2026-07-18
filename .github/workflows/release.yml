@@ -44,7 +44,7 @@ jobs:
     if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/flathub-infra/flatpak-github-actions:gnome-50@sha256:b270d0044182e436c872e4450815fe7de7e2730bf6d238ad35a3f5469b3c4871
+      image: ghcr.io/flathub-infra/flatpak-github-actions:gnome-50@sha256:2f8052339f31c112dece5a1a1a2862dcbcf7518e46ca86f28b91a0419f7793eb
       options: --privileged
     permissions:
       contents: write
