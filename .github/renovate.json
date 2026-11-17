@@ -37,9 +37,11 @@
   "prCreation": "immediate",
   "prHourlyLimit": 0,
   "configMigration": true,
-  "dependencyDashboard": true,
-  "dependencyDashboardTitle": "Dependency Dashboard 🤖",
-  "dependencyDashboardHeader": "This dashboard tracks pending dependency updates and provides an overview of the repository's dependency status.",
-  "dependencyDashboardFooter": "Managed by Renovate Bot. Updates are checked daily at 04:00 CET.",
+  "dependencyDashboard": {
+    "enabled": true,
+    "title": "Dependency Dashboard 🤖",
+    "header": "This dashboard tracks pending dependency updates and provides an overview of the repository's dependency status.",
+    "footer": "Managed by Renovate Bot. Updates are checked daily at 04:00 CET."
+  },
 
 }
